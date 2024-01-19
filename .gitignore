@@ -1,0 +1,6 @@
+test.py
+__pycache__/**
+**/__pycache__
+/.vbn_s3_cache
+**cache**
+.vscode/**

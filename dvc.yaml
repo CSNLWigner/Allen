@@ -1,0 +1,21 @@
+
+
+
+metrics:
+  - metrics.json
+
+params:
+  - params.yaml
+
+plots:
+  - plot.csv:
+      y: accuracy
+      x: epoch
+
+stages:
+  load:
+    cmd: python3 -u "download_allen.py"
+    params:
+      - cache.location
+    outs:
+      - .cache/vbn_s3_cache/
