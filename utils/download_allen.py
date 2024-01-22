@@ -2,12 +2,14 @@ from pathlib import Path
 import allensdk
 from allensdk.brain_observatory.behavior.behavior_project_cache import VisualBehaviorNeuropixelsProjectCache
 
+import yaml
+params = yaml.safe_load(open('params.yaml'))['cache']
 
-def cache_allen(location="/data/.vbn_s3_cache", force_download=False):
+def cache_allen():
     
-    print("cache location:", location)
+    print("cache location:", params['location'])
     
-    output_dir = Path(location)
+    output_dir = Path(params['location'])
     
     # Confirming your allensdk version
     print(f"Your allensdk version is: {allensdk.__version__}")
@@ -27,7 +29,7 @@ def cache_allen(location="/data/.vbn_s3_cache", force_download=False):
         if get == "y":
             cache.load_latest_manifest()
             return cache
-    elif force_download == True:
+    elif params['force_download'] == True:
         cache.load_latest_manifest()
         return cache
     else:
@@ -49,8 +51,3 @@ def cache_allen(location="/data/.vbn_s3_cache", force_download=False):
 # from ruamel.yaml import YAML
 # yaml = YAML(typ="safe")
 
-# MAIN
-#
-# import yaml
-# params = yaml.safe_load(open('params.yaml'))['cache']
-# cache_allen(params['location'], force_download=params['force-download'])

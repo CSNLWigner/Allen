@@ -16,6 +16,7 @@ stages:
   calculate:
     cmd: python3 -u cca_analysis.py
     params:
-      - cache.cca
+      - cache
+      - cca
     outs:
       - results/cca_scores.csv
