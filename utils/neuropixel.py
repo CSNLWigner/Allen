@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import yaml
 
-params = yaml.safe_load(open('params.yaml'))['cache']
+# params = yaml.safe_load(open('params.yaml'))['cache']
 
 # cache = cache_allen(location=params['location'],
 #                     force_download=params['force-download'])
