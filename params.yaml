@@ -6,3 +6,8 @@ cache:
 neuropixel:
   area_of_interest: "VISpm"
   block: "active behavior"
+
+cca:
+  cv: 5
+  n_components: 2
+  scoring: 'r2'

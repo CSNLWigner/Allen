@@ -1,8 +1,13 @@
-from matplotlib import pyplot as plt
+# Here will be the functions to be used to CCA analysis
+# They are called by the cca_analysis.py, which is the main program of this analysis
+
 import numpy as np
 from sklearn.cross_decomposition import CCA
-
+from sklearn.model_selection import cross_val_score
 from utils.neuropixel import get_area_units, get_stimulus_presentations, get_unit_responses
+
+import yaml
+params = yaml.safe_load(open('params.yaml'))['cca']
 
 
 def cca(X_train, Y_train, X_test, Y_test):
@@ -42,7 +47,17 @@ We can then consider two layers, L1 and L2 of a neural network as two sets of ob
 """
 
 
-def compare_VISp_VISpm_with_CCA(session, log=True):
+def compare_VISp_VISpm(session, log=True) -> dict:
+    """
+    Compare the responses of units in the VISp and VISpm brain areas using Canonical Correlation Analysis (CCA).
+
+    Args:
+        session: The session object containing the spike times and stimulus presentations.
+        log (bool, optional): Whether to log the progress. Defaults to True.
+
+    Returns:
+        dict: A dictionary containing the results of the CCA analysis.
+    """
 
     stimulus_block = 2
     """
@@ -58,8 +73,8 @@ def compare_VISp_VISpm_with_CCA(session, log=True):
         print('Get area units')
     area_X = 'VISp'
     area_Y = 'VISpm'
-    area_X_units = get_area_units(session, area_X)
-    area_Y_units = get_area_units(session, area_Y)
+    area_X_units = get_area_units(session, area_X) # shape (units)
+    area_Y_units = get_area_units(session, area_Y) # shape (units)
     print('area_X_units number', area_X_units.shape[0])  # (98)
     print('area_Y_units number', area_Y_units.shape[0])  # (111)
 
@@ -70,25 +85,23 @@ def compare_VISp_VISpm_with_CCA(session, log=True):
     # print(stimulus_presentations[stimulus_presentations['stimulus_block'] == stimulus_block].head(1))
     trial_start = stimulus_presentations[stimulus_presentations['stimulus_block']
                                          == stimulus_block]['start_time'].values
-    # print(trial_start['start_time'])
+    print('trial_start', trial_start)
     area_X_responses = get_unit_responses(
-        area_X_units, session.spike_times, trial_start)
+        area_X_units, session.spike_times, trial_start) # shape (units, timestep)
     area_Y_responses = get_unit_responses(
-        area_Y_units, session.spike_times, trial_start)
+        area_Y_units, session.spike_times, trial_start) # shape (units, timestep)
     print('area_X_responses.shape', area_X_responses.shape)  # (98, 30)
     print('area_Y_responses.shape', area_Y_responses.shape)  # (111, 30)
 
     # Make CCA
     if log:
         print('Make CCA')
-    result = cca(area_X_responses.T, area_Y_responses.T)
-
-def cca_plot(result):
-
-    # Visualize the result
-    plt.figure()
-    plt.plot(result.x_scores_, result.y_scores_, 'o')
-    plt.xlabel('X Scores')
-    plt.ylabel('Y Scores')
-    plt.title('CCA Result')
-    plt.show()
+    # result = cca(area_X_responses.T, area_Y_responses.T)
+    model = CCA(n_components=params['n_components'])
+    scores = cross_val_score(model, area_X_responses.T, area_Y_responses.T, cv=params['cv'], scoring=params['scoring'])
+    
+    print('Scores', scores)
+    
+    return {
+        'scores': scores
+    }

@@ -121,7 +121,17 @@ def get_stimulus_presentations(session):
     
 
 def get_area_units(session, area_of_interest) -> pd.DataFrame:
+    """
+    Retrieves the units in a specific area of interest.
 
+    Args:
+        session (str): The session identifier.
+        area_of_interest (str): The acronym of the area of interest.
+
+    Returns:
+        pd.DataFrame: A DataFrame containing the units in the specified area.
+    """
+    
     # first let's sort our units by depth
     unit_channels = get_unit_channels(session)
     unit_channels = unit_channels.sort_values(
