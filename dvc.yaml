@@ -13,9 +13,9 @@ plots:
       x: epoch
 
 stages:
-  load:
-    cmd: python3 -u "download_allen.py"
+  calculate:
+    cmd: python3 -u cca_analysis.py
     params:
-      - cache.location
+      - cache.cca
     outs:
-      - .cache/vbn_s3_cache/
+      - results/cca_scores.csv
