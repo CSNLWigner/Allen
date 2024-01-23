@@ -13,10 +13,16 @@ plots:
       x: epoch
 
 stages:
-  calculate:
+  analysis:
     cmd: python3 -u cca_analysis.py
     params:
       - cache
       - cca
     outs:
       - results/cca_scores.csv
+  plots:
+    cmd: python3 -u cca_plot.py
+    deps:
+      - results/cca_scores.csv
+    params:
+      - cca

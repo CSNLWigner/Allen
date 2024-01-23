@@ -139,8 +139,8 @@ def get_area_units(session, area_of_interest) -> pd.DataFrame:
 
     # now we'll filter them
     good_unit_filter = ((unit_channels['snr'] > 1) &
-                        (unit_channels['isi_violations'] < 1) &
-                        (unit_channels['firing_rate'] > 0.1))
+                        (unit_channels['isi_violations'] < 1) & # If anyone spikes in the refracter period, they will be excluded
+                        (unit_channels['firing_rate'] > 0.1)) # When they are fires too sparse, then they cannot involved in the time of the trial
 
     good_units = unit_channels.loc[good_unit_filter]
     

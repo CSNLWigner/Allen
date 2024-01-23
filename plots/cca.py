@@ -10,9 +10,9 @@ def line(result):
 
     # Plot the results
     plt.plot(result)
-    plt.xlabel("Time")
-    plt.ylabel("CCA Score")
-    plt.title("CCA Analysis Results")
+    # plt.xlabel("Time")
+    # plt.ylabel("CCA Score")
+    # plt.title("CCA Analysis Results")
     plt.show()
 
 

@@ -8,7 +8,7 @@ from utils.save import save_dict_items
 
 # An arbitrary session from the Allen Neuropixel dataset
 session_id = 1064644573  # 1052533639
-cache = cache_allen("data/.vbn_s3_cache")
+cache = cache_allen()
 session = cache.get_ecephys_session(ecephys_session_id=session_id)
 
 # Compare VISp and VISpm areas with CCA

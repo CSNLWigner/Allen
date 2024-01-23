@@ -1,7 +1,7 @@
 
 cache:
   location: "data/.vbn_s3_cache"
-  force-download: False
+  force_download: False
 
 neuropixel:
   area_of_interest: "VISpm"
