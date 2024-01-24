@@ -13,16 +13,23 @@ plots:
       x: epoch
 
 stages:
-  analysis:
+  cca_analysis:
     cmd: python3 -u cca_analysis.py
     params:
       - cache
       - cca
     outs:
       - results/cca_scores.csv
-  plots:
-    cmd: python3 -u cca_plot.py
-    deps:
-      - results/cca_scores.csv
+  rrr_analysis:
+    cmd: python3 -u rrr_analysis.py
     params:
-      - cca
+      - cache
+      - rrr
+    outs:
+      - results/rrr_scores.csv
+  plots:
+    cmd: python3 -u rrr_plot.py
+    deps:
+      - results/rrr_scores.csv
+    params:
+      - rrr

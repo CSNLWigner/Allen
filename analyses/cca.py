@@ -47,7 +47,7 @@ We can then consider two layers, L1 and L2 of a neural network as two sets of ob
 """
 
 
-def compare_VISp_VISpm(session, log=True) -> dict:
+def compare_two_areas(session, area_X, area_Y, log=True) -> dict:
     """
     Compare the responses of units in the VISp and VISpm brain areas using Canonical Correlation Analysis (CCA).
 
@@ -71,8 +71,6 @@ def compare_VISp_VISpm(session, log=True) -> dict:
     # Get area units
     if log:
         print('Get area units')
-    area_X = 'VISp'
-    area_Y = 'VISpm'
     area_X_units = get_area_units(session, area_X) # shape (units)
     area_Y_units = get_area_units(session, area_Y) # shape (units)
     print('area_X_units number', area_X_units.shape[0])  # (98)

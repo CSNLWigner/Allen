@@ -1,3 +1,4 @@
+from allensdk.brain_observatory.ecephys.visualization import plot_mean_waveforms, plot_spike_counts, raster_plot
 from matplotlib import pyplot as plt
 import numpy as np
 import pandas as pd
@@ -61,7 +62,7 @@ def makePSTH(spikes, startTimes, windowDur, binSize=0.001):
     """
     bins = np.arange(0, windowDur+binSize, binSize)
     counts = np.zeros(bins.size-1)
-    for i, start in enumerate(startTimes):
+    for i, start in enumerate(startTimes):  # enumerate through trials
         startInd = np.searchsorted(spikes, start)
         endInd = np.searchsorted(spikes, start+windowDur)
         counts = counts + np.histogram(spikes[startInd:endInd]-start, bins)[0]
@@ -80,7 +81,7 @@ area (VISli), Lateral visual area (VISl), Anteromedial visual area (VISal), Late
 VISp:   V1
 VISpl:  ?
 VISli:  ? (visually guided behav)
-VISl:   ?
+VISl:   V2 (LM)?
 VISal:  anteromedial cuneus
 VISlla: ?
 VISrl:  ?(visually guided behav)
@@ -301,7 +302,7 @@ def get_response_magnitudes(opto_response):
     return response_magnitudes
 
 
-def get_unit_responses(units, spike_times, trial_start, duration=0.03, binSize=0.001):
+def get_average_unit_responses(units, spike_times, trial_start, duration=0.03, binSize=0.001):
     """
     Calculate the unit responses for each unit in the given units DataFrame.
 
@@ -327,3 +328,59 @@ def get_unit_responses(units, spike_times, trial_start, duration=0.03, binSize=0
         unit_id.append(iu)
 
     return np.array(response)
+
+
+def get_unit_responses(units, spike_times, trial_start, duration=0.250, binSize=0.050):
+    """
+    Calculate the unit responses for each unit in the given units DataFrame.
+
+    Parameters:
+    units (DataFrame): DataFrame containing information about the units.
+    spike_times (list): List of spike times for each unit.
+    trial_start (float): Start time of the trial.
+    duration (float): Total duration of trial for PSTH in seconds. Default is 0.03.
+    binSize (float): Bin size for PSTH in seconds. Default is 0.001.
+
+    Returns:
+    numpy.ndarray: Array containing the unit responses, shape (feature, sample, time)
+    """
+    
+    # def convert_to_tensor(spike_times, binSize, duration):
+    n_unit = len(units)
+    n_trial = len(trial_start)
+    n_bin = int(duration / binSize)
+
+    tensor = np.zeros((n_unit, n_trial, n_bin))
+
+    for i, unit_ID in enumerate([unit_ID for unit_ID, unit_data, in units.iterrows()]):  # Units
+        # print(unit_ID)
+        unit_spike_times = spike_times[unit_ID]
+        # print(type(unit_spike_times))
+        # print(unit_spike_times.shape)
+        for j, start in enumerate(trial_start):  # Trials
+            for k, time in enumerate(np.arange(start, start + duration, binSize)): # Time
+                
+                # print(unit_spike_times, time)
+                
+                bin_start_idx = np.searchsorted(unit_spike_times, time)
+                bin_end_idx = np.searchsorted(unit_spike_times, time+binSize)
+                
+                spikes_in_timebin = unit_spike_times[bin_start_idx:bin_end_idx]
+                
+                tensor[i, j, k] = len(spikes_in_timebin) # spike_count
+
+    count = np.count_nonzero(tensor)
+    print('Spike count in the data:', count)
+
+    return tensor
+    
+
+def rasterplot(session, times):
+    first_drifting_grating_presentation_id = times['stimulus_presentation_id'].values[0]
+    plot_times = times[times['stimulus_presentation_id'] == first_drifting_grating_presentation_id]
+
+    fig = raster_plot(plot_times, title=f'spike raster for stimulus presentation {first_drifting_grating_presentation_id}')
+    plt.show()
+
+    # also print out this presentation
+    session.stimulus_presentations.loc[first_drifting_grating_presentation_id]
