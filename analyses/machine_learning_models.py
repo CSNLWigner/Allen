@@ -83,7 +83,7 @@ def _fit_rrr_no_intercept(X: np.ndarray, Y: np.ndarray, alpha: float, rank: int,
     return Vt[:rank, :].T @ (Vt[:rank, :] @ beta_ridge)
 
 
-class ReducedRankRidge(sklearn.base.MultiOutputMixin, sklearn.base.RegressorMixin, sklearn.linear_model._base.LinearModel):
+class ReducedRankRidgeRegression(sklearn.base.MultiOutputMixin, sklearn.base.RegressorMixin, sklearn.linear_model._base.LinearModel):
     """
     # rrpy
     

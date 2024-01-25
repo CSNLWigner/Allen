@@ -2,77 +2,76 @@
 
 from sklearn.model_selection import cross_val_score
 from utils.neuropixel import get_area_units, get_stimulus_presentations, get_unit_responses
-from analyses.machine_learning_models import ReducedRankRidge
+from analyses.machine_learning_models import ReducedRankRidgeRegression
 import yaml
 import numpy as np
+from allensdk.brain_observatory.ecephys.behavior_ecephys_session import BehaviorEcephysSession
 
+from utils.utils import MSE
+
+preprocess = yaml.safe_load(open('params.yaml'))['preprocess']
 params = yaml.safe_load(open('params.yaml'))['rrr']
 
-def compare_two_areas(session, area_X, area_Y, log=True) -> dict:
+def RRRR(X_data, Y_data, log=False):
     """
-    Compare the responses of units in the VISp and VISpm brain areas using Canonical Correlation Analysis (CCA).
+    Make Reduced Rank Regression (RRR) analysis.
 
     Args:
-        session: The session object containing the spike times and stimulus presentations.
+        X_data (np.ndarray): The data of the first brain area.
+        Y_data (np.ndarray): The data of the second brain area.
+        log (bool, optional): Whether to log the progress. Defaults to True.
+
+    Returns:
+        np.ndarray: The coefficients of the RRR model. Shape (Y_features, X_features)
+    """
+
+    model = ReducedRankRidgeRegression(rank=params['rank'])
+    # scores = cross_val_score(model, area_X_responses.T, area_Y_responses.T,
+    #                          cv=params['cv'], error_score='raise')
+    model.fit(X_data, Y_data)
+    prediction = model.predict(X_data)
+    accuracy = MSE(Y_data, prediction)
+    score = model.score(X_data, Y_data)
+    if log:
+        print('Train accuracy', accuracy)
+    coefficients = model.coef_
+    if log:
+        print('coefficients.shape', coefficients.shape)
+    
+    return coefficients
+
+def compare_two_areas(area_X_responses:np.ndarray, area_Y_responses:np.ndarray, log=False) -> dict:
+    """
+    Compare the responses of units in two brain areas using Canonical Correlation Analysis (CCA).
+
+    Args:
+        session (Session): The session object containing the spike times and stimulus presentations.
+        area_X (str): The name of the first brain area.
+        area_Y (str): The name of the second brain area.
+        session_block (int): The stimulus block number.
+            0: change detection task
+            2: receptive field mapping by gabor stimuli
+            4: full-flash
+            5: passive replay
         log (bool, optional): Whether to log the progress. Defaults to True.
 
     Returns:
         dict: A dictionary containing the results of the CCA analysis.
     """
-
-    stimulus_block = 2
-    """
-    stimulus block:
-    0: change detection task
-    2: receptive field mapping by gabor stimuli
-    4: full-flash
-    5: passive replay
-    """
-
-    # Get area units
-    if log:
-        print('Get area units')
-    area_X_units = get_area_units(session, area_X)  # shape (units)
-    area_Y_units = get_area_units(session, area_Y)  # shape (units)
-    print('area_X_units number', area_X_units.shape[0])  # (98)
-    print('area_Y_units number', area_Y_units.shape[0])  # (92)
-
-    # Get the responses
-    if log:
-        print('Get the responses')
-    stimulus_presentations = get_stimulus_presentations(session)
-    # print(stimulus_presentations[stimulus_presentations['stimulus_block'] == stimulus_block].head(1))
-    trial_start = stimulus_presentations[stimulus_presentations['stimulus_block']
-                                         == stimulus_block]['start_time'].values
-    # Calculate the average difference between neighboring elements
-    average_difference = np.mean(np.diff(trial_start))
-    print("Average difference between neighboring elements in trial_start:", average_difference)
     
-    area_X_responses = get_unit_responses(
-        area_X_units, session.spike_times, trial_start, duration=0.25, binSize=params['bin-size'])  # shape (units, timestep)
-    area_Y_responses = get_unit_responses(
-        area_Y_units, session.spike_times, trial_start, duration=0.25, binSize=params['bin-size'])  # shape (units, timestep)
-    print('area_X_responses.shape', area_X_responses.shape)  # (98, 30)
-    print('area_Y_responses.shape', area_Y_responses.shape)  # (92, 30)
+    # Parameters
+    binSize = preprocess['bin-size']
+    duration = preprocess['stimulus-duration']
+    time_length = int(duration/binSize)
+    n_area_X_units, n_area_Y_units = area_X_responses.shape[0], area_Y_responses.shape[0]
 
+    # Make RRR
+    if log:
+        print('Make RRR...')
+    coefficients = np.zeros((n_area_X_units, n_area_Y_units, time_length))
+    for time in range(time_length):
+        coefficients[:, :, time]= RRRR(area_X_responses[:, :, time].T, area_Y_responses[:, :, time].T, log=False).T
 
-    # # Make RRR
-    # Remember, to make it in each timestep!
-    # if log:
-    #     print('Make RRR')
-    # # result = cca(area_X_responses.T, area_Y_responses.T)
-    # model = ReducedRankRidge(rank=params['rank'])
-    # # scores = cross_val_score(model, area_X_responses.T, area_Y_responses.T,
-    # #                          cv=params['cv'], error_score='raise')
-    # model.fit(area_X_responses.T, area_Y_responses.T)
-    # results = model.predict(area_X_responses.T)
-    # print('\nX_data')
-    # print(area_X_responses.T[0])
-    # print('\nresults')
-    # print(results[0])
-
-    # print('Scores', scores)
-
-    # return {
-    #     'scores': scores
-    # }
+    return {
+        'coefficients': coefficients
+    }

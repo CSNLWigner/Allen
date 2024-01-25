@@ -4,13 +4,14 @@
 from utils import plots
 import numpy as np
 
-from utils.data_io import load_csv
+from utils.data_io import load_pickle
 
-results_path = "results/rrr_scores.csv"
+results_path = "results"
+name = "rrr_coefficients"
 
-result = load_csv(results_path)
+result = load_pickle(f"{results_path}/{name}")
 
-print(result)
+print(result.shape)
 
 # plt.show()
 

@@ -7,6 +7,17 @@ neuropixel:
   area_of_interest: "VISpm"
   block: "active behavior"
 
+preprocess:
+  areas: ["VISp", "VISl"]
+  stimulus-block: 2
+  # Stimulus blocks:
+  # 0: change detection task
+  # 2: receptive field mapping by gabor stimuli
+  # 4: full-flash
+  # 5: passive replay
+  bin-size: 0.050
+  stimulus-duration: 0.250
+
 cca:
   cv: 5
   n_components: 2
@@ -14,11 +25,4 @@ cca:
 
 rrr:
   cv: 5
-  rank: None
-  bin-size: 0.050
-  stimulus_block: 2
-  # Stimulus blocks:
-  # 0: change detection task
-  # 2: receptive field mapping by gabor stimuli
-  # 4: full-flash
-  # 5: passive replay
+  rank: 10

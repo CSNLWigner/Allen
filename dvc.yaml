@@ -13,15 +13,16 @@ plots:
       x: epoch
 
 stages:
-  cca_analysis:
-    cmd: python3 -u cca_analysis.py
+  preprocess:
+    cmd: python3 -u preprocessing.py
     params:
-      - cache
-      - cca
+      - preprocess
     outs:
-      - results/cca_scores.csv
+      - data/unit-responses/
   rrr_analysis:
     cmd: python3 -u rrr_analysis.py
+    deps:
+      - data/unit-responses/
     params:
       - cache
       - rrr
