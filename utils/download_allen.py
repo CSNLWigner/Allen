@@ -5,11 +5,13 @@ from allensdk.brain_observatory.behavior.behavior_project_cache import VisualBeh
 import yaml
 params = yaml.safe_load(open('params.yaml'))['cache']
 
-def cache_allen():
+def cache_allen(location=""):
     
-    print("cache location:", params['location'])
-    
-    output_dir = Path(params['location'])
+    # Location
+    if location == "":
+        location = params['location']
+    print("Cache location:", params['location'])
+    output_dir = Path(location)
     
     # Confirming your allensdk version
     print(f"Your allensdk version is: {allensdk.__version__}")
