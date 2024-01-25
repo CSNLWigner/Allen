@@ -18,11 +18,11 @@ stages:
     params:
       - preprocess
     outs:
-      - data/unit-responses/
+      - data/area-responses/
   rrr_analysis:
     cmd: python3 -u rrr_analysis.py
     deps:
-      - data/unit-responses/
+      - data/area-responses/
     params:
       - cache
       - rrr
