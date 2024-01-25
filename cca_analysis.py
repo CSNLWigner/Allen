@@ -4,7 +4,7 @@
 # from analyses.cca import compare_VISp_VISpm_with_CCA, cca_plot
 from analyses import cca
 from utils.download_allen import cache_allen
-from utils.save import save_dict_items
+from utils.data_io import save_dict_items
 
 # An arbitrary session from the Allen Neuropixel dataset
 session_id = 1064644573  # 1052533639

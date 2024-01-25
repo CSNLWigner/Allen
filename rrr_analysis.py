@@ -6,6 +6,7 @@
 
 from analyses.rrr import compare_two_areas
 from utils.download_allen import cache_allen
+from utils.data_io import save_dict_items
 
 # An arbitrary session from the Allen Neuropixel dataset
 session_id = 1064644573  # 1052533639
@@ -16,4 +17,4 @@ session = cache.get_ecephys_session(ecephys_session_id=session_id)
 result = compare_two_areas(session, 'VISp', 'VISl')
 
 # Save results in the results folder
-# save_dict_items(result, "rrr")
+save_dict_items(result, "rrr")
