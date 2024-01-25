@@ -2,7 +2,7 @@
 # DVC file. 
 
 from matplotlib import pyplot as plt
-from plots import cca
+from utils import plots
 import numpy as np
 import csv
 

@@ -4,3 +4,4 @@ __pycache__/**
 /.vbn_s3_cache
 **cache**
 .vscode/**
+note.md
