@@ -13,8 +13,8 @@ import yaml
 preprocess = yaml.safe_load(open('params.yaml'))['preprocess']
 
 # Load brain area responses
-area_X_responses = load_pickle(f'data/area-responses/{preprocess["stimulus-block"]}_block_VISp_responses')
-area_Y_responses = load_pickle(f'data/area-responses/{preprocess["stimulus-block"]}_block_VISl_responses')
+area_X_responses = load_pickle(f'data/area-responses/{preprocess["stimulus-block"]}_block_VISp-responses')
+area_Y_responses = load_pickle(f'data/area-responses/{preprocess["stimulus-block"]}_block_VISl-responses')
 
 # Make RRR analysis
 result = compare_two_areas(area_X_responses, area_Y_responses, log=True)
