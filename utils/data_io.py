@@ -32,13 +32,17 @@ def save_dict_items(dictionary, name="", path="results"):
 
 ############################################################################################################
 
-def load_csv(name):
+def load_csv(name, path=""):
+    if path != "":
+        name = f'{path}/{name}'
     with open(f"{name}.csv", "r") as f:
         reader = csv.reader(f, delimiter=",")
         data = np.array(list(reader)) # float?
     return data
 
-def load_pickle(name):
+def load_pickle(name, path=""):
+    if path != "":
+        name = f'{path}/{name}'
     with open(f"{name}.pickle", "rb") as f:
         data = pickle.load(f)
     return data
