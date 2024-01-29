@@ -57,6 +57,7 @@ def compare_two_areas(area_X_responses:np.ndarray, area_Y_responses:np.ndarray, 
 
     Returns:
         dict: A dictionary containing the results of the CCA analysis.
+            - coefficients (np.ndarray): The coefficients of the CCA model. Shape (Y_features, X_features)
     """
     
     # Parameters
@@ -71,6 +72,9 @@ def compare_two_areas(area_X_responses:np.ndarray, area_Y_responses:np.ndarray, 
     coefficients = np.zeros((n_area_X_units, n_area_Y_units, time_length))
     for time in range(time_length):
         coefficients[:, :, time]= RRRR(area_X_responses[:, :, time].T, area_Y_responses[:, :, time].T, log=False).T
+
+    if log:
+        print('coefficients.shape', coefficients.shape)
 
     return {
         'coefficients': coefficients

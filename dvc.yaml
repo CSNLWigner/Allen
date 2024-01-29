@@ -27,10 +27,10 @@ stages:
       - cache
       - rrr
     outs:
-      - results/rrr_scores.csv
+      - results/rrr_coefficients.csv
   plots:
     cmd: python3 -u rrr_plot.py
     deps:
-      - results/rrr_scores.csv
+      - results/rrr_coefficients.csv
     params:
       - rrr
