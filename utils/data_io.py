@@ -24,10 +24,12 @@ def save_based_on_type(data, name, path="results"):
     else:
         save_pickle(data, name, path=path)
 
-def save_dict_items(dictionary, name="", path="results"):
+def save_dict_items(dictionary, name="", path="results", log=True):
     if name != "":
         name = name + "_"
     for key, value in dictionary.items():
+        if log:
+            print("Saving", key, type(value))
         save_pickle(value, f"{name}{key}", path=path)
 
 ############################################################################################################
