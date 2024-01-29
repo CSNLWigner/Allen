@@ -2,6 +2,7 @@
 # Save the plots in the figures folder.
 
 import matplotlib.pyplot as plt
+import numpy as np
 
 def line(result):
     """
@@ -28,3 +29,33 @@ def scatter(result):
     plt.ylabel('Y Scores')
     plt.title('CCA Result')
     plt.show()
+
+
+def simple_rrr_plot(result, params):
+    fig, axs = plt.subplots(1, 5, figsize=(15, 3))
+    for i in range(params['cv']):
+        axs[i].imshow(result[:, :, i], cmap='hot', aspect='auto')
+        axs[i].set_title(f'Fold {i+1}')
+
+    plt.colorbar()
+    plt.xlabel('VISl')
+    plt.ylabel('VISp')
+    plt.title('Coefficients of Reduced Rank Regression')
+
+    return fig
+
+
+def simple_rrr_plot_mean(result):
+    
+    # Calculate the mean of the results
+    np.mean(result, axis=2)
+    
+    fig, ax = plt.subplots(1, 1, figsize=(10, 10))
+    im = ax.imshow(np.mean(result, axis=2), cmap='hot', aspect='auto')
+
+    plt.colorbar(im, ax=ax)
+    plt.xlabel('VISl')
+    plt.ylabel('VISp')
+    plt.title('Coefficients of Reduced Rank Regression')
+
+    return fig
