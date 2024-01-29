@@ -50,3 +50,8 @@ stages:
         rrr:
           cv: 5
           rank: 10
+    outs:
+    - path: figures/VISl-VISp_rrr-coefficients.png
+      hash: md5
+      md5: 54c47d51033d8a03af6a044610ff601c
+      size: 51976

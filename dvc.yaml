@@ -34,3 +34,5 @@ stages:
       - results/rrr_coefficients.pickle
     params:
       - rrr
+    outs:
+      - figures/VISl-VISp_rrr-coefficients.png
