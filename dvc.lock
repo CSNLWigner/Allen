@@ -17,3 +17,36 @@ stages:
       md5: 18a4a286fc913c2b7dca2a17b792fbe4.dir
       size: 27702328
       nfiles: 2
+  rrr_analysis:
+    cmd: python3 -u rrr_analysis.py
+    deps:
+    - path: data/area-responses/
+      hash: md5
+      md5: 18a4a286fc913c2b7dca2a17b792fbe4.dir
+      size: 27702328
+      nfiles: 2
+    params:
+      params.yaml:
+        cache:
+          location: data/.vbn_s3_cache
+          force_download: false
+        rrr:
+          cv: 5
+          rank: 10
+    outs:
+    - path: results/rrr_coefficients.pickle
+      hash: md5
+      md5: 602969e22ae61fd2082ce408273d3275
+      size: 360803
+  plots:
+    cmd: python3 -u rrr_plot.py
+    deps:
+    - path: results/rrr_coefficients.pickle
+      hash: md5
+      md5: 602969e22ae61fd2082ce408273d3275
+      size: 360803
+    params:
+      params.yaml:
+        rrr:
+          cv: 5
+          rank: 10
