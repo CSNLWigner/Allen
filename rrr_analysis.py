@@ -20,4 +20,4 @@ area_Y_responses = load_pickle(f'data/area-responses/{preprocess["stimulus-block
 result = compare_two_areas(area_X_responses, area_Y_responses, log=True)
 
 # Save results in the results folder
-save_dict_items(result, "rrr")
+save_dict_items(result, "rrr", path="results")

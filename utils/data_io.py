@@ -1,29 +1,34 @@
 import csv
 import pickle
 import numpy as np
+import os
 
-def save_csv(data, name):
-    with open(f"{name}.csv", "w") as f:
+
+def save_csv(data, name, path="results"):
+    if not os.path.exists(path):
+        os.makedirs(path)
+    with open(f"{path}/{name}.csv", "w") as f:
         writer = csv.writer(f, delimiter=",")
         writer.writerows(data)
-        
-def save_pickle(data, name):
-    with open(f"{name}.pickle", "wb") as f:
+
+
+def save_pickle(data, name, path="results"):
+    if not os.path.exists(path):
+        os.makedirs(path)
+    with open(f"{path}/{name}.pickle", "wb") as f:
         pickle.dump(data, f)
         
-def save_based_on_type(data, name):
+def save_based_on_type(data, name, path="results"):
     if type(data) == np.ndarray:
-        save_csv(data, name)
+        save_csv(data, name, path=path)
     else:
-        save_pickle(data, name)
+        save_pickle(data, name, path=path)
 
 def save_dict_items(dictionary, name="", path="results"):
     if name != "":
         name = name + "_"
-    if path[-1] != "/":
-        path = path + "/"
     for key, value in dictionary.items():
-        save_pickle(value, f"{path}{name}{key}")
+        save_pickle(value, f"{name}{key}", path=path)
 
 ############################################################################################################
 

@@ -15,4 +15,4 @@ session = cache.get_ecephys_session(ecephys_session_id=session_id)
 result = cca.compare_two_areas(session, 'VISp', 'VISl')
 
 # Save results in the results folder
-save_dict_items(result, "cca")
+save_dict_items(result, "cca", path="results")

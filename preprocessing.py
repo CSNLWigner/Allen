@@ -13,4 +13,4 @@ session = cache.get_ecephys_session(ecephys_session_id=session_id)
 
 for area in params['areas']:
     area_responses = get_area_responses(session, area, session_block=params['stimulus-block'], log=True)
-    save_pickle(area_responses, f'data/area-responses/{params["stimulus-block"]}_block_{area}-responses')
+    save_pickle(area_responses, f'{params["stimulus-block"]}_block_{area}-responses', path='data/area-responses')
