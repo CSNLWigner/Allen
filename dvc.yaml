@@ -27,10 +27,10 @@ stages:
       - cache
       - rrr
     outs:
-      - results/rrr_coefficients.csv
+      - results/rrr_coefficients.pickle
   plots:
     cmd: python3 -u rrr_plot.py
     deps:
-      - results/rrr_coefficients.csv
+      - results/rrr_coefficients.pickle
     params:
       - rrr
