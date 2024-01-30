@@ -2,6 +2,7 @@ import csv
 import pickle
 import numpy as np
 import os
+import matplotlib.figure
 
 
 def save_csv(data, name, path="results"):
@@ -17,6 +18,11 @@ def save_pickle(data, name, path="results"):
         os.makedirs(path)
     with open(f"{path}/{name}.pickle", "wb") as f:
         pickle.dump(data, f)
+
+def save_fig(fig:matplotlib.figure.Figure, name, path="figures"):
+    if not os.path.exists(path):
+        os.makedirs(path)
+    fig.savefig(f"{path}/{name}.png")
         
 def save_based_on_type(data, name, path="results"):
     if type(data) == np.ndarray:

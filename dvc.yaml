@@ -35,4 +35,4 @@ stages:
     params:
       - rrr
     outs:
-      - figures/VISl-VISp_rrr-coefficients.png
+      - figures/VISl-VISp_block-2_rrr-coefficients.png
