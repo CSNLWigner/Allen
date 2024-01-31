@@ -38,16 +38,24 @@ def scatter(result):
 def simple_rrr_plot(result, params):
     fig, axs = plt.subplots(1, 5, figsize=(15, 3))
     fig.suptitle('Coefficients of Reduced Rank Regression')
+    
+    # Find global min and max
+    vmin = np.min(result)
+    vmax = np.max(result)
+    
     for i in range(params['cv']):
-        im = axs[i].imshow(result[:, :, i], cmap='hot', aspect='auto')
+        im = axs[i].imshow(result[:, :, i], 
+                           cmap='hot', aspect='auto', 
+                           vmin=vmin, vmax=vmax)
         time_bin = preprocess['bin-size']
         duration = preprocess['stimulus-duration']
         timecourse = np.arange(0, duration+time_bin, time_bin) *1000
         axs[i].set_title(f'{int(timecourse[i])}-{int(timecourse[i+1])} ms')
-        fig.colorbar(im, ax=axs[i])
         axs[i].set_xlabel('VISl')
         axs[i].set_ylabel('VISp')
 
+    # Attach colorbar to the last plot
+    fig.colorbar(im, ax=axs[i])
 
     return fig
 

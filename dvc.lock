@@ -53,5 +53,5 @@ stages:
     outs:
     - path: figures/VISl-VISp_block-4_rrr-coefficients_along_time.png
       hash: md5
-      md5: c7bed257061c41d72570bf88e3f3346e
-      size: 208205
+      md5: e013c39f41416cbb25198ec7e71b39fc
+      size: 209920
