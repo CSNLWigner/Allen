@@ -9,7 +9,7 @@ neuropixel:
 
 preprocess:
   areas: ["VISp", "VISl"]
-  stimulus-block: 2
+  stimulus-block: 4
   # Stimulus blocks:
   # 0: change detection task
   # 2: receptive field mapping by gabor stimuli

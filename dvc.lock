@@ -8,22 +8,22 @@ stages:
           areas:
           - VISp
           - VISl
-          stimulus-block: 2
+          stimulus-block: 4
           bin-size: 0.05
           stimulus-duration: 0.25
     outs:
     - path: data/area-responses/
       hash: md5
-      md5: 18a4a286fc913c2b7dca2a17b792fbe4.dir
-      size: 27702328
+      md5: 39c942d725bcfb4acac785761c44c7a5.dir
+      size: 1140326
       nfiles: 2
   rrr_analysis:
     cmd: python3 -u rrr_analysis.py
     deps:
     - path: data/area-responses/
       hash: md5
-      md5: 18a4a286fc913c2b7dca2a17b792fbe4.dir
-      size: 27702328
+      md5: 39c942d725bcfb4acac785761c44c7a5.dir
+      size: 1140326
       nfiles: 2
     params:
       params.yaml:
@@ -36,14 +36,14 @@ stages:
     outs:
     - path: results/rrr_coefficients.pickle
       hash: md5
-      md5: 602969e22ae61fd2082ce408273d3275
+      md5: ba2df98c64ad520ff53532bca76c6eec
       size: 360803
   plots:
     cmd: python3 -u rrr_plot.py
     deps:
     - path: results/rrr_coefficients.pickle
       hash: md5
-      md5: 602969e22ae61fd2082ce408273d3275
+      md5: ba2df98c64ad520ff53532bca76c6eec
       size: 360803
     params:
       params.yaml:
@@ -51,7 +51,7 @@ stages:
           cv: 5
           rank: 10
     outs:
-    - path: figures/VISl-VISp_block-2_rrr-coefficients_along_time.png
+    - path: figures/VISl-VISp_block-4_rrr-coefficients_along_time.png
       hash: md5
-      md5: 817512c485212f4a79baa2af92dbcf85
-      size: 213812
+      md5: c7bed257061c41d72570bf88e3f3346e
+      size: 208205
