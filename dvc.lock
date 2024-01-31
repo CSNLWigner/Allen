@@ -51,7 +51,7 @@ stages:
           cv: 5
           rank: 10
     outs:
-    - path: figures/VISl-VISp_block-2_rrr-coefficients.png
+    - path: figures/VISl-VISp_block-2_rrr-coefficients_along_time.png
       hash: md5
-      md5: 54c47d51033d8a03af6a044610ff601c
-      size: 51976
+      md5: 817512c485212f4a79baa2af92dbcf85
+      size: 213812
