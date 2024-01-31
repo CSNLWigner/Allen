@@ -3,6 +3,10 @@
 
 import matplotlib.pyplot as plt
 import numpy as np
+from allensdk.brain_observatory.ecephys.visualization import _VlPlotter
+import yaml
+
+preprocess = yaml.safe_load(open('params.yaml'))['preprocess']
 
 def line(result):
     """
@@ -33,17 +37,19 @@ def scatter(result):
 
 def simple_rrr_plot(result, params):
     fig, axs = plt.subplots(1, 5, figsize=(15, 3))
+    fig.suptitle('Coefficients of Reduced Rank Regression')
     for i in range(params['cv']):
-        axs[i].imshow(result[:, :, i], cmap='hot', aspect='auto')
-        axs[i].set_title(f'Fold {i+1}')
+        im = axs[i].imshow(result[:, :, i], cmap='hot', aspect='auto')
+        time_bin = preprocess['bin-size']
+        duration = preprocess['stimulus-duration']
+        timecourse = np.arange(0, duration+time_bin, time_bin) *1000
+        axs[i].set_title(f'{int(timecourse[i])}-{int(timecourse[i+1])} ms')
+        fig.colorbar(im, ax=axs[i])
+        axs[i].set_xlabel('VISl')
+        axs[i].set_ylabel('VISp')
 
-    plt.colorbar()
-    plt.xlabel('VISl')
-    plt.ylabel('VISp')
-    plt.title('Coefficients of Reduced Rank Regression')
 
     return fig
-
 
 def simple_rrr_plot_mean(result):
     
@@ -57,5 +63,28 @@ def simple_rrr_plot_mean(result):
     plt.xlabel('VISl')
     plt.ylabel('VISp')
     plt.title('Coefficients of Reduced Rank Regression')
+
+    return fig
+
+
+def raster_plot(spike_times, figsize=(8, 8), cmap=plt.cm.tab20, title='spike raster', cycle_colors=False):
+    """
+    imported from allensdk.brain_observatory.ecephys.visualization
+    """
+
+    fig, ax = plt.subplots(figsize=figsize)
+    plotter = _VlPlotter(ax, num_objects=len(
+        spike_times.keys().unique()), cmap=cmap, cycle_colors=cycle_colors)
+    # aggregate is called on each column, so pass only one (eg the stimulus_presentation_id)
+    # to plot each unit once
+    spike_times[['stimulus_presentation_id', 'unit_id']
+                ].groupby('unit_id').agg(plotter)
+
+    ax.set_xlabel('time (s)', fontsize=16)
+    ax.set_ylabel('unit', fontsize=16)
+    ax.set_title(title, fontsize=20)
+
+    plt.yticks([])
+    plt.axis('tight')
 
     return fig

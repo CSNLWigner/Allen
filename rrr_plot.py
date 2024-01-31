@@ -5,9 +5,8 @@ from utils.data_io import load_pickle, save_fig
 import yaml
 import matplotlib.pyplot as plt
 
-from utils.plots import simple_rrr_plot_mean
+from utils.plots import simple_rrr_plot
 from utils.data_io import load_pickle
-from utils.plots import simple_rrr_plot_mean
 
 params = yaml.safe_load(open('params.yaml'))['rrr']
 preprocess = yaml.safe_load(open('params.yaml'))['preprocess']
@@ -21,10 +20,10 @@ result = load_pickle(f"{results_path}/{name}")
 print('result.shape', result.shape)
 
 # Visualize the coefficients
-fig = simple_rrr_plot_mean(result)
+fig = simple_rrr_plot(result, params)
 
 # Save the plots
-figname = f"VISl-VISp_block-{preprocess['stimulus-block']}_rrr-coefficients"
+figname = f"VISl-VISp_block-{preprocess['stimulus-block']}_rrr-coefficients_along_time"
 # fig.savefig(f"figures/{figname}.png")
 save_fig(fig, figname, path="figures")
 
