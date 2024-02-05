@@ -384,3 +384,12 @@ def rasterplot(session, times):
 
     # also print out this presentation
     session.stimulus_presentations.loc[first_drifting_grating_presentation_id]
+    
+def stimulus_duration(session, stimulus_block):
+    stimulus_presentations = session.stimulus_presentations[session.stimulus_presentations['active']==True and
+                                                            session.stimulus_presentations['stimulus_block'] == stimulus_block and
+                                                            session.stimulus_presentations['omitted']==False]
+    stimulus_presentations['duration'].hist(bins=100)
+    plt.xlabel('Flash Duration (s)')
+    plt.ylabel('Count')
+    plt.show()
