@@ -1,4 +1,5 @@
 
+from scipy.stats import shapiro
 import numpy as np
 
 
@@ -59,3 +60,24 @@ def iterate_dimension(arr, dim):
         yield i, arr.take(i, axis=dim)
 
 
+# Determine if the data has normal distribution
+def normality_test(full_activity, dim=2):
+    """
+    Perform the Shapiro-Wilk test to determine if the data has a normal distribution.
+
+    Args:
+        full_activity (np.ndarray): The input data.
+
+    Returns:
+        None
+    """
+    for counter, activity_slice in iterate_dimension(full_activity, dim=dim):
+        # Normality test
+        stat, p = shapiro(activity_slice)
+        print('Statistics=%.3f, p=%.3f' % (stat, p))
+        # Interpret
+        alpha = 0.05
+        if p > alpha:
+            print(f'{counter}: Activity looks Gaussian (fail to reject H0)')
+        else:
+            print(f'{counter}: Activity does not look Gaussian (reject H0)')
