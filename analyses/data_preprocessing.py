@@ -2,7 +2,7 @@ from allensdk.brain_observatory.ecephys.behavior_ecephys_session import Behavior
 import numpy as np
 import yaml
 
-from utils.neuropixel import get_area_units, get_stimulus_presentations, get_unit_responses, stimulus_duration
+from utils.neuropixel import get_area_units, get_unit_responses, stimulus_duration
 
 params = yaml.safe_load(open('params.yaml'))['preprocess']
 
@@ -123,3 +123,40 @@ def calculate_residual_activity(full_activity: np.ndarray) -> np.ndarray:
     residual_activity = full_activity - baseline
 
     return residual_activity
+
+def z_score_normalize(activity: np.ndarray, dims=(2)) -> np.ndarray:
+    """
+    Perform Z-score normalization on the activity.
+
+    Args:
+        activity (np.ndarray): The activity to be normalized. Shape (units, trials, time)
+        dims (tuple): Dimensions along which to compute the mean and standard deviation for Z-score normalization. Default is (2).
+
+    Returns:
+        np.ndarray: Numpy array containing the normalized activity. Shape (units, trials, time)
+    """
+    mean = np.mean(activity, axis=dims, keepdims=True)
+    std = np.std(activity, axis=dims, keepdims=True)
+    normalized_activity = (activity - mean) / std
+
+    return normalized_activity
+
+
+def min_max_normalize(activity: np.ndarray, dims=(0, 1)) -> np.ndarray:
+    """
+    Perform min-max normalization on the activity.
+
+    Args:
+        activity (np.ndarray): The activity to be normalized. Shape (units, trials, time)
+        dims (tuple): Dimensions along which to compute the minimum and maximum values for min-max normalization. Default is (0,1).
+
+    Returns:
+        np.ndarray: Numpy array containing the normalized activity. Shape (units, trials, time)
+    """
+    nominator = activity - np.min(activity, axis=dims, keepdims=True)
+    denominator = np.max(activity, axis=dims, keepdims=True) - np.min(activity, axis=dims, keepdims=True)
+    activity = nominator / denominator
+
+    return activity
+
+    

@@ -1,6 +1,6 @@
 
 import numpy as np
-from analyses.data_preprocessing import calculate_residual_activity, get_area_responses, stimulus_log
+from analyses.data_preprocessing import calculate_residual_activity, get_area_responses, min_max_normalize, stimulus_log
 from utils.download_allen import cache_allen
 from utils.data_io import save_pickle
 import yaml
@@ -18,10 +18,14 @@ for area in params['areas']:
     
     # Get the responses for the area
     full_activity = get_area_responses(session, area, session_block=params['stimulus-block'], log=False)
-    
+        
     # Get residual activity
     residual_activity = calculate_residual_activity(full_activity)
     
+    # Normalize the responses
+    normalized_activity = min_max_normalize(residual_activity, dims=(0,1,2))
+    
     # Save the residual activity
-    save_pickle(residual_activity, f'{params["stimulus-block"]}_block_{area}-residual-activity', path='data/area-responses')
+    save_pickle(normalized_activity,
+                f'{params["stimulus-block"]}_block_{area}-activity', path='data/area-responses')
 
