@@ -32,3 +32,30 @@ def MSE(target, prediction):
     mse = np.mean((target - prediction) ** 2)
     similarity = 1 / (1 + mse)
     return similarity
+
+def iterate_dimension(arr, dim):
+    """
+    Iterate through a specific dimension of a numpy array.
+
+    Args:
+        arr (np.ndarray): The input array.
+        dim (int): The dimension to iterate through.
+
+    Yields:
+        Tuple[int, np.ndarray]: The counter and the sliced array along the specified dimension.
+
+    Example:
+        # Make a simple matrix with 3 dimensions
+        arr = np.array([[[1, 2, 3], [4, 5, 6]], [[7, 8, 9], [10, 11, 12]]])
+
+        # Iterate through the second dimension
+        for counter, sliced in iterate_dimension(arr, 1):
+            print(counter, sliced)
+
+    Returns:
+        None
+    """
+    for i in range(arr.shape[dim]):
+        yield i, arr.take(i, axis=dim)
+
+
