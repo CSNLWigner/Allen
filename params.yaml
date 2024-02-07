@@ -15,7 +15,7 @@ preprocess:
   # 2: receptive field mapping by gabor stimuli
   # 4: full-flash
   # 5: passive replay
-  bin-size: 0.050 # in seconds # Joao's default: 0.100
+  bin-size: 0.001 # in seconds # Joao's default: 0.100
   stimulus-duration: 0.250 # in seconds
 
 cca:

@@ -8,15 +8,16 @@ stages:
           areas:
           - VISp
           - VISl
+          - VISpm
           stimulus-block: 2
-          bin-size: 0.05
+          bin-size: 0.001
           stimulus-duration: 0.25
     outs:
     - path: data/area-responses/
       hash: md5
-      md5: 18a4a286fc913c2b7dca2a17b792fbe4.dir
-      size: 27702328
-      nfiles: 2
+      md5: 0c948e8ec006c8c5bb6538f553271efb.dir
+      size: 2194290492
+      nfiles: 3
   rrr_analysis:
     cmd: python3 -u rrr_analysis.py
     deps:
