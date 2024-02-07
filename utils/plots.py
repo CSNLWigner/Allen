@@ -8,41 +8,20 @@ import yaml
 
 preprocess = yaml.safe_load(open('params.yaml'))['preprocess']
 
-def line(result):
-    """
-    expects result to be a one-dimensional array-like object (such as a list or a numpy array). Each element in the array represents a "CCA Score" at a certain "Time". The index of the element in the array corresponds to the "Time"
-    """
-
-    # Plot the results
-    plt.plot(result)
-    # plt.xlabel("Time")
-    # plt.ylabel("CCA Score")
-    # plt.title("CCA Analysis Results")
-    plt.show()
-
-
-def scatter(result):
-    """
-    an object with two attributes: x_scores_ and y_scores_. Both x_scores_ and y_scores_ should be array-like objects of the same length. Each element in x_scores_ corresponds to an "X Score", and each element in y_scores_ corresponds to a "Y Score". The indices of the elements in the arrays correspond to the pairs of "X Scores" and "Y Scores"
-    """
-
-    # Visualize the result
-    plt.figure()
-    plt.plot(result.x_scores_, result.y_scores_, 'o')
-    plt.xlabel('X Scores')
-    plt.ylabel('Y Scores')
-    plt.title('CCA Result')
-    plt.show()
-
-
-def simple_rrr_plot(result, params):
-    fig, axs = plt.subplots(1, 5, figsize=(15, 3))
+def simple_rrr_plot(result, params, ax=None):
+    
+    # Create a new figure and axes if not provided
+    if ax is None:
+        fig, axs = plt.subplots(1, 5, figsize=(15, 3))
+        
+    # Make supertitle
     fig.suptitle('Coefficients of Reduced Rank Regression')
     
     # Find global min and max
     vmin = np.min(result)
     vmax = np.max(result)
     
+    # Plot the results
     for i in range(params['cv']):
         im = axs[i].imshow(result[:, :, i], 
                            cmap='hot', aspect='auto', 
@@ -59,12 +38,16 @@ def simple_rrr_plot(result, params):
 
     return fig
 
-def simple_rrr_plot_mean(result):
+def simple_rrr_plot_mean(result, ax=None):
     
     # Calculate the mean of the results
     np.mean(result, axis=2)
     
-    fig, ax = plt.subplots(1, 1, figsize=(10, 10))
+    # Create a new figure and axes if not provided
+    if ax is None:
+        fig, ax = plt.subplots(1, 1, figsize=(10, 10))
+    
+    # Plot the mean of the results
     im = ax.imshow(np.mean(result, axis=2), cmap='hot', aspect='auto')
 
     plt.colorbar(im, ax=ax)
@@ -75,12 +58,15 @@ def simple_rrr_plot_mean(result):
     return fig
 
 
-def raster_plot(spike_times, figsize=(8, 8), cmap=plt.cm.tab20, title='spike raster', cycle_colors=False):
+def raster_plot(spike_times, figsize=(8, 8), cmap=plt.cm.tab20, title='spike raster', cycle_colors=False, ax=None):
     """
     imported from allensdk.brain_observatory.ecephys.visualization
     """
 
-    fig, ax = plt.subplots(figsize=figsize)
+    # Create a new figure and axes if not provided
+    if ax is None:
+        fig, ax = plt.subplots(figsize=figsize)
+        
     plotter = _VlPlotter(ax, num_objects=len(
         spike_times.keys().unique()), cmap=cmap, cycle_colors=cycle_colors)
     # aggregate is called on each column, so pass only one (eg the stimulus_presentation_id)
@@ -95,4 +81,40 @@ def raster_plot(spike_times, figsize=(8, 8), cmap=plt.cm.tab20, title='spike ras
     plt.yticks([])
     plt.axis('tight')
 
+    return fig
+
+def cross_correlation_plot(cross_correlation, time_series=None, title='Cross-correlation', ax=None):
+    """
+    Plots the cross-correlation between two signals.
+
+    Parameters:
+    cross_correlation (array-like): A one-dimensional array-like object representing the cross-correlation values.
+    time_series (array-like, optional): A one-dimensional array-like object representing the time series. If not provided, it will be generated using the length of cross_correlation.
+    title (str, optional): The title of the plot. Default is 'Cross-correlation'.
+    ax (matplotlib.axes.Axes, optional): The axes on which to plot. If not provided, a new figure and axes will be created.
+
+    Returns:
+    None
+    """
+    
+    # If time_series is not provided, generate it
+    if time_series is None:
+        time_series = np.arange(len(cross_correlation))
+
+    # Create a new figure and axes if not provided
+    if ax is None:
+        fig, ax = plt.subplots()
+    
+    # Plot the cross-correlation
+    ax.plot(time_series, cross_correlation)
+    ax.set_xlabel('Time lag')
+    ax.set_ylabel('Cross-correlation')
+    ax.set_title(title)
+
+    # # Plot the cross-correlation
+    # plt.plot(time_series, cross_correlation)
+    # plt.xlabel('Time lag')
+    # plt.ylabel('Cross-correlation')
+    # plt.title(title)
+    
     return fig
