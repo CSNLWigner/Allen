@@ -3,12 +3,13 @@ import numpy as np
 import yaml
 
 from utils.neuropixel import get_area_units, get_unit_responses, stimulus_duration
+from scipy.signal import convolve
 
 params = yaml.safe_load(open('params.yaml'))['preprocess']
 
 def get_area_responses(session: BehaviorEcephysSession, area: str, session_block: int, log=False) -> np.ndarray:
     """
-    Compare the responses of units in a brain area using Canonical Correlation Analysis (CCA).
+    Get the responses of the units in a specific brain area to a specific stimulus block.
 
     Args:
         session (BehaviorEcephysSession): The session object containing the spike times and stimulus presentations.
@@ -159,4 +160,43 @@ def min_max_normalize(activity: np.ndarray, dims=(0, 1)) -> np.ndarray:
 
     return activity
 
+
+def convolve_spike_train(spike_times: np.ndarray, step_size=0.010, kernel='Gaussian', kernel_size=50) -> np.ndarray:
+    """
+    Convolve the spike train with a boxcar or Gaussian kernel to get a continuous signal.
+
+    Args:
+        spike_times (np.ndarray): The spike times. Shape (n_spikes)
+        step_size (float, optional): The step size for the time vector. Default is 0.010.
+        kernel (str, optional): The type of kernel to use for convolution. Can be 'boxcar' or 'Gaussian'. Default is 'Gaussian'.
+
+    Returns:
+        np.ndarray: Numpy array containing the continuous signal. Shape (time)
+
+    Raises:
+        None
+
+    Example:
+        >>> spike_times = np.array([0.1, 0.2, 0.3])
+        >>> convolve_spike_train(spike_times)
+        array([0., 0.13533528, 0.60653066, 0.13533528, 0.])
+    """
+
+    # Create a time vector
+    time_vector = np.arange(0, np.max(spike_times), step_size)
+
+    # Create an empty spike train
+    spike_train = np.zeros_like(time_vector)
+
+    # Fill in the spike train
+    for spike in spike_times:
+        spike_train[int(spike / step_size)] = 1
+
+    # Convolve with the kernel
+    kernel_types = {
+        'boxcar': np.ones(kernel_size),
+        'Gaussian': np.exp(-np.linspace(-2, 2, kernel_size)**2)
+        }
+    continuous_signal = convolve(spike_train, kernel_types[kernel], mode='same')
     
+    return continuous_signal
