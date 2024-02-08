@@ -37,6 +37,8 @@ def MSE(target, prediction):
 def iterate_dimension(arr, dim):
     """
     Iterate through a specific dimension of a numpy array.
+    
+    (Similar to the built-in np.ndenumerate() function, but with the ability to specify higher dimensions.)
 
     Args:
         arr (np.ndarray): The input array.

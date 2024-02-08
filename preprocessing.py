@@ -5,8 +5,7 @@ from utils.download_allen import cache_allen
 from utils.data_io import save_pickle
 import yaml
 
-from utils.neuropixel import get_area_units, get_unit_responses, makePSTH
-
+# Load parameters
 params = yaml.safe_load(open('params.yaml'))['preprocess']
 
 # An arbitrary session from the Allen Neuropixel dataset

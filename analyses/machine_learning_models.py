@@ -109,7 +109,7 @@ class ReducedRankRidgeRegression(sklearn.base.MultiOutputMixin, sklearn.base.Reg
     ```
 
     ## References
-    <a id="1">[1]</a> 
+    [^1]:
     Mukherjee, A. and Zhu, J. (2011)
     Reduced rank ridge regression and its kernel extensions.
 
