@@ -361,6 +361,8 @@ def get_unit_responses(units, spike_times, trial_start, duration=0.250, binSize=
             for k, time in enumerate(np.arange(start, start + duration, binSize)): # Time
                 
                 # print(unit_spike_times, time)
+                if k == n_bin: # This can happen because of different floating point rounding in int() and np.arange() functions i guess.
+                    break # print('Warning: k is out of range')
                 
                 bin_start_idx = np.searchsorted(unit_spike_times, time)
                 bin_end_idx = np.searchsorted(unit_spike_times, time+binSize)

@@ -4,19 +4,21 @@ stages:
     cmd: python3 -u preprocessing.py
     params:
       params.yaml:
+        cache:
+          location: data/.vbn_s3_cache
+          force_download: false
         preprocess:
           areas:
           - VISp
           - VISl
-          - VISpm
-          stimulus-block: 2
-          bin-size: 0.001
+          stimulus-block: 5
+          bin-size: 0.005
           stimulus-duration: 0.25
     outs:
     - path: data/area-responses/
       hash: md5
-      md5: 0c948e8ec006c8c5bb6538f553271efb.dir
-      size: 2194290492
+      md5: c0d25e573c80757dee5540640262535b.dir
+      size: 577559292
       nfiles: 3
   rrr_analysis:
     cmd: python3 -u rrr_analysis.py
@@ -40,19 +42,77 @@ stages:
       md5: 602969e22ae61fd2082ce408273d3275
       size: 360803
   plots:
-    cmd: python3 -u rrr_plot.py
+    cmd: python3 -u time_lag_plot.py
     deps:
-    - path: results/rrr_coefficients.pickle
+    - path: results/VISp_VISl_cross-time-coeffs.pickle
       hash: md5
-      md5: 602969e22ae61fd2082ce408273d3275
-      size: 360803
+      md5: 3ab7d9da547a0cfffcdb0b7bf2eec32f
+      size: 20152
     params:
       params.yaml:
+        preprocess:
+          areas:
+          - VISp
+          - VISl
+          stimulus-block: 5
+          bin-size: 0.005
+          stimulus-duration: 0.25
+    outs:
+    - path: figures/Time_lag_between_V1_LM_5ms_resolution.png
+      hash: md5
+      md5: cd1ab48fc4076605129e43cd730aab1e
+      size: 26099
+  time_lag_analysis:
+    cmd: python3 -u time_lag_analysis.py
+    deps:
+    - path: data/area-responses/
+      hash: md5
+      md5: c0d25e573c80757dee5540640262535b.dir
+      size: 577559292
+      nfiles: 3
+    params:
+      params.yaml:
+        preprocess:
+          areas:
+          - VISp
+          - VISl
+          stimulus-block: 5
+          bin-size: 0.005
+          stimulus-duration: 0.25
         rrr:
           cv: 5
           rank: 10
     outs:
-    - path: figures/VISl-VISp_block-2_rrr-coefficients_along_time.png
+    - path: results/VISp_VISl_cross-time-coeffs.pickle
       hash: md5
-      md5: e53015d0c29d312bfd6dea651b4cc746
-      size: 205357
+      md5: 3ab7d9da547a0cfffcdb0b7bf2eec32f
+      size: 20152
+  analysis:
+    cmd: python3 -u time_lag_analysis.py
+    deps:
+    - path: data/area-responses/
+      hash: md5
+      md5: c0d25e573c80757dee5540640262535b.dir
+      size: 577559292
+      nfiles: 3
+    params:
+      params.yaml:
+        preprocess:
+          areas:
+          - VISp
+          - VISl
+          stimulus-block: 5
+          bin-size: 0.005
+          stimulus-duration: 0.25
+        rrr:
+          cv: 5
+          rank: 10
+    outs:
+    - path: results/VISp_VISl_cross-time-coeffs.pickle
+      hash: md5
+      md5: 3ab7d9da547a0cfffcdb0b7bf2eec32f
+      size: 20152
+    - path: results/VISp_VISl_cross-time-lag.pickle
+      hash: md5
+      md5: 16767e69729b3833829eee641c06668a
+      size: 116

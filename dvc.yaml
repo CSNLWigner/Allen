@@ -16,23 +16,25 @@ stages:
   preprocess:
     cmd: python3 -u preprocessing.py
     params:
+      - cache
       - preprocess
     outs:
       - data/area-responses/
-  rrr_analysis:
-    cmd: python3 -u rrr_analysis.py
+  analysis:
+    cmd: python3 -u time_lag_analysis.py
     deps:
       - data/area-responses/
     params:
-      - cache
+      - preprocess
       - rrr
     outs:
-      - results/rrr_coefficients.pickle
+      - results/VISp_VISl_cross-time-coeffs.pickle
+      - results/VISp_VISl_cross-time-lag.pickle
   plots:
-    cmd: python3 -u rrr_plot.py
+    cmd: python3 -u time_lag_plot.py
     deps:
-      - results/rrr_coefficients.pickle
+      - results/VISp_VISl_cross-time-coeffs.pickle
     params:
-      - rrr
+      - preprocess
     outs:
-      - figures/VISl-VISp_block-2_rrr-coefficients_along_time.png
+      - figures/Time_lag_between_V1_LM_5ms_resolution.png

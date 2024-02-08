@@ -1,7 +1,6 @@
 
 
-from sklearn.model_selection import cross_val_score
-from utils.neuropixel import get_area_units, get_stimulus_presentations, get_unit_responses
+from sklearn.model_selection import cross_val_score, cross_validate
 from analyses.machine_learning_models import ReducedRankRidgeRegression
 import yaml
 import numpy as np
@@ -17,8 +16,8 @@ def RRRR(X_data, Y_data, log=False):
     Make Reduced Rank Regression (RRR) analysis.
 
     Args:
-        X_data (np.ndarray): The data of the first brain area.
-        Y_data (np.ndarray): The data of the second brain area.
+        X_data (np.ndarray): The data of the first brain area. Shape (n_samples, n_features)
+        Y_data (np.ndarray): The data of the second brain area. Shape (n_samples, n_features)
         log (bool, optional): Whether to log the progress. Defaults to True.
 
     Returns:
@@ -26,23 +25,25 @@ def RRRR(X_data, Y_data, log=False):
     """
 
     model = ReducedRankRidgeRegression(rank=params['rank'])
-    # scores = cross_val_score(model, area_X_responses.T, area_Y_responses.T,
-    #                          cv=params['cv'], error_score='raise')
-    model.fit(X_data, Y_data)
-    prediction = model.predict(X_data)
-    accuracy = MSE(Y_data, prediction)
-    score = model.score(X_data, Y_data)
+    results = cross_validate(model, X_data, Y_data, cv=params['cv'], return_estimator=True, scoring='r2')
     if log:
-        print('Train accuracy', accuracy)
-    coefficients = model.coef_
-    if log:
-        print('coefficients.shape', coefficients.shape)
+        print('Cross-validation scores:', results['test_score'])
     
-    return coefficients
+    # Concatenate the coefficients over the cross-validation folds
+    coefficients = np.array([estimator.coef_ for estimator in results['estimator']])
+    print('coefficients.shape', coefficients.shape)
+    
+    # Calculate the mean of the coefficients
+    mean_coefficients = np.mean(coefficients, axis=0)
+    
+    # Append the mean coefficients to the results
+    results['mean_coefficients'] = mean_coefficients
+    
+    return results
 
 def compare_two_areas(area_X_responses:np.ndarray, area_Y_responses:np.ndarray, log=False) -> dict:
     """
-    Compare the responses of units in two brain areas using Canonical Correlation Analysis (CCA).
+    Compare the responses of units in two brain areas using Reduced Rank Regression (RRR).
 
     Args:
         session (Session): The session object containing the spike times and stimulus presentations.
