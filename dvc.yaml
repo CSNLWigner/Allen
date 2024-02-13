@@ -21,20 +21,23 @@ stages:
     outs:
       - data/area-responses/
   analysis:
-    cmd: python3 -u time_lag_analysis.py
+    cmd: python3 -u rrr-rank-analysis.py
     deps:
       - data/area-responses/
     params:
       - preprocess
       - rrr
     outs:
-      - results/VISp_VISl_cross-time-coeffs.pickle
-      - results/VISp_VISl_cross-time-lag.pickle
+      - results/VISp_VISl_cross-time-test-scores.pickle
   plots:
-    cmd: python3 -u time_lag_plot.py
+    cmd: python3 -u rrr-rank-plot.py
     deps:
-      - results/VISp_VISl_cross-time-coeffs.pickle
+      - results/VISp_VISl_cross-time-test-scores.pickle
     params:
       - preprocess
+      - rrr
+      - rrr-plot
     outs:
-      - figures/Time_lag_between_V1_LM_5ms_resolution.png
+      - figures/V1-V2_cross-time_RRR-rank-analysis-2DIM.png
+      - figures/V1-V2_cross-time_RRR-rank-analysis-timewise.png
+      - figures/V1-V2_cross-time_RRR-rank-analysis-averaged-over-time.png
