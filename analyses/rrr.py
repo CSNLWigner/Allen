@@ -11,7 +11,7 @@ from utils.utils import MSE
 preprocess = yaml.safe_load(open('params.yaml'))['preprocess']
 params = yaml.safe_load(open('params.yaml'))['rrr']
 
-def RRRR(X_data, Y_data, log=False):
+def RRRR(X_data, Y_data, rank=None, cv=None, log=False):
     """
     Make Reduced Rank Regression (RRR) analysis.
 
@@ -19,19 +19,34 @@ def RRRR(X_data, Y_data, log=False):
         X_data (np.ndarray): The data of the first brain area. Shape (n_samples, n_features)
         Y_data (np.ndarray): The data of the second brain area. Shape (n_samples, n_features)
         log (bool, optional): Whether to log the progress. Defaults to True.
+        rank (int, optional): The rank of the RRR model. Defaults to None.
+        cv (int, optional): The number of cross-validation folds. Defaults to None.
 
     Returns:
-        np.ndarray: The coefficients of the RRR model. Shape (Y_features, X_features)
+        dict: A dictionary containing the results of the RRR analysis.
+            - mean_coefficients (np.ndarray): The mean coefficients of the RRR model. Shape (n_features, n_features)
+            - test_score (np.ndarray): The test scores of the RRR model. Shape (n_splits,)
+            - estimator (np.ndarray): The estimators of the RRR model. Shape (n_splits,)
     """
+    
+    # Set default values
+    if rank is None:
+        rank = params['rank']
+    if cv is None:
+        cv = params['cv']
 
-    model = ReducedRankRidgeRegression(rank=params['rank'])
-    results = cross_validate(model, X_data, Y_data, cv=params['cv'], return_estimator=True, scoring='r2')
+    # Make RRR model
+    model = ReducedRankRidgeRegression(rank=rank)
+    
+    # Perform cross-validation
+    results = cross_validate(model, X_data, Y_data, cv=cv, return_estimator=True, scoring='r2')
     if log:
         print('Cross-validation scores:', results['test_score'])
     
     # Concatenate the coefficients over the cross-validation folds
     coefficients = np.array([estimator.coef_ for estimator in results['estimator']])
-    print('coefficients.shape', coefficients.shape)
+    if log:
+        print('coefficients.shape', coefficients.shape)
     
     # Calculate the mean of the coefficients
     mean_coefficients = np.mean(coefficients, axis=0)

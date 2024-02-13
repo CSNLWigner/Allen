@@ -6,6 +6,7 @@ from utils.data_io import load_pickle, save_pickle
 from analyses.data_preprocessing import min_max_normalize
 from analyses.rrr import RRRR
 
+# Load parameters
 params = yaml.safe_load(open('params.yaml'))['preprocess']
 
 # Load V1 and V2 activity
