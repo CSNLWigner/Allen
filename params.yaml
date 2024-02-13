@@ -28,4 +28,4 @@ rrr:
   rank: 100
 
 rrr-plot:
-  discard-first-500-ms: False
+  discard-first-500-ms: True

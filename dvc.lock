@@ -61,20 +61,20 @@ stages:
           cv: 5
           rank: 100
         rrr-plot:
-          discard-first-500-ms: false
+          discard-first-500-ms: true
     outs:
     - path: figures/V1-V2_cross-time_RRR-rank-analysis-2DIM.png
       hash: md5
-      md5: d890699f82b95c87a4b08f75f313de8f
-      size: 20253
+      md5: 86c890d0949db9256151fe3f584810ec
+      size: 17233
     - path: figures/V1-V2_cross-time_RRR-rank-analysis-averaged-over-time.png
       hash: md5
-      md5: 27fbb5a1f3e064ffbfec0a1e9a0c79d8
-      size: 28653
+      md5: 1c212fad6d582f8725bb51362bd5c03d
+      size: 27066
     - path: figures/V1-V2_cross-time_RRR-rank-analysis-timewise.png
       hash: md5
-      md5: 940bd0306e1d3092bd7a8ed71afdb88d
-      size: 68217
+      md5: afae136331c24aae6c37f06850afcfc6
+      size: 62720
   time_lag_analysis:
     cmd: python3 -u time_lag_analysis.py
     deps:
