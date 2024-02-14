@@ -1,6 +1,5 @@
 
-import numpy as np
-from analyses.data_preprocessing import calculate_residual_activity, get_area_responses, min_max_normalize, stimulus_log
+from analyses.data_preprocessing import calculate_residual_activity, get_area_responses, min_max_normalize, z_score_normalize, stimulus_log
 from utils.download_allen import cache_allen
 from utils.data_io import save_pickle
 import yaml
@@ -19,10 +18,10 @@ for area in params['areas']:
     full_activity = get_area_responses(session, area, session_block=params['stimulus-block'], log=False)
         
     # Get residual activity
-    residual_activity = calculate_residual_activity(full_activity)
+    residual_activity = calculate_residual_activity(full_activity) # Neuron-wise AND time-wise
     
     # Normalize the responses
-    normalized_activity = min_max_normalize(residual_activity, dims=(0,1,2))
+    normalized_activity = z_score_normalize(residual_activity, dims=(0,1,2)) # TODO: Normalize based on ITI activity?
     
     # Save the residual activity
     save_pickle(normalized_activity,

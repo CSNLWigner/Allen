@@ -17,7 +17,7 @@ stages:
     outs:
     - path: data/area-responses/
       hash: md5
-      md5: 22bdb5d71d1a8115eb09fa0ce0a5b157.dir
+      md5: c8ec36b0953547bb73b891c488a851cf.dir
       size: 36457528
       nfiles: 2
   rrr_analysis:
@@ -46,7 +46,7 @@ stages:
     deps:
     - path: results/VISp_VISl_cross-time-test-scores.pickle
       hash: md5
-      md5: e39e55ad79de00b99c2b0208c102c8ea
+      md5: fcfb47a5c5443cb3b393710391841807
       size: 4152
     params:
       params.yaml:
@@ -65,16 +65,16 @@ stages:
     outs:
     - path: figures/V1-V2_cross-time_RRR-rank-analysis-2DIM.png
       hash: md5
-      md5: 86c890d0949db9256151fe3f584810ec
-      size: 17233
+      md5: 3b263060a900246f2aeb481768c8ab8b
+      size: 20240
     - path: figures/V1-V2_cross-time_RRR-rank-analysis-averaged-over-time.png
       hash: md5
-      md5: 1c212fad6d582f8725bb51362bd5c03d
-      size: 27066
+      md5: 4c7d4f7e34b2752640cb45d62004bfa0
+      size: 27198
     - path: figures/V1-V2_cross-time_RRR-rank-analysis-timewise.png
       hash: md5
-      md5: afae136331c24aae6c37f06850afcfc6
-      size: 62720
+      md5: 0fe30715108db5df6b18f1444387fa10
+      size: 50273
   time_lag_analysis:
     cmd: python3 -u time_lag_analysis.py
     deps:
@@ -105,7 +105,7 @@ stages:
     deps:
     - path: data/area-responses/
       hash: md5
-      md5: 22bdb5d71d1a8115eb09fa0ce0a5b157.dir
+      md5: c8ec36b0953547bb73b891c488a851cf.dir
       size: 36457528
       nfiles: 2
     params:
@@ -123,5 +123,5 @@ stages:
     outs:
     - path: results/VISp_VISl_cross-time-test-scores.pickle
       hash: md5
-      md5: e39e55ad79de00b99c2b0208c102c8ea
+      md5: fcfb47a5c5443cb3b393710391841807
       size: 4152
