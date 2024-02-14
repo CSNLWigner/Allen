@@ -28,8 +28,8 @@ plt.close(fig)
 scores = np.nanmean(scores, axis=1)
 plt.plot(scores)
 plt.xlabel('Rank')
-plt.ylabel('Test score')
-plt.title('RRR rank analysis')
+plt.ylabel('Test score (r2)')
+plt.title('RRR rank analysis averaged over time')
 plt.savefig(f'figures/V1-V2_cross-time_RRR-rank-analysis-averaged-over-time.png')
 
 # Print at which rank is the test score the lowest
