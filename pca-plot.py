@@ -20,6 +20,12 @@ fig_PC, axs_PC = plt.subplots(len(pca_results), len(pca_results['VISp']), figsiz
 
 max_row = len(pca_results) -1
 
+# Get the min and max values for 1st and 2nd components for all areas and times
+min_PC1 = min([pca_results[area][time]['components'][:,0].min() for area in pca_results for time in pca_results[area]])
+max_PC1 = max([pca_results[area][time]['components'][:,0].max() for area in pca_results for time in pca_results[area]])
+min_PC2 = min([pca_results[area][time]['components'][:,1].min() for area in pca_results for time in pca_results[area]])
+max_PC2 = max([pca_results[area][time]['components'][:,1].max() for area in pca_results for time in pca_results[area]])
+
 # Loop through the areas and times
 for i, area in enumerate(pca_results):
     for j, time in enumerate(pca_results[area]):
@@ -31,8 +37,8 @@ for i, area in enumerate(pca_results):
         axs_PC[i,j].scatter(pca_results[area][time]['components'][:,0], pca_results[area][time]['components'][:,1])
         
         # Set the xlim and ylim to [-2,5], [-2,5]
-        axs_PC[i,j].set_xlim(-2, 8)
-        axs_PC[i,j].set_ylim(-2, 8)
+        axs_PC[i,j].set_xlim(min_PC1, max_PC1)
+        axs_PC[i,j].set_ylim(min_PC2, max_PC2)
 
     # Create suptitle for fig_EVR
     fig_EVR.suptitle('Explained Variance Ratio')
