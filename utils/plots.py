@@ -6,7 +6,9 @@ import numpy as np
 from allensdk.brain_observatory.ecephys.visualization import _VlPlotter
 import yaml
 
-from utils.utils import iterate_dimension
+from utils.utils import get_time, iterate_dimension
+
+from scipy.stats import sem
 
 preprocess = yaml.safe_load(open('params.yaml'))['preprocess']
 
@@ -249,3 +251,54 @@ def rrr_rank_plot_over_time(scores, title='RRR test scores', time_series=None, a
     axs[0].set_ylabel('Test score (r2)')
     
     return fig
+
+# Define a function that iterates through the time dimennsion of the rrr-test-scores (shape (cv, time)) and plots the scores for each time in a separate plot
+def score_plot_by_time(scores, title=None, time_series=None, ax=None, label='', color=None) -> plt.Figure:
+    """
+    Plots the RRR test scores as a function of rank and time.
+
+    Parameters:
+    scores (array-like): A two-dimensional array-like object representing the scores. Shape (cv, time)
+    rank (array-like): A one-dimensional array-like object representing the rank.
+    title (str, optional): The title of the plot. Default is 'Activity Estimation Error'.
+    time_series (array-like, optional): A one-dimensional array-like object representing the time series. If not provided, it will be generated using the params.yaml file.
+    ax (matplotlib.axes.Axes, optional): The axes on which to plot. If not provided, a new figure and axes will be created.
+
+    Returns:
+    matplotlib.figure.Figure: The figure object containing the plot.
+    """
+    
+    # If color is not provided, generate it from the default color cycle. If color is None, the color will be determined by the axes.
+    if color is None:
+        color = next(ax._get_lines.prop_cycler)['color']
+        
+    
+    # Calculate tshe mean and standard error of the mean of the scores
+    mean_scores = np.mean(scores, axis=0)
+    sem_scores = sem(scores, axis=0)
+    
+    # Set default values
+    if time_series is None:
+        duration = preprocess['stimulus-duration'] # 0.250
+        time_bin = preprocess['bin-size'] # 0.050
+        time_series = np.arange(0, duration+time_bin, time_bin)
+    
+    # Create a new figure and axes if not provided
+    if ax is None:
+        fig, ax = plt.subplots()
+        return_fig = True
+    
+    # Create title
+    if title is not None:
+        ax.set_title(title)
+
+    # Plot the mean and standard error of the mean of the scores as a function of time
+    ax.plot(range(len(mean_scores)), mean_scores, label=label, color=color)
+    ax.fill_between(range(len(mean_scores)), mean_scores-sem_scores, mean_scores+sem_scores, alpha=0.1, color=color)
+    
+    ax.set_xlabel('Time (s)')
+    ax.set_xticks(np.arange(0, len(time_series), 2))
+    ax.set_xticklabels(time_series[::2])
+    ax.set_ylabel('Test score (r2)')
+    
+    return

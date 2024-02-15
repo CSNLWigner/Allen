@@ -1,10 +1,12 @@
 
 
+import pandas as pd
 from sklearn.model_selection import cross_val_score, cross_validate
 from analyses.machine_learning_models import ReducedRankRidgeRegression
 import yaml
 import numpy as np
 from allensdk.brain_observatory.ecephys.behavior_ecephys_session import BehaviorEcephysSession
+from utils.data_io import load_pickle
 
 from utils.utils import MSE
 
@@ -95,3 +97,80 @@ def compare_two_areas(area_X_responses:np.ndarray, area_Y_responses:np.ndarray, 
     return {
         'coefficients': coefficients
     }
+
+
+def control_models(predictor_names=['V1', 'movement', 'pupil'], response_name='V2', log=False) -> np.ndarray:
+    '''
+    Perform control models analysis using Reduced Rank Regression (RRR).
+
+    This function loads the necessary data, transforms the behavioral data to match the neuronal data,
+    and performs RRR analysis at each time point. The analysis is performed using the V1 neuronal activity
+    as predictors and V2 neuronal activity as the target variable. The behavioral data (movement and pupil)
+    can also be included as predictors.
+    
+    Params:
+    - predictor names (list): Define, which data to concatenate into the predictors. The options are: 'V1', 'movement', 'pupil'.
+    - outcome name (str): The name of the outcome variable. Default is 'V2'.
+
+    Returns:
+    - results (numpy.ndarray): Array of shape (T, cv) containing the RRR test scores at each time point.
+    '''
+    
+    # Load the data
+    V1 = load_pickle("5_block_VISp-activity", path="data/area-responses") # shape (Neurons, Trials, Time)
+    V2 = load_pickle("5_block_VISl-activity", path="data/area-responses") # shape (Neurons, Trials, Time)
+    movement = load_pickle("5_block_running-speed", path="data/behav-responses") # shape (Trials, Time)
+    pupil = load_pickle("5_block_pupil-area", path="data/behav-responses") # shape (Trials, Time)
+    
+    # Transform the behav data to amtch the V1 and V2 data
+    movement = movement[np.newaxis, :, :]
+    pupil = pupil[np.newaxis, :, :]
+    
+    # Get the number of neurons, trials, and time
+    N_1, K, T = V1.shape
+    N_2 = V2.shape[0]
+    
+    # Init the results bs shape (T, cv)
+    results = np.zeros((T, params['cv']))
+    
+    # Loop through the time
+    for t in range(1):
+    
+        # Make DataFrame from the data
+        X_V1  = pd.DataFrame(V1[:, :, t].T, columns=[f'V1_{i}' for i in range(V1.shape[0])])
+        X_mov = pd.DataFrame(movement[:, :, t].T, columns=['movement'])
+        X_pup = pd.DataFrame(pupil[:, :, t].T, columns=['pupil'])
+        Y_V2  = pd.DataFrame(V2[:, :, t].T, columns=[f'V2_{i}' for i in range(V2.shape[0])])
+        
+        # Replace the NaNs with the mean
+        X_V1.fillna(X_V1.mean(), inplace=True)
+        X_mov.fillna(X_mov.mean(), inplace=True)
+        X_pup.fillna(X_pup.mean(), inplace=True)
+        Y_V2.fillna(Y_V2.mean(), inplace=True)
+        
+        # print()
+        # print('X_pup', X_pup)
+        # print()
+        
+        # Create a dictionary of the dataframes
+        dfs = {'V1': X_V1, 'movement': X_mov, 'pupil': X_pup, 'V2': Y_V2}
+        
+        # Create a list from the dataframes if they are listed in the predictor names list
+        predictors = [df for name, df in dfs.items() if name in predictor_names]
+        
+        # Concatenate the data
+        X = pd.concat(predictors, axis=1).values
+        
+        # Get the outcome variable
+        Y = dfs[response_name].values
+    
+        # Make Reduced Rank Reegression
+        scores = RRRR(X, Y, rank=params['rank'], cv=params['cv'], log=log)
+    
+        # Print the scores
+        # print(scores)
+        
+        # Append the scores to the results
+        results[t, :] = scores['test_score']
+    
+    return results
