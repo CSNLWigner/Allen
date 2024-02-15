@@ -1,4 +1,4 @@
-
+from sklearn.preprocessing import StandardScaler
 from analyses.data_preprocessing import calculate_residual_activity, get_area_responses, min_max_normalize, z_score_normalize, stimulus_log
 from utils.download_allen import cache_allen
 from utils.data_io import save_pickle
@@ -22,6 +22,10 @@ for area in params['areas']:
     
     # Normalize the responses
     normalized_activity = z_score_normalize(residual_activity, dims=(0,1,2)) # TODO: Normalize based on ITI activity?
+    
+    # Sklearn alternative for normalization
+    # scaler = StandardScaler()
+    # normalized_activity = scaler.fit_transform(residual_activity.reshape(residual_activity.shape[0], -1).T).T.reshape(residual_activity.shape)
     
     # Save the residual activity
     save_pickle(normalized_activity,

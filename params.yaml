@@ -25,7 +25,7 @@ cca:
 
 rrr:
   cv: 5
-  rank: 100
+  rank: 8
 
 rrr-plot:
   discard-first-500-ms: True

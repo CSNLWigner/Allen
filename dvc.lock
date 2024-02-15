@@ -61,20 +61,20 @@ stages:
           cv: 5
           rank: 100
         rrr-plot:
-          discard-first-500-ms: true
+          discard-first-500-ms: false
     outs:
     - path: figures/V1-V2_cross-time_RRR-rank-analysis-2DIM.png
       hash: md5
-      md5: 3b263060a900246f2aeb481768c8ab8b
-      size: 20240
+      md5: 6af27dd5cb1ced36dde6409d04da5ac7
+      size: 19503
     - path: figures/V1-V2_cross-time_RRR-rank-analysis-averaged-over-time.png
       hash: md5
-      md5: 4c7d4f7e34b2752640cb45d62004bfa0
-      size: 27198
+      md5: 1ccc8901072e3b5e0511cf7673dd37d2
+      size: 27005
     - path: figures/V1-V2_cross-time_RRR-rank-analysis-timewise.png
       hash: md5
-      md5: 0fe30715108db5df6b18f1444387fa10
-      size: 50273
+      md5: 3c1431d982d04334cfb42c86ee8dd699
+      size: 53591
   time_lag_analysis:
     cmd: python3 -u time_lag_analysis.py
     deps:
@@ -101,13 +101,18 @@ stages:
       md5: 3ab7d9da547a0cfffcdb0b7bf2eec32f
       size: 20152
   analysis:
-    cmd: python3 -u rrr-rank-analysis.py
+    cmd: python3 -u control-models.py
     deps:
     - path: data/area-responses/
       hash: md5
       md5: c8ec36b0953547bb73b891c488a851cf.dir
       size: 36457528
       nfiles: 2
+    - path: data/behav-responses/
+      hash: md5
+      md5: ccb923276b34dab60d053b10bf2afe91.dir
+      size: 576126
+      nfiles: 3
     params:
       params.yaml:
         preprocess:
@@ -119,9 +124,26 @@ stages:
           stimulus-duration: 0.25
         rrr:
           cv: 5
-          rank: 100
+          rank: 8
     outs:
-    - path: results/VISp_VISl_cross-time-test-scores.pickle
+    - path: figures/control-models.png
       hash: md5
-      md5: fcfb47a5c5443cb3b393710391841807
-      size: 4152
+      md5: b332ae1bfcf6dedfbbf4fb99eb810fa5
+      size: 51178
+  behav-preprocess:
+    cmd: python3 -u behav-preprocessing.py
+    params:
+      params.yaml:
+        preprocess:
+          areas:
+          - VISp
+          - VISl
+          stimulus-block: 5
+          bin-size: 0.05
+          stimulus-duration: 0.25
+    outs:
+    - path: data/behav-responses/
+      hash: md5
+      md5: ccb923276b34dab60d053b10bf2afe91.dir
+      size: 576126
+      nfiles: 3
