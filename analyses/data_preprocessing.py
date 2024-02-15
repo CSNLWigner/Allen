@@ -1,11 +1,62 @@
 from allensdk.brain_observatory.ecephys.behavior_ecephys_session import BehaviorEcephysSession
 import numpy as np
+import pandas as pd
 import yaml
 
 from utils.neuropixel import get_area_units, get_unit_responses, stimulus_duration
 from scipy.signal import convolve
 
 params = yaml.safe_load(open('params.yaml'))['preprocess']
+
+def get_behav_responses(behav_data:pd.DataFrame, value_name:str, trial_start, duration=0.250, binSize=0.050) -> np.ndarray:
+    """
+    Calculate the unit responses for each trial in the given timestamps.
+
+    Parameters:
+    behav_data (pd.DataFrame): DataFrame containing the timestamps and values.
+    value_name (str): Name of the column in behav_data that contains the values.
+    trial_start (list or array-like): List or array-like object containing the start time of each trial.
+    duration (float): Total duration of trial for PSTH in seconds. Default is 0.250.
+    binSize (float): Bin size for PSTH in seconds. Default is 0.050.
+
+    Returns:
+    numpy.ndarray: Array containing the unit responses, shape (n_trial, n_bin).
+    """
+    
+    # Get timestamps, values from behav_data
+    timestamps = behav_data['timestamps']
+    values = behav_data[value_name]
+
+    # Get the number of trials and bins
+    n_trial = len(trial_start)
+    n_bin = int(duration / binSize)
+
+    # Create an empty array to store the data
+    data = np.zeros((n_trial, n_bin))
+
+    # Calculate the unit responses for each trial
+    for j, start in enumerate(trial_start):  # Trials
+
+        # Calculate the average value for each bin
+        for k, time in enumerate(np.arange(start, start + duration, binSize)):  # Time
+            
+            # If due to floating point rounding, the last bin is not complete, break the loop
+            if k == n_bin:
+                break
+
+            # Get the indices of the timestamps in the time bin
+            bin_start_idx = np.searchsorted(timestamps, time)
+            bin_end_idx = np.searchsorted(timestamps, time + binSize)
+
+            # timestamps_in_timebin = timestamps[bin_start_idx:bin_end_idx]
+            
+            # Calculate the average value for the bin
+            bin_value = np.mean(values[bin_start_idx:bin_end_idx])
+            
+            # Store the value in the data array
+            data[j, k] = bin_value
+
+    return data
 
 def get_area_responses(session: BehaviorEcephysSession, area: str, session_block: int, log=False) -> np.ndarray:
     """
@@ -54,9 +105,7 @@ def get_area_responses(session: BehaviorEcephysSession, area: str, session_block
     if log:
         print('area_units number', n_area_units)  # shape (units)
 
-    # Get the responses
-    if log:
-        print('Get responses...')
+    # Get the time of the start of each trial
     stimulus_presentations = session.stimulus_presentations
     trial_start = stimulus_presentations[stimulus_presentations['stimulus_block']
                                          == stimulus_block]['start_time'].values
@@ -76,6 +125,27 @@ def get_area_responses(session: BehaviorEcephysSession, area: str, session_block
         print('area_responses.shape', area_responses.shape)  # shape (units, trials, time)
 
     return area_responses
+
+
+
+def transform_behav_data(behav_data: pd.DataFrame, behav_data_type: str, stimulus_presentations:pd.DataFrame, session_block: int, log=False) -> np.ndarray:
+
+    # Parameters
+    stimulus_block = session_block
+    binSize = params['bin-size']
+    duration = params['stimulus-duration']
+    time_length = duration/binSize
+
+    # Get the time of the start of each trial
+    trial_start = stimulus_presentations[stimulus_presentations['stimulus_block']
+                                         == stimulus_block]['start_time'].values
+    
+    transformed_data = get_behav_responses(
+        behav_data, behav_data_type, trial_start, duration=duration, binSize=binSize)  # shape (trials, time)
+    if log:
+        print('behav_data.shape', transformed_data.shape)  # shape (units, trials, time)
+
+    return transformed_data
 
 
 
