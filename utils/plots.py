@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from allensdk.brain_observatory.ecephys.visualization import _VlPlotter
 import yaml
+from utils.data_io import save_pickle
 
 from utils.utils import get_time, iterate_dimension
 
@@ -243,11 +244,24 @@ def rrr_rank_plot_over_time(scores, title='RRR test scores', time_series=None, a
     # Create suptitle
     fig.suptitle(title)
 
-    # Plot the errors as a function of rank
+    # Iterate through the time dimension of the scores
     for t, scores_t in iterate_dimension(scores, 1):
+        
+        # Calculate optimal rank for the current time
+        optimal_rank = np.argmax(scores_t)+1
+        
+        # Print optimal rank for the current time
+        print(f'Optimal rank for {int(time_series[t])}-{int(time_series[t+1])} ms: {optimal_rank}')
+        
+        # Save the optimal rank for the current time
+        save_pickle(optimal_rank, f'optimal-rank-{int(time_series[t])}-{int(time_series[t+1])}ms', path='results')
+        
+        # Plot the scores for the current time
         axs[t].plot(scores_t)
-        axs[t].set_title(label=f'{int(time_series[t])}-{int(time_series[t+1])} ms')
+        axs[t].set_title(f'{int(time_series[t])}-{int(time_series[t+1])} ms')
         axs[t].set_xlabel('Rank')
+    
+    # Set the y-label for the first plot
     axs[0].set_ylabel('Test score (r2)')
     
     return fig

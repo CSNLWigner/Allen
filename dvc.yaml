@@ -15,23 +15,33 @@ plots:
 stages:
   preprocess:
     cmd: python3 -u preprocessing.py
-    params:
-      - preprocess
-    outs:
-      - data/area-responses/
-  behav-preprocess:
-    cmd: python3 -u behav-preprocessing.py
-    params:
-      - preprocess
-    outs:
-      - data/behav-responses/
-  analysis:
-    cmd: python3 -u control-models.py
     deps:
+      - preprocessing.py
+    params:
+      - cache
+      - preprocess
+    outs:
       - data/area-responses/
-      - data/behav-responses/
+  analysis:
+    cmd: python3 -u rrr-rank-analysis.py
+    deps:
+      - rrr-rank-analysis.py
+      - data/area-responses/
     params:
       - preprocess
       - rrr
     outs:
-      - figures/control-models.png
+      - results/VISp_VISl_cross-time-test-scores.pickle
+  plots:
+    cmd: python3 -u rrr-rank-plot.py
+    deps:
+      - rrr-rank-plot.py
+      - results/VISp_VISl_cross-time-test-scores.pickle
+    params:
+      - preprocess
+      - rrr
+      - rrr-plot
+    outs:
+      - figures/V1-V2_cross-time_RRR-rank-analysis-2DIM.png
+      - figures/V1-V2_cross-time_RRR-rank-analysis-timewise.png
+      - figures/V1-V2_cross-time_RRR-rank-analysis-averaged-over-time.png
