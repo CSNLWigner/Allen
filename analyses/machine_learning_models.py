@@ -7,6 +7,7 @@ dchrisrayner AT gmail DOT com
 
 Optimal linear 'bottlenecking' or 'multitask learning'.
 """
+from matplotlib import pyplot as plt
 import sklearn.datasets
 import sklearn.linear_model
 import numpy as np
@@ -85,36 +86,51 @@ def _fit_rrr_no_intercept(X: np.ndarray, Y: np.ndarray, alpha: float, rank: int,
 
 class ReducedRankRidgeRegression(sklearn.base.MultiOutputMixin, sklearn.base.RegressorMixin, sklearn.linear_model._base.LinearModel):
     """
-    # rrpy
-    
-    Gradient descent method.
+    Reduced Rank Ridge Regression.
 
-    **rrpy** is a scikit-learn compatible Python implementation of reduced rank ridge regression.
-    It is based on `rrs.fit` method of the R package **rrpack**, which is in turn based on [[1]](#1).
+    This class implements the Reduced Rank Ridge Regression algorithm, which is a scikit-learn compatible Python implementation of reduced rank ridge regression.
+    It is based on the `rrs.fit` method of the R package `rrpack`, which is in turn based on the research paper by Mukherjee and Zhu [^1].
 
-    It does not support missing values, though such a feature could be added using https://github.com/aksarkar/wlra.
+    The `ReducedRankRidgeRegression` estimator supports gradient descent method and does not support missing values.
 
-    The `ReducedRankRidge` estimator has a `memory` parameter which allows rapid tuning of the `rank` parameter:
+    Parameters:
+    - alpha (float, default=1.0): Regularization parameter.
+    - fit_intercept (bool, default=True): Whether to calculate the intercept for this model.
+    - rank (int, default=None): Rank of the coefficient matrix.
+    - ridge_solver (str, default='auto'): Solver to use for ridge regression.
+    - memory (joblib.Memory, default=None): Memory object to cache the computation of the rank parameter.
+
+    References:
+    [^1] Mukherjee, A. and Zhu, J. (2011). Reduced rank ridge regression and its kernel extensions.
+
+    Source: https://github.com/krey/rrpy
+
+    Examples:
     ```python
-    import sklearn.datasets
-    import joblib
-    from rrpy import ReducedRankRidge
-    X, Y = sklearn.datasets.make_regression(n_samples=1000, n_features=500, n_targets=50, random_state=1, n_informative=25)
-    memory = joblib.Memory(location='/tmp/rrpy-test/', verbose=2)
-    estimator = ReducedRankRidge(memory=memory, rank=10)
-    estimator.fit(X, Y)
-    estimator.rank = 20
-    estimator.fit(X, Y) # cached
-    memory.clear(warn=False)
+    from sklearn.datasets import make_regression
+    from sklearn.model_selection import train_test_split
+    from sklearn.metrics import mean_squared_error
+    from machine_learning_models import ReducedRankRidgeRegression
+
+    # Generate synthetic data
+    X, y = make_regression(n_samples=100, n_features=10, noise=0.1, random_state=42)
+
+    # Split the data into training and test sets
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+    # Create and fit the ReducedRankRidgeRegression model
+    model = ReducedRankRidgeRegression(alpha=0.1, rank=2)
+    model.fit(X_train, y_train)
+
+    # Make predictions on the test set
+    y_pred = model.predict(X_test)
+
+    # Calculate the mean squared error
+    mse = mean_squared_error(y_test, y_pred)
+    print(f"Mean Squared Error: {mse}")
     ```
-
-    ## References
-    [^1]:
-    Mukherjee, A. and Zhu, J. (2011)
-    Reduced rank ridge regression and its kernel extensions.
-
-    source: https://github.com/krey/rrpy
     """
+
     def __init__(self, alpha=1.0, fit_intercept=True, rank=None, ridge_solver='auto', memory=None):
         self.alpha = alpha
         self.fit_intercept = fit_intercept
@@ -123,10 +139,19 @@ class ReducedRankRidgeRegression(sklearn.base.MultiOutputMixin, sklearn.base.Reg
         self.memory = memory
 
     def fit(self, X, y):
+        """
+        Fit the Reduced Rank Ridge Regression model to the training data.
+
+        Parameters:
+        - X (array-like of shape (n_samples, n_features)): Training data.
+        - y (array-like of shape (n_samples, n_targets)): Target values.
+
+        Returns:
+        - self (object): Returns self.
+        """
         if self.fit_intercept:
             X_offset = np.average(X, axis=0)
             y_offset = np.average(y, axis=0)
-            # doesn't modify inplace, unlike -=
             X = X - X_offset
             y = y - y_offset
         self.coef_ = _fit_rrr_no_intercept(
@@ -139,20 +164,26 @@ class ReducedRankRidgeRegression(sklearn.base.MultiOutputMixin, sklearn.base.Reg
         return self
 
     def predict(self, X):
-        """Predict Y from X."""
-        # if np.size(np.shape(X)) == 1:
-        #     X = np.reshape(X, (-1, 1))
+        """
+        Predict target values for the given test data.
+
+        Parameters:
+        - X (array-like of shape (n_samples, n_features)): Test data.
+
+        Returns:
+        - y_pred (array-like of shape (n_samples, n_targets)): Predicted target values.
+        """
         return np.dot(X, self.coef_.T)
 
 
 """
-from analyses.machine_learning_models import ReducedRankRidge, ReducedRankRegressor
+# from analyses.machine_learning_models import ReducedRankRidge, ReducedRankRegressor
 
 X, Y = sklearn.datasets.make_regression(
     n_samples=500, n_features=100, n_targets=30, random_state=1, n_informative=10)
 print(Y[0])
 
-estimator = ReducedRankRidge(rank=10)
+estimator = ReducedRankRidgeRegression(rank=10)
 estimator.fit(X, Y)
 Y_hat_1 = estimator.predict(X)
 print('\nY_hat_1')
@@ -167,4 +198,10 @@ plt.plot(Y[0])
 plt.plot(Y_hat_1[0])
 plt.plot(Y_hat_2[0])
 plt.show()
+
+Y_hat = estimator.predict(X)
+score = estimator.score(X, Y) # 0.9149982934373226
+print(score)
+score = estimator.score(X, Y_hat) # 1.0
+print(score)
 """
