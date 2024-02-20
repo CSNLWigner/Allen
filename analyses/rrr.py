@@ -41,7 +41,7 @@ def RRRR(X_data, Y_data, rank=None, cv=None, log=False):
     model = ReducedRankRidgeRegression(rank=rank)
     
     # Perform cross-validation
-    results = cross_validate(model, X_data, Y_data, cv=cv, return_estimator=True, scoring='r2')
+    results = cross_validate(model, X_data, Y_data, cv=cv, return_estimator=True, scoring='r2', error_score=params['error-score'])
     if log:
         print('Cross-validation scores:', results['test_score'])
     
@@ -141,12 +141,29 @@ def control_models(predictor_names=['V1', 'movement', 'pupil'], response_name='V
         X_mov = pd.DataFrame(movement[:, :, t].T, columns=['movement'])
         X_pup = pd.DataFrame(pupil[:, :, t].T, columns=['pupil'])
         Y_V2  = pd.DataFrame(V2[:, :, t].T, columns=[f'V2_{i}' for i in range(V2.shape[0])])
+                
+        # Calculate mean values
+        X_V1_mean = X_V1.mean()
+        X_mov_mean = X_mov.mean()
+        X_pup_mean = X_pup.mean()
+        Y_V2_mean = Y_V2.mean()
         
+        # If any of the mean values are NaN, print a warning specifying which one
+        if log:
+            if X_V1_mean.isna().any():
+                print('X_V1_mean contains NaNs')
+            if X_mov_mean.isna().any():
+                print('X_mov_mean contains NaNs')
+            if X_pup_mean.isna().any():
+                print('X_pup_mean contains NaNs')
+            if Y_V2_mean.isna().any():
+                print('Y_V2_mean contains NaNs')
+
         # Replace the NaNs with the mean
-        X_V1.fillna(X_V1.mean(), inplace=True)
-        X_mov.fillna(X_mov.mean(), inplace=True)
-        X_pup.fillna(X_pup.mean(), inplace=True)
-        Y_V2.fillna(Y_V2.mean(), inplace=True)
+        X_V1.fillna(X_V1_mean, inplace=True)
+        X_mov.fillna(X_mov_mean, inplace=True)
+        X_pup.fillna(X_pup_mean, inplace=True)
+        Y_V2.fillna(Y_V2_mean, inplace=True)
         
         # Create a dictionary of the dataframes
         dfs = {'V1': X_V1, 'movement': X_mov, 'pupil': X_pup, 'V2': Y_V2}
@@ -159,6 +176,10 @@ def control_models(predictor_names=['V1', 'movement', 'pupil'], response_name='V
         
         # Get the outcome variable
         Y = dfs[response_name].values
+    
+        # if x contains nan, raise an error
+        if np.isnan(X).any():
+            raise ValueError('X contains NaNs')
     
         # Make Reduced Rank Reegression
         scores = RRRR(X, Y, rank=params['rank'], cv=params['cv'], log=log)
