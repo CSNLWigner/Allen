@@ -330,7 +330,7 @@ def get_average_unit_responses(units, spike_times, trial_start, duration=0.03, b
     return np.array(response)
 
 
-def get_unit_responses(units, spike_times, trial_start, duration=0.250, binSize=0.050):
+def get_unit_responses(units, spike_times, trial_start, duration=0.250, stepSize=0.010, binSize=0.050):
     """
     Calculate the unit responses for each unit in the given units DataFrame.
 
@@ -348,9 +348,10 @@ def get_unit_responses(units, spike_times, trial_start, duration=0.250, binSize=
     # def convert_to_tensor(spike_times, binSize, duration):
     n_unit = len(units)
     n_trial = len(trial_start)
+    n_step = int(duration / stepSize)
     n_bin = int(duration / binSize)
 
-    tensor = np.zeros((n_unit, n_trial, n_bin))
+    tensor = np.zeros((n_unit, n_trial, n_step))
 
     for i, unit_ID in enumerate([unit_ID for unit_ID, unit_data, in units.iterrows()]):  # Units
         # print(unit_ID)
@@ -358,7 +359,7 @@ def get_unit_responses(units, spike_times, trial_start, duration=0.250, binSize=
         # print(type(unit_spike_times))
         # print(unit_spike_times.shape)
         for j, start in enumerate(trial_start):  # Trials
-            for k, time in enumerate(np.arange(start, start + duration, binSize)): # Time
+            for k, time in enumerate(np.arange(start, start + duration, stepSize)): # Time
                 
                 # print(unit_spike_times, time)
                 if k == n_bin: # This can happen because of different floating point rounding in int() and np.arange() functions i guess.

@@ -93,6 +93,7 @@ def get_area_responses(session: BehaviorEcephysSession, area: str, session_block
 
     # Parameters
     stimulus_block = session_block
+    stepSize = params['step-size']
     binSize = params['bin-size']
     duration = params['stimulus-duration']
     time_length = duration/binSize
@@ -120,7 +121,7 @@ def get_area_responses(session: BehaviorEcephysSession, area: str, session_block
         stimulus_duration(session, stimulus_block)
 
     area_responses = get_unit_responses(
-        area_units, session.spike_times, trial_start, duration=duration, binSize=binSize)  # shape (units, trials, time)
+        area_units, session.spike_times, trial_start, duration=duration, stepSize=stepSize, binSize=binSize)  # shape (units, trials, time)
     if log:
         print('area_responses.shape', area_responses.shape)  # shape (units, trials, time)
 
