@@ -110,17 +110,22 @@ stages:
       md5: 3ab7d9da547a0cfffcdb0b7bf2eec32f
       size: 20152
   analysis:
-    cmd: python3 -u rrr-rank-analysis.py
+    cmd: python3 -u control-models.py
     deps:
+    - path: control-models.py
+      hash: md5
+      md5: 8fb923a48c457836f026ef82477debd5
+      size: 1606
     - path: data/area-responses/
       hash: md5
       md5: c8ec36b0953547bb73b891c488a851cf.dir
       size: 36457528
       nfiles: 2
-    - path: rrr-rank-analysis.py
+    - path: data/behav-responses/
       hash: md5
-      md5: 5067444005fb4a4ebe6a81d140859193
-      size: 1316
+      md5: ccb923276b34dab60d053b10bf2afe91.dir
+      size: 576126
+      nfiles: 3
     params:
       params.yaml:
         preprocess:
@@ -131,15 +136,20 @@ stages:
           bin-size: 0.05
           stimulus-duration: 0.25
         rrr:
-          cv: 5
+          cv: 3
           rank: 8
     outs:
-    - path: results/VISp_VISl_cross-time-test-scores.pickle
+    - path: figures/control-models.png
       hash: md5
-      md5: 3b5470b403a974def19d54b219ee4fe6
-      size: 472
+      md5: f4bc4b75fd09c2c28b366ed94353e3aa
+      size: 55683
   behav-preprocess:
     cmd: python3 -u behav-preprocessing.py
+    deps:
+    - path: behav-preprocessing.py
+      hash: md5
+      md5: 7451924b8d7170dc7280fb4455e536c4
+      size: 1524
     params:
       params.yaml:
         preprocess:
