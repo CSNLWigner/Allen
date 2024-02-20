@@ -131,10 +131,10 @@ def control_models(predictor_names=['V1', 'movement', 'pupil'], response_name='V
     N_2 = V2.shape[0]
     
     # Init the results bs shape (T, cv)
-    results = np.zeros((T, params['cv']))
+    results = np.zeros((params['cv'], T))
     
     # Loop through the time
-    for t in range(1):
+    for t in range(T):
     
         # Make DataFrame from the data
         X_V1  = pd.DataFrame(V1[:, :, t].T, columns=[f'V1_{i}' for i in range(V1.shape[0])])
@@ -147,10 +147,6 @@ def control_models(predictor_names=['V1', 'movement', 'pupil'], response_name='V
         X_mov.fillna(X_mov.mean(), inplace=True)
         X_pup.fillna(X_pup.mean(), inplace=True)
         Y_V2.fillna(Y_V2.mean(), inplace=True)
-        
-        # print()
-        # print('X_pup', X_pup)
-        # print()
         
         # Create a dictionary of the dataframes
         dfs = {'V1': X_V1, 'movement': X_mov, 'pupil': X_pup, 'V2': Y_V2}
@@ -166,11 +162,8 @@ def control_models(predictor_names=['V1', 'movement', 'pupil'], response_name='V
     
         # Make Reduced Rank Reegression
         scores = RRRR(X, Y, rank=params['rank'], cv=params['cv'], log=log)
-    
-        # Print the scores
-        # print(scores)
         
         # Append the scores to the results
-        results[t, :] = scores['test_score']
+        results[:, t] = scores['test_score']
     
     return results

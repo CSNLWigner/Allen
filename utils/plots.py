@@ -152,7 +152,7 @@ def cross_time_correlation_coefficients_plot(coeffs, time_series=None, title='Cr
     if time_series is None:
         time_bin = preprocess['bin-size']
         duration = preprocess['stimulus-duration']
-        time_series = np.arange(0, duration+time_bin, time_bin)
+        time_series = np.arange(0, duration, time_bin)
 
     # Create a new figure and axes if not provided
     if ax is None:
@@ -195,7 +195,7 @@ def rrr_rank_plot(scores, title='RRR test scores (r2)', time_series=None, ax=Non
     if time_series is None:
         duration = preprocess['stimulus-duration']
         time_bin = preprocess['bin-size']
-        time_series = np.arange(0, duration+time_bin, time_bin) * 1000
+        time_series = np.arange(0, duration, time_bin) * 1000
     time_step = 2
     
     # Create a new figure and axes if not provided
@@ -235,7 +235,7 @@ def rrr_rank_plot_over_time(scores, title='RRR test scores', time_series=None, a
     if time_series is None:
         duration = preprocess['stimulus-duration']
         time_bin = preprocess['bin-size']
-        time_series = np.arange(0, duration+time_bin, time_bin) * 1000
+        time_series = np.arange(0, duration, time_bin) * 1000
     
     # Create a new figure and axes if not provided
     if axs is None:
@@ -291,11 +291,15 @@ def score_plot_by_time(scores, title=None, time_series=None, ax=None, label='', 
     mean_scores = np.mean(scores, axis=0)
     sem_scores = sem(scores, axis=0)
     
+    # Calculate the maximum value of the scores
+    max_score = np.max(mean_scores+sem_scores)
+    
     # Set default values
     if time_series is None:
         duration = preprocess['stimulus-duration'] # 0.250
         time_bin = preprocess['bin-size'] # 0.050
-        time_series = np.arange(0, duration+time_bin, time_bin)
+        half_time_bin = time_bin/2
+        time_series = np.arange(0+half_time_bin, duration+half_time_bin, time_bin).round(3)
     
     # Create a new figure and axes if not provided
     if ax is None:
@@ -311,8 +315,10 @@ def score_plot_by_time(scores, title=None, time_series=None, ax=None, label='', 
     ax.fill_between(range(len(mean_scores)), mean_scores-sem_scores, mean_scores+sem_scores, alpha=0.1, color=color)
     
     ax.set_xlabel('Time (s)')
-    ax.set_xticks(np.arange(0, len(time_series), 2))
-    ax.set_xticklabels(time_series[::2])
+    ax.set_xticks(np.arange(0, len(time_series), 1))
+    ax.set_xticklabels(time_series[::1])
     ax.set_ylabel('Test score (r2)')
+    # ax.set_xlim(1, len(mean_scores))
+    ax.set_ylim(0, max_score)
     
     return

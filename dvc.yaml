@@ -18,30 +18,25 @@ stages:
     deps:
       - preprocessing.py
     params:
-      - cache
       - preprocess
     outs:
       - data/area-responses/
+  behav-preprocess:
+    cmd: python3 -u behav-preprocessing.py
+    deps:
+      - behav-preprocessing.py
+    params:
+      - preprocess
+    outs:
+      - data/behav-responses/
   analysis:
-    cmd: python3 -u rrr-rank-analysis.py
+    cmd: python3 -u control-models.py
     deps:
-      - rrr-rank-analysis.py
+      - control-models.py
       - data/area-responses/
+      - data/behav-responses/
     params:
       - preprocess
       - rrr
     outs:
-      - results/VISp_VISl_cross-time-test-scores.pickle
-  plots:
-    cmd: python3 -u rrr-rank-plot.py
-    deps:
-      - rrr-rank-plot.py
-      - results/VISp_VISl_cross-time-test-scores.pickle
-    params:
-      - preprocess
-      - rrr
-      - rrr-plot
-    outs:
-      - figures/V1-V2_cross-time_RRR-rank-analysis-2DIM.png
-      - figures/V1-V2_cross-time_RRR-rank-analysis-timewise.png
-      - figures/V1-V2_cross-time_RRR-rank-analysis-averaged-over-time.png
+      - figures/control-models.png
