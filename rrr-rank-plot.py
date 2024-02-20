@@ -17,8 +17,8 @@ scores = load_pickle(f'VISp_VISl_cross-time-test-scores', path='results') # Shap
 if params['discard-first-500-ms']:
     scores[:, 0] = np.nan
 
-# 2D plot
-fig = rrr_rank_plot(scores)
+# 2D plot of the first 50 ranks
+fig = rrr_rank_plot(scores[:, :50])
 save_fig(fig, f'V1-V2_cross-time_RRR-rank-analysis-2DIM', path='figures')
 plt.close(fig)
 

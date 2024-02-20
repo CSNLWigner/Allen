@@ -235,7 +235,7 @@ def rrr_rank_plot_over_time(scores, title='RRR test scores', time_series=None, a
     if time_series is None:
         duration = preprocess['stimulus-duration']
         time_bin = preprocess['bin-size']
-        time_series = np.arange(0, duration, time_bin) * 1000
+        time_series = np.arange(0, duration+time_bin, time_bin) * 1000
     
     # Create a new figure and axes if not provided
     if axs is None:
