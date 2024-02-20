@@ -33,10 +33,10 @@ for t in range(T):
         # Calculate rrr ridge using your rrrr function
         models = RRRR(V1_activity[:, :, t].T, V2_activity[:, :, t].T, rank=rank, cv=params['cv'])
         
-        # Get the test score
+        # Calculate the mean of the test scores above the cv-folds
         test_score = np.mean(models['test_score'])
 
-        # Append error to the list
+        # Save the test score
         test_scores[rank-1, t] = test_score
 
 # Save the errors
