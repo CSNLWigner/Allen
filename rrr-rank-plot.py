@@ -17,8 +17,8 @@ scores = load_pickle(f'VISp_VISl_cross-time-test-scores', path='results') # Shap
 if params['discard-first-500-ms']:
     scores[:, 0] = np.nan
 
-# 2D plot of the first 50 ranks
-fig = rrr_rank_plot(scores[:, :50])
+# 2D plot of the first 30 ranks
+fig = rrr_rank_plot(scores[:30, :])
 save_fig(fig, f'V1-V2_cross-time_RRR-rank-analysis-2DIM', path='figures')
 plt.close(fig)
 
@@ -28,9 +28,13 @@ save_fig(fig, f'V1-V2_cross-time_RRR-rank-analysis-timewise', path='figures')
 plt.close(fig)
 
 # Average over time
-scores = np.nanmean(scores, axis=1)
-plt.plot(scores)
+scores_over_time = np.nanmean(scores, axis=1)
+plt.plot(scores_over_time)
 plt.xlabel('Rank')
 plt.ylabel('Test score (r2)')
 plt.title('RRR rank analysis averaged over time')
 plt.savefig(f'figures/V1-V2_cross-time_RRR-rank-analysis-averaged-over-time.png')
+
+# Optimal rank over time
+optimal_rank = np.nanargmax(scores_over_time)
+print(f'Optimal rank: {optimal_rank}')
