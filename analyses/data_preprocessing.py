@@ -8,7 +8,7 @@ from scipy.signal import convolve
 
 params = yaml.safe_load(open('params.yaml'))['preprocess']
 
-def get_behav_responses(behav_data:pd.DataFrame, value_name:str, trial_start, duration=0.250, binSize=0.050) -> np.ndarray:
+def get_behav_responses(behav_data:pd.DataFrame, value_name:str, trial_start, duration=0.250, stepSize=0.010, binSize=0.050) -> np.ndarray:
     """
     Calculate the unit responses for each trial in the given timestamps.
 
@@ -29,16 +29,17 @@ def get_behav_responses(behav_data:pd.DataFrame, value_name:str, trial_start, du
 
     # Get the number of trials and bins
     n_trial = len(trial_start)
+    n_step = int(duration / stepSize)
     n_bin = int(duration / binSize)
 
     # Create an empty array to store the data
-    data = np.zeros((n_trial, n_bin))
+    data = np.zeros((n_trial, n_step))
 
     # Calculate the unit responses for each trial
     for j, start in enumerate(trial_start):  # Trials
 
         # Calculate the average value for each bin
-        for k, time in enumerate(np.arange(start, start + duration, binSize)):  # Time
+        for k, time in enumerate(np.arange(start, start + duration, stepSize)):  # Time
             
             # If due to floating point rounding, the last bin is not complete, break the loop
             if k == n_bin:
@@ -133,6 +134,7 @@ def transform_behav_data(behav_data: pd.DataFrame, behav_data_type: str, stimulu
 
     # Parameters
     stimulus_block = session_block
+    stepSize = params['step-size']
     binSize = params['bin-size']
     duration = params['stimulus-duration']
     time_length = duration/binSize
@@ -142,7 +144,7 @@ def transform_behav_data(behav_data: pd.DataFrame, behav_data_type: str, stimulu
                                          == stimulus_block]['start_time'].values
     
     transformed_data = get_behav_responses(
-        behav_data, behav_data_type, trial_start, duration=duration, binSize=binSize)  # shape (trials, time)
+        behav_data, behav_data_type, trial_start, duration=duration, stepSize=stepSize, binSize=binSize)  # shape (trials, time)
     if log:
         print('behav_data.shape', transformed_data.shape)  # shape (units, trials, time)
 
