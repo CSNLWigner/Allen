@@ -29,9 +29,12 @@ test_scores = np.zeros((max_rank, T))
 for t in range(T):
     
     for rank in ranks:
+        
+        X = V1_activity[:, :, t].T
+        Y = V2_activity[:, :, t].T
     
         # Calculate rrr ridge using your rrrr function
-        models = RRRR(V1_activity[:, :, t].T, V2_activity[:, :, t].T, rank=rank, cv=params['cv'])
+        models = RRRR(X, Y, rank=rank, cv=params['cv'])
         
         # Calculate the mean of the test scores above the cv-folds
         test_score = np.mean(models['test_score'])
