@@ -6,6 +6,7 @@ __pycache__/**
 .vscode/**
 note.md
 data/area-responses/**
+data/raw-area-responses/**
 results/**
 figures/**
 **pickle

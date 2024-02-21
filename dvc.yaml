@@ -13,10 +13,19 @@ plots:
       x: epoch
 
 stages:
+  load:
+    cmd: python3 -u load_raw_activity_data.py
+    deps:
+      - load_raw_activity_data.py
+    params:
+      - preprocess
+    outs:
+      - data/raw-area-responses/
   preprocess:
     cmd: python3 -u preprocessing.py
     deps:
       - preprocessing.py
+      - data/raw-area-responses/
     params:
       - cache
       - preprocess

@@ -94,8 +94,8 @@ def get_area_responses(session: BehaviorEcephysSession, area: str, session_block
 
     # Parameters
     stimulus_block = session_block
-    stepSize = params['step-size']
-    binSize = params['bin-size']
+    stepSize = params['raw-step-size']
+    binSize = params['raw-step-size']
     duration = params['stimulus-duration']
     time_length = duration/binSize
 

@@ -1,22 +1,21 @@
 from sklearn.preprocessing import StandardScaler
-from analyses.data_preprocessing import calculate_residual_activity, get_area_responses, min_max_normalize, z_score_normalize, stimulus_log
+from analyses.data_preprocessing import calculate_residual_activity, min_max_normalize, recalculate_neural_activity, z_score_normalize
 from utils.download_allen import cache_allen
-from utils.data_io import save_pickle
+from utils.data_io import load_pickle, save_pickle
 import yaml
 
 # Load parameters
 params = yaml.safe_load(open('params.yaml'))['preprocess']
 
-# An arbitrary session from the Allen Neuropixel dataset
-session_id = 1064644573  # 1052533639
-cache = cache_allen()
-session = cache.get_ecephys_session(ecephys_session_id=session_id)
-
 for area in params['areas']:
+
+    # Get the full activity for the area
+    full_activity = load_pickle(
+        f'{params["stimulus-block"]}_block_{area}-activity', path='data/raw-area-responses')
     
-    # Get the responses for the area
-    full_activity = get_area_responses(session, area, session_block=params['stimulus-block'], log=False)
-        
+    # Recalculate time steps and time bins of the full activity
+    full_activity = recalculate_neural_activity(full_activity, params['stimulus-duration'], params['bin-size'], params['time-step'], orig_time_step=0.005)
+    
     # Get residual activity
     residual_activity = calculate_residual_activity(full_activity) # Neuron-wise AND time-wise
     
