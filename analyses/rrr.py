@@ -129,6 +129,8 @@ def control_models(predictor_names=['V1', 'movement', 'pupil'], response_name='V
     # Get the number of neurons, trials, and time
     N_1, K, T = V1.shape
     N_2 = V2.shape[0]
+    if log:
+        print(f'V1 shape: {V1.shape}, V2 shape: {V2.shape}, movement shape: {movement.shape}, pupil shape: {pupil.shape}')
     
     # Init the results bs shape (T, cv)
     results = np.zeros((params['cv'], T))

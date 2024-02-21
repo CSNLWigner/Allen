@@ -10,7 +10,7 @@ fig, ax = plt.subplots()  # 1, 1, figsize=(10, 10)
 predictors = ['V1']
 
 result = control_models(predictor_names=predictors,
-                        response_name='V2')
+                        response_name='V2', log=True)
 
 score_plot_by_time(result, ax=ax, label=', '.join(predictors))
 
