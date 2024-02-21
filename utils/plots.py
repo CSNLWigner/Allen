@@ -234,8 +234,8 @@ def rrr_rank_plot_over_time(scores, title='RRR test scores', time_series=None, a
     # Set default values
     if time_series is None:
         duration = preprocess['stimulus-duration']
-        time_bin = preprocess['bin-size']
-        time_series = np.arange(0, duration+time_bin, time_bin) * 1000
+        time_step = preprocess['step-size']
+        time_series = np.arange(0, duration+time_step, time_step) * 1000
     
     # Create a new figure and axes if not provided
     if axs is None:
@@ -297,9 +297,9 @@ def score_plot_by_time(scores, title=None, time_series=None, ax=None, label='', 
     # Set default values
     if time_series is None:
         duration = preprocess['stimulus-duration'] # 0.250
-        time_bin = preprocess['bin-size'] # 0.050
-        half_time_bin = time_bin/2
-        time_series = np.arange(0+half_time_bin, duration+half_time_bin, time_bin).round(3)
+        time_step = preprocess['step-size'] # 0.050
+        half_time_step = time_step/2
+        time_series = np.arange(0+half_time_step, duration+half_time_step, time_step).round(3)
     
     # Create a new figure and axes if not provided
     if ax is None:
@@ -322,3 +322,25 @@ def score_plot_by_time(scores, title=None, time_series=None, ax=None, label='', 
     ax.set_ylim(0, max_score)
     
     return
+
+
+def cv_rank_time_plot(results, cv, ranks, title, ax=None, max=None):
+    '''
+    Plot the results of the cross-validation and rank.
+    '''
+
+    # If ax is None, create a new figure
+    if ax is None:
+        fig, ax = plt.subplots(1, 1)
+
+    # Plot the results
+    im = ax.imshow(results, cmap='viridis', vmin=0, vmax=max)
+    ax.set_xlabel('Rank')
+    ax.set_ylabel('Cross-validation')
+    ax.set_title(title)
+    ax.set_xticks(range(len(ranks)))
+    ax.set_xticklabels(ranks)
+    ax.set_yticks(range(len(cv)))
+    ax.set_yticklabels(cv)
+
+    return im
