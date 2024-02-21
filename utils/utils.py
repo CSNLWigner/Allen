@@ -86,7 +86,7 @@ def normality_test(full_activity, dim=2):
         else:
             print(f'{counter}: Activity does not look Gaussian (reject H0)')
 
-def get_time(time_bin, bin_size=preprocess['bin-size'], digits=3): return round(time_bin*bin_size, digits)
+def get_time(time_bin, bin_size=preprocess['step-size'], digits=3): return round(time_bin*bin_size, digits)
 """
 ```python
 get_time = lambda time_bin, bin_size: round(time_bin*bin_size, 3)

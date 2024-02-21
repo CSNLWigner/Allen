@@ -150,9 +150,9 @@ def cross_time_correlation_coefficients_plot(coeffs, time_series=None, title='Cr
     
     # If time_series is not provided, generate it
     if time_series is None:
-        time_bin = preprocess['bin-size']
+        time_step = preprocess['step-size']
         duration = preprocess['stimulus-duration']
-        time_series = np.arange(0, duration, time_bin)
+        time_series = np.arange(0, duration, time_step).round(3)
 
     # Create a new figure and axes if not provided
     if ax is None:
@@ -194,8 +194,8 @@ def rrr_rank_plot(scores, title='RRR test scores (r2)', time_series=None, ax=Non
     # Set default values
     if time_series is None:
         duration = preprocess['stimulus-duration']
-        time_bin = preprocess['bin-size']
-        time_series = np.arange(0, duration, time_bin) * 1000
+        time_step = preprocess['step-size']
+        time_series = np.arange(0, duration, time_step).round(3)
     time_step = 2
     
     # Create a new figure and axes if not provided
@@ -216,7 +216,7 @@ def rrr_rank_plot(scores, title='RRR test scores (r2)', time_series=None, ax=Non
     return fig
 
 # Define a function that iterates through the time dimennsion of the rrr-rank-scores and plots the scores for each time in a separate plot
-def rrr_rank_plot_over_time(scores, title='RRR test scores', time_series=None, axs=None) -> plt.Figure:
+def rrr_rank_plot_over_time(scores, title='RRR test scores', time_series=None, fig=None, axs=None, label=None, log=False) -> plt.Figure:
     """
     Plots the RRR test scores as a function of rank and time.
 
@@ -235,14 +235,16 @@ def rrr_rank_plot_over_time(scores, title='RRR test scores', time_series=None, a
     if time_series is None:
         duration = preprocess['stimulus-duration']
         time_step = preprocess['step-size']
-        time_series = np.arange(0, duration+time_step, time_step) * 1000
+        time_bin = preprocess['bin-size']
+        time_series = np.arange(0, duration+time_step, time_step).round(3)
     
     # Create a new figure and axes if not provided
     if axs is None:
         fig, axs = plt.subplots(1, scores.shape[1], figsize=(15, 3))
     
     # Create suptitle
-    fig.suptitle(title)
+    if fig is not None:
+        fig.suptitle(title)
 
     # Iterate through the time dimension of the scores
     for t, scores_t in iterate_dimension(scores, 1):
@@ -250,15 +252,19 @@ def rrr_rank_plot_over_time(scores, title='RRR test scores', time_series=None, a
         # Calculate optimal rank for the current time
         optimal_rank = np.argmax(scores_t)+1
         
+        # Set the time range for the current time
+        from_time, to_time = time_series[t], time_series[t]+time_bin
+        
         # Print optimal rank for the current time
-        print(f'Optimal rank for {int(time_series[t])}-{int(time_series[t+1])} ms: {optimal_rank}')
+        if log:
+            print(f'Optimal rank for {from_time}-{to_time} ms: {optimal_rank}')
         
         # Save the optimal rank for the current time
-        save_pickle(optimal_rank, f'optimal-rank-{int(time_series[t])}-{int(time_series[t+1])}ms', path='results')
+        save_pickle(optimal_rank, f'optimal-rank-{from_time}-{to_time}ms', path='results')
         
         # Plot the scores for the current time
-        axs[t].plot(scores_t)
-        axs[t].set_title(f'{int(time_series[t])}-{int(time_series[t+1])} ms')
+        axs[t].plot(scores_t, label=label)
+        axs[t].set_title(f'{from_time}-{to_time} ms')
         axs[t].set_xlabel('Rank')
     
     # Set the y-label for the first plot
