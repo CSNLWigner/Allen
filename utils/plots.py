@@ -253,7 +253,7 @@ def rrr_rank_plot_over_time(scores, title='RRR test scores', time_series=None, f
         optimal_rank = np.argmax(scores_t)+1
         
         # Set the time range for the current time
-        from_time, to_time = time_series[t], time_series[t]+time_bin
+        from_time, to_time = time_series[t].round(3), (time_series[t]+time_bin).round(3)
         
         # Print optimal rank for the current time
         if log:

@@ -88,8 +88,8 @@ stages:
       size: 49361
     - path: figures/V1-V2_cross-time_RRR-rank-analysis-timewise.png
       hash: md5
-      md5: 86b6169c57f2c6d716bd2ba89c57b589
-      size: 92959
+      md5: e3ecd6dc4ef053a71201bf51786cc342
+      size: 90783
   time_lag_analysis:
     cmd: python3 -u time_lag_analysis.py
     deps:
