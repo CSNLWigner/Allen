@@ -48,7 +48,7 @@ def load_csv(name, path=""):
         data = np.array(list(reader)) # float?
     return data
 
-def load_pickle(name, path=""):
+def load_pickle(name, path="results"):
     if path != "":
         name = f'{path}/{name}'
     with open(f"{name}.pickle", "rb") as f:
