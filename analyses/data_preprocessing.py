@@ -6,6 +6,8 @@ import yaml
 from utils.neuropixel import get_area_units, get_unit_responses, stimulus_duration
 from scipy.signal import convolve
 
+# Load the parameters
+load = yaml.safe_load(open('params.yaml'))['load']
 params = yaml.safe_load(open('params.yaml'))['preprocess']
 
 def get_behav_responses(behav_data:pd.DataFrame, value_name:str, trial_start, duration=0.250, stepSize=0.010, binSize=0.050) -> np.ndarray:
@@ -94,9 +96,9 @@ def get_area_responses(session: BehaviorEcephysSession, area: str, session_block
 
     # Parameters
     stimulus_block = session_block
-    stepSize = params['raw-step-size']
-    binSize = params['raw-step-size']
-    duration = params['stimulus-duration']
+    stepSize = load['step-size']
+    binSize = load['step-size']
+    duration = load['stimulus-duration']
     time_length = duration/binSize
 
     # Get area units

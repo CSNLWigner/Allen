@@ -7,7 +7,7 @@ neuropixel:
   area_of_interest: "VISpm"
   block: "active behavior"
 
-preprocess:
+load:
   areas: ["VISp", "VISl"] # "VISpm" # "VISm" has no spikes
   stimulus-block: 5
   # Stimulus blocks:
@@ -15,8 +15,12 @@ preprocess:
   # 2: receptive field mapping by gabor stimuli
   # 4: full-flash
   # 5: passive replay
-  raw-step-size: 0.005 # in seconds
-  step-size: 0.050 # in seconds
+  step-size: 0.005 # in seconds
+  stimulus-duration: 0.250 # in seconds
+
+preprocess:
+  areas: ["VISp", "VISl"] # "VISpm" # "VISm" has no spikes
+  step-size: 0.025 # in seconds
   bin-size: 0.025 # in seconds # Joao's default: 0.100
   stimulus-duration: 0.250 # in seconds
 

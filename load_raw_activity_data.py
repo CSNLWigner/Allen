@@ -5,7 +5,7 @@ from utils.data_io import save_pickle
 import yaml
 
 # Load parameters
-params = yaml.safe_load(open('params.yaml'))['preprocess']
+params = yaml.safe_load(open('params.yaml'))['load']
 
 # An arbitrary session from the Allen Neuropixel dataset
 session_id = 1064644573  # 1052533639

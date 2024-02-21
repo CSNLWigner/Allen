@@ -5,13 +5,14 @@ from utils.data_io import load_pickle, save_pickle
 import yaml
 
 # Load parameters
+load = yaml.safe_load(open('params.yaml'))['load']
 params = yaml.safe_load(open('params.yaml'))['preprocess']
 
 for area in params['areas']:
 
     # Get the full activity for the area
     full_activity = load_pickle(
-        f'{params["stimulus-block"]}_block_{area}-activity', path='data/raw-area-responses')
+        f'{load["stimulus-block"]}_block_{area}-activity', path='data/raw-area-responses')
     
     # Recalculate time steps and time bins of the full activity
     full_activity = recalculate_neural_activity(full_activity, 
@@ -30,5 +31,5 @@ for area in params['areas']:
     
     # Save the residual activity
     save_pickle(normalized_activity,
-                f'{params["stimulus-block"]}_block_{area}-activity', path='data/area-responses')
+                f'{load["stimulus-block"]}_block_{area}-activity', path='data/area-responses')
 

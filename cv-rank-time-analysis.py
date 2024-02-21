@@ -10,6 +10,7 @@ import yaml
 from utils.plots import cv_rank_time_plot
 
 # Load the parameters
+load = yaml.safe_load(open('params.yaml'))['load']
 params = yaml.safe_load(open('params.yaml'))['preprocess']
 
 # Load V1 and V2 activity
@@ -22,10 +23,10 @@ def calculate_something(from_time=0.200, to_time=0.250):
     '''
 
     # Recalculate the neural activity
-    # V1 = recalculate_neural_activity(V1, params['stimulus-duration'], params['bin-size'], params['time-step'], orig_time_step=params['raw-step-size'])
-    V1 = raw_V1[:, :, int(from_time/params['raw-step-size']):int(to_time/params['raw-step-size'])].sum(axis=2)
+    # V1 = recalculate_neural_activity(V1, params['stimulus-duration'], params['bin-size'], params['time-step'], orig_time_step=load['step-size'])
+    V1 = raw_V1[:, :, int(from_time/load['step-size']):int(to_time/load['step-size'])].sum(axis=2)
     X = z_score_normalize(calculate_residual_activity(V1[:,:,np.newaxis]), dims=(0, 1)).squeeze().T
-    V2 = raw_V2[:, :, int(from_time/params['raw-step-size']):int(to_time/params['raw-step-size'])].sum(axis=2)
+    V2 = raw_V2[:, :, int(from_time/load['step-size']):int(to_time/load['step-size'])].sum(axis=2)
     Y = z_score_normalize(calculate_residual_activity(V2[:,:,np.newaxis]), dims=(0, 1)).squeeze().T
 
     # Create a results array

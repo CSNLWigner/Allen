@@ -6,12 +6,13 @@ from utils.data_io import load_pickle, save_pickle
 import yaml
 
 # Load parameters
+load = yaml.safe_load(open('params.yaml'))['load']
 preprocess = yaml.safe_load(open('params.yaml'))['preprocess']
 params = yaml.safe_load(open('params.yaml'))['rrr']
 
 # Load V1 and V2 activity
-V1_activity = load_pickle(f'{preprocess["stimulus-block"]}_block_VISp-activity', path='data/area-responses')
-V2_activity = load_pickle(f'{preprocess["stimulus-block"]}_block_VISl-activity', path='data/area-responses')
+V1_activity = load_pickle(f'{load["stimulus-block"]}_block_VISp-activity', path='data/area-responses')
+V2_activity = load_pickle(f'{load["stimulus-block"]}_block_VISl-activity', path='data/area-responses')
 
 # Set the maximum rank to iterate over
 max_rank = 15
