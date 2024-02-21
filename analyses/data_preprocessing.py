@@ -273,3 +273,53 @@ def convolve_spike_train(spike_times: np.ndarray, step_size=0.010, kernel='Gauss
     continuous_signal = convolve(spike_train, kernel_types[kernel], mode='same')
     
     return continuous_signal
+
+def recalculate_neural_activity(neural_activity: np.ndarray, duration: float, time_step: float, time_bin: float, orig_time_step=0.001) -> np.ndarray:
+    """
+    Recalculate the neural activity based on the given time step and time bin.
+
+    Args:
+        neural_activity (np.ndarray): The neural activity. Shape (neurons, trials, time).
+        time_step (float): The new time step.
+        time_bin (float): The new time bin.
+        orig_time_step (float, optional): The original time step. Default is 0.001.
+
+    Returns:
+        np.ndarray: Numpy array containing the recalculated neural activity. Shape (neurons, trials, new_time)
+
+    Raises:
+        None
+
+    Example:
+        >>> neural_activity = np.array([[[0.1, 0.2, 0.3, 0.6],
+                                         [0.4, 0.5, 0.6, 0.6]],
+                                        [[0.7, 0.8, 0.9, 0.6],
+                                         [1.0, 1.1, 1.2, 0.6]]])
+        >>> time_step = 0.001
+        >>> time_bin = 0.002
+        >>> recalculate_neural_activity(neural_activity, time_step, time_bin)
+        array([[[0.3, 0.5, 0.9, 0.6],
+                [0.9, 1.1, 1.2, 0.6]],
+               [[1.5, 1.7, 1.5, 0.6],
+                [2.1, 2.3, 1.8, 0.6]]])
+    """
+    
+    N, K, T_orig = neural_activity.shape
+    
+    # Calculate the new time length
+    T_new = int(duration / time_step)
+    
+    # Create an empty array to store the recalculated neural activity
+    recalculated_activity = np.zeros((N, K, T_new))
+    
+    for t in range(T_new):
+
+        # Calculate the start and end indices for the original time step
+        start_idx = int(t * time_step / orig_time_step)
+        end_idx = int((t * time_step + time_bin) / orig_time_step)
+        
+        # Recalculate the neural activity
+        recalculated_activity[:, :, t] = np.sum(neural_activity[:, :, start_idx:end_idx], axis=2)
+                
+    return recalculated_activity
+
