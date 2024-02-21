@@ -3,25 +3,34 @@ stages:
   preprocess:
     cmd: python3 -u preprocessing.py
     deps:
+    - path: data/raw-area-responses/
+      hash: md5
+      md5: 94ecd96945585f2a2e5940ae31ec6264.dir
+      size: 364572328
+      nfiles: 2
     - path: preprocessing.py
       hash: md5
-      md5: cc9b0aab43cf098b451b76b7c28c6a3c
-      size: 1408
+      md5: 5353fd13c80cb834028272261c0e5c98
+      size: 1472
     params:
       params.yaml:
+        cache:
+          location: data/.vbn_s3_cache
+          force_download: false
         preprocess:
           areas:
           - VISp
           - VISl
           stimulus-block: 5
+          raw-step-size: 0.005
           step-size: 0.025
           bin-size: 0.05
           stimulus-duration: 0.25
     outs:
     - path: data/area-responses/
       hash: md5
-      md5: 95d4d7ccef50569165fb558bb6c662e9.dir
-      size: 72914728
+      md5: 7b2092e7c6f8ff8ebd4f51e2aff83ad6.dir
+      size: 36457528
       nfiles: 2
   rrr_analysis:
     cmd: python3 -u rrr_analysis.py
@@ -49,12 +58,12 @@ stages:
     deps:
     - path: results/VISp_VISl_cross-time-test-scores.pickle
       hash: md5
-      md5: 101ff001eb718b9b54a004024c9eb658
-      size: 792
+      md5: f03c5c831f3043d168b55e18b551dfe4
+      size: 3154
     - path: rrr-rank-plot.py
       hash: md5
-      md5: aa34572f6c9f66e5e5974a11378309c3
-      size: 1250
+      md5: 26660032f7cfed752d5061872faeea77
+      size: 1773
     params:
       params.yaml:
         preprocess:
@@ -62,28 +71,29 @@ stages:
           - VISp
           - VISl
           stimulus-block: 5
-          step-size: 0.025
-          bin-size: 0.05
+          raw-step-size: 0.005
+          step-size: 0.05
+          bin-size: 0.025
           stimulus-duration: 0.25
         rrr:
           cv: 3
           rank: 8
           error-score: raise
         rrr-plot:
-          discard-first-500-ms: true
+          discard-first-500-ms: false
     outs:
     - path: figures/V1-V2_cross-time_RRR-rank-analysis-2DIM.png
       hash: md5
-      md5: 881b916deaf8be3c044138f614d5e6b7
-      size: 18896
+      md5: fe83a75a0ae1343e374881da7cdde66b
+      size: 20682
     - path: figures/V1-V2_cross-time_RRR-rank-analysis-averaged-over-time.png
       hash: md5
-      md5: a9fdb3b432da3aeae946bde12ca6cd31
-      size: 18355
+      md5: 0f84fd6333fe986f4a2f67ff86a0dba3
+      size: 41054
     - path: figures/V1-V2_cross-time_RRR-rank-analysis-timewise.png
       hash: md5
-      md5: 78c7f76413f28fe7cce95d17d09b9dac
-      size: 60094
+      md5: 27d8593ed2f3a7ea669f757cbe678a75
+      size: 65523
   time_lag_analysis:
     cmd: python3 -u time_lag_analysis.py
     deps:
@@ -114,13 +124,13 @@ stages:
     deps:
     - path: data/area-responses/
       hash: md5
-      md5: 95d4d7ccef50569165fb558bb6c662e9.dir
-      size: 72914728
+      md5: 7b2092e7c6f8ff8ebd4f51e2aff83ad6.dir
+      size: 36457528
       nfiles: 2
     - path: rrr-rank-analysis.py
       hash: md5
-      md5: 9a04ec0ee663c34952b8500eef97544f
-      size: 1386
+      md5: f825c8dda1f6dcfa2b42a6292c34641e
+      size: 1000
     params:
       params.yaml:
         preprocess:
@@ -128,8 +138,8 @@ stages:
           - VISp
           - VISl
           stimulus-block: 5
-          step-size: 0.025
-          bin-size: 0.05
+          raw-step-size: 0.005
+          step-size: 0.05
           stimulus-duration: 0.25
         rrr:
           cv: 3
@@ -138,8 +148,8 @@ stages:
     outs:
     - path: results/VISp_VISl_cross-time-test-scores.pickle
       hash: md5
-      md5: 101ff001eb718b9b54a004024c9eb658
-      size: 792
+      md5: f03c5c831f3043d168b55e18b551dfe4
+      size: 3154
   behav-preprocess:
     cmd: python3 -u behav-preprocessing.py
     deps:

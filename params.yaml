@@ -16,8 +16,8 @@ preprocess:
   # 4: full-flash
   # 5: passive replay
   raw-step-size: 0.005 # in seconds
-  step-size: 0.025 # in seconds
-  bin-size: 0.050 # in seconds # Joao's default: 0.100
+  step-size: 0.050 # in seconds
+  bin-size: 0.025 # in seconds # Joao's default: 0.100
   stimulus-duration: 0.250 # in seconds
 
 cca:
@@ -31,7 +31,7 @@ rrr:
   error-score: 'raise'
 
 rrr-plot:
-  discard-first-500-ms: True
+  discard-first-500-ms: False
 
 rrr-cv-rank-time:
   cv: [2,3,4,5,6]
