@@ -14,7 +14,9 @@ for area in params['areas']:
         f'{params["stimulus-block"]}_block_{area}-activity', path='data/raw-area-responses')
     
     # Recalculate time steps and time bins of the full activity
-    full_activity = recalculate_neural_activity(full_activity, params['stimulus-duration'], params['bin-size'], params['time-step'], orig_time_step=0.005)
+    full_activity = recalculate_neural_activity(full_activity, 
+        params['stimulus-duration'], params['step-size'], params['bin-size'],
+        orig_time_step=0.005)
     
     # Get residual activity
     residual_activity = calculate_residual_activity(full_activity) # Neuron-wise AND time-wise
