@@ -1,7 +1,7 @@
 import pickle
 import numpy as np
 import matplotlib.pyplot as plt
-from analyses.rrr import RRRR
+from analyses.rrr import RRRR, rrr_rank_analysis
 from utils.data_io import load_pickle, save_pickle
 import yaml
 
@@ -14,33 +14,20 @@ V1_activity = load_pickle(f'{preprocess["stimulus-block"]}_block_VISp-activity',
 V2_activity = load_pickle(f'{preprocess["stimulus-block"]}_block_VISl-activity', path='data/area-responses')
 
 # Set the maximum rank to iterate over
-max_rank = params['rank']
+max_rank = 15
+
+cvs = [2, 3, 4]
 
 # Get the number of neurons, trials, and time points
 N, K_V1, T = V1_activity.shape
 
-# Define the range of ranks to iterate over
-ranks = range(1, max_rank+1)
+# Init the results array
+test_scores = np.full((max_rank, T, cvs[-1]+1), np.nan)
 
-# Initialize the errors
-test_scores = np.zeros((max_rank, T))
-
-# Iterate over time
-for t in range(T):
+for cv in cvs:
     
-    for rank in ranks:
-        
-        X = V1_activity[:, :, t].T
-        Y = V2_activity[:, :, t].T
-    
-        # Calculate rrr ridge using your rrrr function
-        models = RRRR(X, Y, rank=rank, cv=params['cv'])
-        
-        # Calculate the mean of the test scores above the cv-folds
-        test_score = np.mean(models['test_score'])
+    test_scores[:,:,cv] = rrr_rank_analysis(V1_activity, V2_activity, cv=cv, log=False)
 
-        # Save the test score
-        test_scores[rank-1, t] = test_score
 
 # Save the errors
 save_pickle(test_scores, f'VISp_VISl_cross-time-test-scores', path='results')

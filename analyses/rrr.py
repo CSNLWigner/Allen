@@ -190,3 +190,40 @@ def control_models(predictor_names=['V1', 'movement', 'pupil'], response_name='V
         results[:, t] = scores['test_score']
     
     return results
+
+def rrr_rank_analysis(V1_activity, V2_activity, max_rank=15, cv=params['cv'], log=False):
+    """
+    Perform Reduced Rank Regression (RRR) rank analysis.
+    """
+    
+    # Get the number of neurons, trials, and time points
+    N, K_V1, T = V1_activity.shape
+    
+    # Define the range of ranks to iterate over
+    ranks = range(1, max_rank+1)
+
+    # Initialize the errors
+    test_scores = np.zeros((max_rank, T))
+
+    # Iterate over time
+    for t in range(T):
+        for rank in ranks:
+            X = V1_activity[:, :, t].T
+            Y = V2_activity[:, :, t].T
+        
+            # Calculate rrr ridge using your rrrr function
+            models = RRRR(X, Y, rank=rank, cv=cv)
+            
+            # Calculate the mean of the test scores above the cv-folds
+            test_score = np.mean(models['test_score'])
+
+            # Save the test score
+            test_scores[rank-1, t] = test_score
+
+            if log:
+                print(f"Rank: {rank}, Time: {t}, Test Score: {test_score}")
+
+    # If test scores are negative, set them to nan
+    test_scores[test_scores < 0] = np.nan
+    
+    return test_scores
