@@ -18,15 +18,15 @@ def RRRR(X_data, Y_data, rank=None, cv=None, log=False):
     Make Reduced Rank Regression (RRR) analysis.
 
     Args:
-        X_data (np.ndarray): The data of the first brain area. Shape (n_samples, n_features)
-        Y_data (np.ndarray): The data of the second brain area. Shape (n_samples, n_features)
+        X_data (np.ndarray): The data of the first brain area. Shape (n_samples, n_features_X)
+        Y_data (np.ndarray): The data of the second brain area. Shape (n_samples, n_features_Y)
         log (bool, optional): Whether to log the progress. Defaults to True.
         rank (int, optional): The rank of the RRR model. Defaults to None.
         cv (int, optional): The number of cross-validation folds. Defaults to None.
 
     Returns:
         dict: A dictionary containing the results of the RRR analysis.
-            - mean_coefficients (np.ndarray): The mean coefficients of the RRR model. Shape (n_features, n_features)
+            - mean_coefficients (np.ndarray): The mean coefficients of the RRR model. Shape (n_features_X, n_features_Y)
             - test_score (np.ndarray): The test scores of the RRR model. Shape (n_splits,)
             - estimator (np.ndarray): The estimators of the RRR model. Shape (n_splits,)
     """
@@ -54,7 +54,7 @@ def RRRR(X_data, Y_data, rank=None, cv=None, log=False):
     mean_coefficients = np.mean(coefficients, axis=0)
     
     # Append the mean coefficients to the results
-    results['mean_coefficients'] = mean_coefficients
+    results['mean_coefficients'] = mean_coefficients.T
     
     return results
 
