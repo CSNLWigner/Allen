@@ -20,8 +20,8 @@ load:
 
 preprocess:
   areas: ["VISp", "VISl"] # "VISpm" # "VISm" has no spikes
-  step-size: 0.050 # in seconds
-  bin-size: 0.050 # in seconds # Joao's default: 0.100
+  step-size: 0.005 # in seconds
+  bin-size: 0.005 # in seconds # Joao's default: 0.100
   stimulus-duration: 0.250 # in seconds
 
 cca:

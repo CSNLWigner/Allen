@@ -134,7 +134,7 @@ def cross_correlation_plot(cross_correlation, time_series=None, title='Cross-cor
     
     return fig
 
-def cross_time_correlation_coefficients_plot(coeffs, time_series=None, title='Cross-time-correlation', ax=None) -> plt.Figure:
+def cross_time_correlation_coefficients_plot(coeffs, time_series=None, first_dim_label=None, second_dim_label=None, title='Cross-time-correlation', ax=None) -> plt.Figure:
     """
     Plots the cross-correlation between two signals.
 
@@ -147,6 +147,9 @@ def cross_time_correlation_coefficients_plot(coeffs, time_series=None, title='Cr
     Returns:
     matplotlib.pyplot.Figure: The figure containing the plot.
     """
+    
+    # Reverse the second dimension of the coefficients
+    coeffs = np.flip(coeffs, axis=1)
     
     # If time_series is not provided, generate it
     if time_series is None:
@@ -162,14 +165,16 @@ def cross_time_correlation_coefficients_plot(coeffs, time_series=None, title='Cr
     im = ax.imshow(coeffs,
                    cmap='hot', aspect='auto')
     ax.set_title(title)
-    ax.set_xlabel('LM (s)')
-    ax.set_ylabel('V1 (s)')
+    ax.set_xlabel(first_dim_label)
+    ax.set_ylabel(second_dim_label)
     
     # Set xticklabels and yticklabels corresponding to some values of the time_series
-    ax.set_xticks(np.arange(0, len(time_series), 10))
-    ax.set_xticklabels(time_series[::10])
-    ax.set_yticks(np.arange(0, len(time_series), 10))
-    ax.set_yticklabels(time_series[::10])
+    ax.set_xticks(np.arange(0, len(time_series), 4))
+    ax.set_xticklabels(time_series[::4])
+    
+    # Plot a reverse time series on the y-axis
+    ax.set_yticks(np.arange(0, len(time_series), 4))
+    ax.set_yticklabels(time_series[::4][::-1])
 
     # Attach colorbar to the last plot
     fig.colorbar(im, ax=ax)

@@ -18,39 +18,36 @@ stages:
     deps:
       - load_raw_activity_data.py
     params:
-      - preprocess
+      - load
     outs:
       - data/raw-area-responses/
   preprocess:
     cmd: python3 -u preprocessing.py
     deps:
-      - preprocessing.py
       - data/raw-area-responses/
+      - preprocessing.py
     params:
       - cache
       - preprocess
     outs:
       - data/area-responses/
   analysis:
-    cmd: python3 -u rrr-rank-analysis.py
+    cmd: python3 -u time_lag_analysis.py
     deps:
-      - rrr-rank-analysis.py
       - data/area-responses/
+      - time_lag_analysis.py
     params:
       - preprocess
       - rrr
     outs:
-      - results/VISp_VISl_cross-time-test-scores.pickle
+      - results/VISp_VISl_cross-time-coeffs.pickle
+      - results/VISp_VISl_cross-time-lag.pickle
   plots:
-    cmd: python3 -u rrr-rank-plot.py
+    cmd: python3 -u time_lag_plot.py
     deps:
-      - rrr-rank-plot.py
-      - results/VISp_VISl_cross-time-test-scores.pickle
+      - results/VISp_VISl_cross-time-coeffs.pickle
+      - time_lag_plot.py
     params:
       - preprocess
-      - rrr
-      - rrr-plot
     outs:
-      - figures/V1-V2_cross-time_RRR-rank-analysis-2DIM.png
-      - figures/V1-V2_cross-time_RRR-rank-analysis-timewise.png
-      - figures/V1-V2_cross-time_RRR-rank-analysis-averaged-over-time.png
+      - figures/Time_lag_between_V1_LM.png

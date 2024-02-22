@@ -12,10 +12,10 @@ params = yaml.safe_load(open('params.yaml'))['preprocess']
 coeffs = load_pickle('VISp_VISl_cross-time-coeffs', path='results')
 
 # Plot the coefficients
-fig = cross_time_correlation_coefficients_plot(coeffs, title='Cross time correlation')
+fig = cross_time_correlation_coefficients_plot(coeffs, title='Cross time correlation', first_dim_label='V1 time (s)', second_dim_label='V2 time (s)')
 
 # Show the plot
 plt.show()
 
 # Save the figure
-save_fig(fig, f'Time_lag_between_V1_LM_{int(params["bin-size"]*1000)}ms_resolution', path='figures')
+save_fig(fig, f'Time_lag_between_V1_LM', path='figures')
