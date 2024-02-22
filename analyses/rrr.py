@@ -227,3 +227,37 @@ def rrr_rank_analysis(V1_activity, V2_activity, max_rank=15, cv=params['cv'], lo
     test_scores[test_scores < 0] = np.nan
     
     return test_scores
+
+def calculate_cross_time_correlation_coefficients(areaX, areaY, log=False) -> np.ndarray:
+    """
+    Calculate the cross-time correlation RRR between the responses of two brain areas. The output will be a matrix of shape (T, T) where T is the number of time points.
+    """
+    
+    # Get the number of neurons, trials, and time points
+    N, K, T = areaX.shape
+    
+    # Initialize the cross-time correlation coefficients
+    cross_time_r2 = np.zeros((T, T))
+    
+    # Iterate over time
+    for t in range(T):
+        for s in range(T):
+            X = areaX[:, :, t].T
+            Y = areaY[:, :, s].T
+        
+            # Calculate rrr ridge using your rrrr function
+            models = RRRR(X, Y, rank=params['rank'], cv=params['cv'])
+            
+            # Calculate the mean of the test scores above the cv-folds
+            cross_time_r2[t, s] = np.mean(models['test_score'])
+
+    if log:
+        print('cross_time_r2\n', cross_time_r2)
+
+    # The values must be nan where the time of V1 is greater than V2
+    cross_time_r2[np.tril_indices(cross_time_r2.shape[0], k=-1)] = np.nan
+
+    # The negative values must be nan, because they are not meaningful
+    cross_time_r2[cross_time_r2 < 0] = np.nan
+    
+    return cross_time_r2
