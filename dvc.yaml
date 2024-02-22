@@ -32,22 +32,12 @@ stages:
     outs:
       - data/area-responses/
   analysis:
-    cmd: python3 -u time_lag_analysis.py
+    cmd: python3 -u cv-rank-cross-time.py
     deps:
       - data/area-responses/
-      - time_lag_analysis.py
+      - cv-rank-cross-time.py
     params:
       - preprocess
       - rrr
     outs:
-      - results/VISp_VISl_cross-time-coeffs.pickle
-      - results/VISp_VISl_cross-time-lag.pickle
-  plots:
-    cmd: python3 -u time_lag_plot.py
-    deps:
-      - results/VISp_VISl_cross-time-coeffs.pickle
-      - time_lag_plot.py
-    params:
-      - preprocess
-    outs:
-      - figures/Time_lag_between_V1_LM.png
+      - figures/CV-rank_cross-time.png

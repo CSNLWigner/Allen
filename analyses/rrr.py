@@ -261,3 +261,19 @@ def calculate_cross_time_correlation(areaX, areaY, log=False) -> np.ndarray:
     cross_time_r2[cross_time_r2 < 0] = np.nan
     
     return cross_time_r2
+
+
+def cross_time_rrr_coeffs(V1_activity, V2_activity, cv=None, rank=None) -> np.ndarray:
+    """
+    Calculate the cross-time RRR coefficients between two sets of activities.
+
+    Parameters:
+        V1_activity (np.ndarray): Array of activities for the first set.
+        V2_activity (np.ndarray): Array of activities for the second set.
+
+    Returns:
+        np.ndarray: Array of cross-time RRR coefficients. Shape (timelength_X, timelength_Y)
+
+    """
+    return RRRR(V1_activity.mean(axis=0), V2_activity.mean(
+        axis=0), cv=cv, rank=rank, log=True)
