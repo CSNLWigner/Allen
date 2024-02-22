@@ -228,7 +228,7 @@ def rrr_rank_analysis(V1_activity, V2_activity, max_rank=15, cv=params['cv'], lo
     
     return test_scores
 
-def calculate_cross_time_correlation_coefficients(areaX, areaY, log=False) -> np.ndarray:
+def calculate_cross_time_correlation(areaX, areaY, log=False) -> np.ndarray:
     """
     Calculate the cross-time correlation RRR between the responses of two brain areas. The output will be a matrix of shape (T, T) where T is the number of time points.
     """
