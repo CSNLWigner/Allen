@@ -56,7 +56,7 @@ stages:
     deps:
     - path: results/VISp_VISl_cross-time-coeffs.pickle
       hash: md5
-      md5: 283fafeb03b0c458e452c4c2aca09c00
+      md5: bb7411ee0491cba734bbbe1dcc909b51
       size: 20152
     - path: time_lag_plot.py
       hash: md5
@@ -74,8 +74,8 @@ stages:
     outs:
     - path: figures/Time_lag_between_V1_LM.png
       hash: md5
-      md5: c7dff5a1544297fede63a20d1a4248d6
-      size: 29208
+      md5: 19f84ee5e2b10c880ccf47fdfa6eddf5
+      size: 33907
   time_lag_analysis:
     cmd: python3 -u time_lag_analysis.py
     deps:
@@ -111,8 +111,8 @@ stages:
       nfiles: 2
     - path: time_lag_analysis.py
       hash: md5
-      md5: b9aee6f8d98820a6375b2b1109e42410
-      size: 1479
+      md5: 5410e227aacbda84642378ebf6cba888
+      size: 1466
     params:
       params.yaml:
         preprocess:
@@ -129,7 +129,7 @@ stages:
     outs:
     - path: results/VISp_VISl_cross-time-coeffs.pickle
       hash: md5
-      md5: 283fafeb03b0c458e452c4c2aca09c00
+      md5: bb7411ee0491cba734bbbe1dcc909b51
       size: 20152
     - path: results/VISp_VISl_cross-time-lag.pickle
       hash: md5
