@@ -136,7 +136,7 @@ def cross_correlation_plot(cross_correlation, time_series=None, title='Cross-cor
 
 def cross_time_correlation_coefficients_plot(coeffs, time_series=None, first_dim_label=None, second_dim_label=None, title='Cross-time-correlation', ax=None) -> plt.Figure:
     """
-    Plots the cross-correlation between two signals.
+    Plots the cross-correlation between two signals. Colors range from blue (negative) to red (positive), with white representing zero.
 
     Parameters:
     coeffs (array-like): A three-dimensional array-like object representing the cross-correlation coefficients.
@@ -156,14 +156,16 @@ def cross_time_correlation_coefficients_plot(coeffs, time_series=None, first_dim
         time_step = preprocess['step-size']
         duration = preprocess['stimulus-duration']
         time_series = np.arange(0, duration, time_step).round(3)
-
+    
+    # Create a custom color palette ranging from blue (negative) to red (positive), with white representing zero
+    cmap = 'bwr'
+    
     # Create a new figure and axes if not provided
     if ax is None:
         fig, ax = plt.subplots()
 
-    # Plot the results
-    im = ax.imshow(coeffs,
-                   cmap='hot', aspect='auto')
+    # Plot the results using the custom color palette
+    im = ax.imshow(coeffs, cmap=cmap, aspect='auto')
     ax.set_title(title)
     ax.set_xlabel(first_dim_label)
     ax.set_ylabel(second_dim_label)
