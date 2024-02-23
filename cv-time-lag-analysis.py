@@ -4,11 +4,13 @@ from utils.data_io import load_pickle, save_pickle
 import yaml
 
 # Load parameters
-params = yaml.safe_load(open('params.yaml'))['preprocess']
+load = yaml.safe_load(open('params.yaml'))['load']
+preproc = yaml.safe_load(open('params.yaml'))['preprocess']
+params = yaml.safe_load(open('params.yaml'))['rrr']
 
 # Load the activity
-full_VISp_activity = load_pickle(f'{params["stimulus-block"]}_block_VISp-activity', path='data/raw-area-responses')
-full_VISl_activity = load_pickle(f'{params["stimulus-block"]}_block_VISl-activity', path='data/raw-area-responses')
+full_VISp_activity = load_pickle(f'{load["stimulus-block"]}_block_VISp-activity', path='data/raw-area-responses')
+full_VISl_activity = load_pickle(f'{load["stimulus-block"]}_block_VISl-activity', path='data/raw-area-responses')
 
 # Import preprocessing functions
 from analyses.data_preprocessing import calculate_residual_activity, recalculate_neural_activity, z_score_normalize
@@ -21,7 +23,7 @@ def preprocess_area_responses(raw_activity):
     
     # Recalculate time steps and time bins of the full activity
     full_activity = recalculate_neural_activity(raw_activity,
-        params['stimulus-duration'], params['step-size'], params['bin-size'],
+        preproc['stimulus-duration'], preproc['step-size'], preproc['bin-size'],
         orig_time_step=0.001)
     
     # Get residual activity
@@ -60,7 +62,8 @@ def calculate_something(cv, time_lag):
             V2 = np.roll(V2, -lag, axis=2)
             
             # Reduced Rank Regression
-            result = RRRR(V1, V2, c, lag)
+            # print(f'Cross-validation: {c}, Time lag: {lag}')
+            result = RRRR(V1.mean(axis=0), V2.mean(axis=0), params['rank'], cv=c)
             
             # Save the result
             results[i, j] = result['test_score'].mean()

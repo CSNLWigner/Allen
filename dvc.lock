@@ -52,30 +52,21 @@ stages:
       md5: 602969e22ae61fd2082ce408273d3275
       size: 360803
   plots:
-    cmd: python3 -u time_lag_plot.py
+    cmd: python3 -u cv-time-lag-plot.py
     deps:
-    - path: results/VISp_VISl_cross-time-coeffs.pickle
+    - path: cv-time-lag-plot.py
       hash: md5
-      md5: bb7411ee0491cba734bbbe1dcc909b51
-      size: 20152
-    - path: time_lag_plot.py
+      md5: 10f8de1081dd4d1cb4f041f97551551c
+      size: 394
+    - path: results/CV-timelag.pickle
       hash: md5
-      md5: d8a254deb1383cbb8b2baa30b266da64
-      size: 631
-    params:
-      params.yaml:
-        preprocess:
-          areas:
-          - VISp
-          - VISl
-          step-size: 0.005
-          bin-size: 0.005
-          stimulus-duration: 0.25
+      md5: 05fedccd49e0472bc17c9f6e9477706d
+      size: 269
     outs:
-    - path: figures/Time_lag_between_V1_LM.png
+    - path: figures/CV-timelag.png
       hash: md5
-      md5: 19f84ee5e2b10c880ccf47fdfa6eddf5
-      size: 33907
+      md5: 70d7147da7739541ce81f7a2689e189e
+      size: 16375
   time_lag_analysis:
     cmd: python3 -u time_lag_analysis.py
     deps:
@@ -102,16 +93,16 @@ stages:
       md5: 3ab7d9da547a0cfffcdb0b7bf2eec32f
       size: 20152
   analysis:
-    cmd: python3 -u cv-rank-cross-time.py
+    cmd: python3 -u cv-time-lag-analysis.py
     deps:
-    - path: cv-rank-cross-time.py
+    - path: cv-time-lag-analysis.py
       hash: md5
-      md5: d348731ef08b91f4ed63b2204e34591d
-      size: 1798
-    - path: data/area-responses/
+      md5: 052e998d354e8e574b060226c50c9784
+      size: 2935
+    - path: data/raw-area-responses/
       hash: md5
-      md5: ce2c7a07f8904e921134497915d3357e.dir
-      size: 364572328
+      md5: 1f062d2824a39f1b02e4275b6a4187fe.dir
+      size: 1822860328
       nfiles: 2
     params:
       params.yaml:
@@ -122,15 +113,11 @@ stages:
           step-size: 0.005
           bin-size: 0.005
           stimulus-duration: 0.25
-        rrr:
-          cv: 3
-          rank: 8
-          error-score: raise
     outs:
-    - path: figures/CV-rank_cross-time.png
+    - path: results/CV-timelag.pickle
       hash: md5
-      md5: eda41c9f903204ed951f7d3b7e351a23
-      size: 16442
+      md5: 05fedccd49e0472bc17c9f6e9477706d
+      size: 269
   behav-preprocess:
     cmd: python3 -u behav-preprocessing.py
     deps:
@@ -168,11 +155,11 @@ stages:
           - VISp
           - VISl
           stimulus-block: 5
-          step-size: 0.005
+          step-size: 0.001
           stimulus-duration: 0.25
     outs:
     - path: data/raw-area-responses/
       hash: md5
-      md5: 94ecd96945585f2a2e5940ae31ec6264.dir
-      size: 364572328
+      md5: 1f062d2824a39f1b02e4275b6a4187fe.dir
+      size: 1822860328
       nfiles: 2

@@ -355,5 +355,12 @@ def cv_rank_time_plot(results, cv, ranks, title, ax=None, max=None):
     ax.set_xticklabels(ranks)
     ax.set_yticks(range(len(cv)))
     ax.set_yticklabels(cv)
+    
+    # Add colorbar
+    fig.colorbar(im, ax=ax)
 
-    return im
+    if fig is not None:
+        return fig
+    
+    if fig is None:
+        return im

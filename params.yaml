@@ -15,7 +15,7 @@ load:
   # 2: receptive field mapping by gabor stimuli
   # 4: full-flash
   # 5: passive replay
-  step-size: 0.005 # in seconds
+  step-size: 0.001 # in seconds
   stimulus-duration: 0.250 # in seconds
 
 preprocess:

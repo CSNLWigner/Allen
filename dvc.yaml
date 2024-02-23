@@ -21,23 +21,19 @@ stages:
       - load
     outs:
       - data/raw-area-responses/
-  preprocess:
-    cmd: python3 -u preprocessing.py
-    deps:
-      - data/raw-area-responses/
-      - preprocessing.py
-    params:
-      - cache
-      - preprocess
-    outs:
-      - data/area-responses/
   analysis:
-    cmd: python3 -u cv-rank-cross-time.py
+    cmd: python3 -u cv-time-lag-analysis.py
     deps:
-      - data/area-responses/
-      - cv-rank-cross-time.py
+      - cv-time-lag-analysis.py
+      - data/raw-area-responses/
     params:
       - preprocess
-      - rrr
     outs:
-      - figures/CV-rank_cross-time.png
+      - results/CV-timelag.pickle
+  plots:
+    cmd: python3 -u cv-time-lag-plot.py
+    deps:
+      - cv-time-lag-plot.py
+      - results/CV-timelag.pickle
+    outs:
+      - figures/CV-timelag.png

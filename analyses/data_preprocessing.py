@@ -276,7 +276,7 @@ def convolve_spike_train(spike_times: np.ndarray, step_size=0.010, kernel='Gauss
     
     return continuous_signal
 
-def recalculate_neural_activity(neural_activity: np.ndarray, duration: float, time_step: float, time_bin: float, orig_time_step=0.001) -> np.ndarray:
+def recalculate_neural_activity(neural_activity: np.ndarray, duration: float, time_step: float, time_bin: float, orig_time_step=load['step-size']) -> np.ndarray:
     """
     Recalculate the neural activity based on the given time step and time bin.
 
