@@ -27,13 +27,19 @@ stages:
       - cv-time-lag-analysis.py
       - data/raw-area-responses/
     params:
+      - load
       - preprocess
+      - rrr
+      - rrr-cv-rank-time
     outs:
-      - results/CV-timelag.pickle
+      - results/CV-lag-time.pickle
   plots:
     cmd: python3 -u cv-time-lag-plot.py
     deps:
       - cv-time-lag-plot.py
-      - results/CV-timelag.pickle
+      - results/CV-lag-time.pickle
+    params:
+      - preprocess
+      - rrr-cv-rank-time
     outs:
       - figures/CV-timelag.png

@@ -56,17 +56,56 @@ stages:
     deps:
     - path: cv-time-lag-plot.py
       hash: md5
-      md5: 10f8de1081dd4d1cb4f041f97551551c
-      size: 394
-    - path: results/CV-timelag.pickle
+      md5: fda2655e99dc1f8fa4db0034bf3bf464
+      size: 1311
+    - path: results/CV-lag-time.pickle
       hash: md5
-      md5: 05fedccd49e0472bc17c9f6e9477706d
-      size: 269
+      md5: d0f0c894fa996641bec510dcc4f0ccdd
+      size: 442
+    params:
+      params.yaml:
+        preprocess:
+          areas:
+          - VISp
+          - VISl
+          step-size: 0.05
+          bin-size: 0.05
+          stimulus-duration: 0.25
+        rrr-cv-rank-time:
+          cv:
+          - 2
+          - 3
+          - 4
+          ranks:
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+          - 9
+          - 10
+          - 11
+          - 12
+          - 13
+          - 14
+          lag:
+          - 0
+          - 2
+          - 4
+          - 6
+          timepoints:
+          - 50
+          - 100
+          - 150
+          duration: 0.25
+          time-bin: 0.05
+          time-step: 0.025
     outs:
     - path: figures/CV-timelag.png
       hash: md5
-      md5: 70d7147da7739541ce81f7a2689e189e
-      size: 16375
+      md5: fc5d35c6aed42f0546f61e8268f9b318
+      size: 35243
   time_lag_analysis:
     cmd: python3 -u time_lag_analysis.py
     deps:
@@ -97,8 +136,8 @@ stages:
     deps:
     - path: cv-time-lag-analysis.py
       hash: md5
-      md5: 052e998d354e8e574b060226c50c9784
-      size: 2935
+      md5: 20cae32ded01019ec10245385588a04d
+      size: 4228
     - path: data/raw-area-responses/
       hash: md5
       md5: 1f062d2824a39f1b02e4275b6a4187fe.dir
@@ -106,18 +145,59 @@ stages:
       nfiles: 2
     params:
       params.yaml:
+        load:
+          areas:
+          - VISp
+          - VISl
+          stimulus-block: 5
+          step-size: 0.001
+          stimulus-duration: 0.25
         preprocess:
           areas:
           - VISp
           - VISl
-          step-size: 0.005
-          bin-size: 0.005
+          step-size: 0.05
+          bin-size: 0.05
           stimulus-duration: 0.25
+        rrr:
+          cv: 3
+          rank: 8
+          error-score: raise
+        rrr-cv-rank-time:
+          cv:
+          - 2
+          - 3
+          - 4
+          ranks:
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+          - 9
+          - 10
+          - 11
+          - 12
+          - 13
+          - 14
+          lag:
+          - 0
+          - 2
+          - 4
+          - 6
+          timepoints:
+          - 50
+          - 100
+          - 150
+          duration: 0.25
+          time-bin: 0.05
+          time-step: 0.025
     outs:
-    - path: results/CV-timelag.pickle
+    - path: results/CV-lag-time.pickle
       hash: md5
-      md5: 05fedccd49e0472bc17c9f6e9477706d
-      size: 269
+      md5: d0f0c894fa996641bec510dcc4f0ccdd
+      size: 442
   behav-preprocess:
     cmd: python3 -u behav-preprocessing.py
     deps:
@@ -163,3 +243,23 @@ stages:
       md5: 1f062d2824a39f1b02e4275b6a4187fe.dir
       size: 1822860328
       nfiles: 2
+  dimensionality-reduction:
+    cmd: python3 -u cv-lag-time-selection.py
+    deps:
+    - path: cv-lag-time-selection.py
+      hash: md5
+      md5: 965a07f1bed342b2c2fad2c2dde90119
+      size: 886
+    - path: results/CV-lag-time.pickle
+      hash: md5
+      md5: d0f0c894fa996641bec510dcc4f0ccdd
+      size: 442
+    outs:
+    - path: results/CV-lag-time_max-mean.pickle
+      hash: md5
+      md5: 075529a1c01fe2f4196054b96158e56d
+      size: 221
+    - path: results/CV-lag-time_max-mean_name.pickle
+      hash: md5
+      md5: 1416be89675e4e1240eeb07b8c5cafbb
+      size: 18
