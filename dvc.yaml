@@ -30,7 +30,7 @@ stages:
       - load
       - preprocess
       - rrr
-      - rrr-cv-rank-time
+      - rrr-param-search
     outs:
       - results/CV-lag-time.pickle
   plots:
@@ -40,6 +40,6 @@ stages:
       - results/CV-lag-time.pickle
     params:
       - preprocess
-      - rrr-cv-rank-time
+      - rrr-param-search
     outs:
       - figures/CV-timelag.png

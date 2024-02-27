@@ -8,15 +8,19 @@ import yaml
 
 # Load the params
 preproc = yaml.safe_load(open('params.yaml'))['preprocess']
-params = yaml.safe_load(open('params.yaml'))['rrr-cv-rank-time']
+params = yaml.safe_load(open('params.yaml'))['rrr-param-search']
 
 # Define the cross-validation, and time
 cv = params['cv']
 time_lag = params['lag']
+rank = np.array(params['rank'], dtype=int) # [2, 4, 8, 16]
 timepoints = params['timepoints']
 
+# Get the rank idx of the value 8
+rank_idx = np.where(rank == 8)[0][0]
+
 # Load the results
-result = load_pickle('CV-lag-time')
+result = load_pickle('CV-lag-time')[:,:,rank_idx, :] # Shape: (cv, lag, time)
 
 # Create fig, axs with 2 rows and 1 col
 fig, axs = plt.subplots(2, 1, figsize=(10, 10))

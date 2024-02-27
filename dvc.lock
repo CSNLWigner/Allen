@@ -56,12 +56,12 @@ stages:
     deps:
     - path: cv-time-lag-plot.py
       hash: md5
-      md5: fda2655e99dc1f8fa4db0034bf3bf464
-      size: 1311
+      md5: f2d9a1232ae7a3ee1dc01b5457c39c14
+      size: 1586
     - path: results/CV-lag-time.pickle
       hash: md5
-      md5: 8068a2299e4a22193255d9d7655a5842
-      size: 442
+      md5: 04d5c43bad72817a93c514e51ae9c14b
+      size: 2077
     params:
       params.yaml:
         preprocess:
@@ -71,24 +71,18 @@ stages:
           step-size: 0.05
           bin-size: 0.05
           stimulus-duration: 0.25
-        rrr-cv-rank-time:
+        rrr-param-search:
           cv:
           - 2
           - 3
           - 4
-          ranks:
-          - 3
-          - 4
           - 5
           - 6
-          - 7
+          rank:
+          - 6
           - 8
-          - 9
           - 10
-          - 11
           - 12
-          - 13
-          - 14
           lag:
           - 0
           - 1
@@ -104,8 +98,8 @@ stages:
     outs:
     - path: figures/CV-timelag.png
       hash: md5
-      md5: 8f914b1c490cb4e8cf9d878ccdfb0f93
-      size: 35026
+      md5: befc88e02c9f589d8db4c441cc062de8
+      size: 35437
   time_lag_analysis:
     cmd: python3 -u time_lag_analysis.py
     deps:
@@ -136,8 +130,8 @@ stages:
     deps:
     - path: cv-time-lag-analysis.py
       hash: md5
-      md5: 20cae32ded01019ec10245385588a04d
-      size: 4228
+      md5: c8cef63b6b87a95c2fc7a717746ec445
+      size: 4214
     - path: data/raw-area-responses/
       hash: md5
       md5: 1f062d2824a39f1b02e4275b6a4187fe.dir
@@ -163,24 +157,18 @@ stages:
           cv: 3
           rank: 8
           error-score: raise
-        rrr-cv-rank-time:
+        rrr-param-search:
           cv:
           - 2
           - 3
           - 4
-          ranks:
-          - 3
-          - 4
           - 5
           - 6
-          - 7
+          rank:
+          - 6
           - 8
-          - 9
           - 10
-          - 11
           - 12
-          - 13
-          - 14
           lag:
           - 0
           - 1
@@ -196,8 +184,8 @@ stages:
     outs:
     - path: results/CV-lag-time.pickle
       hash: md5
-      md5: 8068a2299e4a22193255d9d7655a5842
-      size: 442
+      md5: 04d5c43bad72817a93c514e51ae9c14b
+      size: 2077
   behav-preprocess:
     cmd: python3 -u behav-preprocessing.py
     deps:
