@@ -21,15 +21,15 @@ stages:
       - load
     outs:
       - data/raw-area-responses/
-  preprocess:
-    cmd: python3 -u preprocessing.py
-    deps:
-      - preprocessing.py
-      - data/raw-area-responses/
-    params:
-      - preprocess
-    outs:
-      - data/area-responses/
+  # preprocess:
+  #   cmd: python3 -u preprocessing.py
+  #   deps:
+  #     - preprocessing.py
+  #     - data/raw-area-responses/
+  #   params:
+  #     - preprocess
+  #   outs:
+  #     - data/area-responses/
   analysis:
     cmd: python3 -u cv-time-lag-analysis.py
     deps:
@@ -51,4 +51,4 @@ stages:
       - preprocess
       - rrr-param-search
     outs:
-      - figures/CV-timelag.png
+      - figures/rrr-param-search.png

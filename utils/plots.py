@@ -337,7 +337,7 @@ def score_plot_by_time(scores, title=None, time_series=None, ax=None, label='', 
     return
 
 
-def cv_rank_time_plot(results, title, ax=None, max=None, xlabel=None, ylabel=None, xticks=None, yticks=None):
+def cv_rank_time_plot(results, title=None, ax=None, max=None, xlabel=None, ylabel=None, xticks=None, yticks=None):
     '''
     Plot the results of the cross-validation and rank.
 
@@ -358,6 +358,9 @@ def cv_rank_time_plot(results, title, ax=None, max=None, xlabel=None, ylabel=Non
     If ax is None, a new figure is created. The plot is displayed using a colormap
     with the 'viridis' color map. The colorbar is added to the plot. If fig is not None,
     the figure is returned. If fig is None, the image is returned.
+    
+    Note:
+    Since the first dimension corresponds to the Y-axis, and the second dimension corresponds to the X-axis, the results is transposed before plotting.
     '''
 
     # If ax is None, create a new figure
@@ -367,7 +370,7 @@ def cv_rank_time_plot(results, title, ax=None, max=None, xlabel=None, ylabel=Non
         fig = None
 
     # Plot the results
-    im = ax.imshow(results, cmap='viridis', vmin=0, vmax=max)
+    im = ax.imshow(results.T, cmap='viridis', vmin=0, vmax=max)
     ax.set_xlabel(xlabel)
     ax.set_ylabel(ylabel)
     ax.set_title(title)

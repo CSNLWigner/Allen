@@ -12,41 +12,46 @@ params = yaml.safe_load(open('params.yaml'))['rrr-param-search']
 
 # Define the cross-validation, and time
 cv = params['cv']
-time_lag = params['lag']
+lag = params['lag']
 rank = np.array(params['rank'], dtype=int) # [2, 4, 8, 16]
-timepoints = params['timepoints']
+time = params['timepoints']
 
 # Get the rank idx of the value 8
 rank_idx = np.where(rank == 8)[0][0]
 
 # Load the results
-result = load_pickle('CV-lag-time')[:,:,rank_idx, :] # Shape: (cv, lag, time)
+result = load_pickle('CV-lag-time')#[:,:,rank_idx, :] # Shape: (cv, lag, rank, time)
+print(result.shape)
 
-# Create fig, axs with 2 rows and 1 col
-fig, axs = plt.subplots(2, 1, figsize=(10, 10))
+# Dimension names
+dim_names = ['cv', 'lag', 'rank', 'time']
 
-# Plot the mean above the CVs
-mean_cv = np.nanmean(result, axis=0)
-print(mean_cv)
-im = cv_rank_time_plot(mean_cv,
-                        title=f'Averaged over CVs', ax=axs[0],
-                        xlabel='Lag', ylabel='Time',
-                        xticks=time_lag, yticks=timepoints)
-fig.colorbar(im, ax=axs[0])
+# Create fig, axs with 
+fig, axs = plt.subplots(6, 1, figsize=(20, 20))
 
-print('result.shape:', result.shape)
-
-# Plot the mean above the times
-mean_time = np.nanmean(result, axis=2)
-print(mean_time)
-im = cv_rank_time_plot(mean_time,
-                        title=f'Averaged over times', ax=axs[1],
-                        xlabel='CV', ylabel='Lag',
-                        xticks=cv, yticks=time_lag)
-fig.colorbar(im, ax=axs[1])
-
-
-# Plot the results
+# Permuations of the dimensions (select 2 from 4) with built-in function
+from itertools import combinations
+perm = list(combinations(dim_names, 2))
+for p in perm:
+    
+    # Select the dimensions
+    x, y = p
+    
+    # Index of the rest dimensions in tuple
+    rest = [d for d in dim_names if d not in [x, y]]
+    rest_idx = [dim_names.index(r) for r in rest]
+    
+    # Plot the median of the result above the rest dimension indices
+    median = np.nanmedian(result, axis=tuple(rest_idx))
+    
+    im = cv_rank_time_plot(median,
+                           #title=f'Averaged over {p}', 
+                           ax=axs[perm.index(p)],
+                           xlabel=x, ylabel=y,
+                           xticks=eval(x), yticks=eval(y))
+    
+    fig.colorbar(im, ax=axs[perm.index(p)])
+    
 
 # Save the figure
-save_fig(fig, f'CV-timelag')
+save_fig(fig, f'rrr-param-search')
