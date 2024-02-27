@@ -325,3 +325,29 @@ def recalculate_neural_activity(neural_activity: np.ndarray, duration: float, ti
                 
     return recalculated_activity
 
+
+def preprocess_area_responses(raw_activity, method='z-score'):
+    """
+    Preprocesses the raw neural activity of a specific brain area.
+
+    Args:
+        raw_activity (ndarray): The raw neural activity.
+        method (str, optional): The method to use for normalization. Default is 'z-score'.
+
+    Returns:
+        ndarray: The normalized and preprocessed neural activity.
+    """
+    
+    # Recalculate time steps and time bins of the full activity
+    full_activity = recalculate_neural_activity(raw_activity,
+                                                params['stimulus-duration'], params['step-size'], params['bin-size'],
+                                                orig_time_step=load['step-size'])
+
+    # Get residual activity
+    residual_activity = calculate_residual_activity(full_activity)  # Neuron-wise AND time-wise
+
+    # Normalize the responses
+    if method == 'z-score':
+        normalized_activity = z_score_normalize(residual_activity, dims=(0, 1, 2))  # TODO: Normalize based on ITI activity?
+
+    return normalized_activity

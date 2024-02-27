@@ -1,5 +1,5 @@
 from sklearn.preprocessing import StandardScaler
-from analyses.data_preprocessing import calculate_residual_activity, min_max_normalize, recalculate_neural_activity, z_score_normalize
+from analyses.data_preprocessing import calculate_residual_activity, min_max_normalize, preprocess_area_responses, recalculate_neural_activity, z_score_normalize
 from utils.download_allen import cache_allen
 from utils.data_io import load_pickle, save_pickle
 import yaml
@@ -14,16 +14,7 @@ for area in params['areas']:
     full_activity = load_pickle(
         f'{load["stimulus-block"]}_block_{area}-activity', path='data/raw-area-responses')
     
-    # Recalculate time steps and time bins of the full activity
-    full_activity = recalculate_neural_activity(full_activity, 
-        params['stimulus-duration'], params['step-size'], params['bin-size'],
-        orig_time_step=0.005)
-    
-    # Get residual activity
-    residual_activity = calculate_residual_activity(full_activity) # Neuron-wise AND time-wise
-    
-    # Normalize the responses
-    normalized_activity = z_score_normalize(residual_activity, dims=(0,1,2)) # TODO: Normalize based on ITI activity?
+    normalized_activity = preprocess_area_responses(full_activity, method='z-score')
     
     # Sklearn alternative for normalization
     # scaler = StandardScaler()
