@@ -140,8 +140,8 @@ stages:
           areas:
           - VISp
           - VISl
-          step-size: 0.025
-          bin-size: 0.025
+          step-size: 0.05
+          bin-size: 0.05
           stimulus-duration: 0.25
         rrr:
           cv: 3
@@ -152,6 +152,8 @@ stages:
           - 2
           - 3
           - 4
+          - 5
+          - 6
           rank:
           - 8
           - 9
@@ -166,17 +168,16 @@ stages:
           - 1
           timepoints:
           - 50
-          - 75
           - 100
-          - 125
+          - 150
           duration: 0.25
           time-bin: 0.05
           time-step: 0.025
     outs:
     - path: results/CV-lag-time.pickle
       hash: md5
-      md5: 59e957e419a4a322cbac2c572a47022f
-      size: 1693
+      md5: f35268e866c6119f80c31e7c3b58d299
+      size: 2077
   behav-preprocess:
     cmd: python3 -u behav-preprocessing.py
     deps:

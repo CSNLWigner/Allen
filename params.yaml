@@ -20,8 +20,8 @@ load:
 
 preprocess:
   areas: ["VISp", "VISl"] # "VISpm" # "VISm" has no spikes
-  step-size: 0.025 # in seconds
-  bin-size: 0.025 # in seconds # Joao's default: 0.100
+  step-size: 0.050 # in seconds
+  bin-size: 0.050 # in seconds # Joao's default: 0.100
   stimulus-duration: 0.250 # in seconds
 
 cca:
@@ -38,10 +38,10 @@ rrr-plot:
   discard-first-500-ms: False
 
 rrr-param-search:
-  cv: [2,3,4] # [5,6]
+  cv: [2,3,4,5,6]
   rank: [8,9,10,11,11,12,13,14] # [3,4,5,6,7,8,9,10,11,12,13,14]
   lag: [0,1]
-  timepoints: [50,75,100,125] # [150]
+  timepoints: [50,100,150]
   duration: 0.250
   time-bin: 0.050
   time-step: 0.025
