@@ -13,7 +13,7 @@ from utils.utils import MSE
 preprocess = yaml.safe_load(open('params.yaml'))['preprocess']
 params = yaml.safe_load(open('params.yaml'))['rrr']
 
-def RRRR(X_data, Y_data, rank=None, cv=None, log=False):
+def RRRR(X_data, Y_data, rank=None, cv=None, log=False, success_log=True):
     """
     Make Reduced Rank Regression (RRR) analysis.
 
@@ -55,6 +55,11 @@ def RRRR(X_data, Y_data, rank=None, cv=None, log=False):
     
     # Append the mean coefficients to the results
     results['mean_coefficients'] = mean_coefficients.T
+    
+    # If mean of the scores is not negative, then print the cv, rank and the mean of the scores
+    log=True
+    if success_log and np.mean(results['test_score']) > 0:
+        print(f'CV: {cv}, Rank: {rank}, Mean test score: {np.mean(results["test_score"])}')
     
     return results
 
