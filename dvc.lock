@@ -5,30 +5,27 @@ stages:
     deps:
     - path: data/raw-area-responses/
       hash: md5
-      md5: 94ecd96945585f2a2e5940ae31ec6264.dir
-      size: 364572328
+      md5: 1f062d2824a39f1b02e4275b6a4187fe.dir
+      size: 1822860328
       nfiles: 2
     - path: preprocessing.py
       hash: md5
-      md5: 02d5df914352d5887a6b645ced79b8b3
-      size: 1536
+      md5: 5831de0d14a7aa0435c3a5b782c91134
+      size: 1131
     params:
       params.yaml:
-        cache:
-          location: data/.vbn_s3_cache
-          force_download: false
         preprocess:
           areas:
           - VISp
           - VISl
-          step-size: 0.005
-          bin-size: 0.005
+          step-size: 0.05
+          bin-size: 0.05
           stimulus-duration: 0.25
     outs:
     - path: data/area-responses/
       hash: md5
-      md5: ce2c7a07f8904e921134497915d3357e.dir
-      size: 364572328
+      md5: c8ec36b0953547bb73b891c488a851cf.dir
+      size: 36457528
       nfiles: 2
   rrr_analysis:
     cmd: python3 -u rrr_analysis.py

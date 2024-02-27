@@ -1,4 +1,4 @@
-from analyses.data_preprocessing import get_area_responses
+from analyses.data_preprocessing import get_area_responses, preprocess_area_responses
 from utils.download_allen import cache_allen
 from utils.data_io import load_pickle, save_pickle
 import yaml
@@ -15,26 +15,6 @@ full_VISl_activity = load_pickle(f'{load["stimulus-block"]}_block_VISl-activity'
 
 # Import preprocessing functions
 from analyses.data_preprocessing import calculate_residual_activity, recalculate_neural_activity, z_score_normalize
-
-# Preprocess the area responses
-def preprocess_area_responses(raw_activity):
-    '''
-    Preprocess the area responses.
-    '''
-    
-    # Recalculate time steps and time bins of the full activity
-    full_activity = recalculate_neural_activity(raw_activity,
-        preproc['stimulus-duration'], preproc['step-size'], preproc['bin-size'],
-        orig_time_step=0.001)
-    
-    # Get residual activity
-    residual_activity = calculate_residual_activity(full_activity) # Neuron-wise AND time-wise
-    
-    # Normalize the responses
-    normalized_activity = z_score_normalize(residual_activity, dims=(0,1,2)) # TODO: Normalize based on ITI activity?
-    
-    return normalized_activity
-    
 
 # Import utile functions
 import numpy as np
