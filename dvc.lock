@@ -56,12 +56,12 @@ stages:
     deps:
     - path: cv-time-lag-plot.py
       hash: md5
-      md5: f2d9a1232ae7a3ee1dc01b5457c39c14
-      size: 1586
+      md5: 12bfd16549ff25996c1ba1fd94da0df5
+      size: 1484
     - path: results/CV-lag-time.pickle
       hash: md5
-      md5: 04d5c43bad72817a93c514e51ae9c14b
-      size: 2077
+      md5: 2a14a2002018d066cde40f446f4622cd
+      size: 3037
     params:
       params.yaml:
         preprocess:
@@ -79,10 +79,12 @@ stages:
           - 5
           - 6
           rank:
-          - 6
           - 8
           - 10
+          - 11
           - 12
+          - 13
+          - 14
           lag:
           - 0
           - 1
@@ -165,10 +167,12 @@ stages:
           - 5
           - 6
           rank:
-          - 6
           - 8
           - 10
+          - 11
           - 12
+          - 13
+          - 14
           lag:
           - 0
           - 1
@@ -184,8 +188,8 @@ stages:
     outs:
     - path: results/CV-lag-time.pickle
       hash: md5
-      md5: 04d5c43bad72817a93c514e51ae9c14b
-      size: 2077
+      md5: 2a14a2002018d066cde40f446f4622cd
+      size: 3037
   behav-preprocess:
     cmd: python3 -u behav-preprocessing.py
     deps:
