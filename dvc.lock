@@ -60,7 +60,7 @@ stages:
       size: 1311
     - path: results/CV-lag-time.pickle
       hash: md5
-      md5: d0f0c894fa996641bec510dcc4f0ccdd
+      md5: 8068a2299e4a22193255d9d7655a5842
       size: 442
     params:
       params.yaml:
@@ -91,9 +91,9 @@ stages:
           - 14
           lag:
           - 0
+          - 1
           - 2
-          - 4
-          - 6
+          - 3
           timepoints:
           - 50
           - 100
@@ -104,8 +104,8 @@ stages:
     outs:
     - path: figures/CV-timelag.png
       hash: md5
-      md5: fc5d35c6aed42f0546f61e8268f9b318
-      size: 35243
+      md5: 8f914b1c490cb4e8cf9d878ccdfb0f93
+      size: 35026
   time_lag_analysis:
     cmd: python3 -u time_lag_analysis.py
     deps:
@@ -183,9 +183,9 @@ stages:
           - 14
           lag:
           - 0
+          - 1
           - 2
-          - 4
-          - 6
+          - 3
           timepoints:
           - 50
           - 100
@@ -196,7 +196,7 @@ stages:
     outs:
     - path: results/CV-lag-time.pickle
       hash: md5
-      md5: d0f0c894fa996641bec510dcc4f0ccdd
+      md5: 8068a2299e4a22193255d9d7655a5842
       size: 442
   behav-preprocess:
     cmd: python3 -u behav-preprocessing.py
