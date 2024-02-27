@@ -13,11 +13,11 @@ params = yaml.safe_load(open('params.yaml'))['rrr-param-search']
 # Define the cross-validation, and time
 cv = params['cv']
 lag = params['lag']
-rank = np.array(params['rank'], dtype=int) # [2, 4, 8, 16]
+rank = np.array(params['rank'], dtype=int)
 time = params['timepoints']
 
 # Get the rank idx of the value 8
-rank_idx = np.where(rank == 8)[0][0]
+# rank_idx = np.where(rank == 8)[0][0]
 
 # Load the results
 result = load_pickle('CV-lag-time')#[:,:,rank_idx, :] # Shape: (cv, lag, rank, time)
@@ -41,10 +41,10 @@ for p in perm:
     rest = [d for d in dim_names if d not in [x, y]]
     rest_idx = [dim_names.index(r) for r in rest]
     
-    # Plot the median of the result above the rest dimension indices
-    median = np.nanmedian(result, axis=tuple(rest_idx))
+    # Plot the mean of the result above the rest dimension indices
+    mean = np.nanmean(result, axis=tuple(rest_idx))
     
-    im = cv_rank_time_plot(median,
+    im = cv_rank_time_plot(mean,
                            #title=f'Averaged over {p}', 
                            ax=axs[perm.index(p)],
                            xlabel=x, ylabel=y,

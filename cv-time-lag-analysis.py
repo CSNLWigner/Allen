@@ -89,11 +89,19 @@ print('result.shape:', result.shape)
 # Save the results
 save_pickle(result, f'CV-lag-time')
 
-# Get the maximum
-max = np.nanmax(result)
 
-# Get the indices of the maximum value
-max_idx = np.unravel_index(np.nanargmax(result), result.shape)
-print(f'maximum value ({max.round(3)}) is at cv={cv[max_idx[0]]}, lag={time_lag[max_idx[1]]}, rank={rank[max_idx[2]]}, time={timepoints[max_idx[3]]}ms')
+for idx, t in enumerate(timepoints):
+    
+    # Get the result at the time
+    result_t = result[:, :, :, idx]
+
+    # Get the maximum
+    max = np.nanmax(result)
+
+    # Get the indices of the maximum value
+    max_idx = np.unravel_index(np.nanargmax(result), result.shape)
+    
+    # Print the maximum value and the corresponding parameters
+    print(f'maximum value({max.round(3)}) at {t} ms is at cv={cv[max_idx[0]]}, lag={time_lag[max_idx[1]]}, rank={rank[max_idx[2]]}')
 
 

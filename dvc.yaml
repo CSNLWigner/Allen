@@ -42,13 +42,13 @@ stages:
       - rrr-param-search
     outs:
       - results/CV-lag-time.pickle
-  plots:
-    cmd: python3 -u cv-time-lag-plot.py
-    deps:
-      - cv-time-lag-plot.py
-      - results/CV-lag-time.pickle
-    params:
-      - preprocess
-      - rrr-param-search
-    outs:
-      - figures/rrr-param-search.png
+  # plots:
+  #   cmd: python3 -u cv-time-lag-plot.py
+  #   deps:
+  #     - cv-time-lag-plot.py
+  #     - results/CV-lag-time.pickle
+  #   params:
+  #     - preprocess
+  #     - rrr-param-search
+  #   outs:
+  #     - figures/rrr-param-search.png
