@@ -385,3 +385,28 @@ def cv_rank_time_plot(results, title=None, ax=None, max=None, xlabel=None, ylabe
     
     if fig is None:
         return im
+
+def score_time(mean, sem, title=None, xlabel='Time', ylabel='R^2', time_series=None):
+    
+    # Set default values
+    T = len(mean)
+
+    # If time_series is not provided, generate it
+    if time_series is None:
+        duration = preprocess['stimulus-duration']
+        time_step = preprocess['step-size']
+        time_series = np.arange(0, duration+time_step, time_step).round(3)
+
+    # Init the figure
+    fig, ax = plt.subplots(1, 1, figsize=(10, 5))
+
+    # Plot the result
+    ax.plot(mean)
+    ax.fill_between(range(T), np.array(mean) - np.array(sem), np.array(mean) + np.array(sem), alpha=0.2)
+    ax.set_xlabel('Time (s)')
+    ax.set_ylabel('R^2')
+    ax.set_title(title)
+    ax.set_xticks(np.arange(0, len(time_series), 5))
+    ax.set_xticklabels(time_series[::5])
+    
+    return fig

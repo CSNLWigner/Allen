@@ -20,8 +20,8 @@ load:
 
 preprocess:
   areas: ["VISp", "VISl"] # "VISpm" # "VISm" has no spikes
-  step-size: 0.100 # in seconds
-  bin-size: 0.100 # in seconds # Joao's default: 0.100
+  step-size: 0.010 # in seconds
+  bin-size: 0.050 # in seconds # Joao's default: 0.100
   stimulus-duration: 0.250 # in seconds
 
 cca:
@@ -30,8 +30,8 @@ cca:
   scoring: 'r2'
 
 rrr:
-  cv: 3
-  rank: 8
+  cv: 4
+  rank: 11
   error-score: 'raise'
 
 rrr-plot:
