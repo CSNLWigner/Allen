@@ -10,8 +10,8 @@ rrr_params = yaml.safe_load(open('params.yaml'))['rrr']
 main_params = yaml.safe_load(open('params.yaml'))['rrr-param-search']
 
 # Load the activity
-full_VISp_activity = load_pickle(f'{load["stimulus-block"]}_block_VISp-activity', path='data/raw-area-responses')
-full_VISl_activity = load_pickle(f'{load["stimulus-block"]}_block_VISl-activity', path='data/raw-area-responses')
+full_activity_predictor = load_pickle(f'{load["stimulus-block"]}_block_{rrr_params["predictor"]}-activity', path='data/raw-area-responses')
+full_activity_target    = load_pickle(f'{load["stimulus-block"]}_block_{rrr_params["target"]}-activity', path='data/raw-area-responses')
 
 # Import preprocessing functions
 from analyses.data_preprocessing import calculate_residual_activity, recalculate_neural_activity, z_score_normalize
@@ -50,11 +50,11 @@ def calculate_something():
     for j, lag in enumerate(time_lag):
         
         # Preprocess the area responses
-        V1 = preprocess_area_responses(full_VISp_activity)
-        V2 = preprocess_area_responses(full_VISl_activity)
+        predictor = preprocess_area_responses(full_activity_predictor)
+        target = preprocess_area_responses(full_activity_target)
         
         # Move the activity of V2 back in time by the actual time lag
-        V2 = np.roll(V2, -lag, axis=2)
+        target = np.roll(target, -lag, axis=2)
                 
         for i, c in enumerate(cv):
             for k, r in enumerate(rank):
@@ -63,7 +63,7 @@ def calculate_something():
                     # Reduced Rank Regression
                     # print(f'Cross-validation: {c}, Time lag: {lag}')
                     # result = RRRR(V1.mean(axis=0), V2.mean(axis=0), params['rank'], cv=c) # cross-time RRRR
-                    result = RRRR(V1[:,:,t].T, V2[:,:,t].T, rank=r, cv=c)
+                    result = RRRR(predictor[:,:,t].T, target[:,:,t].T, rank=r, cv=c)
                     
                     # Save the result averaged over the folds
                     results[i, j, k, t] = result['test_score'].mean()

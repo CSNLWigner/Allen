@@ -8,6 +8,7 @@ import yaml
 
 # Load the params
 preproc = yaml.safe_load(open('params.yaml'))['preprocess']
+rrr = yaml.safe_load(open('params.yaml'))['rrr']
 params = yaml.safe_load(open('params.yaml'))['rrr-param-search']
 
 # Define the cross-validation, and time
@@ -28,6 +29,9 @@ dim_names = ['cv', 'lag', 'rank', 'time']
 
 # Create fig, axs with 
 fig, axs = plt.subplots(6, 1, figsize=(20, 20))
+
+# Create suptitle
+fig.suptitle(f'{rrr["predictor"]} -> {rrr["target"]}', fontsize=20)
 
 # Permuations of the dimensions (select 2 from 4) with built-in function
 from itertools import combinations
