@@ -47,5 +47,6 @@ stages:
       - results/rrr-score-time.pickle
     params:
       - preprocess
+      - rrr
     outs:
       - figures/rrr-score-time.png

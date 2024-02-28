@@ -11,11 +11,11 @@ preprocess = yaml.safe_load(open('params.yaml'))['preprocess']
 rrr = yaml.safe_load(open('params.yaml'))['rrr']
 
 # Load the data
-X = load_pickle("5_block_VISp-activity", path="data/area-responses") # shape (Neurons, Trials, Time)
-Y = load_pickle("5_block_VISl-activity", path="data/area-responses") # shape (Neurons, Trials, Time)
+predictor = load_pickle(f"5_block_{rrr['predictor']}-activity", path="data/area-responses") # shape (Neurons, Trials, Time)
+target = load_pickle(f"5_block_{rrr['target']}-activity", path="data/area-responses") # shape (Neurons, Trials, Time)
 
 # Get the shape of the data
-N_X, K, T = X.shape
+N_predictor, K, T = predictor.shape
 
 # Initialize the result
 rrr_result = []
@@ -26,11 +26,11 @@ sem  = []
 for time in range(T):
     
     # Get the time step
-    X_t = X[:, :, time].T
-    Y_t = Y[:, :, time].T
+    predictor_t = predictor[:, :, time].T
+    target_t = target[:, :, time].T
     
     # Perform RRR
-    result = RRRR(X_t, Y_t, rank=rrr['rank'], cv=rrr['cv'])['test_score']
+    result = RRRR(predictor_t, target_t, rank=rrr['rank'], cv=rrr['cv'])['test_score']
     
     # Save the mean and standard error
     mean.append(result.mean())

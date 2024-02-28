@@ -53,12 +53,12 @@ stages:
     deps:
     - path: results/rrr-score-time.pickle
       hash: md5
-      md5: f8772a80cbc47a573f4030adad677470
+      md5: 90a696de97ad58181684167e7211baf9
       size: 1087
     - path: rrr-score-time-plot.py
       hash: md5
-      md5: 78b55066f96a458f0a94ef7bf8ba25c5
-      size: 313
+      md5: 2d6df910b19eb3bd14cf6e820cd9ca4a
+      size: 484
     params:
       params.yaml:
         preprocess:
@@ -68,11 +68,17 @@ stages:
           step-size: 0.01
           bin-size: 0.05
           stimulus-duration: 0.25
+        rrr:
+          cv: 4
+          rank: 11
+          error-score: raise
+          predictor: VISl
+          target: VISp
     outs:
     - path: figures/rrr-score-time.png
       hash: md5
-      md5: ff74699e7668247a94f3eecf9dc7fdca
-      size: 26977
+      md5: 2a44cc9c11a539eba476daac736947bf
+      size: 16647
   time_lag_analysis:
     cmd: python3 -u time_lag_analysis.py
     deps:
@@ -108,8 +114,8 @@ stages:
       nfiles: 2
     - path: rrr-score-time.py
       hash: md5
-      md5: 17178e221956b35cd231b6b13db9f18c
-      size: 1220
+      md5: 08371326697e9496fcfae7620ecbe184
+      size: 1170
     params:
       params.yaml:
         preprocess:
@@ -123,10 +129,12 @@ stages:
           cv: 4
           rank: 11
           error-score: raise
+          predictor: VISl
+          target: VISp
     outs:
     - path: results/rrr-score-time.pickle
       hash: md5
-      md5: f8772a80cbc47a573f4030adad677470
+      md5: 90a696de97ad58181684167e7211baf9
       size: 1087
   behav-preprocess:
     cmd: python3 -u behav-preprocessing.py
