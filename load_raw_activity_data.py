@@ -8,7 +8,7 @@ import yaml
 params = yaml.safe_load(open('params.yaml'))['load']
 
 # An arbitrary session from the Allen Neuropixel dataset
-session_id = 1064644573  # 1052533639
+session_id = params['session'] # 1064644573  # 1052533639
 cache = cache_allen()
 session = cache.get_ecephys_session(ecephys_session_id=session_id)
 

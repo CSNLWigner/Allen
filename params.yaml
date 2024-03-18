@@ -8,6 +8,7 @@ neuropixel:
   block: "active behavior"
 
 load:
+  session: 1059678195 # 1064644573
   areas: ["VISp", "VISl"] # "VISpm" # "VISm" has no spikes
   stimulus-block: 5
   # Stimulus blocks:

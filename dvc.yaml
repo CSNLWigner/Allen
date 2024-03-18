@@ -44,4 +44,4 @@ stages:
       - rrr
       - rrr-param-search
     outs:
-      - figures/CV-timelag.png
+      - figures/rrr-param-search.png
