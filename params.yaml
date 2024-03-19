@@ -31,7 +31,7 @@ cca:
   scoring: 'r2'
 
 rrr:
-  cv: 5
+  cv: 3
   rank: 18
   error-score: 'raise'
   predictor: 'VISl'

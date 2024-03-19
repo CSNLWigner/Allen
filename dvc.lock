@@ -69,7 +69,7 @@ stages:
           bin-size: 0.1
           stimulus-duration: 0.25
         rrr:
-          cv: 5
+          cv: 3
           rank: 18
           error-score: raise
           predictor: VISl
@@ -126,7 +126,7 @@ stages:
           bin-size: 0.1
           stimulus-duration: 0.25
         rrr:
-          cv: 5
+          cv: 3
           rank: 18
           error-score: raise
           predictor: VISl
