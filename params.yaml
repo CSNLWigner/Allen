@@ -8,7 +8,7 @@ neuropixel:
   block: "active behavior"
 
 load:
-  session: 1111216934 # 1064644573
+  session: 1109889304
   areas: ["VISp", "VISl"] # "VISpm" # "VISm" has no spikes
   stimulus-block: 5
   # Stimulus blocks:
@@ -21,8 +21,8 @@ load:
 
 preprocess:
   areas: ["VISp", "VISl"] # "VISpm" # "VISm" has no spikes
-  step-size: 0.100 # in seconds
-  bin-size: 0.100 # in seconds # Joao's default: 0.100
+  step-size: 0.010 # time-step in seconds
+  bin-size: 0.050 # time-window in seconds # Joao's default: 0.100
   stimulus-duration: 0.250 # in seconds
 
 cca:
@@ -31,8 +31,8 @@ cca:
   scoring: 'r2'
 
 rrr:
-  cv: 4
-  rank: 11
+  cv: 5
+  rank: 18
   error-score: 'raise'
   predictor: 'VISl'
   target: 'VISp'
