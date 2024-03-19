@@ -57,7 +57,7 @@ stages:
       size: 1767
     - path: results/CV-lag-time.pickle
       hash: md5
-      md5: c38e5cc9c1c1490f407eef8c45cbd891
+      md5: e0cad6b9afead44122f95da77e4c3f25
       size: 2077
     params:
       params.yaml:
@@ -104,8 +104,8 @@ stages:
     outs:
     - path: figures/rrr-param-search.png
       hash: md5
-      md5: 97adc9ab8ad337853ebf4eb7d196e0b6
-      size: 90578
+      md5: 2eea6a01dc6bb2884d677b74eeb3e10d
+      size: 89826
   time_lag_analysis:
     cmd: python3 -u time_lag_analysis.py
     deps:
@@ -140,13 +140,13 @@ stages:
       size: 3811
     - path: data/raw-area-responses/
       hash: md5
-      md5: 90173a39471e6a306b64b6be692881b9.dir
-      size: 2649600328
+      md5: a8107967f577de4cf6c4ae8ecfd60599.dir
+      size: 1649824328
       nfiles: 2
     params:
       params.yaml:
         load:
-          session: 1111013640
+          session: 1111216934
           areas:
           - VISp
           - VISl
@@ -196,7 +196,7 @@ stages:
     outs:
     - path: results/CV-lag-time.pickle
       hash: md5
-      md5: c38e5cc9c1c1490f407eef8c45cbd891
+      md5: e0cad6b9afead44122f95da77e4c3f25
       size: 2077
   behav-preprocess:
     cmd: python3 -u behav-preprocessing.py
@@ -231,7 +231,7 @@ stages:
     params:
       params.yaml:
         load:
-          session: 1111013640
+          session: 1111216934
           areas:
           - VISp
           - VISl
@@ -241,8 +241,8 @@ stages:
     outs:
     - path: data/raw-area-responses/
       hash: md5
-      md5: 90173a39471e6a306b64b6be692881b9.dir
-      size: 2649600328
+      md5: a8107967f577de4cf6c4ae8ecfd60599.dir
+      size: 1649824328
       nfiles: 2
   dimensionality-reduction:
     cmd: python3 -u cv-lag-time-selection.py
