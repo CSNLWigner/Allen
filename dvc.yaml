@@ -22,32 +22,26 @@ stages:
       - load
     outs:
       - data/raw-area-responses/
-  preprocess:
-    cmd: python3 -u preprocessing.py
+  analysis:
+    cmd: python3 -u cv-time-lag-analysis.py
     deps:
-      - preprocessing.py
+      - cv-time-lag-analysis.py
       - data/raw-area-responses/
     params:
-      - preprocess
-    outs:
-      - data/area-responses/
-  analysis:
-    cmd: python3 -u rrr-score-time.py
-    deps:
-      - rrr-score-time.py
-      - data/area-responses/
-    params:
+      - load
       - preprocess
       - rrr
+      - rrr-param-search
     outs:
-      - results/rrr-score-time.pickle
+      - results/CV-lag-time.pickle
   plots:
-    cmd: python3 -u rrr-score-time-plot.py
+    cmd: python3 -u cv-time-lag-plot.py
     deps:
-      - rrr-score-time-plot.py
-      - results/rrr-score-time.pickle
+      - cv-time-lag-plot.py
+      - results/CV-lag-time.pickle
     params:
       - preprocess
       - rrr
+      - rrr-param-search
     outs:
-      - figures/rrr-score-time.png
+      - figures/rrr-param-search.png
