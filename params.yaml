@@ -22,7 +22,7 @@ load:
 preprocess:
   areas: ["VISp", "VISl"] # "VISpm" # "VISm" has no spikes
   step-size: 0.010 # time-step in seconds
-  bin-size: 0.050 # time-window in seconds # Joao's default: 0.100
+  bin-size: 0.100 # time-window in seconds # Joao's default: 0.100
   stimulus-duration: 0.250 # in seconds
 
 cca:
@@ -34,8 +34,8 @@ rrr:
   cv: 5
   rank: 18
   error-score: 'raise'
-  predictor: 'VISl'
-  target: 'VISp'
+  predictor: 'VISp'
+  target: 'VISl'
 
 rrr-plot:
   discard-first-500-ms: False
