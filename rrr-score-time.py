@@ -22,9 +22,6 @@ rrr_result = []
 mean = []
 sem  = []
 
-# Move the activity of V2 back in time by the actual time lag
-target = np.roll(target, -rrr['lag'], axis=2)
-
 # Loop through the time steps
 for time in range(T):
     

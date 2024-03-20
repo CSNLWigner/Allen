@@ -171,7 +171,7 @@ stages:
     params:
       params.yaml:
         load:
-          session: 1109889304
+          session: 1108334384
           areas:
           - VISp
           - VISl
@@ -181,8 +181,8 @@ stages:
     outs:
     - path: data/raw-area-responses/
       hash: md5
-      md5: 549c173a28edec59ebd4164e84ee51e3.dir
-      size: 2152192328
+      md5: 844f797ca01e89759d88c134f55dea93.dir
+      size: 2575480328
       nfiles: 2
   dimensionality-reduction:
     cmd: python3 -u cv-lag-time-selection.py
