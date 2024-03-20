@@ -59,7 +59,7 @@ stages:
       size: 589
     - path: results/max-ranks.pickle
       hash: md5
-      md5: d9342e887003eda3a3b932083b6ba471
+      md5: 4184064b23de731491cd643e31976660
       size: 66
     params:
       params.yaml:
@@ -75,8 +75,8 @@ stages:
     outs:
     - path: figures/max-ranks.png
       hash: md5
-      md5: 04d9052f437cda1076ef1d9a9c44f9af
-      size: 12269
+      md5: 285e3ef49377b7b39dbd4642afddbfe2
+      size: 14926
   time_lag_analysis:
     cmd: python3 -u time_lag_analysis.py
     deps:
@@ -107,8 +107,8 @@ stages:
     deps:
     - path: data/raw-area-responses/
       hash: md5
-      md5: df68177328b5724e5cdb798048b81612.dir
-      size: 892056328
+      md5: 90173a39471e6a306b64b6be692881b9.dir
+      size: 2649600328
       nfiles: 2
     - path: rank-along-time-analysis.py
       hash: md5
@@ -117,7 +117,7 @@ stages:
     params:
       params.yaml:
         load:
-          session: 1112515874
+          session: 1111013640
           areas:
           - VISp
           - VISl
@@ -135,7 +135,7 @@ stages:
           stimulus-duration: 0.25
         rrr:
           cv: 2
-          rank: 12
+          rank: 16
           error-score: raise
           predictor: VISp
           target: VISl
@@ -169,7 +169,7 @@ stages:
     outs:
     - path: results/max-ranks.pickle
       hash: md5
-      md5: d9342e887003eda3a3b932083b6ba471
+      md5: 4184064b23de731491cd643e31976660
       size: 66
   behav-preprocess:
     cmd: python3 -u behav-preprocessing.py
@@ -204,7 +204,7 @@ stages:
     params:
       params.yaml:
         load:
-          session: 1112515874
+          session: 1111013640
           areas:
           - VISp
           - VISl
@@ -214,8 +214,8 @@ stages:
     outs:
     - path: data/raw-area-responses/
       hash: md5
-      md5: df68177328b5724e5cdb798048b81612.dir
-      size: 892056328
+      md5: 90173a39471e6a306b64b6be692881b9.dir
+      size: 2649600328
       nfiles: 2
   dimensionality-reduction:
     cmd: python3 -u cv-lag-time-selection.py
