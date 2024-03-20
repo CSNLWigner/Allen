@@ -51,16 +51,16 @@ stages:
       md5: 602969e22ae61fd2082ce408273d3275
       size: 360803
   plots:
-    cmd: python3 -u rank-along-time-plot.py
+    cmd: python3 -u cv-time-lag-plot.py
     deps:
-    - path: rank-along-time-plot.py
+    - path: cv-time-lag-plot.py
       hash: md5
-      md5: b4b459a686616b647295ed234b9354f8
-      size: 589
-    - path: results/max-ranks.pickle
+      md5: 94c99302fd551b26e4a997234af1fcbb
+      size: 1767
+    - path: results/CV-lag-time.pickle
       hash: md5
-      md5: 4184064b23de731491cd643e31976660
-      size: 66
+      md5: 85dc0974d970947487953ee8d9f1c01d
+      size: 282
     params:
       params.yaml:
         preprocess:
@@ -72,11 +72,37 @@ stages:
           step-size: 0.01
           bin-size: 0.1
           stimulus-duration: 0.25
+        rrr:
+          cv: 2
+          rank: 16
+          error-score: raise
+          predictor: VISl
+          target: VISp
+        rrr-param-search:
+          cv:
+          - 2
+          rank:
+          - 16
+          lag:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          timepoints:
+          - 0
+          - 100
+          duration: 0.25
+          time-bin: 0.05
+          time-step: 0.025
     outs:
-    - path: figures/max-ranks.png
+    - path: figures/rrr-param-search.png
       hash: md5
-      md5: 285e3ef49377b7b39dbd4642afddbfe2
-      size: 14926
+      md5: bc6f530af92fc976b553adcd2f1a783e
+      size: 86050
   time_lag_analysis:
     cmd: python3 -u time_lag_analysis.py
     deps:
@@ -103,17 +129,17 @@ stages:
       md5: 3ab7d9da547a0cfffcdb0b7bf2eec32f
       size: 20152
   analysis:
-    cmd: python3 -u rank-along-time-analysis.py
+    cmd: python3 -u cv-time-lag-analysis.py
     deps:
+    - path: cv-time-lag-analysis.py
+      hash: md5
+      md5: 32b1f1619d28503d247a5e96de824f1d
+      size: 3811
     - path: data/raw-area-responses/
       hash: md5
       md5: 90173a39471e6a306b64b6be692881b9.dir
       size: 2649600328
       nfiles: 2
-    - path: rank-along-time-analysis.py
-      hash: md5
-      md5: 0c12019496e42bf8c10dcba2a8d6a9d8
-      size: 2205
     params:
       params.yaml:
         load:
@@ -142,24 +168,17 @@ stages:
         rrr-param-search:
           cv:
           - 2
+          rank:
+          - 16
+          lag:
+          - 0
+          - 1
+          - 2
           - 3
           - 4
           - 5
-          rank:
-          - 2
-          - 4
           - 6
-          - 8
-          - 10
-          - 12
-          - 14
-          - 16
-          - 18
-          - 20
-          lag:
-          - 0
-          - 3
-          - 6
+          - 7
           timepoints:
           - 0
           - 100
@@ -167,10 +186,10 @@ stages:
           time-bin: 0.05
           time-step: 0.025
     outs:
-    - path: results/max-ranks.pickle
+    - path: results/CV-lag-time.pickle
       hash: md5
-      md5: 4184064b23de731491cd643e31976660
-      size: 66
+      md5: 85dc0974d970947487953ee8d9f1c01d
+      size: 282
   behav-preprocess:
     cmd: python3 -u behav-preprocessing.py
     deps:

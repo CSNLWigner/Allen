@@ -23,9 +23,9 @@ stages:
     outs:
       - data/raw-area-responses/
   analysis:
-    cmd: python3 -u rank-along-time-analysis.py
+    cmd: python3 -u cv-time-lag-analysis.py
     deps:
-      - rank-along-time-analysis.py
+      - cv-time-lag-analysis.py
       - data/raw-area-responses/
     params:
       - load
@@ -33,13 +33,15 @@ stages:
       - rrr
       - rrr-param-search
     outs:
-      - results/max-ranks.pickle
+      - results/CV-lag-time.pickle
   plots:
-    cmd: python3 -u rank-along-time-plot.py
+    cmd: python3 -u cv-time-lag-plot.py
     deps:
-      - rank-along-time-plot.py
-      - results/max-ranks.pickle
+      - cv-time-lag-plot.py
+      - results/CV-lag-time.pickle
     params:
       - preprocess
+      - rrr
+      - rrr-param-search
     outs:
-      - figures/max-ranks.png
+      - figures/rrr-param-search.png
