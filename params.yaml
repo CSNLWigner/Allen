@@ -33,11 +33,11 @@ cca:
   scoring: 'r2'
 
 rrr:
-  cv: 3
-  rank: 18
+  cv: 2
+  rank: 14
   error-score: 'raise'
-  predictor: 'VISp'
-  target: 'VISl'
+  predictor: 'VISl'
+  target: 'VISp'
 
 rrr-plot:
   discard-first-500-ms: False
