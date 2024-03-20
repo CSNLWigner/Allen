@@ -57,7 +57,7 @@ stages:
       size: 1767
     - path: results/CV-lag-time.pickle
       hash: md5
-      md5: 5a198da83da7ddd38cd0e27ebe423821
+      md5: 5cf0bfb6098ab6b41fb344a09957ee53
       size: 2077
     params:
       params.yaml:
@@ -72,8 +72,8 @@ stages:
           cv: 3
           rank: 18
           error-score: raise
-          predictor: VISl
-          target: VISp
+          predictor: VISp
+          target: VISl
         rrr-param-search:
           cv:
           - 2
@@ -104,8 +104,8 @@ stages:
     outs:
     - path: figures/rrr-param-search.png
       hash: md5
-      md5: 13fd0d12c56cbdcc56c7edb8ef884391
-      size: 96033
+      md5: 0eb0ab3853476f8b8cc82db3f1894482
+      size: 90312
   time_lag_analysis:
     cmd: python3 -u time_lag_analysis.py
     deps:
@@ -164,8 +164,8 @@ stages:
           cv: 3
           rank: 18
           error-score: raise
-          predictor: VISl
-          target: VISp
+          predictor: VISp
+          target: VISl
         rrr-param-search:
           cv:
           - 2
@@ -196,7 +196,7 @@ stages:
     outs:
     - path: results/CV-lag-time.pickle
       hash: md5
-      md5: 5a198da83da7ddd38cd0e27ebe423821
+      md5: 5cf0bfb6098ab6b41fb344a09957ee53
       size: 2077
   behav-preprocess:
     cmd: python3 -u behav-preprocessing.py
