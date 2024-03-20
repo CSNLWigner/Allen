@@ -137,8 +137,8 @@ stages:
           cv: 2
           rank: 16
           error-score: raise
-          predictor: VISp
-          target: VISl
+          predictor: VISl
+          target: VISp
         rrr-param-search:
           cv:
           - 2
