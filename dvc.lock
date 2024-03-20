@@ -51,16 +51,16 @@ stages:
       md5: 602969e22ae61fd2082ce408273d3275
       size: 360803
   plots:
-    cmd: python3 -u rrr-score-time-plot.py
+    cmd: python3 -u rank-along-time-plot.py
     deps:
-    - path: results/rrr-score-time.pickle
+    - path: rank-along-time-plot.py
       hash: md5
-      md5: e9e69c4a301ff88cdb89751ec1fef8ce
-      size: 1087
-    - path: rrr-score-time-plot.py
+      md5: 4bf8443bdd18303d5d0c007584071c92
+      size: 757
+    - path: results/max-ranks.pickle
       hash: md5
-      md5: 2d6df910b19eb3bd14cf6e820cd9ca4a
-      size: 484
+      md5: c0e64a232f2822d271bb1053af4e4f54
+      size: 66
     params:
       params.yaml:
         preprocess:
@@ -72,17 +72,11 @@ stages:
           step-size: 0.01
           bin-size: 0.1
           stimulus-duration: 0.25
-        rrr:
-          cv: 2
-          rank: 16
-          error-score: raise
-          predictor: VISl
-          target: VISp
     outs:
-    - path: figures/rrr-score-time.png
+    - path: figures/max-ranks.png
       hash: md5
-      md5: 0168db45eb81d7b5582d162e10fd812f
-      size: 38193
+      md5: f4137f9f44ee5d4df65f46524d8350d8
+      size: 14629
   time_lag_analysis:
     cmd: python3 -u time_lag_analysis.py
     deps:
@@ -109,19 +103,27 @@ stages:
       md5: 3ab7d9da547a0cfffcdb0b7bf2eec32f
       size: 20152
   analysis:
-    cmd: python3 -u rrr-score-time.py
+    cmd: python3 -u rank-along-time-analysis.py
     deps:
-    - path: data/area-responses/
+    - path: data/raw-area-responses/
       hash: md5
-      md5: 04f91c128616ea9e82ff228fe6e8d2f1.dir
-      size: 264960328
+      md5: 844f797ca01e89759d88c134f55dea93.dir
+      size: 2575480328
       nfiles: 2
-    - path: rrr-score-time.py
+    - path: rank-along-time-analysis.py
       hash: md5
-      md5: fb6ee1ccf33cf0b3ee33910b8886c3c2
-      size: 1238
+      md5: 0c12019496e42bf8c10dcba2a8d6a9d8
+      size: 2205
     params:
       params.yaml:
+        load:
+          session: 1108334384
+          areas:
+          - VISp
+          - VISl
+          stimulus-block: 5
+          step-size: 0.001
+          stimulus-duration: 0.25
         preprocess:
           areas:
           - VISp
@@ -132,16 +134,43 @@ stages:
           bin-size: 0.1
           stimulus-duration: 0.25
         rrr:
-          cv: 2
-          rank: 16
+          cv: 3
+          rank: 18
           error-score: raise
-          predictor: VISl
-          target: VISp
+          predictor: VISp
+          target: VISl
+        rrr-param-search:
+          cv:
+          - 2
+          - 3
+          - 4
+          - 5
+          rank:
+          - 2
+          - 4
+          - 6
+          - 8
+          - 10
+          - 12
+          - 14
+          - 16
+          - 18
+          - 20
+          lag:
+          - 0
+          - 3
+          - 6
+          timepoints:
+          - 0
+          - 100
+          duration: 0.25
+          time-bin: 0.05
+          time-step: 0.025
     outs:
-    - path: results/rrr-score-time.pickle
+    - path: results/max-ranks.pickle
       hash: md5
-      md5: e9e69c4a301ff88cdb89751ec1fef8ce
-      size: 1087
+      md5: c0e64a232f2822d271bb1053af4e4f54
+      size: 66
   behav-preprocess:
     cmd: python3 -u behav-preprocessing.py
     deps:
@@ -175,7 +204,7 @@ stages:
     params:
       params.yaml:
         load:
-          session: 1111013640
+          session: 1108334384
           areas:
           - VISp
           - VISl
@@ -185,8 +214,8 @@ stages:
     outs:
     - path: data/raw-area-responses/
       hash: md5
-      md5: 90173a39471e6a306b64b6be692881b9.dir
-      size: 2649600328
+      md5: 844f797ca01e89759d88c134f55dea93.dir
+      size: 2575480328
       nfiles: 2
   dimensionality-reduction:
     cmd: python3 -u cv-lag-time-selection.py

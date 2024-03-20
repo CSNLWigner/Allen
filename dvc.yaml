@@ -22,32 +22,24 @@ stages:
       - load
     outs:
       - data/raw-area-responses/
-  preprocess:
-    cmd: python3 -u preprocessing.py
+  analysis:
+    cmd: python3 -u rank-along-time-analysis.py
     deps:
-      - preprocessing.py
+      - rank-along-time-analysis.py
       - data/raw-area-responses/
     params:
-      - preprocess
-    outs:
-      - data/area-responses/
-  analysis:
-    cmd: python3 -u rrr-score-time.py
-    deps:
-      - rrr-score-time.py
-      - data/area-responses/
-    params:
+      - load
       - preprocess
       - rrr
+      - rrr-param-search
     outs:
-      - results/rrr-score-time.pickle
+      - results/max-ranks.pickle
   plots:
-    cmd: python3 -u rrr-score-time-plot.py
+    cmd: python3 -u rank-along-time-plot.py
     deps:
-      - rrr-score-time-plot.py
-      - results/rrr-score-time.pickle
+      - rank-along-time-plot.py
+      - results/max-ranks.pickle
     params:
       - preprocess
-      - rrr
     outs:
-      - figures/rrr-score-time.png
+      - figures/max-ranks.png
