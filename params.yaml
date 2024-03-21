@@ -8,7 +8,7 @@ neuropixel:
   block: "active behavior"
 
 load:
-  session: 1112302803
+  session: 1108334384
   areas: ["VISp", "VISl"] # "VISpm" # "VISm" has no spikes
   stimulus-block: 5
   # Stimulus blocks:
@@ -33,8 +33,8 @@ cca:
   scoring: 'r2'
 
 rrr:
-  cv: 2
-  rank: 14
+  cv: 3
+  rank: 18
   error-score: 'raise'
   predictor: 'VISp'
   target: 'VISl'
