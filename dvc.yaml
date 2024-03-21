@@ -23,25 +23,24 @@ stages:
     outs:
       - data/raw-area-responses/
   analysis:
-    cmd: python3 -u cv-time-lag-analysis.py
+    cmd: python3 -u time-lag-search-analysis.py
     deps:
-      - cv-time-lag-analysis.py
+      - time-lag-search-analysis.py
       - data/raw-area-responses/
     params:
       - load
       - preprocess
       - rrr
       - rrr-param-search
+      - best-rrr-params
     outs:
-      - results/CV-lag-time.pickle
+      - results/time-lag-search.pickle
   plots:
-    cmd: python3 -u cv-time-lag-plot.py
+    cmd: python3 -u time-lag-search-plot.py
     deps:
-      - cv-time-lag-plot.py
-      - results/CV-lag-time.pickle
+      - time-lag-search-plot.py
+      - results/time-lag-search.pickle
     params:
-      - preprocess
-      - rrr
       - rrr-param-search
     outs:
-      - figures/rrr-param-search.png
+      - figures/time-lag-search.png
