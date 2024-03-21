@@ -36,8 +36,8 @@ rrr:
   cv: 3
   rank: 18
   error-score: 'raise'
-  predictor: 'VISp'
-  target: 'VISl'
+  predictor: 'VISl'
+  target: 'VISp'
 
 rrr-plot:
   discard-first-500-ms: False
@@ -45,7 +45,7 @@ rrr-plot:
 rrr-param-search:
   cv: [3]
   rank: [14]
-  lag: [0,5,10,15,20,25,30,35,40,45,50]
+  lag: [0,5,10,15,20,25,30,35]
   timepoints: [0,100]
   duration: 0.250
   time-bin: 0.050
