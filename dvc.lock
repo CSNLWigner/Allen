@@ -59,8 +59,8 @@ stages:
       size: 1767
     - path: results/CV-lag-time.pickle
       hash: md5
-      md5: d9556e3a701d0e70ac983ccced76ed6d
-      size: 413
+      md5: f3df4d41c67a6e999aa690ca1ad5cf54
+      size: 282
     params:
       params.yaml:
         preprocess:
@@ -80,10 +80,9 @@ stages:
           target: VISp
         rrr-param-search:
           cv:
-          - 2
+          - 3
           rank:
-          - 14
-          - 16
+          - 12
           lag:
           - 0
           - 1
@@ -102,8 +101,8 @@ stages:
     outs:
     - path: figures/rrr-param-search.png
       hash: md5
-      md5: 7e9ca4d556954fbe8fe7396df5c8a1bc
-      size: 83475
+      md5: fb294d0bf1bf2c6448767a8b96a0174e
+      size: 89344
   time_lag_analysis:
     cmd: python3 -u time_lag_analysis.py
     deps:
@@ -138,13 +137,13 @@ stages:
       size: 3811
     - path: data/raw-area-responses/
       hash: md5
-      md5: 844f797ca01e89759d88c134f55dea93.dir
-      size: 2575480328
+      md5: df68177328b5724e5cdb798048b81612.dir
+      size: 892056328
       nfiles: 2
     params:
       params.yaml:
         load:
-          session: 1108334384
+          session: 1112515874
           areas:
           - VISp
           - VISl
@@ -168,10 +167,9 @@ stages:
           target: VISp
         rrr-param-search:
           cv:
-          - 2
+          - 3
           rank:
-          - 14
-          - 16
+          - 12
           lag:
           - 0
           - 1
@@ -190,8 +188,8 @@ stages:
     outs:
     - path: results/CV-lag-time.pickle
       hash: md5
-      md5: d9556e3a701d0e70ac983ccced76ed6d
-      size: 413
+      md5: f3df4d41c67a6e999aa690ca1ad5cf54
+      size: 282
   behav-preprocess:
     cmd: python3 -u behav-preprocessing.py
     deps:
@@ -225,7 +223,7 @@ stages:
     params:
       params.yaml:
         load:
-          session: 1108334384
+          session: 1112515874
           areas:
           - VISp
           - VISl
@@ -235,8 +233,8 @@ stages:
     outs:
     - path: data/raw-area-responses/
       hash: md5
-      md5: 844f797ca01e89759d88c134f55dea93.dir
-      size: 2575480328
+      md5: df68177328b5724e5cdb798048b81612.dir
+      size: 892056328
       nfiles: 2
   dimensionality-reduction:
     cmd: python3 -u cv-lag-time-selection.py
