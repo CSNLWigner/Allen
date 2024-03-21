@@ -36,8 +36,8 @@ rrr:
   cv: 3
   rank: 18
   error-score: 'raise'
-  predictor: 'VISl'
-  target: 'VISp'
+  predictor: 'VISp'
+  target: 'VISl'
 
 rrr-plot:
   discard-first-500-ms: False
