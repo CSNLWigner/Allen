@@ -15,8 +15,8 @@ lags = load_pickle('time-lag-search')
 
 # Plot the max ranks
 plt.plot(lag_times, lags)
-plt.xlabel('Time (s)')
-plt.ylabel('Optimal rank')
+plt.xlabel('Lag (s)')
+plt.ylabel('R^2')
 plt.xticks(lag_times[::2], lag_times[::2])
 
 # Save the figure
