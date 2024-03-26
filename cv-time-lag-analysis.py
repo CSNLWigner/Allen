@@ -54,7 +54,7 @@ def calculate_something():
         target = preprocess_area_responses(full_activity_target)
         
         # Move the activity of V2 back in time by the actual time lag
-        target = np.roll(target, -lag, axis=2)
+        lagged_target = np.roll(target, -lag, axis=2)
                 
         for i, c in enumerate(cv):
             for k, r in enumerate(rank):
@@ -63,7 +63,7 @@ def calculate_something():
                     # Reduced Rank Regression
                     # print(f'Cross-validation: {c}, Time lag: {lag}')
                     # result = RRRR(V1.mean(axis=0), V2.mean(axis=0), params['rank'], cv=c) # cross-time RRRR
-                    result = RRRR(predictor[:,:,t].T, target[:,:,t].T, rank=r, cv=c)
+                    result = RRRR(predictor[:,:,t].T, lagged_target[:,:,t].T, rank=r, cv=c)
                     
                     # Save the result averaged over the folds
                     results[i, j, k, t] = result['test_score'].mean()
