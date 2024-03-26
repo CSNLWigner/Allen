@@ -8,7 +8,7 @@ import yaml
 search_params = yaml.safe_load(open('params.yaml'))['rrr-param-search']
 
 # Define the timepoints
-lag_times = search_params['lag']
+lag_times = np.arange(0, 50, 1)
 
 # Load max ranks
 lags = load_pickle('time-lag-search')
@@ -17,7 +17,7 @@ lags = load_pickle('time-lag-search')
 plt.plot(lag_times, lags)
 plt.xlabel('Lag (s)')
 plt.ylabel('R^2')
-plt.xticks(lag_times[::2], lag_times[::2])
+plt.xticks(lag_times[::5], lag_times[::5])
 
 # Save the figure
 plt.savefig('figures/time-lag-search.png')

@@ -99,3 +99,46 @@ A lambda function is an anonymous function that can be defined in a single line.
 
 On the other hand, the regular function get_time is defined using the def keyword. It also takes two arguments time_bin and bin_size, and returns the result of rounding time_bin * bin_size to 3 decimal places.
 """
+
+
+def shift_with_nans(arr, shift, axis=2, constant=np.nan):
+    """
+    Shifts the elements of a numpy array along a specified axis by padding with NaNs.
+
+    Args:
+        arr (np.ndarray): The input array.
+        shift (int): The number of positions to shift the elements. Positive values shift to the right, negative values shift to the left.
+        axis (int): The axis along which to shift the elements. Default is 2.
+        constant (int): The value to use for padding. Default is np.nan.
+
+    Returns:
+        np.ndarray: The shifted array.
+
+    Example:
+        # Create a 2D array
+        arr = np.array([[1, 2, 3], [4, 5, 6]])
+
+        # Shift the elements by 1 position to the right along axis 1
+        shifted_arr = shift_with_nans(arr, 1, axis=1)
+        print(shifted_arr)
+        # Output: [[nan 1 2]
+        #          [nan 4 5]]
+
+        # Shift the elements by 2 positions to the left along axis 0
+        shifted_arr = shift_with_nans(arr, -2, axis=0)
+        print(shifted_arr)
+        # Output: [[nan nan nan]
+        #          [nan nan nan]
+        #          [1 2 3]
+        #          [4 5 6]]
+    """
+    padding = [(0, 0) for _ in range(arr.ndim)]
+    if shift > 0:
+        padding[axis] = (shift, 0)
+    else:
+        padding[axis] = (0, -shift)
+    arr = np.pad(arr, padding, mode='constant', constant_values=constant)
+    slices = [slice(None) if i != axis else slice(None, -shift) if shift > 0 else slice(-shift, None) for i in range(arr.ndim)]
+    return arr[tuple(slices)]
+
+
