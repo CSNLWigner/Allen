@@ -7,11 +7,12 @@ import yaml
 # Load parameters
 search_params = yaml.safe_load(open('params.yaml'))['rrr-param-search']
 
-# Define the timepoints
-lag_times = np.arange(0, 50, 1)
 
 # Load max ranks
 lags = load_pickle('time-lag-search')
+
+# Define the timepoints
+lag_times = len(lags)
 
 # Plot the max ranks
 plt.plot(lag_times, lags)
