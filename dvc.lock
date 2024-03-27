@@ -55,7 +55,7 @@ stages:
     deps:
     - path: results/time-lag-search.pickle
       hash: md5
-      md5: 9ef04703dc933060885ecb873372e81c
+      md5: e7d2b95c19d589575ff660e3347082c0
       size: 405
     - path: time-lag-search-plot.py
       hash: md5
@@ -94,8 +94,8 @@ stages:
     outs:
     - path: figures/time-lag-search.png
       hash: md5
-      md5: 92899f9fa81133b28ad9ba03e85318b5
-      size: 19224
+      md5: 7676efa971b231695db56aed27808e06
+      size: 19012
   time_lag_analysis:
     cmd: python3 -u time_lag_analysis.py
     deps:
@@ -185,8 +185,8 @@ stages:
           cv: 3
           rank: 18
           error-score: raise
-          predictor: VISl
-          target: VISp
+          predictor: VISp
+          target: VISl
           timepoint: 0.05
         rrr-param-search:
           cv:
@@ -219,7 +219,7 @@ stages:
     outs:
     - path: results/time-lag-search.pickle
       hash: md5
-      md5: 9ef04703dc933060885ecb873372e81c
+      md5: e7d2b95c19d589575ff660e3347082c0
       size: 405
   behav-preprocess:
     cmd: python3 -u behav-preprocessing.py
