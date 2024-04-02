@@ -126,8 +126,8 @@ stages:
     deps:
     - path: data/raw-area-responses/
       hash: md5
-      md5: df68177328b5724e5cdb798048b81612.dir
-      size: 892056328
+      md5: 90173a39471e6a306b64b6be692881b9.dir
+      size: 2649600328
       nfiles: 2
     - path: lag-along-time-analysis.py
       hash: md5
@@ -165,7 +165,7 @@ stages:
               cv: 2
               rank: 14
         load:
-          session: 1112515874
+          session: 1111013640
           areas:
           - VISp
           - VISl
@@ -185,8 +185,8 @@ stages:
           cv: 3
           rank: 18
           error-score: raise
-          predictor: VISl
-          target: VISp
+          predictor: VISp
+          target: VISl
           timepoint: 0.05
         rrr-param-search:
           cv:
@@ -219,11 +219,11 @@ stages:
     outs:
     - path: results/lags-along-time.pickle
       hash: md5
-      md5: 2858d5b66b667cd077748bc00d7703b3
+      md5: f79f636a7626e3434f9f00e7916b90c2
       size: 3352
     - path: results/max-lags-along-time.pickle
       hash: md5
-      md5: 72a20e46fb1fefe6e9c707e455cdaa53
+      md5: a13af1906e11ca1a3cb44805d5f63fe8
       size: 46
   behav-preprocess:
     cmd: python3 -u behav-preprocessing.py
@@ -258,7 +258,7 @@ stages:
     params:
       params.yaml:
         load:
-          session: 1112515874
+          session: 1111013640
           areas:
           - VISp
           - VISl
@@ -268,8 +268,8 @@ stages:
     outs:
     - path: data/raw-area-responses/
       hash: md5
-      md5: df68177328b5724e5cdb798048b81612.dir
-      size: 892056328
+      md5: 90173a39471e6a306b64b6be692881b9.dir
+      size: 2649600328
       nfiles: 2
   dimensionality-reduction:
     cmd: python3 -u cv-lag-time-selection.py
@@ -300,7 +300,7 @@ stages:
       size: 962
     - path: results/lags-along-time.pickle
       hash: md5
-      md5: 2858d5b66b667cd077748bc00d7703b3
+      md5: f79f636a7626e3434f9f00e7916b90c2
       size: 3352
     params:
       params.yaml:
@@ -344,8 +344,8 @@ stages:
     outs:
     - path: figures/lags-along-time.png
       hash: md5
-      md5: 3370bce73f0f3b43c2b8072220b46d05
-      size: 17736
+      md5: c46f8553a42749dd33547a88d07379a2
+      size: 18573
   plot:
     cmd: python3 -u max-lags-along-time-plot.py
     deps:
@@ -355,7 +355,7 @@ stages:
       size: 647
     - path: results/max-lags-along-time.pickle
       hash: md5
-      md5: 72a20e46fb1fefe6e9c707e455cdaa53
+      md5: a13af1906e11ca1a3cb44805d5f63fe8
       size: 46
     params:
       params.yaml:
@@ -399,5 +399,5 @@ stages:
     outs:
     - path: figures/max-lags-along-time.png
       hash: md5
-      md5: eef12fba3a8a01db2671ed7867daf395
-      size: 14584
+      md5: 391653f1a92577c47a26d9710caa50e7
+      size: 16100
