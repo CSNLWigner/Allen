@@ -143,7 +143,7 @@ def shift_with_nans(arr, shift, axis=2, constant=np.nan):
 
 
 # Print iterations progress
-def printProgressBar(iteration, total, prefix='', suffix='', decimals=1, length=100, fill='█', printEnd="\r"):
+def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, length = 100, fill = '█', printEnd = "\r", onComplete='delete'):
     """
     Call in a loop to create terminal progress bar
     @params:
@@ -155,12 +155,18 @@ def printProgressBar(iteration, total, prefix='', suffix='', decimals=1, length=
         length      - Optional  : character length of bar (Int)
         fill        - Optional  : bar fill character (Str)
         printEnd    - Optional  : end character (e.g. "\r", "\r\n") (Str)
+        onComplete  - Optional  : what to do when the progress is complete () (Str)
     """
-    percent = ("{0:." + str(decimals) + "f}").format(100 *
-                                                     (iteration / float(total)))
+    percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
     filledLength = int(length * iteration // total)
     bar = fill * filledLength + '-' * (length - filledLength)
-    print(f'\r{prefix} |{bar}| {percent}% {suffix}', end=printEnd)
-    # Print New Line on Complete
-    if iteration == total:
-        print()
+    print(f'\r{prefix} |{bar}| {percent}% {suffix}', end = printEnd)
+    
+    # Complete
+    if iteration == total: 
+        
+        if onComplete == 'delete':
+            print(' '*len(prefix) + ' '*len(suffix) + ' '*len(percent) + ' '*length + '      ', end=printEnd)
+        
+        if onComplete == 'newline':
+            print()
