@@ -23,9 +23,9 @@ stages:
     outs:
       - data/raw-area-responses/
   analysis:
-    cmd: python3 -u time-lag-search-analysis.py
+    cmd: python3 -u lag-along-time-analysis.py
     deps:
-      - time-lag-search-analysis.py
+      - lag-along-time-analysis.py
       - data/raw-area-responses/
     params:
       - load
@@ -34,13 +34,25 @@ stages:
       - rrr-param-search
       - best-rrr-params
     outs:
-      - results/time-lag-search.pickle
-  plots:
-    cmd: python3 -u time-lag-search-plot.py
+      - results/lags-along-time.pickle
+      - results/max-lags-along-time.pickle
+  imshow:
+    cmd: python3 -u lags-along-time-plot.py
     deps:
-      - time-lag-search-plot.py
-      - results/time-lag-search.pickle
+      - lags-along-time-plot.py
+      - results/lags-along-time.pickle
     params:
+      - preprocess
       - rrr-param-search
     outs:
-      - figures/time-lag-search.png
+      - figures/lags-along-time.png
+  plot:
+    cmd: python3 -u max-lags-along-time-plot.py
+    deps:
+      - max-lags-along-time-plot.py
+      - results/max-lags-along-time.pickle
+    params:
+      - preprocess
+      - rrr-param-search
+    outs:
+      - figures/max-lags-along-time.png

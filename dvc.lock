@@ -122,17 +122,17 @@ stages:
       md5: 3ab7d9da547a0cfffcdb0b7bf2eec32f
       size: 20152
   analysis:
-    cmd: python3 -u time-lag-search-analysis.py
+    cmd: python3 -u lag-along-time-analysis.py
     deps:
     - path: data/raw-area-responses/
       hash: md5
-      md5: 10ef5583a11378b08328263dc56b10de.dir
-      size: 2475768328
+      md5: 90173a39471e6a306b64b6be692881b9.dir
+      size: 2649600328
       nfiles: 2
-    - path: time-lag-search-analysis.py
+    - path: lag-along-time-analysis.py
       hash: md5
-      md5: 3e2ee0e311383e6cd325997506673ea0
-      size: 2808
+      md5: b296c10203f9391efe928e884f52f5b5
+      size: 3053
     params:
       params.yaml:
         best-rrr-params:
@@ -165,7 +165,7 @@ stages:
               cv: 2
               rank: 14
         load:
-          session: 1112302803
+          session: 1111013640
           areas:
           - VISp
           - VISl
@@ -217,10 +217,14 @@ stages:
           time-bin: 0.05
           time-step: 0.025
     outs:
-    - path: results/time-lag-search.pickle
+    - path: results/lags-along-time.pickle
       hash: md5
-      md5: ceec899418606920162ad037624bf31f
-      size: 405
+      md5: 445c6597e464ba5a5a78256f50fdc22c
+      size: 3352
+    - path: results/max-lags-along-time.pickle
+      hash: md5
+      md5: c2010f55ff7730741a2a9b52a2f36a4a
+      size: 46
   behav-preprocess:
     cmd: python3 -u behav-preprocessing.py
     deps:
@@ -254,7 +258,7 @@ stages:
     params:
       params.yaml:
         load:
-          session: 1112302803
+          session: 1111013640
           areas:
           - VISp
           - VISl
@@ -264,8 +268,8 @@ stages:
     outs:
     - path: data/raw-area-responses/
       hash: md5
-      md5: 10ef5583a11378b08328263dc56b10de.dir
-      size: 2475768328
+      md5: 90173a39471e6a306b64b6be692881b9.dir
+      size: 2649600328
       nfiles: 2
   dimensionality-reduction:
     cmd: python3 -u cv-lag-time-selection.py
@@ -287,3 +291,113 @@ stages:
       hash: md5
       md5: 1416be89675e4e1240eeb07b8c5cafbb
       size: 18
+  imshow:
+    cmd: python3 -u lags-along-time-plot.py
+    deps:
+    - path: lags-along-time-plot.py
+      hash: md5
+      md5: 57e2230b96272272e4d3509ddabea466
+      size: 962
+    - path: results/lags-along-time.pickle
+      hash: md5
+      md5: 445c6597e464ba5a5a78256f50fdc22c
+      size: 3352
+    params:
+      params.yaml:
+        preprocess:
+          areas:
+          - VISp
+          - VISl
+          lag-time: 0
+          lag-area: VISl
+          step-size: 0.01
+          bin-size: 0.1
+          stimulus-duration: 0.25
+        rrr-param-search:
+          cv:
+          - 3
+          rank:
+          - 14
+          lag:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 8
+          - 10
+          - 15
+          - 20
+          - 25
+          - 30
+          - 35
+          - 40
+          - 45
+          timepoints:
+          - 0
+          - 100
+          duration: 0.25
+          time-bin: 0.05
+          time-step: 0.025
+    outs:
+    - path: figures/lags-along-time.png
+      hash: md5
+      md5: 83ace3ff1cc61619834d57c16a8825a0
+      size: 17893
+  plot:
+    cmd: python3 -u max-lags-along-time-plot.py
+    deps:
+    - path: max-lags-along-time-plot.py
+      hash: md5
+      md5: 47a786f43a2b737fbec7e749e59b2ce3
+      size: 836
+    - path: results/max-lags-along-time.pickle
+      hash: md5
+      md5: c2010f55ff7730741a2a9b52a2f36a4a
+      size: 46
+    params:
+      params.yaml:
+        preprocess:
+          areas:
+          - VISp
+          - VISl
+          lag-time: 0
+          lag-area: VISl
+          step-size: 0.01
+          bin-size: 0.1
+          stimulus-duration: 0.25
+        rrr-param-search:
+          cv:
+          - 3
+          rank:
+          - 14
+          lag:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 8
+          - 10
+          - 15
+          - 20
+          - 25
+          - 30
+          - 35
+          - 40
+          - 45
+          timepoints:
+          - 0
+          - 100
+          duration: 0.25
+          time-bin: 0.05
+          time-step: 0.025
+    outs:
+    - path: figures/max-lags-along-time.png
+      hash: md5
+      md5: a6bb32a57558a6690af778e2d8c8cb31
+      size: 17751
