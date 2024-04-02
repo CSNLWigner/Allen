@@ -326,7 +326,7 @@ def recalculate_neural_activity(neural_activity: np.ndarray, duration: float, ti
     return recalculated_activity
 
 
-def preprocess_area_responses(raw_activity, method='z-score'):
+def preprocess_area_responses(raw_activity, method='z-score', stimulus_duration=params['stimulus-duration'], step_size=params['step-size'], bin_size=params['bin-size']):
     """
     Preprocesses the raw neural activity of a specific brain area.
 
@@ -340,7 +340,7 @@ def preprocess_area_responses(raw_activity, method='z-score'):
     
     # Recalculate time steps and time bins of the full activity
     full_activity = recalculate_neural_activity(raw_activity,
-                                                params['stimulus-duration'], params['step-size'], params['bin-size'],
+                                                stimulus_duration, step_size, bin_size,
                                                 orig_time_step=load['step-size'])
 
     # Get residual activity
