@@ -194,42 +194,30 @@ stages:
           rank:
           - 14
           lag:
-          - 5
           - 10
-          - 15
           - 20
-          - 25
           - 30
-          - 35
           - 40
-          - 45
           - 50
-          - 55
           - 60
-          - 65
           - 70
-          - 75
           - 80
-          - 85
           - 90
-          - 95
           - 100
-          - 105
           - 110
-          - 115
           - 120
-          - 125
           - 130
+          - 140
           timepoints:
-          - 30
+          - 0
           duration: 0.25
           time-bin: 0.05
           time-step: 0.025
     outs:
     - path: results/cross-time-RRR.pickle
       hash: md5
-      md5: 4d5f5908f580c0b7949800d4964f9aee
-      size: 5560
+      md5: 8b0aafdadc8abe17e6a3862ba3e15097
+      size: 1720
   behav-preprocess:
     cmd: python3 -u behav-preprocessing.py
     deps:
@@ -360,8 +348,8 @@ stages:
       size: 916
     - path: results/cross-time-RRR.pickle
       hash: md5
-      md5: 4d5f5908f580c0b7949800d4964f9aee
-      size: 5560
+      md5: 8b0aafdadc8abe17e6a3862ba3e15097
+      size: 1720
     params:
       params.yaml:
         rrr-param-search:
@@ -370,39 +358,27 @@ stages:
           rank:
           - 14
           lag:
-          - 5
           - 10
-          - 15
           - 20
-          - 25
           - 30
-          - 35
           - 40
-          - 45
           - 50
-          - 55
           - 60
-          - 65
           - 70
-          - 75
           - 80
-          - 85
           - 90
-          - 95
           - 100
-          - 105
           - 110
-          - 115
           - 120
-          - 125
           - 130
+          - 140
           timepoints:
-          - 30
+          - 0
           duration: 0.25
           time-bin: 0.05
           time-step: 0.025
     outs:
     - path: figures/cross-time-RRR.png
       hash: md5
-      md5: 7ae88b83b8bb31a680b435be222ebdf9
-      size: 71586
+      md5: 3fe198750a24ff96b5e8b9d44cfc0859
+      size: 57292
