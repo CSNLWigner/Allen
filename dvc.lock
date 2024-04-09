@@ -194,20 +194,17 @@ stages:
           rank:
           - 14
           lag:
-          - 10
-          - 20
-          - 30
-          - 40
-          - 50
-          - 60
-          - 70
-          - 80
-          - 90
           - 100
+          - 105
           - 110
+          - 115
           - 120
+          - 125
           - 130
+          - 135
           - 140
+          - 145
+          - 150
           timepoints:
           - 0
           duration: 0.25
@@ -216,8 +213,8 @@ stages:
     outs:
     - path: results/cross-time-RRR.pickle
       hash: md5
-      md5: d4a978a24895a013685c81714aaea4f9
-      size: 1720
+      md5: f9d0e061857055f6219bb0bbbb770e86
+      size: 1120
   behav-preprocess:
     cmd: python3 -u behav-preprocessing.py
     deps:
@@ -348,8 +345,8 @@ stages:
       size: 1058
     - path: results/cross-time-RRR.pickle
       hash: md5
-      md5: d4a978a24895a013685c81714aaea4f9
-      size: 1720
+      md5: f9d0e061857055f6219bb0bbbb770e86
+      size: 1120
     params:
       params.yaml:
         rrr-param-search:
@@ -358,20 +355,17 @@ stages:
           rank:
           - 14
           lag:
-          - 10
-          - 20
-          - 30
-          - 40
-          - 50
-          - 60
-          - 70
-          - 80
-          - 90
           - 100
+          - 105
           - 110
+          - 115
           - 120
+          - 125
           - 130
+          - 135
           - 140
+          - 145
+          - 150
           timepoints:
           - 0
           duration: 0.25
@@ -380,5 +374,5 @@ stages:
     outs:
     - path: figures/cross-time-RRR.png
       hash: md5
-      md5: d898b87bce42b9f076ae04a6fc6fea4d
-      size: 66006
+      md5: 1d247931dcf1cff8df7d84060a74f433
+      size: 59522
