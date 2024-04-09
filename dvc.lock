@@ -126,8 +126,8 @@ stages:
     deps:
     - path: crosstime-analysis.py
       hash: md5
-      md5: 4a9ff2267644c2bd00683d53edac66ee
-      size: 2494
+      md5: 93a883b2b75e40a092d94c3ccf64a61a
+      size: 2519
     - path: data/raw-area-responses/
       hash: md5
       md5: 844f797ca01e89759d88c134f55dea93.dir
@@ -185,8 +185,8 @@ stages:
           cv: 3
           rank: 18
           error-score: raise
-          predictor: VISp
-          target: VISl
+          predictor: VISl
+          target: VISp
           timepoint: 0.05
         rrr-param-search:
           cv:
@@ -213,7 +213,7 @@ stages:
     outs:
     - path: results/cross-time-RRR.pickle
       hash: md5
-      md5: 23c196c40906a20b2d33eb1ab8381392
+      md5: 45d06cf58e4a10a17509238dc1a147e5
       size: 36064
   behav-preprocess:
     cmd: python3 -u behav-preprocessing.py
@@ -345,7 +345,7 @@ stages:
       size: 1205
     - path: results/cross-time-RRR.pickle
       hash: md5
-      md5: 23c196c40906a20b2d33eb1ab8381392
+      md5: 45d06cf58e4a10a17509238dc1a147e5
       size: 36064
     params:
       params.yaml:
@@ -374,5 +374,5 @@ stages:
     outs:
     - path: figures/cross-time-RRR.png
       hash: md5
-      md5: 7342e1bf6751379c2eb99ff58d7a2201
-      size: 89329
+      md5: df4ea70f9361383a372a39e538dbe7ee
+      size: 94784
