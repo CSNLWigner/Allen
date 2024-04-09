@@ -21,7 +21,7 @@ timeseries = np.array(search['lag'])
 timeseries = timeseries + search['timepoints'][0]
 
 # Plot the matrix. colormap do not use white color. Make the resolution higher.
-plt.imshow(matrix, cmap='viridis', interpolation='bilinear')
+plt.imshow(matrix, cmap='hsv', interpolation='bilinear')
 plt.xticks(range(timeseries.shape[0]), timeseries)
 plt.yticks(range(timeseries.shape[0]), timeseries)
 plt.colorbar()

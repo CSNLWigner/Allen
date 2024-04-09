@@ -344,8 +344,8 @@ stages:
     deps:
     - path: crosstime-plot.py
       hash: md5
-      md5: 7f19a6dcc3b146f66fc92255d7405a4a
-      size: 916
+      md5: 93fb0be9b76c87ed5852b566f84f738a
+      size: 912
     - path: results/cross-time-RRR.pickle
       hash: md5
       md5: 317128f92001909f140c939ce630ba3f
@@ -380,5 +380,5 @@ stages:
     outs:
     - path: figures/cross-time-RRR.png
       hash: md5
-      md5: c13cffd1713fd0d22125a5765a2a2027
-      size: 56333
+      md5: 6e57543f8554a054119e446c4bf9bcff
+      size: 48061
