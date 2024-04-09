@@ -11,14 +11,17 @@ search = yaml.safe_load(open("params.yaml"))["rrr-param-search"]
 # Load cross-time-RRR from results
 matrix = load_pickle("cross-time-RRR", path="results")
 
+# The diagonal of the matrix should be nan
+np.fill_diagonal(matrix, np.nan)
+
 # timeseries = np.arange(0, preprocess["stimulus-duration"], search['lag']/1000)
 timeseries = np.array(search['lag'])
 
 # Add the first timepoint to each element in timeseries
 timeseries = timeseries + search['timepoints'][0]
 
-# Plot the matrix
-plt.imshow(matrix, cmap='hot', interpolation='nearest')
+# Plot the matrix. colormap do not use white color
+plt.imshow(matrix, cmap='viridis', interpolation='nearest')
 plt.xticks(range(timeseries.shape[0]), timeseries)
 plt.yticks(range(timeseries.shape[0]), timeseries)
 plt.colorbar()
