@@ -143,30 +143,38 @@ def shift_with_nans(arr, shift, axis=2, constant=np.nan):
 
 
 # Print iterations progress
-def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, length = 100, fill = '█', printEnd = "\r", onComplete='delete'):
+def printProgressBar(iteration, total, prefix='', suffix='', decimals=1, length=100, fill='█', printEnd="\r", onComplete='delete'):
     """
-    Call in a loop to create terminal progress bar
-    @params:
-        iteration   - Required  : current iteration (Int)
-        total       - Required  : total iterations (Int)
-        prefix      - Optional  : prefix string (Str)
-        suffix      - Optional  : suffix string (Str)
-        decimals    - Optional  : positive number of decimals in percent complete (Int)
-        length      - Optional  : character length of bar (Int)
-        fill        - Optional  : bar fill character (Str)
-        printEnd    - Optional  : end character (e.g. "\r", "\r\n") (Str)
-        onComplete  - Optional  : what to do when the progress is complete () (Str)
+    Call in a loop to create a terminal progress bar.
+
+    Parameters:
+        iteration (int): Current iteration.
+        total (int): Total iterations.
+        prefix (str, optional): Prefix string. Defaults to ''.
+        suffix (str, optional): Suffix string. Defaults to ''.
+        decimals (int, optional): Number of decimals in percent complete. Defaults to 1.
+        length (int, optional): Character length of the progress bar. Defaults to 100.
+        fill (str, optional): Bar fill character. Defaults to '█'.
+        printEnd (str, optional): End character. Defaults to "\r".
+        onComplete (str, optional): Action to perform when the progress is complete. 
+            Options: 'delete' (clear the progress bar), 'newline' (print a newline character). Defaults to 'delete'.
+
+    Example:
+        printProgressBar(0, 10)
+        for i in range(10):
+            printProgressBar(i + 1, 10)
+            time.sleep(0.1)
     """
     percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
     filledLength = int(length * iteration // total)
     bar = fill * filledLength + '-' * (length - filledLength)
-    print(f'\r{prefix} |{bar}| {percent}% {suffix}', end = printEnd)
+    print(f'\r{prefix} |{bar}| {percent}% {suffix}', end=printEnd)
     
     # Complete
     if iteration == total: 
         
         if onComplete == 'delete':
-            print(' '*len(prefix) + ' '*len(suffix) + ' '*len(percent) + ' '*length + '      ', end=printEnd)
+            print(' ' * len(prefix) + ' ' * len(suffix) + ' ' * len(percent) + ' ' * length + '      ', end=printEnd)
         
         if onComplete == 'newline':
             print()
