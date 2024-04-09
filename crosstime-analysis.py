@@ -55,8 +55,8 @@ for x, t_x in enumerate(timeseries):
         # Save results
         results[x, y] = model['test_score'].mean()
         
-        # Print progressbar
-        printProgressBar(x + 1, len(timeseries), prefix='t_predictor:')
+    # Print progressbar
+    printProgressBar(x + 1, len(timeseries), prefix='t_predictor:')
 
 # Save the results
 save_pickle(results, "cross-time-RRR")
