@@ -122,17 +122,17 @@ stages:
       md5: 3ab7d9da547a0cfffcdb0b7bf2eec32f
       size: 20152
   analysis:
-    cmd: python3 -u lag-along-time-analysis.py
+    cmd: python3 -u crosstime-analysis.py
     deps:
+    - path: crosstime-analysis.py
+      hash: md5
+      md5: 0c9fac0f1269c527eda090641c3f5911
+      size: 2308
     - path: data/raw-area-responses/
       hash: md5
       md5: 844f797ca01e89759d88c134f55dea93.dir
       size: 2575480328
       nfiles: 2
-    - path: lag-along-time-analysis.py
-      hash: md5
-      md5: b296c10203f9391efe928e884f52f5b5
-      size: 3053
     params:
       params.yaml:
         best-rrr-params:
@@ -211,20 +211,15 @@ stages:
           - 40
           - 45
           timepoints:
-          - 0
-          - 100
+          - 50
           duration: 0.25
           time-bin: 0.05
           time-step: 0.025
     outs:
-    - path: results/lags-along-time.pickle
+    - path: results/cross-time-RRR.pickle
       hash: md5
-      md5: 86b4c9f1198ee40350cfe5101e557153
-      size: 3352
-    - path: results/max-lags-along-time.pickle
-      hash: md5
-      md5: 993e51bae6ad9575e3bcf6b54663963f
-      size: 46
+      md5: 17bd52bd47a51d2b197d999fbebcf451
+      size: 2200
   behav-preprocess:
     cmd: python3 -u behav-preprocessing.py
     deps:
@@ -347,27 +342,18 @@ stages:
       md5: 805bc6159cea03e97789675c123c5998
       size: 17841
   plot:
-    cmd: python3 -u max-lags-along-time-plot.py
+    cmd: python3 -u crosstime-plot.py
     deps:
-    - path: max-lags-along-time-plot.py
+    - path: crosstime-plot.py
       hash: md5
-      md5: d8f83ddc47bddc606d31d70fadb26ea1
-      size: 647
-    - path: results/max-lags-along-time.pickle
+      md5: 629197b9e81cfcbee8abeb3c1f02cbc4
+      size: 772
+    - path: results/cross-time-RRR.pickle
       hash: md5
-      md5: 993e51bae6ad9575e3bcf6b54663963f
-      size: 46
+      md5: 17bd52bd47a51d2b197d999fbebcf451
+      size: 2200
     params:
       params.yaml:
-        preprocess:
-          areas:
-          - VISp
-          - VISl
-          lag-time: 0
-          lag-area: VISl
-          step-size: 0.01
-          bin-size: 0.1
-          stimulus-duration: 0.25
         rrr-param-search:
           cv:
           - 3
@@ -391,13 +377,12 @@ stages:
           - 40
           - 45
           timepoints:
-          - 0
-          - 100
+          - 50
           duration: 0.25
           time-bin: 0.05
           time-step: 0.025
     outs:
-    - path: figures/max-lags-along-time.png
+    - path: figures/cross-time-RRR.png
       hash: md5
-      md5: cc6e5e5b47d9493b7f11bed172203f54
-      size: 21163
+      md5: e5a97a8169d2d7266e8baf93d64aedb9
+      size: 20758
