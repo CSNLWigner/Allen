@@ -7,6 +7,7 @@ import yaml
 
 # Load rrr-param-search parameters
 search = yaml.safe_load(open("params.yaml"))["rrr-param-search"]
+rrr = yaml.safe_load(open("params.yaml"))["rrr"]
 
 # Load cross-time-RRR from results
 matrix = load_pickle("cross-time-RRR", path="results")
@@ -24,6 +25,8 @@ timeseries = timeseries + search['timepoints'][0]
 plt.imshow(matrix, cmap='terrain', interpolation='bilinear')
 plt.xticks(range(timeseries.shape[0]), timeseries)
 plt.yticks(range(timeseries.shape[0]), timeseries)
+plt.xlabel(f"Timepoints of {rrr['predictor']}")
+plt.ylabel(f"Timepoints of {rrr['target']}")
 plt.colorbar()
 
 # Save the plot
