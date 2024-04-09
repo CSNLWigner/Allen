@@ -23,36 +23,24 @@ stages:
     outs:
       - data/raw-area-responses/
   analysis:
-    cmd: python3 -u lag-along-time-analysis.py
+    cmd: python3 -u crosstime-analysis.py
     deps:
-      - lag-along-time-analysis.py
+      - crosstime-analysis.py
       - data/raw-area-responses/
     params:
       - load
       - preprocess
       - rrr
-      - rrr-param-search
       - best-rrr-params
-    outs:
-      - results/lags-along-time.pickle
-      - results/max-lags-along-time.pickle
-  imshow:
-    cmd: python3 -u lags-along-time-plot.py
-    deps:
-      - lags-along-time-plot.py
-      - results/lags-along-time.pickle
-    params:
-      - preprocess
       - rrr-param-search
     outs:
-      - figures/lags-along-time.png
+      - results/cross-time-RRR.pickle
   plot:
-    cmd: python3 -u max-lags-along-time-plot.py
+    cmd: python3 -u crosstime-plot.py
     deps:
-      - max-lags-along-time-plot.py
-      - results/max-lags-along-time.pickle
+      - crosstime-plot.py
+      - results/cross-time-RRR.pickle
     params:
-      - preprocess
       - rrr-param-search
     outs:
-      - figures/max-lags-along-time.png
+      - figures/cross-time-RRR.png
