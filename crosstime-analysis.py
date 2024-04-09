@@ -4,6 +4,7 @@ import yaml
 from analyses.data_preprocessing import preprocess_area_responses
 from analyses.rrr import RRRR
 from utils.data_io import load_pickle, save_pickle
+from utils.utils import printProgressBar
 
 """
 cross-time analysis based on timpoints of rrr-param-search lag
@@ -32,13 +33,14 @@ cv = rrr[session][prediction_direction]['cv']
 rank = rrr[session][prediction_direction]['rank']
 
 # timeseries = np.arange(0, preprocess["stimulus-duration"], search['lag']/1000)
-timeseries = np.array(search['lag'])
-
-# Add the first timepoint to each element in timeseries
-timeseries = timeseries + search['timepoints'][0]
+timeseries = np.arange(0, 200, 3)
+# timeseries = np.array(search['lag']) + search['timepoints'][0]
 
 # Init results
 results = np.full((len(timeseries), len(timeseries)), fill_value=np.nan)
+
+# Print progressbar
+printProgressBar(0, len(timeseries), prefix='t_predictor:')
 
 for x, t_x in enumerate(timeseries):
     for y, t_y in enumerate(timeseries):
@@ -52,6 +54,9 @@ for x, t_x in enumerate(timeseries):
         
         # Save results
         results[x, y] = model['test_score'].mean()
+        
+        # Print progressbar
+        printProgressBar(x + 1, len(timeseries), prefix='t_predictor:')
 
 # Save the results
 save_pickle(results, "cross-time-RRR")
