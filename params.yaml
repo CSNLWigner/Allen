@@ -36,8 +36,8 @@ rrr:
   cv: 3
   rank: 18
   error-score: 'raise'
-  predictor: 'VISp'
-  target: 'VISp'
+  predictor: 'VISl'
+  target: 'VISl'
   timepoint: 0.050 # in seconds
 
 rrr-param-search:

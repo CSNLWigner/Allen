@@ -185,8 +185,8 @@ stages:
           cv: 3
           rank: 18
           error-score: raise
-          predictor: VISp
-          target: VISp
+          predictor: VISl
+          target: VISl
           timepoint: 0.05
         rrr-param-search:
           cv:
@@ -213,7 +213,7 @@ stages:
     outs:
     - path: results/cross-time-RRR.pickle
       hash: md5
-      md5: 5e30b0a5c1311133f3c3a0d4dab23e6d
+      md5: 9639fda8fbf12c5d6be79ccca664943f
       size: 36064
   behav-preprocess:
     cmd: python3 -u behav-preprocessing.py
@@ -345,7 +345,7 @@ stages:
       size: 1205
     - path: results/cross-time-RRR.pickle
       hash: md5
-      md5: 5e30b0a5c1311133f3c3a0d4dab23e6d
+      md5: 9639fda8fbf12c5d6be79ccca664943f
       size: 36064
     params:
       params.yaml:
@@ -374,5 +374,5 @@ stages:
     outs:
     - path: figures/cross-time-RRR.png
       hash: md5
-      md5: c8f76e1bf490e01d4c27273cab3c9626
-      size: 58412
+      md5: e3810ac5150ac8e0b61f065b2d484eac
+      size: 94218
