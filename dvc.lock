@@ -130,8 +130,8 @@ stages:
       size: 2486
     - path: data/raw-area-responses/
       hash: md5
-      md5: 844f797ca01e89759d88c134f55dea93.dir
-      size: 2575480328
+      md5: 90173a39471e6a306b64b6be692881b9.dir
+      size: 2649600328
       nfiles: 2
     params:
       params.yaml:
@@ -165,7 +165,7 @@ stages:
               cv: 2
               rank: 14
         load:
-          session: 1108334384
+          session: 1111013640
           areas:
           - VISp
           - VISl
@@ -186,7 +186,7 @@ stages:
           rank: 18
           error-score: raise
           predictor: VISl
-          target: VISl
+          target: VISp
           timepoint: 0.05
         rrr-param-search:
           cv:
@@ -213,7 +213,7 @@ stages:
     outs:
     - path: results/cross-time-RRR.pickle
       hash: md5
-      md5: 9639fda8fbf12c5d6be79ccca664943f
+      md5: e493584ba62758bd136cdc72d39b3d0f
       size: 36064
   behav-preprocess:
     cmd: python3 -u behav-preprocessing.py
@@ -248,7 +248,7 @@ stages:
     params:
       params.yaml:
         load:
-          session: 1108334384
+          session: 1111013640
           areas:
           - VISp
           - VISl
@@ -258,8 +258,8 @@ stages:
     outs:
     - path: data/raw-area-responses/
       hash: md5
-      md5: 844f797ca01e89759d88c134f55dea93.dir
-      size: 2575480328
+      md5: 90173a39471e6a306b64b6be692881b9.dir
+      size: 2649600328
       nfiles: 2
   dimensionality-reduction:
     cmd: python3 -u cv-lag-time-selection.py
@@ -345,7 +345,7 @@ stages:
       size: 1205
     - path: results/cross-time-RRR.pickle
       hash: md5
-      md5: 9639fda8fbf12c5d6be79ccca664943f
+      md5: e493584ba62758bd136cdc72d39b3d0f
       size: 36064
     params:
       params.yaml:
@@ -374,5 +374,5 @@ stages:
     outs:
     - path: figures/cross-time-RRR.png
       hash: md5
-      md5: e3810ac5150ac8e0b61f065b2d484eac
-      size: 94218
+      md5: e875d5592a970a25a81393ba545dba33
+      size: 81750
