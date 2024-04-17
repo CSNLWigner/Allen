@@ -5,7 +5,7 @@ All ecephys sessions had this issue except those listed here: ~~1059678195~~, 11
 | 1111013640 | 10-12%            | cv=2, rank=16        | cv=2, lag=4?, rank=16 |                            |               |
 | 1108334384 | 11-15%            | cv=2, rank=14        | cv=3, lag=3?, rank=18 | cv=2, rank=20              | cv=3, rank=20 |
 | 1112515874 | 6-16%             | cv=3, lag=6, rank=12 | cv=2, lag=5?, rank=12 | cv=3, rank=20              | cv=2, rank=20 |
-| 1112302803 | 8%                | cv=3, rank=14        | cv=2, lag=2? rank=14  | cv=3, rank=20              |               |
+| 1112302803 | 8%                | cv=3, rank=14        | cv=2, lag=2? rank=14  | cv=3, rank=20              | cv=2, rank=20 |
 | 1109889304 | 18-21% (NO 100ms) | cv=5, rank=18        | cv=2, lag=3, rank=8   |                            |               |
 | 1113751921 | 8.5-13%           | cv=4, lag=0, rank=20 | cv=2, lag=0, rank=10  |                            |               |
 
