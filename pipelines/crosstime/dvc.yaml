@@ -1,0 +1,46 @@
+
+
+
+metrics:
+  - metrics.json
+
+params:
+  - params.yaml
+
+plots:
+  - plot.csv:
+      y: accuracy
+      x: epoch
+
+
+stages:
+  load:
+    cmd: python3 -u load_raw_activity_data.py
+    deps:
+      - load_raw_activity_data.py
+    params:
+      - load
+    outs:
+      - data/raw-area-responses/
+  analysis:
+    cmd: python3 -u crosstime-analysis.py
+    deps:
+      - crosstime-analysis.py
+      - data/raw-area-responses/
+    params:
+      - load
+      - preprocess
+      - rrr
+      - best-rrr-params
+      - rrr-param-search
+    outs:
+      - results/cross-time-RRR.pickle
+  plot:
+    cmd: python3 -u crosstime-plot.py
+    deps:
+      - crosstime-plot.py
+      - results/cross-time-RRR.pickle
+    params:
+      - rrr-param-search
+    outs:
+      - figures/cross-time-RRR.png

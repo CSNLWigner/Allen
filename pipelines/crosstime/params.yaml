@@ -1,0 +1,87 @@
+
+cache:
+  location: "data/.vbn_s3_cache"
+  force_download: False
+
+neuropixel:
+  area_of_interest: "VISpm"
+  block: "active behavior"
+
+load:
+  session: 1112302803
+  areas: ["VISp", "VISl"] # "VISpm" # "VISm" has no spikes
+  stimulus-block: 5
+  # Stimulus blocks:
+  # 0: change detection task
+  # 2: receptive field mapping by gabor stimuli
+  # 4: full-flash
+  # 5: passive replay
+  step-size: 0.001 # in seconds
+  stimulus-duration: 0.250 # in seconds
+
+preprocess:
+  areas: ["VISp", "VISl"] # "VISpm" # "VISm" has no spikes
+  lag-time: 0 # in milliseconds
+  lag-area: "VISl"
+  step-size: 0.010 # time-step in seconds # 0.010
+  bin-size: 0.100 # time-window in seconds # Joao's default: 0.100
+  stimulus-duration: 0.250 # in seconds
+
+cca:
+  cv: 5
+  n_components: 2
+  scoring: 'r2'
+
+rrr:
+  cv: 3
+  rank: 18
+  error-score: 'raise'
+  predictor: 'VISl'
+  target: 'VISl'
+  timepoint: 0.050 # in seconds
+
+rrr-param-search:
+  cv: [3]
+  rank: [14]
+  lag: [100,105,110,115,120,125,130,135,140,145,150]
+  timepoints: [0]
+  duration: 0.250
+  time-bin: 0.050
+  time-step: 0.025
+
+best-rrr-params:
+  1111013640:
+    top-down:
+      cv: 2
+      rank: 16
+    bottom-up:
+      cv: 2
+      rank: 16
+  1108334384:
+    top-down:
+      cv: 2
+      rank: 14
+    bottom-up:
+      cv: 3
+      rank: 18
+  1112515874:
+    top-down:
+      cv: 3
+      rank: 12
+    bottom-up:
+      cv: 2
+      rank: 12
+  1112302803:
+    top-down:
+      cv: 3
+      rank: 14
+    bottom-up:
+      cv: 2
+      rank: 14
+  1113751921:
+    top-down:
+      cv: 4
+      rank: 20
+    bottom-up:
+      cv: 2
+      rank: 10
