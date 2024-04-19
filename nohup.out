@@ -1,1 +1,1 @@
-ERROR: Stage '$' not found inside 'dvc.yaml' file
+ERROR: 'dvc.lock' is git-ignored.
