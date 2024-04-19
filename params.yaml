@@ -8,7 +8,7 @@ neuropixel:
   block: "active behavior"
 
 load:
-  session: 1112302803
+  session: 1111013640
   areas: ["VISp", "VISl"] # "VISpm" # "VISm" has no spikes
   stimulus-block: 5
   # Stimulus blocks:
@@ -36,15 +36,15 @@ rrr:
   cv: 3
   rank: 18
   error-score: 'raise'
-  predictor: 'VISl'
-  target: 'VISl'
+  predictor: 'VISp'
+  target: 'VISp'
   timepoint: 0.050 # in seconds
 
 rrr-param-search:
-  cv: [3] # [2,3,4,5]
-  rank: [14] # [2,4,6,8,10,12,14,16,18,20]
-  lag: [100,105,110,115,120,125,130,135,140,145,150] # [0,3,6]
-  timepoints: [0] # [0,100]
+  cv: [3]
+  rank: [14]
+  lag: [100,105,110,115,120,125,130,135,140,145,150]
+  timepoints: [0]
   duration: 0.250
   time-bin: 0.050
   time-step: 0.025
