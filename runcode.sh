@@ -18,6 +18,9 @@ IFS=',' read -r -a param_value_list <<< "$3"
 # Loop over the parameters
 for param_value in "${param_value_list[@]}"
 do
+    # Print the informations
+    echo "$git_name $param_key $param_value"
+
     # Add the param key
     new_param="$param_key: $param_value"
     old_param="$param_key: 0"
@@ -30,8 +33,11 @@ do
 
     # Git
     git add .
-    git commit -m "$param_key $param_value"
+    git commit -m "$git_name $param_key $param_value"
 
     # Reset the parameters to avoid conflicts in the next iteration
     sed -i "s/$new_param/$old_param/g" params.yaml
+
+    # Print current date and time
+    date
 done
