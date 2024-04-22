@@ -9,7 +9,7 @@ stages:
     params:
       params.yaml:
         load:
-          session: 1062755779
+          session: 1048189115
           areas:
           - VISp
           - VISl
@@ -18,8 +18,8 @@ stages:
           stimulus-duration: 0.25
     outs:
     - path: data/raw-area-responses/
-      md5: 1163c85aeb7832d6b62bde5da5a6541c.dir
-      size: 623480322
+      md5: d797481f26ebe5ed0b2ce45325927c9c.dir
+      size: 1305600322
       nfiles: 2
   analysis:
     cmd: python3 -u cv-time-lag-analysis.py
@@ -28,13 +28,13 @@ stages:
       md5: 5aaee89679c4fda561b9bcad4051af56
       size: 3825
     - path: data/raw-area-responses/
-      md5: 1163c85aeb7832d6b62bde5da5a6541c.dir
-      size: 623480322
+      md5: d797481f26ebe5ed0b2ce45325927c9c.dir
+      size: 1305600322
       nfiles: 2
     params:
       params.yaml:
         load:
-          session: 1062755779
+          session: 1048189115
           areas:
           - VISp
           - VISl
@@ -54,8 +54,8 @@ stages:
           cv: 3
           rank: 18
           error-score: raise
-          predictor: VISp
-          target: VISl
+          predictor: VISl
+          target: VISp
           timepoint: 0.05
         rrr-param-search:
           cv:
@@ -86,7 +86,7 @@ stages:
           time-step: 0.025
     outs:
     - path: results/CV-lag-time.pickle
-      md5: d0fc1935d44be78e47c51924e8d459bf
+      md5: 8cc076833871d483395c454a8561413e
       size: 2083
   plot:
     cmd: python3 -u crosstime-plot.py
@@ -132,7 +132,7 @@ stages:
       md5: 94c99302fd551b26e4a997234af1fcbb
       size: 1767
     - path: results/CV-lag-time.pickle
-      md5: d0fc1935d44be78e47c51924e8d459bf
+      md5: 8cc076833871d483395c454a8561413e
       size: 2083
     params:
       params.yaml:
@@ -149,8 +149,8 @@ stages:
           cv: 3
           rank: 18
           error-score: raise
-          predictor: VISp
-          target: VISl
+          predictor: VISl
+          target: VISp
           timepoint: 0.05
         rrr-param-search:
           cv:
@@ -181,5 +181,5 @@ stages:
           time-step: 0.025
     outs:
     - path: figures/rrr-param-search.png
-      md5: 3f49e82f8ac3245f8cb00a7609de2bb7
-      size: 83479
+      md5: b7864043aa094fa390b46f5bae026104
+      size: 93239
