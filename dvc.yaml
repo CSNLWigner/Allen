@@ -8,25 +8,24 @@ stages:
     outs:
       - data/raw-area-responses/
   analysis:
-    cmd: python3 -u cv-time-lag-analysis.py
+    cmd: python3 -u crosstime-analysis.py
     deps:
-      - cv-time-lag-analysis.py
+      - crosstime-analysis.py
       - data/raw-area-responses/
     params:
       - load
       - preprocess
       - rrr
+      - best-rrr-params
       - rrr-param-search
     outs:
-      - results/CV-lag-time.pickle
-  plots:
-    cmd: python3 -u cv-time-lag-plot.py
+      - results/cross-time-RRR.pickle
+  plot:
+    cmd: python3 -u crosstime-plot.py
     deps:
-      - cv-time-lag-plot.py
-      - results/CV-lag-time.pickle
+      - crosstime-plot.py
+      - results/cross-time-RRR.pickle
     params:
-      - preprocess
-      - rrr
       - rrr-param-search
     outs:
-      - figures/rrr-param-search.png
+      - figures/cross-time-RRR.png
