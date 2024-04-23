@@ -8797,3 +8797,38 @@ To enable auto staging, run:
 
 	dvc config core.autostage true
 Use `dvc push` to send your updates to remote storage.
+[compute 5d62403] top-down_cross-time_100-200 session 1049514117
+ Committer: szabo.zsombor <szabo.zsombor@m3.rmki.kfki.hu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 3 files changed, 46 insertions(+), 11 deletions(-)
+2024. ápr. 23., kedd, 16:18:26 CEST
+top-down_cross-time_100-200 session 1052533639
+Stage 'load' is cached - skipping run, checking out outputs
+Updating lock file 'dvc.lock'
+
+Stage 'analysis' is cached - skipping run, checking out outputs
+Updating lock file 'dvc.lock'
+
+Running stage 'plot':
+> python3 -u crosstime-plot.py
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
