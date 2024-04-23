@@ -8497,3 +8497,23 @@ To enable auto staging, run:
 
 	dvc config core.autostage true
 Use `dvc push` to send your updates to remote storage.
+Error: The initial value of session should be 0 in params.yaml
+bottom-up_cross-time_100-200 session 1113751921
+Stage 'load' is cached - skipping run, checking out outputs
+Updating lock file 'dvc.lock'
+
+Stage 'analysis' is cached - skipping run, checking out outputs
+Updating lock file 'dvc.lock'
+
+Running stage 'plot':
+> python3 -u crosstime-plot.py
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
