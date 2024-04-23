@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import yaml
 
 # Load rrr-param-search parameters
+load = yaml.safe_load(open("params.yaml"))["load"]
 search = yaml.safe_load(open("params.yaml"))["rrr-param-search"]
 rrr = yaml.safe_load(open("params.yaml"))["rrr"]
 
@@ -35,3 +36,4 @@ plt.colorbar()
 
 # Save the plot
 plt.savefig("figures/cross-time-RRR.png")
+plt.savefig(f"cache/cross-time-RRR-{load['session']}.png")
