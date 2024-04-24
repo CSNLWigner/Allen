@@ -1,18 +1,3 @@
-
-
-
-metrics:
-  - metrics.json
-
-params:
-  - params.yaml
-
-plots:
-  - plot.csv:
-      y: accuracy
-      x: epoch
-
-
 stages:
   load:
     cmd: python3 -u load_raw_activity_data.py
