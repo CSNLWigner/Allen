@@ -9,7 +9,7 @@ stages:
     params:
       params.yaml:
         load:
-          session: 1113751921
+          session: 1112302803
           areas:
           - VISp
           - VISl
@@ -18,8 +18,8 @@ stages:
           stimulus-duration: 0.25
     outs:
     - path: data/raw-area-responses/
-      md5: 6400b62176d4ec09708d7f56e50b2bf3.dir
-      size: 2258350322
+      md5: 0e2b5e246edec15869ca98aeb6a0d790.dir
+      size: 2475768322
       nfiles: 2
   analysis:
     cmd: python3 -u crosstime-analysis.py
@@ -28,8 +28,8 @@ stages:
       md5: f1597d35f27888f863465e88e97333b1
       size: 2486
     - path: data/raw-area-responses/
-      md5: 6400b62176d4ec09708d7f56e50b2bf3.dir
-      size: 2258350322
+      md5: 0e2b5e246edec15869ca98aeb6a0d790.dir
+      size: 2475768322
       nfiles: 2
     params:
       params.yaml:
@@ -126,7 +126,7 @@ stages:
               cv: 3
               rank: 10
         load:
-          session: 1113751921
+          session: 1112302803
           areas:
           - VISp
           - VISl
@@ -146,8 +146,8 @@ stages:
           cv: 3
           rank: 18
           error-score: raise
-          predictor: VISl
-          target: VISp
+          predictor: VISp
+          target: VISl
           timepoint: 0.05
         rrr-param-search:
           cv:
@@ -173,7 +173,7 @@ stages:
           time-step: 0.025
     outs:
     - path: results/cross-time-RRR.pickle
-      md5: 7b0c6b6f649b44e9a130e3200e641959
+      md5: 0ccbf2c0e24703424b03b3a19f50fb3b
       size: 36070
   plot:
     cmd: python3 -u crosstime-plot.py
@@ -182,7 +182,7 @@ stages:
       md5: d42aac4ffcc35730bd9c44f4b3bb6f12
       size: 1331
     - path: results/cross-time-RRR.pickle
-      md5: 7b0c6b6f649b44e9a130e3200e641959
+      md5: 0ccbf2c0e24703424b03b3a19f50fb3b
       size: 36070
     params:
       params.yaml:
@@ -210,8 +210,8 @@ stages:
           time-step: 0.025
     outs:
     - path: figures/cross-time-RRR.png
-      md5: 36dae5aa4c53ccfddcc82d85486aa141
-      size: 35153
+      md5: a19fcdd0f495e27f166bc56bbd873cec
+      size: 62306
   plots:
     cmd: python3 -u cv-time-lag-plot.py
     deps:
