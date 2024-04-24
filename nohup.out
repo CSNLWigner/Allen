@@ -9318,3 +9318,46 @@ Traceback (most recent call last):
     cv = rrr[session][prediction_direction]['cv']
 KeyError: 1064400234
 ERROR: failed to reproduce 'analysis': failed to run: python3 -u crosstime-analysis.py, exited with 1
+[compute 959c57b] top-down_param-search session 1064400234
+ Committer: szabo.zsombor <szabo.zsombor@m3.rmki.kfki.hu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 3 files changed, 47 insertions(+), 4 deletions(-)
+2024. ápr. 24., szerda, 15:47:32 CEST
+top-down_param-search session 1064415305
+Running stage 'load':
+> python3 -u load_raw_activity_data.py
+Cache location: data/.vbn_s3_cache
+Your allensdk version is: 2.15.2
+the most up-to-date manifest available:  visual-behavior-neuropixels_project_manifest_v0.5.0.json
+the most up-to-date manifest downloaded: visual-behavior-neuropixels_project_manifest_v0.5.0.json
+/home/szabo.zsombor/.conda/envs/pythconda/lib/python3.7/site-packages/hdmf/spec/namespace.py:532: UserWarning: Ignoring cached namespace 'hdmf-common' version 1.8.0 because version 1.5.1 is already loaded.
+  % (ns['name'], ns['version'], self.__namespaces.get(ns['name'])['version']))
+/home/szabo.zsombor/.conda/envs/pythconda/lib/python3.7/site-packages/hdmf/spec/namespace.py:532: UserWarning: Ignoring cached namespace 'core' version 2.6.0-alpha because version 2.5.0 is already loaded.
+  % (ns['name'], ns['version'], self.__namespaces.get(ns['name'])['version']))
+/home/szabo.zsombor/.conda/envs/pythconda/lib/python3.7/site-packages/hdmf/spec/namespace.py:532: UserWarning: Ignoring cached namespace 'hdmf-experimental' version 0.5.0 because version 0.2.0 is already loaded.
+  % (ns['name'], ns['version'], self.__namespaces.get(ns['name'])['version']))
+Spike count in the data: 964926
+(118, 4800, 250)
+Spike count in the data: 827455
+(95, 4800, 250)
+Computing md5 for a large file '/home/szabo.zsombor/Allen_project/data/raw-area-responses/5_block_VISp-activity.pickle'. This is only done once.
+Updating lock file 'dvc.lock'
+
+Running stage 'analysis':
+> python3 -u crosstime-analysis.py
+Traceback (most recent call last):
+  File "crosstime-analysis.py", line 32, in <module>
+    cv = rrr[session][prediction_direction]['cv']
+KeyError: 1064415305
+ERROR: failed to reproduce 'analysis': failed to run: python3 -u crosstime-analysis.py, exited with 1
