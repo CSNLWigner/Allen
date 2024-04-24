@@ -9,7 +9,7 @@ stages:
     params:
       params.yaml:
         load:
-          session: 1113751921
+          session: 1063010385
           areas:
           - VISp
           - VISl
@@ -18,8 +18,8 @@ stages:
           stimulus-duration: 0.25
     outs:
     - path: data/raw-area-responses/
-      md5: 6400b62176d4ec09708d7f56e50b2bf3.dir
-      size: 2258350322
+      md5: ed1eed30893ca7ba78d144fca7e0f321.dir
+      size: 1535040322
       nfiles: 2
   analysis:
     cmd: python3 -u crosstime-analysis.py
