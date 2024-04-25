@@ -9,7 +9,7 @@ stages:
     params:
       params.yaml:
         load:
-          session: 1064400234
+          session: 1064415305
           areas:
           - VISp
           - VISl
@@ -18,8 +18,8 @@ stages:
           stimulus-duration: 0.25
     outs:
     - path: data/raw-area-responses/
-      md5: 10429afc7b4c3645fda1d9cbc10e4cdb.dir
-      size: 1506258322
+      md5: 1baa79b5fdd228b0efcb3c9e00fd8a8b.dir
+      size: 2044800322
       nfiles: 2
   analysis:
     cmd: python3 -u cv-time-lag-analysis.py
@@ -28,13 +28,13 @@ stages:
       md5: 5aaee89679c4fda561b9bcad4051af56
       size: 3825
     - path: data/raw-area-responses/
-      md5: 10429afc7b4c3645fda1d9cbc10e4cdb.dir
-      size: 1506258322
+      md5: 1baa79b5fdd228b0efcb3c9e00fd8a8b.dir
+      size: 2044800322
       nfiles: 2
     params:
       params.yaml:
         load:
-          session: 1064400234
+          session: 1064415305
           areas:
           - VISp
           - VISl
@@ -88,7 +88,7 @@ stages:
           time-step: 0.025
     outs:
     - path: results/CV-lag-time.pickle
-      md5: 1640bc6d4f314253484a6080a2d8b61f
+      md5: f0e2efe8878b5af2c113ec6d5af7d127
       size: 2467
   plot:
     cmd: python3 -u crosstime-plot.py
@@ -134,7 +134,7 @@ stages:
       md5: 94c99302fd551b26e4a997234af1fcbb
       size: 1767
     - path: results/CV-lag-time.pickle
-      md5: 1640bc6d4f314253484a6080a2d8b61f
+      md5: f0e2efe8878b5af2c113ec6d5af7d127
       size: 2467
     params:
       params.yaml:
@@ -185,5 +185,5 @@ stages:
           time-step: 0.025
     outs:
     - path: figures/rrr-param-search.png
-      md5: 4c86ff88ac669e865b723a11d01a2663
-      size: 97791
+      md5: 20359f53b5b228a8d084bc9e1ee0ff54
+      size: 91476
