@@ -9,7 +9,7 @@ stages:
     params:
       params.yaml:
         load:
-          session: 1093864136
+          session: 1063010385
           areas:
           - VISp
           - VISl
@@ -18,115 +18,23 @@ stages:
           stimulus-duration: 0.25
     outs:
     - path: data/raw-area-responses/
-      md5: d3a6842b3d3260442674e4f9bb36f2bc.dir
-      size: 1410612322
+      md5: ed1eed30893ca7ba78d144fca7e0f321.dir
+      size: 1535040322
       nfiles: 2
   analysis:
-    cmd: python3 -u crosstime-analysis.py
+    cmd: python3 -u cv-time-lag-analysis.py
     deps:
-    - path: crosstime-analysis.py
-      md5: f1597d35f27888f863465e88e97333b1
-      size: 2486
+    - path: cv-time-lag-analysis.py
+      md5: 5aaee89679c4fda561b9bcad4051af56
+      size: 3825
     - path: data/raw-area-responses/
-      md5: 6400b62176d4ec09708d7f56e50b2bf3.dir
-      size: 2258350322
+      md5: ed1eed30893ca7ba78d144fca7e0f321.dir
+      size: 1535040322
       nfiles: 2
     params:
       params.yaml:
-        best-rrr-params:
-          1111013640:
-            top-down:
-              cv: 2
-              rank: 16
-            bottom-up:
-              cv: 2
-              rank: 16
-          1108334384:
-            top-down:
-              cv: 2
-              rank: 14
-            bottom-up:
-              cv: 3
-              rank: 18
-          1112515874:
-            top-down:
-              cv: 3
-              rank: 12
-            bottom-up:
-              cv: 2
-              rank: 12
-          1112302803:
-            top-down:
-              cv: 3
-              rank: 14
-            bottom-up:
-              cv: 2
-              rank: 14
-          1113751921:
-            top-down:
-              cv: 4
-              rank: 20
-            bottom-up:
-              cv: 2
-              rank: 10
-          1048189115:
-            top-down:
-              cv: 5
-              rank: 16
-            bottom-up:
-              cv: 3
-              rank: 16
-          1047969464:
-            top-down:
-              cv: 5
-              rank: 16
-            bottom-up:
-              cv: 3
-              rank: 18
-          1049514117:
-            top-down:
-              cv: 2
-              rank: 8
-            bottom-up:
-              cv: 5
-              rank: 10
-          1052533639:
-            top-down:
-              cv: 4
-              rank: 20
-            bottom-up:
-              cv: 4
-              rank: 16
-          1053718935:
-            top-down:
-              cv: 4
-              rank: 18
-            bottom-up:
-              cv: 4
-              rank: 18
-          1053941483:
-            top-down:
-              cv: 2
-              rank: 16
-            bottom-up:
-              cv: 4
-              rank: 12
-          1055415082:
-            top-down:
-              cv: 2
-              rank: 12
-            bottom-up:
-              cv: 4
-              rank: 20
-          1062755779:
-            top-down:
-              cv: 5
-              rank: 12
-            bottom-up:
-              cv: 3
-              rank: 10
         load:
-          session: 1113751921
+          session: 1063010385
           areas:
           - VISp
           - VISl
@@ -139,42 +47,49 @@ stages:
           - VISl
           lag-time: 0
           lag-area: VISl
-          step-size: 0.01
+          step-size: 0.1
           bin-size: 0.1
           stimulus-duration: 0.25
         rrr:
           cv: 3
           rank: 18
           error-score: raise
-          predictor: VISp
-          target: VISl
+          predictor: VISl
+          target: VISp
           timepoint: 0.05
         rrr-param-search:
           cv:
+          - 2
           - 3
+          - 4
+          - 5
           rank:
+          - 2
+          - 4
+          - 6
+          - 8
+          - 10
+          - 12
           - 14
+          - 16
+          - 18
+          - 20
+          - 25
+          - 30
           lag:
-          - 100
-          - 105
-          - 110
-          - 115
-          - 120
-          - 125
-          - 130
-          - 135
-          - 140
-          - 145
-          - 150
+          - 0
+          - 3
+          - 6
           timepoints:
           - 0
+          - 100
           duration: 0.25
           time-bin: 0.05
           time-step: 0.025
     outs:
-    - path: results/cross-time-RRR.pickle
-      md5: f48292fb1543b91540283947850c58ab
-      size: 36070
+    - path: results/CV-lag-time.pickle
+      md5: c9167935a7ceadcd848a599591b8399b
+      size: 2467
   plot:
     cmd: python3 -u crosstime-plot.py
     deps:
@@ -219,8 +134,8 @@ stages:
       md5: 94c99302fd551b26e4a997234af1fcbb
       size: 1767
     - path: results/CV-lag-time.pickle
-      md5: 3386a7e89bec82dbda4b8b97ae835d09
-      size: 2083
+      md5: c9167935a7ceadcd848a599591b8399b
+      size: 2467
     params:
       params.yaml:
         preprocess:
@@ -256,6 +171,8 @@ stages:
           - 16
           - 18
           - 20
+          - 25
+          - 30
           lag:
           - 0
           - 3
@@ -268,5 +185,5 @@ stages:
           time-step: 0.025
     outs:
     - path: figures/rrr-param-search.png
-      md5: 759194cc853b7527318e970e4c52a001
-      size: 85335
+      md5: 3d77445b00ea01c51f569ab6d38ed4da
+      size: 91341
