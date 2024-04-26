@@ -141,3 +141,143 @@ best-rrr-params:
     bottom-up:
       cv: 3
       rank: 10
+  1063010385:
+    top-down:
+      cv: 2
+      rank: 10
+    bottom-up:
+      cv: 4
+      rank: 14
+  1064639378:
+    top-down:
+      cv: 4
+      rank: 20
+    bottom-up:
+      cv: 2
+      rank: 16
+  1065905010:
+    top-down:
+      cv: 4
+      rank: 20
+    bottom-up:
+      cv: 4
+      rank: 16
+  1065908084:
+    top-down:
+      cv: 2
+      rank: 10
+    bottom-up:
+      cv: 4
+      rank: 12
+  1067588044:
+    top-down:
+      cv: 2
+      rank: 12
+    bottom-up:
+      cv: 5
+      rank: 18
+  1067781390:
+    top-down:
+      cv: 2
+      rank: 12
+    bottom-up:
+      cv: 5
+      rank: 20
+  1069461581:
+    top-down:
+      cv: 2
+      rank: 16
+    bottom-up:
+      cv: 3
+      rank: 20
+  1071300149:
+    top-down:
+      cv: 2
+      rank: 14
+    bottom-up:
+      cv: 2
+      rank: 8
+  1081079981:
+    top-down:
+      cv: 4
+      rank: 12
+    bottom-up:
+      cv: 4
+      rank: 12
+  1081429294:
+    top-down:
+      cv: 4
+      rank: 14
+    bottom-up:
+      cv: 3
+      rank: 18
+  1086200042:
+    top-down:
+      cv: 4
+      rank: 10
+    bottom-up:
+      cv: 2
+      rank: 10
+  1086410738:
+    top-down:
+      cv: 5
+      rank: 14
+    bottom-up:
+      cv: 3
+      rank: 10
+  1087720624:
+    top-down:
+      cv: 3
+      rank: 12
+    bottom-up:
+      cv: 3
+      rank: 14
+  1087992708:
+    top-down:
+      cv: 2
+      rank: 10
+    bottom-up:
+      cv: 2
+      rank: 12
+  1090803859:
+    top-down:
+      cv: 2
+      rank: 12
+    bottom-up:
+      cv: 2
+      rank: 12
+  1091039376:
+    top-down:
+      cv: 2
+      rank: 12
+    bottom-up:
+      cv: 2
+      rank: 6
+  1091039902:
+    top-down:
+      cv: 2
+      rank: 12
+    bottom-up:
+      cv: 2
+      rank: 20
+  1093864136:
+    top-down:
+      cv: 2
+      rank: 4
+    bottom-up:
+      cv: 2
+      rank: 10
+  1095340643:
+    top-down:
+      cv: 3
+      rank: 14
+    bottom-up:
+      cv: 4
+      rank: 25
+  1098119201:
+    top-down:
+      cv: 2
+      rank: 12
+    bottom-up:
+      cv: 2
+      rank: 8
