@@ -9,7 +9,7 @@ stages:
     params:
       params.yaml:
         load:
-          session: 1098119201
+          session: 1063010385
           areas:
           - VISp
           - VISl
@@ -18,23 +18,255 @@ stages:
           stimulus-duration: 0.25
     outs:
     - path: data/raw-area-responses/
-      md5: 658e8e2b98d678858312f18ee9192073.dir
-      size: 2293922322
+      md5: ed1eed30893ca7ba78d144fca7e0f321.dir
+      size: 1535040322
       nfiles: 2
   analysis:
-    cmd: python3 -u cv-time-lag-analysis.py
+    cmd: python3 -u crosstime-analysis.py
     deps:
-    - path: cv-time-lag-analysis.py
-      md5: 5aaee89679c4fda561b9bcad4051af56
-      size: 3825
+    - path: crosstime-analysis.py
+      md5: f1597d35f27888f863465e88e97333b1
+      size: 2486
     - path: data/raw-area-responses/
-      md5: 658e8e2b98d678858312f18ee9192073.dir
-      size: 2293922322
+      md5: ed1eed30893ca7ba78d144fca7e0f321.dir
+      size: 1535040322
       nfiles: 2
     params:
       params.yaml:
+        best-rrr-params:
+          1111013640:
+            top-down:
+              cv: 2
+              rank: 16
+            bottom-up:
+              cv: 2
+              rank: 16
+          1108334384:
+            top-down:
+              cv: 2
+              rank: 14
+            bottom-up:
+              cv: 3
+              rank: 18
+          1112515874:
+            top-down:
+              cv: 3
+              rank: 12
+            bottom-up:
+              cv: 2
+              rank: 12
+          1112302803:
+            top-down:
+              cv: 3
+              rank: 14
+            bottom-up:
+              cv: 2
+              rank: 14
+          1113751921:
+            top-down:
+              cv: 4
+              rank: 20
+            bottom-up:
+              cv: 2
+              rank: 10
+          1048189115:
+            top-down:
+              cv: 5
+              rank: 16
+            bottom-up:
+              cv: 3
+              rank: 16
+          1047969464:
+            top-down:
+              cv: 5
+              rank: 16
+            bottom-up:
+              cv: 3
+              rank: 18
+          1049514117:
+            top-down:
+              cv: 2
+              rank: 8
+            bottom-up:
+              cv: 5
+              rank: 10
+          1052533639:
+            top-down:
+              cv: 4
+              rank: 20
+            bottom-up:
+              cv: 4
+              rank: 16
+          1053718935:
+            top-down:
+              cv: 4
+              rank: 18
+            bottom-up:
+              cv: 4
+              rank: 18
+          1053941483:
+            top-down:
+              cv: 2
+              rank: 16
+            bottom-up:
+              cv: 4
+              rank: 12
+          1055415082:
+            top-down:
+              cv: 2
+              rank: 12
+            bottom-up:
+              cv: 4
+              rank: 20
+          1062755779:
+            top-down:
+              cv: 5
+              rank: 12
+            bottom-up:
+              cv: 3
+              rank: 10
+          1063010385:
+            top-down:
+              cv: 2
+              rank: 10
+            bottom-up:
+              cv: 4
+              rank: 14
+          1064639378:
+            top-down:
+              cv: 4
+              rank: 20
+            bottom-up:
+              cv: 2
+              rank: 16
+          1065905010:
+            top-down:
+              cv: 4
+              rank: 20
+            bottom-up:
+              cv: 4
+              rank: 16
+          1065908084:
+            top-down:
+              cv: 2
+              rank: 10
+            bottom-up:
+              cv: 4
+              rank: 12
+          1067588044:
+            top-down:
+              cv: 2
+              rank: 12
+            bottom-up:
+              cv: 5
+              rank: 18
+          1067781390:
+            top-down:
+              cv: 2
+              rank: 12
+            bottom-up:
+              cv: 5
+              rank: 20
+          1069461581:
+            top-down:
+              cv: 2
+              rank: 16
+            bottom-up:
+              cv: 3
+              rank: 20
+          1071300149:
+            top-down:
+              cv: 2
+              rank: 14
+            bottom-up:
+              cv: 2
+              rank: 8
+          1081079981:
+            top-down:
+              cv: 4
+              rank: 12
+            bottom-up:
+              cv: 4
+              rank: 12
+          1081429294:
+            top-down:
+              cv: 4
+              rank: 14
+            bottom-up:
+              cv: 3
+              rank: 18
+          1086200042:
+            top-down:
+              cv: 4
+              rank: 10
+            bottom-up:
+              cv: 2
+              rank: 10
+          1086410738:
+            top-down:
+              cv: 5
+              rank: 14
+            bottom-up:
+              cv: 3
+              rank: 10
+          1087720624:
+            top-down:
+              cv: 3
+              rank: 12
+            bottom-up:
+              cv: 3
+              rank: 14
+          1087992708:
+            top-down:
+              cv: 2
+              rank: 10
+            bottom-up:
+              cv: 2
+              rank: 12
+          1090803859:
+            top-down:
+              cv: 2
+              rank: 12
+            bottom-up:
+              cv: 2
+              rank: 12
+          1091039376:
+            top-down:
+              cv: 2
+              rank: 12
+            bottom-up:
+              cv: 2
+              rank: 6
+          1091039902:
+            top-down:
+              cv: 2
+              rank: 12
+            bottom-up:
+              cv: 2
+              rank: 20
+          1093864136:
+            top-down:
+              cv: 2
+              rank: 4
+            bottom-up:
+              cv: 2
+              rank: 10
+          1095340643:
+            top-down:
+              cv: 3
+              rank: 14
+            bottom-up:
+              cv: 4
+              rank: 25
+          1098119201:
+            top-down:
+              cv: 2
+              rank: 12
+            bottom-up:
+              cv: 2
+              rank: 8
         load:
-          session: 1098119201
+          session: 1063010385
           areas:
           - VISp
           - VISl
@@ -47,49 +279,42 @@ stages:
           - VISl
           lag-time: 0
           lag-area: VISl
-          step-size: 0.1
+          step-size: 0.01
           bin-size: 0.1
           stimulus-duration: 0.25
         rrr:
           cv: 3
           rank: 18
           error-score: raise
-          predictor: VISp
-          target: VISl
+          predictor: VISl
+          target: VISp
           timepoint: 0.05
         rrr-param-search:
           cv:
-          - 2
           - 3
-          - 4
-          - 5
           rank:
-          - 2
-          - 4
-          - 6
-          - 8
-          - 10
-          - 12
           - 14
-          - 16
-          - 18
-          - 20
-          - 25
-          - 30
           lag:
-          - 0
-          - 3
-          - 6
+          - 100
+          - 105
+          - 110
+          - 115
+          - 120
+          - 125
+          - 130
+          - 135
+          - 140
+          - 145
+          - 150
           timepoints:
           - 0
-          - 100
           duration: 0.25
           time-bin: 0.05
           time-step: 0.025
     outs:
-    - path: results/CV-lag-time.pickle
-      md5: 3c5e9b83bf418914f89ed8dcaad405c2
-      size: 2467
+    - path: results/cross-time-RRR.pickle
+      md5: 12436091f36b567fc7faffc928ae3059
+      size: 36070
   plot:
     cmd: python3 -u crosstime-plot.py
     deps:
@@ -97,7 +322,7 @@ stages:
       md5: d42aac4ffcc35730bd9c44f4b3bb6f12
       size: 1331
     - path: results/cross-time-RRR.pickle
-      md5: f48292fb1543b91540283947850c58ab
+      md5: 12436091f36b567fc7faffc928ae3059
       size: 36070
     params:
       params.yaml:
@@ -125,8 +350,8 @@ stages:
           time-step: 0.025
     outs:
     - path: figures/cross-time-RRR.png
-      md5: 888e66798f2894ae6cbfe8d149477294
-      size: 65889
+      md5: b4fa5fb5374ba45f5738a551db847093
+      size: 75485
   plots:
     cmd: python3 -u cv-time-lag-plot.py
     deps:
