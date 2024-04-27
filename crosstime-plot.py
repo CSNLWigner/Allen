@@ -11,13 +11,14 @@ search = yaml.safe_load(open("params.yaml"))["rrr-param-search"]
 rrr = yaml.safe_load(open("params.yaml"))["rrr"]
 
 # Load cross-time-RRR from results
-matrix = load_pickle("cross-time-RRR", path="results")[33:66,33:66]
+matrix = load_pickle("cross-time-RRR", path="results")#[33:66,33:66]
 
 # The diagonal of the matrix should be nan
 np.fill_diagonal(matrix, np.nan)
 
 # timeseries = np.arange(0, preprocess["stimulus-duration"], search['lag']/1000)
-timeseries = np.arange(33*3, 66*3, 3)
+timeseries = np.arange(0, 200, 3)
+#timeseries = np.arange(33*3, 66*3, 3)
 # timeseries = np.array(search['lag'])
 
 # Add the first timepoint to each element in timeseries
