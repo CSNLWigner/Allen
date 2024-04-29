@@ -1390,3 +1390,36 @@ To enable auto staging, run:
 
 	dvc config core.autostage true
 Use `dvc push` to send your updates to remote storage.
+[compute e05b381] TD_param-search_GEN3 session 1108528422
+ Committer: szabo.zsombor <szabo.zsombor@m3.rmki.kfki.hu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 4 files changed, 331 insertions(+), 11 deletions(-)
+2024. ápr. 29., hétfő, 22:13:57 CEST
+TD_param-search_GEN3 session 1108531612
+Running stage 'load':
+> python3 -u load_raw_activity_data.py
+Cache location: data/.vbn_s3_cache
+Your allensdk version is: 2.15.2
+the most up-to-date manifest available:  visual-behavior-neuropixels_project_manifest_v0.5.0.json
+the most up-to-date manifest downloaded: visual-behavior-neuropixels_project_manifest_v0.5.0.json
+Spike count in the data: 751319
+(68, 4804, 250)
+Spike count in the data: 437220
+(66, 4804, 250)
+Updating lock file 'dvc.lock'
+
+Running stage 'analysis':
+> python3 -u cv-time-lag-analysis.py
+Calculating something
+result.shape: (4, 3, 12, 2)
