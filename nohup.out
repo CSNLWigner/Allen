@@ -24559,3 +24559,31 @@ ERROR: failed to reproduce 'analysis': failed to run: python3 -u cv-time-lag-ana
   % (ns['name'], ns['version'], self.__namespaces.get(ns['name'])['version']))
 cv-time-lag-plot.py:49: RuntimeWarning: Mean of empty slice
   mean = np.nanmean(result, axis=tuple(rest_idx))
+Traceback (most recent call last):
+  File "load_raw_activity_data.py", line 13, in <module>
+    session = cache.get_ecephys_session(ecephys_session_id=session_id)
+  File "/home/szabo.zsombor/.conda/envs/pythconda/lib/python3.7/site-packages/allensdk/brain_observatory/behavior/behavior_project_cache/behavior_neuropixels_project_cache.py", line 149, in get_ecephys_session
+    return self.fetch_api.get_ecephys_session(ecephys_session_id)
+  File "/home/szabo.zsombor/.conda/envs/pythconda/lib/python3.7/site-packages/allensdk/brain_observatory/behavior/behavior_project_cache/project_apis/data_io/behavior_neuropixels_project_cloud_api.py", line 139, in get_ecephys_session
+    str(session_data_path), probe_data_path_map=probe_data_path_map
+  File "/home/szabo.zsombor/.conda/envs/pythconda/lib/python3.7/site-packages/allensdk/brain_observatory/behavior/behavior_session.py", line 604, in from_nwb_path
+    with pynwb.NWBHDF5IO(nwb_path, "r", load_namespaces=True) as read_io:
+  File "/home/szabo.zsombor/.conda/envs/pythconda/lib/python3.7/site-packages/hdmf/utils.py", line 645, in func_call
+    return func(args[0], **pargs)
+  File "/home/szabo.zsombor/.conda/envs/pythconda/lib/python3.7/site-packages/pynwb/__init__.py", line 218, in __init__
+    super().load_namespaces(tm, path, file=file_obj, driver=driver)
+  File "/home/szabo.zsombor/.conda/envs/pythconda/lib/python3.7/site-packages/hdmf/utils.py", line 645, in func_call
+    return func(args[0], **pargs)
+  File "/home/szabo.zsombor/.conda/envs/pythconda/lib/python3.7/site-packages/hdmf/backends/hdf5/h5tools.py", line 150, in load_namespaces
+    open_file_obj = cls.__resolve_file_obj(path, file_obj, driver)
+  File "/home/szabo.zsombor/.conda/envs/pythconda/lib/python3.7/site-packages/hdmf/backends/hdf5/h5tools.py", line 125, in __resolve_file_obj
+    file_obj = File(path, 'r', **file_kwargs)
+  File "/home/szabo.zsombor/.conda/envs/pythconda/lib/python3.7/site-packages/h5py/_hl/files.py", line 567, in __init__
+    fid = make_fid(name, mode, userblock_size, fapl, fcpl, swmr=swmr)
+  File "/home/szabo.zsombor/.conda/envs/pythconda/lib/python3.7/site-packages/h5py/_hl/files.py", line 231, in make_fid
+    fid = h5f.open(name, flags, fapl=fapl)
+  File "h5py/_objects.pyx", line 54, in h5py._objects.with_phil.wrapper
+  File "h5py/_objects.pyx", line 55, in h5py._objects.with_phil.wrapper
+  File "h5py/h5f.pyx", line 106, in h5py.h5f.open
+OSError: Unable to open file (truncated file: eof = 65486848, sblock->base_addr = 0, stored_eof = 2261770567)
+ERROR: failed to reproduce 'load': failed to run: python3 -u load_raw_activity_data.py, exited with 1
