@@ -4,6 +4,7 @@ import pandas as pd
 import yaml
 
 from utils.neuropixel import get_area_units, get_unit_responses, stimulus_duration
+from utils.utils import printProgressBar
 from scipy.signal import convolve
 
 # Load the parameters
@@ -314,6 +315,9 @@ def recalculate_neural_activity(neural_activity: np.ndarray, duration: float, ti
     # Create an empty array to store the recalculated neural activity
     recalculated_activity = np.zeros((N, K, T_new))
     
+    # TODO: Progress bar
+    # printProgressBar(0, T_new, prefix='Recalculating neural activity:', length=30)
+    
     for t in range(T_new):
 
         # Calculate the start and end indices for the original time step
@@ -322,6 +326,9 @@ def recalculate_neural_activity(neural_activity: np.ndarray, duration: float, ti
         
         # Recalculate the neural activity
         recalculated_activity[:, :, t] = np.sum(neural_activity[:, :, start_idx:end_idx], axis=2)
+        
+        # TODO: Update the progress bar
+        # printProgressBar(t + 1, T_new, prefix='Recalculating neural activity:', length=30)
                 
     return recalculated_activity
 
