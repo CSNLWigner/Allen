@@ -2442,3 +2442,36 @@ Cache location: data/.vbn_s3_cache
 Your allensdk version is: 2.15.2
 the most up-to-date manifest available:  visual-behavior-neuropixels_project_manifest_v0.5.0.json
 the most up-to-date manifest downloaded: visual-behavior-neuropixels_project_manifest_v0.5.0.json
+[compute 9517d34] TD_param-search_GEN3 session 1112515874
+ Committer: szabo.zsombor <szabo.zsombor@m3.rmki.kfki.hu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 3 files changed, 52 insertions(+), 1 deletion(-)
+2024. ápr. 30., kedd, 01:25:09 CEST
+TD_param-search_GEN3 session 1115077618
+Running stage 'load':
+> python3 -u load_raw_activity_data.py
+Cache location: data/.vbn_s3_cache
+Your allensdk version is: 2.15.2
+the most up-to-date manifest available:  visual-behavior-neuropixels_project_manifest_v0.5.0.json
+the most up-to-date manifest downloaded: visual-behavior-neuropixels_project_manifest_v0.5.0.json
+Spike count in the data: 1233068
+(148, 4804, 250)
+Spike count in the data: 0
+(0, 4804, 250)
+Computing md5 for a large file '/home/szabo.zsombor/Allen_project/data/raw-area-responses/5_block_VISp-activity.pickle'. This is only done once.
+Updating lock file 'dvc.lock'
+
+Running stage 'analysis':
+> python3 -u cv-time-lag-analysis.py
+Calculating something
