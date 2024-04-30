@@ -46,7 +46,7 @@ do
 
     # continue if no maximum value
     if ! grep -q 'maximum value' log_cache.txt; then
-	echo "All top-down model failed"
+	echo "WARNING: All top-down model failed"
 	continue
     fi
 
@@ -63,7 +63,7 @@ do
 
     # continue if no maximum value
     if ! grep -q 'maximum value' log_cache.txt; then
-	echo "All bottom-up model failed"
+	echo "WARNING: All bottom-up model failed"
 	continue
     fi
 
