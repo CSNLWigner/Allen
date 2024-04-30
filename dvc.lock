@@ -5,8 +5,8 @@ stages:
     deps:
     - path: data/raw-area-responses/
       hash: md5
-      md5: 10ef5583a11378b08328263dc56b10de.dir
-      size: 2475768328
+      md5: 90173a39471e6a306b64b6be692881b9.dir
+      size: 2649600328
       nfiles: 2
     - path: preprocessing.py
       hash: md5
@@ -15,7 +15,7 @@ stages:
     params:
       params.yaml:
         load:
-          session: 1112302803
+          session: 1111013640
           areas:
           - VISp
           - VISl
@@ -34,8 +34,8 @@ stages:
     outs:
     - path: data/area-responses/
       hash: md5
-      md5: 3dda94d48fbfdce02c965c6a77b8cc4c.dir
-      size: 247577128
+      md5: 04f91c128616ea9e82ff228fe6e8d2f1.dir
+      size: 264960328
       nfiles: 2
   rrr_analysis:
     cmd: python3 -u rrr_analysis.py
@@ -63,7 +63,7 @@ stages:
     deps:
     - path: results/rrr-time-slice.pickle
       hash: md5
-      md5: d4eb6d3e8e23e6b1c97b6a86cac8f98b
+      md5: 479b95be88871b5f98350b1cbd260046
       size: 1089
     - path: rrr-time-slice-plot.py
       hash: md5
@@ -83,8 +83,8 @@ stages:
     outs:
     - path: figures/rrr-time-slice.png
       hash: md5
-      md5: e92ce511094fc7fcb71148adcc1c2f40
-      size: 32716
+      md5: 6082ac171d2b0f578b82c5976b9d4057
+      size: 31598
   time_lag_analysis:
     cmd: python3 -u time_lag_analysis.py
     deps:
@@ -115,8 +115,8 @@ stages:
     deps:
     - path: data/area-responses/
       hash: md5
-      md5: 3dda94d48fbfdce02c965c6a77b8cc4c.dir
-      size: 247577128
+      md5: 04f91c128616ea9e82ff228fe6e8d2f1.dir
+      size: 264960328
       nfiles: 2
     - path: rrr-time-slice-analysis.py
       hash: md5
@@ -161,7 +161,7 @@ stages:
               cv: 2
               rank: 10
         load:
-          session: 1112302803
+          session: 1111013640
           areas:
           - VISp
           - VISl
@@ -173,7 +173,7 @@ stages:
     outs:
     - path: results/rrr-time-slice.pickle
       hash: md5
-      md5: d4eb6d3e8e23e6b1c97b6a86cac8f98b
+      md5: 479b95be88871b5f98350b1cbd260046
       size: 1089
   behav-preprocess:
     cmd: python3 -u behav-preprocessing.py
@@ -208,7 +208,7 @@ stages:
     params:
       params.yaml:
         load:
-          session: 1112302803
+          session: 1111013640
           areas:
           - VISp
           - VISl
@@ -218,8 +218,8 @@ stages:
     outs:
     - path: data/raw-area-responses/
       hash: md5
-      md5: 10ef5583a11378b08328263dc56b10de.dir
-      size: 2475768328
+      md5: 90173a39471e6a306b64b6be692881b9.dir
+      size: 2649600328
       nfiles: 2
   dimensionality-reduction:
     cmd: python3 -u cv-lag-time-selection.py
