@@ -8,7 +8,7 @@ neuropixel:
   block: "active behavior"
 
 load:
-  session: 1112515874
+  session: 1108334384
   areas: ["VISp", "VISl"] # "VISpm" # "VISm" has no spikes
   stimulus-block: 5
   # Stimulus blocks:
@@ -22,7 +22,7 @@ load:
 preprocess:
   areas: ["VISp", "VISl"] # "VISpm" # "VISm" has no spikes
   lag-time: 0 # in milliseconds
-  lag-area: "VISl"
+  lag-area: ""
   step-size: 0.010 # time-step in seconds # 0.010
   bin-size: 0.100 # time-window in seconds # Joao's default: 0.100
   stimulus-duration: 0.250 # in seconds
@@ -41,7 +41,7 @@ rrr:
   timepoint: 0.050 # in seconds
 
 rrr-time-slice:
-  predictor-time: 0.145 # in seconds
+  predictor-time: 0.150 # in seconds
 
 rrr-param-search:
   cv: [3] # [2,3,4,5]

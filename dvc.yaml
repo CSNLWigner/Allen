@@ -13,6 +13,45 @@ plots:
       x: epoch
 
 
+
+# MARK: Crosstest
+
+# stages:
+#    load:
+#      cmd: python3 -u load_raw_activity_data.py
+#      deps:
+#        - load_raw_activity_data.py
+#      params:
+#        - load
+#      outs:
+#        - data/raw-area-responses/
+#   analysis:
+#     cmd: python3 -u crosstime-analysis.py
+#     deps:
+#       - crosstime-analysis.py
+#       - data/raw-area-responses/
+#     params:
+#       - load
+#       - preprocess
+#       - rrr
+#       - best-rrr-params
+#       - rrr-param-search
+#     outs:
+#       - results/cross-time-RRR.pickle
+#   plots:
+#     cmd: python3 -u crosstime-plot.py
+#     deps:
+#       - crosstime-plot.py
+#       - results/cross-time-RRR.pickle
+#     params:
+#       - rrr-param-search
+#     outs:
+#       - figures/cross-time-RRR.png
+
+
+
+# MARK: time-slice
+
 stages:
   load:
     cmd: python3 -u load_raw_activity_data.py
@@ -22,25 +61,33 @@ stages:
       - load
     outs:
       - data/raw-area-responses/
-  analysis:
-    cmd: python3 -u crosstime-analysis.py
+  preprocess:
+    cmd: python3 -u preprocessing.py
     deps:
-      - crosstime-analysis.py
+      - preprocessing.py
       - data/raw-area-responses/
     params:
       - load
       - preprocess
-      - rrr
-      - best-rrr-params
-      - rrr-param-search
     outs:
-      - results/cross-time-RRR.pickle
-  plot:
-    cmd: python3 -u crosstime-plot.py
+      - data/area-responses/
+  analysis:
+    cmd: python3 -u rrr-time-slice-analysis.py
     deps:
-      - crosstime-plot.py
-      - results/cross-time-RRR.pickle
+      - rrr-time-slice-analysis.py
+      - data/area-responses/
     params:
-      - rrr-param-search
+      - rrr-time-slice
+      - load
+      - best-rrr-params
     outs:
-      - figures/cross-time-RRR.png
+      - results/rrr-time-slice.pickle
+  plots:
+    cmd: python3 -u rrr-time-slice-plot.py
+    deps:
+      - rrr-time-slice-plot.py
+      - results/rrr-time-slice.pickle
+    params:
+      - preprocess
+    outs:
+      - figures/rrr-time-slice.png
