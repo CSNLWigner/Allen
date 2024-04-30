@@ -36,5 +36,6 @@ plt.ylabel(f"Timepoints of {rrr['target']}")
 plt.colorbar()
 
 # Save the plot
+prediction_direction = 'top-down' if rrr['predictor'] == 'VISl' else 'bottom-up'
 plt.savefig("figures/cross-time-RRR.png")
-plt.savefig(f"cache/cross-time-RRR-{load['session']}.png")
+plt.savefig(f"cache/cross-time-RRR_{load['session']}_{prediction_direction}.png")
