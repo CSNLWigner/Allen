@@ -12,6 +12,8 @@ rrr = yaml.safe_load(open("params.yaml"))["rrr"]
 # Load cross-time-RRR from results
 matrix = load_pickle("cross-time-RRR", path="results")
 
+# print(matrix)
+
 # The diagonal of the matrix should be nan
 np.fill_diagonal(matrix, np.nan)
 

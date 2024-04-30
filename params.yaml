@@ -43,6 +43,9 @@ rrr:
 rrr-time-slice:
   predictor-time: 0.150 # in seconds
 
+crosstime:
+  scaling-factor: 5 # in ms
+
 rrr-param-search:
   cv: [3] # [2,3,4,5]
   rank: [14] # [2,4,6,8,10,12,14,16,18,20]
