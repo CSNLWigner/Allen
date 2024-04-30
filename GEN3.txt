@@ -2475,3 +2475,90 @@ Updating lock file 'dvc.lock'
 Running stage 'analysis':
 > python3 -u cv-time-lag-analysis.py
 Calculating something
+[compute bd0756c] TD_param-search_GEN3 session 1115077618
+ Committer: szabo.zsombor <szabo.zsombor@m3.rmki.kfki.hu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 4 files changed, 88 insertions(+), 4 deletions(-)
+2024. ápr. 30., kedd, 02:08:59 CEST
+TD_param-search_GEN3 session 1115086689
+Running stage 'load':
+> python3 -u load_raw_activity_data.py
+Cache location: data/.vbn_s3_cache
+Your allensdk version is: 2.15.2
+the most up-to-date manifest available:  visual-behavior-neuropixels_project_manifest_v0.5.0.json
+the most up-to-date manifest downloaded: visual-behavior-neuropixels_project_manifest_v0.5.0.json
+Spike count in the data: 1426701
+(161, 4798, 250)
+Spike count in the data: 1102990
+(134, 4798, 250)
+Computing md5 for a large file '/home/szabo.zsombor/Allen_project/data/raw-area-responses/5_block_VISl-activity.pickle'. This is only done once.
+Computing md5 for a large file '/home/szabo.zsombor/Allen_project/data/raw-area-responses/5_block_VISp-activity.pickle'. This is only done once.
+Updating lock file 'dvc.lock'
+
+Running stage 'analysis':
+> python3 -u cv-time-lag-analysis.py
+Calculating something
+CV: 2, Rank: 2, Mean test score: 0.016300712455806086
+CV: 2, Rank: 4, Mean test score: 0.06760551846131171
+CV: 2, Rank: 6, Mean test score: 0.0964749365604132
+CV: 2, Rank: 8, Mean test score: 0.1137268280762314
+CV: 2, Rank: 10, Mean test score: 0.12849719991967698
+CV: 2, Rank: 12, Mean test score: 0.1397151588099205
+CV: 2, Rank: 14, Mean test score: 0.1366064018342017
+CV: 2, Rank: 16, Mean test score: 0.13267789699108573
+CV: 2, Rank: 18, Mean test score: 0.13234882590798114
+CV: 2, Rank: 20, Mean test score: 0.13033825969994314
+CV: 2, Rank: 25, Mean test score: 0.12485145112285209
+CV: 2, Rank: 30, Mean test score: 0.12049375590017437
+CV: 2, Rank: 4, Mean test score: 0.03693932875502864
+CV: 2, Rank: 6, Mean test score: 0.06280707253336276
+CV: 2, Rank: 8, Mean test score: 0.0777545562276459
+CV: 2, Rank: 10, Mean test score: 0.09028575691232173
+CV: 2, Rank: 12, Mean test score: 0.09437691145321031
+CV: 2, Rank: 14, Mean test score: 0.09398184421136795
+CV: 2, Rank: 16, Mean test score: 0.09126718192163938
+CV: 2, Rank: 18, Mean test score: 0.08809268928971418
+CV: 2, Rank: 20, Mean test score: 0.08636415697598518
+CV: 2, Rank: 25, Mean test score: 0.08520655964220943
+CV: 2, Rank: 30, Mean test score: 0.07701862424053346
+CV: 2, Rank: 2, Mean test score: 0.016300712455806086
+CV: 2, Rank: 4, Mean test score: 0.06760551846131171
+CV: 2, Rank: 6, Mean test score: 0.0964749365604132
+CV: 2, Rank: 8, Mean test score: 0.1137268280762314
+CV: 2, Rank: 10, Mean test score: 0.12849719991967698
+CV: 2, Rank: 12, Mean test score: 0.1397151588099205
+CV: 2, Rank: 14, Mean test score: 0.1366064018342017
+CV: 2, Rank: 16, Mean test score: 0.13267789699108573
+CV: 2, Rank: 18, Mean test score: 0.13234882590798114
+CV: 2, Rank: 20, Mean test score: 0.13033825969994314
+CV: 2, Rank: 25, Mean test score: 0.12485145112285209
+CV: 2, Rank: 30, Mean test score: 0.12049375590017437
+result.shape: (4, 3, 12, 2)
+maximum value(0.14) at 0 ms is at cv=2, lag=0, rank=12
+maximum value(0.14) at 100 ms is at cv=2, lag=0, rank=12
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(4, 3, 12, 2)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
