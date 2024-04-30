@@ -40,8 +40,8 @@ do
     cp pipelines/param-search/dvc.yaml dvc.yaml
 
     # TD search
-    sed -i "s/predictor: '\(.*\)'/predictor: 'VISl'" params.yaml
-    sed -i "s/target: '\(.*\)'/predictor: 'VISp'" params.yaml
+    sed -i "s/predictor: '\(.*\)'/predictor: 'VISl'/" params.yaml
+    sed -i "s/target: '\(.*\)'/predictor: 'VISp'/" params.yaml
     run_function "TD_param-search_GEN3" $session
 
     # continue if no maximum value
@@ -57,8 +57,8 @@ do
     echo "rank is $TD_rank"
 
     # BU search
-    sed -i "s/predictor: '\(.*\)'/predictor: 'VISp'" params.yaml
-    sed -i "s/target: '\(.*\)'/predictor: 'VISl'" params.yaml
+    sed -i "s/predictor: '\(.*\)'/predictor: 'VISp'/" params.yaml
+    sed -i "s/target: '\(.*\)'/predictor: 'VISl'/" params.yaml
     run_function "BU_param-search_GEN3" $session
 
     # continue if no maximum value
@@ -90,13 +90,13 @@ EOL
     cp pipelines/crosstime/dvc.yaml dvc.yaml
 
     # TD crosstime
-    sed -i "s/predictor: '\(.*\)'/predictor: 'VISl'" params.yaml
-    sed -i "s/target: '\(.*\)'/predictor: 'VISp'" params.yaml
+    sed -i "s/predictor: '\(.*\)'/predictor: 'VISl'/" params.yaml
+    sed -i "s/target: '\(.*\)'/predictor: 'VISp'/" params.yaml
     run_function "TD_cross-time_GEN3" $session
 
     # BU crosstime
-    sed -i "s/predictor: '\(.*\)'/predictor: 'VISp'" params.yaml
-    sed -i "s/target: '\(.*\)'/predictor: 'VISl'" params.yaml
+    sed -i "s/predictor: '\(.*\)'/predictor: 'VISp'/" params.yaml
+    sed -i "s/target: '\(.*\)'/predictor: 'VISl'/" params.yaml
     run_function "BU_cross-time_GEN3" $session
 
 done
