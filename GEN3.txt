@@ -3056,3 +3056,339 @@ Running stage 'analysis':
 > python3 -u cv-time-lag-analysis.py
 Calculating something
 result.shape: (4, 3, 12, 2)
+[compute 1eaa13a] TD_param-search_GEN3 session 1116941914
+ Committer: szabo.zsombor <szabo.zsombor@m3.rmki.kfki.hu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 4 files changed, 56 insertions(+), 4 deletions(-)
+2024. ápr. 30., kedd, 07:34:48 CEST
+TD_param-search_GEN3 session 1117148442
+Running stage 'load':
+> python3 -u load_raw_activity_data.py
+Cache location: data/.vbn_s3_cache
+Your allensdk version is: 2.15.2
+the most up-to-date manifest available:  visual-behavior-neuropixels_project_manifest_v0.5.0.json
+the most up-to-date manifest downloaded: visual-behavior-neuropixels_project_manifest_v0.5.0.json
+Spike count in the data: 672979
+(63, 4807, 250)
+Spike count in the data: 765064
+(112, 4807, 250)
+Computing md5 for a large file '/home/szabo.zsombor/Allen_project/data/raw-area-responses/5_block_VISl-activity.pickle'. This is only done once.
+Updating lock file 'dvc.lock'
+
+Running stage 'analysis':
+> python3 -u cv-time-lag-analysis.py
+Calculating something
+CV: 2, Rank: 2, Mean test score: 0.037564651184795114
+CV: 2, Rank: 2, Mean test score: 0.04103160885127499
+CV: 2, Rank: 4, Mean test score: 0.039559663588092514
+CV: 2, Rank: 4, Mean test score: 0.056241743059330454
+CV: 2, Rank: 6, Mean test score: 0.04660455701475093
+CV: 2, Rank: 6, Mean test score: 0.070817903177059
+CV: 2, Rank: 8, Mean test score: 0.0502383007481267
+CV: 2, Rank: 8, Mean test score: 0.07930579677843311
+CV: 2, Rank: 10, Mean test score: 0.04959000578781021
+CV: 2, Rank: 10, Mean test score: 0.08606729406290393
+CV: 2, Rank: 12, Mean test score: 0.05037010259998903
+CV: 2, Rank: 12, Mean test score: 0.08357543795168412
+CV: 2, Rank: 14, Mean test score: 0.04973441090070095
+CV: 2, Rank: 14, Mean test score: 0.08600044017155009
+CV: 2, Rank: 16, Mean test score: 0.04935382200924616
+CV: 2, Rank: 16, Mean test score: 0.08660950019082664
+CV: 2, Rank: 18, Mean test score: 0.04768229373226398
+CV: 2, Rank: 18, Mean test score: 0.08608636352818008
+CV: 2, Rank: 20, Mean test score: 0.047144028258874454
+CV: 2, Rank: 20, Mean test score: 0.08583470896325235
+CV: 2, Rank: 25, Mean test score: 0.04203826780680403
+CV: 2, Rank: 25, Mean test score: 0.08183402269754361
+CV: 2, Rank: 30, Mean test score: 0.03853507422354726
+CV: 2, Rank: 30, Mean test score: 0.07664557671570327
+CV: 3, Rank: 2, Mean test score: 0.009354964771095665
+CV: 3, Rank: 2, Mean test score: 0.014608510105804171
+CV: 3, Rank: 4, Mean test score: 0.005505335604913217
+CV: 3, Rank: 4, Mean test score: 0.030544933192043915
+CV: 3, Rank: 6, Mean test score: 0.019284910582893142
+CV: 3, Rank: 6, Mean test score: 0.050985690516820954
+CV: 3, Rank: 8, Mean test score: 0.027438797452522645
+CV: 3, Rank: 8, Mean test score: 0.05095025488244482
+CV: 3, Rank: 10, Mean test score: 0.027819032601331357
+CV: 3, Rank: 10, Mean test score: 0.05580643454040446
+CV: 3, Rank: 12, Mean test score: 0.02988530656832376
+CV: 3, Rank: 12, Mean test score: 0.05805199620220422
+CV: 3, Rank: 14, Mean test score: 0.030720527933230712
+CV: 3, Rank: 14, Mean test score: 0.06261032258738365
+CV: 3, Rank: 16, Mean test score: 0.030524835997536897
+CV: 3, Rank: 16, Mean test score: 0.06340145518987873
+CV: 3, Rank: 18, Mean test score: 0.0295668549432478
+CV: 3, Rank: 18, Mean test score: 0.06360290839537756
+CV: 3, Rank: 20, Mean test score: 0.028813899297183667
+CV: 3, Rank: 20, Mean test score: 0.06213687126403511
+CV: 3, Rank: 25, Mean test score: 0.026442890208766973
+CV: 3, Rank: 25, Mean test score: 0.062114763125296235
+CV: 3, Rank: 30, Mean test score: 0.02371009589469746
+CV: 3, Rank: 30, Mean test score: 0.05905051260214699
+CV: 4, Rank: 2, Mean test score: 0.011254264956485335
+CV: 4, Rank: 2, Mean test score: 0.015210642635785355
+CV: 4, Rank: 4, Mean test score: 0.01666079951654628
+CV: 4, Rank: 4, Mean test score: 0.031772050025739546
+CV: 4, Rank: 6, Mean test score: 0.03368488800640161
+CV: 4, Rank: 6, Mean test score: 0.0538180569229196
+CV: 4, Rank: 8, Mean test score: 0.04047075721078811
+CV: 4, Rank: 8, Mean test score: 0.060674516790940713
+CV: 4, Rank: 10, Mean test score: 0.04327775728313247
+CV: 4, Rank: 10, Mean test score: 0.06308650092438738
+CV: 4, Rank: 12, Mean test score: 0.045297078809136096
+CV: 4, Rank: 12, Mean test score: 0.06448495620347292
+CV: 4, Rank: 14, Mean test score: 0.04576535030753201
+CV: 4, Rank: 14, Mean test score: 0.06930933889577211
+CV: 4, Rank: 16, Mean test score: 0.045352275968122226
+CV: 4, Rank: 16, Mean test score: 0.07130630583589556
+CV: 4, Rank: 18, Mean test score: 0.0451424150261966
+CV: 4, Rank: 18, Mean test score: 0.07213992676700488
+CV: 4, Rank: 20, Mean test score: 0.045353991535870566
+CV: 4, Rank: 20, Mean test score: 0.07118690354682161
+CV: 4, Rank: 25, Mean test score: 0.0429584166274209
+CV: 4, Rank: 25, Mean test score: 0.06979029048840725
+CV: 4, Rank: 30, Mean test score: 0.04098294658716861
+CV: 4, Rank: 30, Mean test score: 0.06767361351709993
+CV: 5, Rank: 2, Mean test score: 0.007703487601350402
+CV: 5, Rank: 2, Mean test score: 0.010246293249804386
+CV: 5, Rank: 4, Mean test score: 0.019223194177265757
+CV: 5, Rank: 4, Mean test score: 0.029306610219839768
+CV: 5, Rank: 6, Mean test score: 0.03661242959299092
+CV: 5, Rank: 6, Mean test score: 0.05288343204983803
+CV: 5, Rank: 8, Mean test score: 0.0419090245535032
+CV: 5, Rank: 8, Mean test score: 0.06316062097474777
+CV: 5, Rank: 10, Mean test score: 0.04513942606312361
+CV: 5, Rank: 10, Mean test score: 0.06649911360824043
+CV: 5, Rank: 12, Mean test score: 0.047170388367784345
+CV: 5, Rank: 12, Mean test score: 0.07126673182756367
+CV: 5, Rank: 14, Mean test score: 0.048351089233475426
+CV: 5, Rank: 14, Mean test score: 0.07488872494058028
+CV: 5, Rank: 16, Mean test score: 0.04811250373760421
+CV: 5, Rank: 16, Mean test score: 0.07661207991330797
+CV: 5, Rank: 18, Mean test score: 0.04823647072888455
+CV: 5, Rank: 18, Mean test score: 0.07709300043613668
+CV: 5, Rank: 20, Mean test score: 0.04864110905860198
+CV: 5, Rank: 20, Mean test score: 0.07660274124125585
+CV: 5, Rank: 25, Mean test score: 0.04628871905209476
+CV: 5, Rank: 25, Mean test score: 0.07605885691252377
+CV: 5, Rank: 30, Mean test score: 0.044954996713665034
+CV: 5, Rank: 30, Mean test score: 0.07397265287760624
+CV: 2, Rank: 2, Mean test score: 0.029991417297613066
+CV: 2, Rank: 2, Mean test score: 0.026866317052143065
+CV: 2, Rank: 4, Mean test score: 0.04605064197229364
+CV: 2, Rank: 4, Mean test score: 0.029304647687648407
+CV: 2, Rank: 6, Mean test score: 0.051439686724436856
+CV: 2, Rank: 6, Mean test score: 0.035372278337438244
+CV: 2, Rank: 8, Mean test score: 0.05439872443694468
+CV: 2, Rank: 8, Mean test score: 0.03940528365750823
+CV: 2, Rank: 10, Mean test score: 0.05432105561903536
+CV: 2, Rank: 10, Mean test score: 0.04404753216530686
+CV: 2, Rank: 12, Mean test score: 0.053979914291735
+CV: 2, Rank: 12, Mean test score: 0.04558985852700781
+CV: 2, Rank: 14, Mean test score: 0.053373723067413406
+CV: 2, Rank: 14, Mean test score: 0.043944197630840516
+CV: 2, Rank: 16, Mean test score: 0.05153608037220045
+CV: 2, Rank: 16, Mean test score: 0.04194923301092513
+CV: 2, Rank: 18, Mean test score: 0.04918412870687559
+CV: 2, Rank: 18, Mean test score: 0.040288029318316404
+CV: 2, Rank: 20, Mean test score: 0.04785506041990092
+CV: 2, Rank: 20, Mean test score: 0.0386229017314442
+CV: 2, Rank: 25, Mean test score: 0.0445266037391695
+CV: 2, Rank: 25, Mean test score: 0.03507947894881756
+CV: 2, Rank: 30, Mean test score: 0.04067683263242819
+CV: 2, Rank: 30, Mean test score: 0.03021441958880426
+CV: 3, Rank: 2, Mean test score: 0.00577643743794583
+CV: 3, Rank: 4, Mean test score: 0.023161806105992336
+CV: 3, Rank: 4, Mean test score: 0.005477159880759852
+CV: 3, Rank: 6, Mean test score: 0.028627179158058527
+CV: 3, Rank: 6, Mean test score: 0.014225960711480821
+CV: 3, Rank: 8, Mean test score: 0.02972813191289081
+CV: 3, Rank: 8, Mean test score: 0.020346089994333932
+CV: 3, Rank: 10, Mean test score: 0.030924996737214747
+CV: 3, Rank: 10, Mean test score: 0.022568628768417847
+CV: 3, Rank: 12, Mean test score: 0.030719945627215726
+CV: 3, Rank: 12, Mean test score: 0.02772783152987858
+CV: 3, Rank: 14, Mean test score: 0.03239912108330148
+CV: 3, Rank: 14, Mean test score: 0.027970899730293968
+CV: 3, Rank: 16, Mean test score: 0.031729319301895265
+CV: 3, Rank: 16, Mean test score: 0.026833924950242394
+CV: 3, Rank: 18, Mean test score: 0.030247846455920296
+CV: 3, Rank: 18, Mean test score: 0.026333772455029252
+CV: 3, Rank: 20, Mean test score: 0.029314311264036493
+CV: 3, Rank: 20, Mean test score: 0.025269921552329776
+CV: 3, Rank: 25, Mean test score: 0.02833328782872116
+CV: 3, Rank: 25, Mean test score: 0.02235176556654055
+CV: 3, Rank: 30, Mean test score: 0.0257496463091226
+CV: 3, Rank: 30, Mean test score: 0.019691827978717383
+CV: 4, Rank: 2, Mean test score: 0.0045679910937180684
+CV: 4, Rank: 4, Mean test score: 0.02489567138722641
+CV: 4, Rank: 4, Mean test score: 0.01577140173743831
+CV: 4, Rank: 6, Mean test score: 0.0355173884534819
+CV: 4, Rank: 6, Mean test score: 0.02265933838059641
+CV: 4, Rank: 8, Mean test score: 0.038919805280329636
+CV: 4, Rank: 8, Mean test score: 0.03104909567338321
+CV: 4, Rank: 10, Mean test score: 0.041255540682457195
+CV: 4, Rank: 10, Mean test score: 0.0343357911632634
+CV: 4, Rank: 12, Mean test score: 0.039963656228397204
+CV: 4, Rank: 12, Mean test score: 0.040195909411606154
+CV: 4, Rank: 14, Mean test score: 0.04077735728758557
+CV: 4, Rank: 14, Mean test score: 0.040982313422650365
+CV: 4, Rank: 16, Mean test score: 0.042023313612608554
+CV: 4, Rank: 16, Mean test score: 0.04054414873959517
+CV: 4, Rank: 18, Mean test score: 0.04075742810909107
+CV: 4, Rank: 18, Mean test score: 0.04059815148926906
+CV: 4, Rank: 20, Mean test score: 0.03999080607084353
+CV: 4, Rank: 20, Mean test score: 0.04004005731807283
+CV: 4, Rank: 25, Mean test score: 0.03918286656331903
+CV: 4, Rank: 25, Mean test score: 0.03792021557037616
+CV: 4, Rank: 30, Mean test score: 0.03708736020265473
+CV: 4, Rank: 30, Mean test score: 0.035253284585063965
+CV: 5, Rank: 2, Mean test score: 0.0006369001005305103
+CV: 5, Rank: 4, Mean test score: 0.01926137724382648
+CV: 5, Rank: 4, Mean test score: 0.013608432801121196
+CV: 5, Rank: 6, Mean test score: 0.03747379003323566
+CV: 5, Rank: 6, Mean test score: 0.02249054436828931
+CV: 5, Rank: 8, Mean test score: 0.044754827901137675
+CV: 5, Rank: 8, Mean test score: 0.03029553466417778
+CV: 5, Rank: 10, Mean test score: 0.04742428454817515
+CV: 5, Rank: 10, Mean test score: 0.034294798622570295
+CV: 5, Rank: 12, Mean test score: 0.0459799432605597
+CV: 5, Rank: 12, Mean test score: 0.039295639732233545
+CV: 5, Rank: 14, Mean test score: 0.04708843600012032
+CV: 5, Rank: 14, Mean test score: 0.040822034353378556
+CV: 5, Rank: 16, Mean test score: 0.04823472882749328
+CV: 5, Rank: 16, Mean test score: 0.040893909890665145
+CV: 5, Rank: 18, Mean test score: 0.04758741140885991
+CV: 5, Rank: 18, Mean test score: 0.040434564446211144
+CV: 5, Rank: 20, Mean test score: 0.04691973700059794
+CV: 5, Rank: 20, Mean test score: 0.040106540480532686
+CV: 5, Rank: 25, Mean test score: 0.04554024710283721
+CV: 5, Rank: 25, Mean test score: 0.03827200967679647
+CV: 5, Rank: 30, Mean test score: 0.043925521626246904
+CV: 5, Rank: 30, Mean test score: 0.03539132657180564
+CV: 2, Rank: 2, Mean test score: 0.037564651184795114
+CV: 2, Rank: 2, Mean test score: 0.04103160885127499
+CV: 2, Rank: 4, Mean test score: 0.039559663588092514
+CV: 2, Rank: 4, Mean test score: 0.056241743059330454
+CV: 2, Rank: 6, Mean test score: 0.04660455701475093
+CV: 2, Rank: 6, Mean test score: 0.070817903177059
+CV: 2, Rank: 8, Mean test score: 0.0502383007481267
+CV: 2, Rank: 8, Mean test score: 0.07930579677843311
+CV: 2, Rank: 10, Mean test score: 0.04959000578781021
+CV: 2, Rank: 10, Mean test score: 0.08606729406290393
+CV: 2, Rank: 12, Mean test score: 0.05037010259998903
+CV: 2, Rank: 12, Mean test score: 0.08357543795168412
+CV: 2, Rank: 14, Mean test score: 0.04973441090070095
+CV: 2, Rank: 14, Mean test score: 0.08600044017155009
+CV: 2, Rank: 16, Mean test score: 0.04935382200924616
+CV: 2, Rank: 16, Mean test score: 0.08660950019082664
+CV: 2, Rank: 18, Mean test score: 0.04768229373226398
+CV: 2, Rank: 18, Mean test score: 0.08608636352818008
+CV: 2, Rank: 20, Mean test score: 0.047144028258874454
+CV: 2, Rank: 20, Mean test score: 0.08583470896325235
+CV: 2, Rank: 25, Mean test score: 0.04203826780680403
+CV: 2, Rank: 25, Mean test score: 0.08183402269754361
+CV: 2, Rank: 30, Mean test score: 0.03853507422354726
+CV: 2, Rank: 30, Mean test score: 0.07664557671570327
+CV: 3, Rank: 2, Mean test score: 0.009354964771095665
+CV: 3, Rank: 2, Mean test score: 0.014608510105804171
+CV: 3, Rank: 4, Mean test score: 0.005505335604913217
+CV: 3, Rank: 4, Mean test score: 0.030544933192043915
+CV: 3, Rank: 6, Mean test score: 0.019284910582893142
+CV: 3, Rank: 6, Mean test score: 0.050985690516820954
+CV: 3, Rank: 8, Mean test score: 0.027438797452522645
+CV: 3, Rank: 8, Mean test score: 0.05095025488244482
+CV: 3, Rank: 10, Mean test score: 0.027819032601331357
+CV: 3, Rank: 10, Mean test score: 0.05580643454040446
+CV: 3, Rank: 12, Mean test score: 0.02988530656832376
+CV: 3, Rank: 12, Mean test score: 0.05805199620220422
+CV: 3, Rank: 14, Mean test score: 0.030720527933230712
+CV: 3, Rank: 14, Mean test score: 0.06261032258738365
+CV: 3, Rank: 16, Mean test score: 0.030524835997536897
+CV: 3, Rank: 16, Mean test score: 0.06340145518987873
+CV: 3, Rank: 18, Mean test score: 0.0295668549432478
+CV: 3, Rank: 18, Mean test score: 0.06360290839537756
+CV: 3, Rank: 20, Mean test score: 0.028813899297183667
+CV: 3, Rank: 20, Mean test score: 0.06213687126403511
+CV: 3, Rank: 25, Mean test score: 0.026442890208766973
+CV: 3, Rank: 25, Mean test score: 0.062114763125296235
+CV: 3, Rank: 30, Mean test score: 0.02371009589469746
+CV: 3, Rank: 30, Mean test score: 0.05905051260214699
+CV: 4, Rank: 2, Mean test score: 0.011254264956485335
+CV: 4, Rank: 2, Mean test score: 0.015210642635785355
+CV: 4, Rank: 4, Mean test score: 0.01666079951654628
+CV: 4, Rank: 4, Mean test score: 0.031772050025739546
+CV: 4, Rank: 6, Mean test score: 0.03368488800640161
+CV: 4, Rank: 6, Mean test score: 0.0538180569229196
+CV: 4, Rank: 8, Mean test score: 0.04047075721078811
+CV: 4, Rank: 8, Mean test score: 0.060674516790940713
+CV: 4, Rank: 10, Mean test score: 0.04327775728313247
+CV: 4, Rank: 10, Mean test score: 0.06308650092438738
+CV: 4, Rank: 12, Mean test score: 0.045297078809136096
+CV: 4, Rank: 12, Mean test score: 0.06448495620347292
+CV: 4, Rank: 14, Mean test score: 0.04576535030753201
+CV: 4, Rank: 14, Mean test score: 0.06930933889577211
+CV: 4, Rank: 16, Mean test score: 0.045352275968122226
+CV: 4, Rank: 16, Mean test score: 0.07130630583589556
+CV: 4, Rank: 18, Mean test score: 0.0451424150261966
+CV: 4, Rank: 18, Mean test score: 0.07213992676700488
+CV: 4, Rank: 20, Mean test score: 0.045353991535870566
+CV: 4, Rank: 20, Mean test score: 0.07118690354682161
+CV: 4, Rank: 25, Mean test score: 0.0429584166274209
+CV: 4, Rank: 25, Mean test score: 0.06979029048840725
+CV: 4, Rank: 30, Mean test score: 0.04098294658716861
+CV: 4, Rank: 30, Mean test score: 0.06767361351709993
+CV: 5, Rank: 2, Mean test score: 0.007703487601350402
+CV: 5, Rank: 2, Mean test score: 0.010246293249804386
+CV: 5, Rank: 4, Mean test score: 0.019223194177265757
+CV: 5, Rank: 4, Mean test score: 0.029306610219839768
+CV: 5, Rank: 6, Mean test score: 0.03661242959299092
+CV: 5, Rank: 6, Mean test score: 0.05288343204983803
+CV: 5, Rank: 8, Mean test score: 0.0419090245535032
+CV: 5, Rank: 8, Mean test score: 0.06316062097474777
+CV: 5, Rank: 10, Mean test score: 0.04513942606312361
+CV: 5, Rank: 10, Mean test score: 0.06649911360824043
+CV: 5, Rank: 12, Mean test score: 0.047170388367784345
+CV: 5, Rank: 12, Mean test score: 0.07126673182756367
+CV: 5, Rank: 14, Mean test score: 0.048351089233475426
+CV: 5, Rank: 14, Mean test score: 0.07488872494058028
+CV: 5, Rank: 16, Mean test score: 0.04811250373760421
+CV: 5, Rank: 16, Mean test score: 0.07661207991330797
+CV: 5, Rank: 18, Mean test score: 0.04823647072888455
+CV: 5, Rank: 18, Mean test score: 0.07709300043613668
+CV: 5, Rank: 20, Mean test score: 0.04864110905860198
+CV: 5, Rank: 20, Mean test score: 0.07660274124125585
+CV: 5, Rank: 25, Mean test score: 0.04628871905209476
+CV: 5, Rank: 25, Mean test score: 0.07605885691252377
+CV: 5, Rank: 30, Mean test score: 0.044954996713665034
+CV: 5, Rank: 30, Mean test score: 0.07397265287760624
+result.shape: (4, 3, 12, 2)
+maximum value(0.087) at 0 ms is at cv=2, lag=0, rank=16
+maximum value(0.087) at 100 ms is at cv=2, lag=0, rank=16
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(4, 3, 12, 2)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
