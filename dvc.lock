@@ -9,7 +9,7 @@ stages:
     params:
       params.yaml:
         load:
-          session: 1152632711
+          session: 1152811536
           areas:
           - VISp
           - VISl
@@ -18,8 +18,8 @@ stages:
           stimulus-duration: 0.25
     outs:
     - path: data/raw-area-responses/
-      md5: ca359a8a069c52f78a08255889032669.dir
-      size: 1797070322
+      md5: 45a83e7571474eb4e2b2abc35e99345f.dir
+      size: 1152000319
       nfiles: 2
   analysis:
     cmd: python3 -u cv-time-lag-analysis.py
