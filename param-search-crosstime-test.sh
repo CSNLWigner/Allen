@@ -18,6 +18,12 @@ run_function () {
     # Run code
     dvc repro > log_cache.txt
 
+    # Exit in case of dvc error
+    if [[ $? -ne 0 ]]; then
+	echo "ERROR: dvc was not successfull"
+	exit 1
+    fi
+
     # Git
     git add .
     git commit -m "$1 session $2"
@@ -41,7 +47,7 @@ do
 
     # TD search
     sed -i "s/predictor: '\(.*\)'/predictor: 'VISl'/" params.yaml
-    sed -i "s/target: '\(.*\)'/predictor: 'VISp'/" params.yaml
+    sed -i "s/target: '\(.*\)'/target: 'VISp'/" params.yaml
     run_function "TD_param-search_GEN3" $session
 
     # continue if no maximum value
@@ -58,7 +64,7 @@ do
 
     # BU search
     sed -i "s/predictor: '\(.*\)'/predictor: 'VISp'/" params.yaml
-    sed -i "s/target: '\(.*\)'/predictor: 'VISl'/" params.yaml
+    sed -i "s/target: '\(.*\)'/target: 'VISl'/" params.yaml
     run_function "BU_param-search_GEN3" $session
 
     # continue if no maximum value
@@ -91,12 +97,12 @@ EOL
 
     # TD crosstime
     sed -i "s/predictor: '\(.*\)'/predictor: 'VISl'/" params.yaml
-    sed -i "s/target: '\(.*\)'/predictor: 'VISp'/" params.yaml
+    sed -i "s/target: '\(.*\)'/target: 'VISp'/" params.yaml
     run_function "TD_cross-time_GEN3" $session
 
     # BU crosstime
     sed -i "s/predictor: '\(.*\)'/predictor: 'VISp'/" params.yaml
-    sed -i "s/target: '\(.*\)'/predictor: 'VISl'/" params.yaml
+    sed -i "s/target: '\(.*\)'/target: 'VISl'/" params.yaml
     run_function "BU_cross-time_GEN3" $session
 
 done
