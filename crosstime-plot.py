@@ -31,8 +31,8 @@ tick_frequency = 5
 plt.imshow(matrix, cmap='terrain', interpolation='bilinear')
 plt.xticks(range(0, timeseries.shape[0], tick_frequency), timeseries[::tick_frequency])
 plt.yticks(range(0, timeseries.shape[0], tick_frequency), timeseries[::tick_frequency])
-plt.xlabel(f"Timepoints of {rrr['predictor']}")
-plt.ylabel(f"Timepoints of {rrr['target']}")
+plt.xlabel(f"Timepoints of {rrr['target']}")
+plt.ylabel(f"Timepoints of {rrr['predictor']}")
 plt.colorbar()
 
 # Save the plot
