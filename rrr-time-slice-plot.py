@@ -2,6 +2,7 @@
 from matplotlib import pyplot as plt
 import numpy as np
 from utils.data_io import load_pickle, save_fig
+from utils import plots
 import yaml
 
 # Load parameters
@@ -18,16 +19,9 @@ timepoints = np.arange(0, preproc['stimulus-duration'], preproc['step-size'])  #
 
 # print(mean_BU[np.newaxis].T)
 
-# Plot the results
-plt.plot(timepoints, mean_TD, label='Top-down')
-plt.plot(timepoints, mean_BU, label='Bottom-up')
-plt.xlabel('Time (s)')
-plt.ylabel('R^2')
-# Make a vertical line at the predictor time
-plt.axvline(x=predictor_time, color='k', linestyle='--')
-plt.xticks([0, predictor_time, timepoints[-1]])
-plt.xlim([0, timepoints[-1]])
-plt.legend()
+# Create the figure
+fig, ax = plt.subplots()
+plots.rrr_time_slice(ax, mean_TD, mean_BU)
 
 # Save the figure
-plt.savefig('figures/rrr-time-slice.png')
+save_fig('rrr-time-slice')

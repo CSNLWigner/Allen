@@ -410,3 +410,37 @@ def score_time(mean, sem, title=None, xlabel='Time', ylabel='R^2', time_series=N
     ax.set_xticklabels(time_series[::5])
     
     return fig
+
+def crosstime_RRR(ax, matrix, predictor, target, timeseries):
+    
+    # The diagonal of the matrix should be nan
+    np.fill_diagonal(matrix, np.nan)
+
+    # tick frequency
+    tick_frequency = 5
+    # Plot the matrix. colormap do not use white color. Make the resolution higher.
+    ax.imshow(matrix, cmap='terrain', interpolation='bilinear')
+    ax.set_xticks(range(0, timeseries.shape[0], tick_frequency))
+    ax.set_xticklabels(timeseries[::tick_frequency])
+    ax.set_yticks(range(0, timeseries.shape[0], tick_frequency))
+    ax.set_yticklabels(timeseries[::tick_frequency])
+    ax.set_xlabel(f"Timepoints of {target}")
+    ax.set_ylabel(f"Timepoints of {predictor}")
+    ax.colorbar()
+
+    return ax
+
+def rrr_time_slice(ax, mean_TD, mean_BU):
+    
+    # Plot the results
+    ax[0].imshow(mean_TD[np.newaxis].T, aspect='auto', cmap='hot')
+    ax[0].set_title('Top-down')
+    ax[0].set_xlabel('Time (s)')
+    ax[0].set_ylabel('Area')
+    
+    ax[1].imshow(mean_BU[np.newaxis].T, aspect='auto', cmap='hot')
+    ax[1].set_title('Bottom-up')
+    ax[1].set_xlabel('Time (s)')
+    ax[1].set_ylabel('Area')
+    
+    return ax
