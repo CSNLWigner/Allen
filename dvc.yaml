@@ -21,7 +21,7 @@ stages:
     outs:
       - results/cross-time-RRR.pickle
   cache:
-    cmd: python3 -u save_slices.py
+    cmd: python3 -u save-slices.py
     deps:
       - save-slices.py
       - results/cross-time-RRR.pickle
