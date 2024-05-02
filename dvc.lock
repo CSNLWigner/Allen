@@ -9,7 +9,7 @@ stages:
     params:
       params.yaml:
         load:
-          session: 1067588044
+          session: 1067781390
           areas:
           - VISp
           - VISl
@@ -18,8 +18,8 @@ stages:
           stimulus-duration: 0.25
     outs:
     - path: data/raw-area-responses/
-      md5: 96c16af4dbdf280fc159e70173626276.dir
-      size: 2623530322
+      md5: c73a4c9103d7d3ae692320017b393644.dir
+      size: 2005146322
       nfiles: 2
   analysis:
     cmd: python3 -u crosstime-analysis.py
@@ -28,8 +28,8 @@ stages:
       md5: f1597d35f27888f863465e88e97333b1
       size: 2486
     - path: data/raw-area-responses/
-      md5: 96c16af4dbdf280fc159e70173626276.dir
-      size: 2623530322
+      md5: c73a4c9103d7d3ae692320017b393644.dir
+      size: 2005146322
       nfiles: 2
     params:
       params.yaml:
@@ -266,7 +266,7 @@ stages:
               cv: 2
               rank: 8
         load:
-          session: 1067588044
+          session: 1067781390
           areas:
           - VISp
           - VISl
@@ -313,7 +313,7 @@ stages:
           time-step: 0.025
     outs:
     - path: results/cross-time-RRR.pickle
-      md5: 043c16c4d21dda4a2dd16236cc6da585
+      md5: 6d4742299ab83a941e2b04c78b113c2c
       size: 36070
   plot:
     cmd: python3 -u crosstime-plot.py
@@ -382,7 +382,7 @@ stages:
     cmd: python3 -u save-slices.py
     deps:
     - path: results/cross-time-RRR.pickle
-      md5: 043c16c4d21dda4a2dd16236cc6da585
+      md5: 6d4742299ab83a941e2b04c78b113c2c
       size: 36070
     - path: save-slices.py
       md5: f96435535e18d9b5f51d93096567a79c
@@ -390,7 +390,7 @@ stages:
     params:
       params.yaml:
         load:
-          session: 1067588044
+          session: 1067781390
           areas:
           - VISp
           - VISl
