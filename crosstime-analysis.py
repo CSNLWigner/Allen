@@ -33,7 +33,7 @@ cv = rrr[session][prediction_direction]['cv']
 rank = rrr[session][prediction_direction]['rank']
 
 # timeseries = np.arange(0, preprocess["stimulus-duration"], search['lag']/1000)
-timeseries = np.arange(0, 200, 3)
+timeseries = np.arange(0, 200, 5)
 # timeseries = np.array(search['lag']) + search['timepoints'][0]
 
 # Init results
