@@ -1,58 +1,3 @@
-
-
-
-metrics:
-  - metrics.json
-
-params:
-  - params.yaml
-
-plots:
-  - plot.csv:
-      y: accuracy
-      x: epoch
-
-
-
-# MARK: Crosstest
-
-# stages:
-#   load:
-#     cmd: python3 -u load_raw_activity_data.py
-#     deps:
-#       - load_raw_activity_data.py
-#     params:
-#       - load
-#     outs:
-#       - data/raw-area-responses/
-#   analysis:
-#     cmd: python3 -u crosstime-analysis.py
-#     deps:
-#       - crosstime-analysis.py
-#       - data/raw-area-responses/
-#     params:
-#       - load
-#       - preprocess
-#       - rrr
-#       - best-rrr-params
-#       - rrr-param-search
-#       - crosstime
-#     outs:
-#       - results/cross-time-RRR.pickle
-#   plots:
-#     cmd: python3 -u crosstime-plot.py
-#     deps:
-#       - crosstime-plot.py
-#       - results/cross-time-RRR.pickle
-#     params:
-#       - rrr-param-search
-#     outs:
-#       - figures/cross-time-RRR.png
-
-
-
-# MARK: time-slice
-
 stages:
   load:
     cmd: python3 -u load_raw_activity_data.py
@@ -72,7 +17,25 @@ stages:
       - preprocess
     outs:
       - data/area-responses/
-  analysis:
+  # crosstest:
+  #   foreach: 
+  #     - top-down
+  #     - bottom-up
+  #   do:
+  #     cmd: python3 -u crosstime-analysis.py "${item}"
+  #     deps:
+  #       - crosstime-analysis.py
+  #       - data/raw-area-responses/
+  #     params:
+  #       - load
+  #       - preprocess
+  #       - rrr
+  #       - best-rrr-params
+  #       - rrr-param-search
+  #       - crosstime
+  #     outs:
+  #       - results/cross-time-RRR.pickle
+  timeslice:
     cmd: python3 -u rrr-time-slice-analysis.py
     deps:
       - rrr-time-slice-analysis.py
@@ -84,11 +47,14 @@ stages:
     outs:
       - results/rrr-time-slice.pickle
   plots:
-    cmd: python3 -u rrr-time-slice-plot.py
+    cmd: python3 -u crosstime-timeslice-plot.py
     deps:
-      - rrr-time-slice-plot.py
+      - crosstime-timeslice-plot.py
+      - results/cross-time-RRR.pickle
       - results/rrr-time-slice.pickle
     params:
+      - load
       - preprocess
+      - rrr-time-slice
     outs:
-      - figures/rrr-time-slice.png
+      - figures/crosstime-timeslice-plot.png
