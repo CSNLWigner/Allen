@@ -1,0 +1,60 @@
+stages:
+  load:
+    cmd: python3 -u load_raw_activity_data.py
+    deps:
+      - load_raw_activity_data.py
+    params:
+      - load
+    outs:
+      - data/raw-area-responses/
+  preprocess:
+    cmd: python3 -u preprocessing.py
+    deps:
+      - preprocessing.py
+      - data/raw-area-responses/
+    params:
+      - load
+      - preprocess
+    outs:
+      - data/area-responses/
+  # crosstest:
+  #   foreach: 
+  #     - top-down
+  #     - bottom-up
+  #   do:
+  #     cmd: python3 -u crosstime-analysis.py "${item}"
+  #     deps:
+  #       - crosstime-analysis.py
+  #       - data/raw-area-responses/
+  #     params:
+  #       - load
+  #       - preprocess
+  #       - rrr
+  #       - best-rrr-params
+  #       - rrr-param-search
+  #       - crosstime
+  #     outs:
+  #       - results/cross-time-RRR.pickle
+  timeslice:
+    cmd: python3 -u rrr-time-slice-analysis.py
+    deps:
+      - rrr-time-slice-analysis.py
+      - data/area-responses/
+    params:
+      - rrr-time-slice
+      - load
+      - best-rrr-params
+    outs:
+      - results/rrr-time-slice.pickle
+  plots:
+    cmd: python3 -u crosstime-timeslice-plot.py
+    deps:
+      - crosstime-timeslice-plot.py
+      - results/cross-time-RRR.pickle
+      - results/rrr-time-slice.pickle
+    params:
+      - load
+      - preprocess
+      - rrr-time-slice
+    outs:
+      - figures/crosstime-timeslice-plot.png
