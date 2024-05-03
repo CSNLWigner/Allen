@@ -9,7 +9,7 @@ stages:
     params:
       params.yaml:
         load:
-          session: 1098119201
+          session: 1113751921
           areas:
           - VISp
           - VISl
@@ -18,8 +18,8 @@ stages:
           stimulus-duration: 0.25
     outs:
     - path: data/raw-area-responses/
-      md5: 658e8e2b98d678858312f18ee9192073.dir
-      size: 2293922322
+      md5: 6400b62176d4ec09708d7f56e50b2bf3.dir
+      size: 2258350322
       nfiles: 2
   analysis:
     cmd: python3 -u crosstime-analysis.py
@@ -353,31 +353,42 @@ stages:
       md5: 44d3f340ac75224c5cb4f56b41e4f29b
       size: 70736
   plots:
-    cmd: python3 -u save-slices.py
+    cmd: python3 -u crosstime-timeslice-plot.py
     deps:
-    - path: results/CV-lag-time.pickle
-      md5: f0d0ffb41803ad1fabcede6760c9fb4b
-      size: 2467
-    - path: save-slices.py
-      md5: f96435535e18d9b5f51d93096567a79c
-      size: 639
+    - path: crosstime-timeslice-plot.py
+      md5: 5bcaefd3fdd9b53a7fc98b6d802bb454
+      size: 1665
+    - path: results/cross-time-RRR.pickle
+      md5: 653fc8960b4dc3f265a5bfd64f68fa02
+      size: 36070
+    - path: results/rrr-time-slice.pickle
+      md5: 3ed95e5f01b263410e0989e90d6d9469
+      size: 1132
     params:
       params.yaml:
         load:
-          session: 0
+          session: 1113751921
           areas:
           - VISp
           - VISl
           stimulus-block: 5
           step-size: 0.001
           stimulus-duration: 0.25
-        rrr:
-          cv: 3
-          rank: 18
-          error-score: raise
-          predictor: VISl
-          target: VISp
-          timepoint: 0.05
+        preprocess:
+          areas:
+          - VISp
+          - VISl
+          lag-time: 0
+          lag-area: VISl
+          step-size: 0.01
+          bin-size: 0.1
+          stimulus-duration: 0.25
+        rrr-time-slice:
+          predictor-time: 0.15
+    outs:
+    - path: figures/crosstime-timeslice-plot.png
+      md5: 68b6ddd65e47b0dda5b13ddf93e0d5df
+      size: 184967
   cache:
     cmd: python3 -u save-slices.py
     deps:
@@ -404,3 +415,295 @@ stages:
           predictor: VISp
           target: VISl
           timepoint: 0.05
+  preprocess:
+    cmd: python3 -u preprocessing.py
+    deps:
+    - path: data/raw-area-responses/
+      md5: 6400b62176d4ec09708d7f56e50b2bf3.dir
+      size: 2258350322
+      nfiles: 2
+    - path: preprocessing.py
+      md5: 3f55ca4c5a9147f2533e099f2eaee84c
+      size: 1332
+    params:
+      params.yaml:
+        load:
+          session: 1113751921
+          areas:
+          - VISp
+          - VISl
+          stimulus-block: 5
+          step-size: 0.001
+          stimulus-duration: 0.25
+        preprocess:
+          areas:
+          - VISp
+          - VISl
+          lag-time: 0
+          lag-area: VISl
+          step-size: 0.01
+          bin-size: 0.1
+          stimulus-duration: 0.25
+    outs:
+    - path: data/area-responses/
+      md5: 1abeb79a2b4f5d6446a7310cc49413de.dir
+      size: 225835322
+      nfiles: 2
+  timeslice:
+    cmd: python3 -u rrr-time-slice-analysis.py
+    deps:
+    - path: data/area-responses/
+      md5: 1abeb79a2b4f5d6446a7310cc49413de.dir
+      size: 225835322
+      nfiles: 2
+    - path: rrr-time-slice-analysis.py
+      md5: f0ea99e1ca4e4ed376ba91b5fa4eace3
+      size: 1618
+    params:
+      params.yaml:
+        best-rrr-params:
+          1111013640:
+            top-down:
+              cv: 2
+              rank: 16
+            bottom-up:
+              cv: 2
+              rank: 16
+          1108334384:
+            top-down:
+              cv: 2
+              rank: 14
+            bottom-up:
+              cv: 3
+              rank: 18
+          1112515874:
+            top-down:
+              cv: 3
+              rank: 12
+            bottom-up:
+              cv: 2
+              rank: 12
+          1112302803:
+            top-down:
+              cv: 3
+              rank: 14
+            bottom-up:
+              cv: 2
+              rank: 14
+          1113751921:
+            top-down:
+              cv: 4
+              rank: 20
+            bottom-up:
+              cv: 2
+              rank: 10
+          1048189115:
+            top-down:
+              cv: 5
+              rank: 16
+            bottom-up:
+              cv: 3
+              rank: 16
+          1047969464:
+            top-down:
+              cv: 5
+              rank: 16
+            bottom-up:
+              cv: 3
+              rank: 18
+          1049514117:
+            top-down:
+              cv: 2
+              rank: 8
+            bottom-up:
+              cv: 5
+              rank: 10
+          1052533639:
+            top-down:
+              cv: 4
+              rank: 20
+            bottom-up:
+              cv: 4
+              rank: 16
+          1053718935:
+            top-down:
+              cv: 4
+              rank: 18
+            bottom-up:
+              cv: 4
+              rank: 18
+          1053941483:
+            top-down:
+              cv: 2
+              rank: 16
+            bottom-up:
+              cv: 4
+              rank: 12
+          1055415082:
+            top-down:
+              cv: 2
+              rank: 12
+            bottom-up:
+              cv: 4
+              rank: 20
+          1062755779:
+            top-down:
+              cv: 5
+              rank: 12
+            bottom-up:
+              cv: 3
+              rank: 10
+          1063010385:
+            top-down:
+              cv: 2
+              rank: 10
+            bottom-up:
+              cv: 4
+              rank: 14
+          1064639378:
+            top-down:
+              cv: 4
+              rank: 20
+            bottom-up:
+              cv: 2
+              rank: 16
+          1065905010:
+            top-down:
+              cv: 4
+              rank: 20
+            bottom-up:
+              cv: 4
+              rank: 16
+          1065908084:
+            top-down:
+              cv: 2
+              rank: 10
+            bottom-up:
+              cv: 4
+              rank: 12
+          1067588044:
+            top-down:
+              cv: 2
+              rank: 12
+            bottom-up:
+              cv: 5
+              rank: 18
+          1067781390:
+            top-down:
+              cv: 2
+              rank: 12
+            bottom-up:
+              cv: 5
+              rank: 20
+          1069461581:
+            top-down:
+              cv: 2
+              rank: 16
+            bottom-up:
+              cv: 3
+              rank: 20
+          1071300149:
+            top-down:
+              cv: 2
+              rank: 14
+            bottom-up:
+              cv: 2
+              rank: 8
+          1081079981:
+            top-down:
+              cv: 4
+              rank: 12
+            bottom-up:
+              cv: 4
+              rank: 12
+          1081429294:
+            top-down:
+              cv: 4
+              rank: 14
+            bottom-up:
+              cv: 3
+              rank: 18
+          1086200042:
+            top-down:
+              cv: 4
+              rank: 10
+            bottom-up:
+              cv: 2
+              rank: 10
+          1086410738:
+            top-down:
+              cv: 5
+              rank: 14
+            bottom-up:
+              cv: 3
+              rank: 10
+          1087720624:
+            top-down:
+              cv: 3
+              rank: 12
+            bottom-up:
+              cv: 3
+              rank: 14
+          1087992708:
+            top-down:
+              cv: 2
+              rank: 10
+            bottom-up:
+              cv: 2
+              rank: 12
+          1090803859:
+            top-down:
+              cv: 2
+              rank: 12
+            bottom-up:
+              cv: 2
+              rank: 12
+          1091039376:
+            top-down:
+              cv: 2
+              rank: 12
+            bottom-up:
+              cv: 2
+              rank: 6
+          1091039902:
+            top-down:
+              cv: 2
+              rank: 12
+            bottom-up:
+              cv: 2
+              rank: 20
+          1093864136:
+            top-down:
+              cv: 2
+              rank: 4
+            bottom-up:
+              cv: 2
+              rank: 10
+          1095340643:
+            top-down:
+              cv: 3
+              rank: 14
+            bottom-up:
+              cv: 4
+              rank: 25
+          1098119201:
+            top-down:
+              cv: 2
+              rank: 12
+            bottom-up:
+              cv: 2
+              rank: 8
+        load:
+          session: 1113751921
+          areas:
+          - VISp
+          - VISl
+          stimulus-block: 5
+          step-size: 0.001
+          stimulus-duration: 0.25
+        rrr-time-slice:
+          predictor-time: 0.15
+    outs:
+    - path: results/rrr-time-slice.pickle
+      md5: 3ed95e5f01b263410e0989e90d6d9469
+      size: 1132

@@ -410,3 +410,47 @@ def score_time(mean, sem, title=None, xlabel='Time', ylabel='R^2', time_series=N
     ax.set_xticklabels(time_series[::5])
     
     return fig
+
+def crosstime_RRR(ax, matrix, predictor, target, timeseries):
+    """
+    Plot a cross-timepoint correlation matrix.
+
+    Parameters:
+    - ax (matplotlib.axes.Axes): The axes on which to plot the matrix.
+    - matrix (numpy.ndarray): The correlation matrix to be plotted.
+    - predictor (str): The label for the predictor variable.
+    - target (str): The label for the target variable.
+    - timeseries (numpy.ndarray): The array of timepoints.
+
+    Returns:
+    - cax (matplotlib.image.AxesImage): The plotted image of the matrix.
+    """
+
+    # The diagonal of the matrix should be nan
+    np.fill_diagonal(matrix, np.nan)
+
+    # tick frequency
+    tick_frequency = 5
+    # Plot the matrix. colormap do not use white color. Make the resolution higher.
+    cax = ax.imshow(matrix, cmap='terrain', interpolation='bilinear')
+    ax.set_xticks(range(0, timeseries.shape[0], tick_frequency))
+    ax.set_xticklabels(timeseries[::tick_frequency])
+    ax.set_yticks(range(0, timeseries.shape[0], tick_frequency))
+    ax.set_yticklabels(timeseries[::tick_frequency])
+    ax.set_xlabel(f"Timepoints of {target}")
+    ax.set_ylabel(f"Timepoints of {predictor}")
+
+    return cax
+
+def rrr_time_slice(ax, mean_TD, mean_BU, timepoints, predictor_time):
+
+    # Plot the results
+    ax.plot(timepoints, mean_TD, label='Top-down')
+    ax.plot(timepoints, mean_BU, label='Bottom-up')
+    ax.set_xlabel('Time (s)')
+    ax.set_ylabel('R^2')
+    # Make a vertical line at the predictor time
+    ax.axvline(x=predictor_time, color='k', linestyle='--')
+    ax.set_xticks([0, predictor_time, timepoints[-1]])
+    ax.set_xlim([0, timepoints[-1]])
+    ax.legend()
