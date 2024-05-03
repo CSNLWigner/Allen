@@ -9,7 +9,7 @@ stages:
     params:
       params.yaml:
         load:
-          session: 1047969464
+          session: 1049514117
           areas:
           - VISp
           - VISl
@@ -18,8 +18,8 @@ stages:
           stimulus-duration: 0.25
     outs:
     - path: data/raw-area-responses/
-      md5: 290de43fc016b8b8f10228e566f17aec.dir
-      size: 1516800322
+      md5: 91013312123b4a90352713c499a7a61b.dir
+      size: 1518064322
       nfiles: 2
   analysis:
     cmd: python3 -u crosstime-analysis.py
@@ -362,12 +362,12 @@ stages:
       md5: 653fc8960b4dc3f265a5bfd64f68fa02
       size: 36070
     - path: results/rrr-time-slice.pickle
-      md5: c47c8bc3c6b51a9ed4dae5f1392816cc
+      md5: b11bc4267e0cb0c974a128ceacf1990a
       size: 1132
     params:
       params.yaml:
         load:
-          session: 1047969464
+          session: 1049514117
           areas:
           - VISp
           - VISl
@@ -387,8 +387,8 @@ stages:
           predictor-time: 0.15
     outs:
     - path: figures/crosstime-timeslice-plot.png
-      md5: 814e90bc34498f0ea584e49459064237
-      size: 151241
+      md5: f12e200702181eda07c21763b7e9c7f8
+      size: 197140
   cache:
     cmd: python3 -u save-slices.py
     deps:
@@ -419,8 +419,8 @@ stages:
     cmd: python3 -u preprocessing.py
     deps:
     - path: data/raw-area-responses/
-      md5: 290de43fc016b8b8f10228e566f17aec.dir
-      size: 1516800322
+      md5: 91013312123b4a90352713c499a7a61b.dir
+      size: 1518064322
       nfiles: 2
     - path: preprocessing.py
       md5: 3f55ca4c5a9147f2533e099f2eaee84c
@@ -428,7 +428,7 @@ stages:
     params:
       params.yaml:
         load:
-          session: 1047969464
+          session: 1049514117
           areas:
           - VISp
           - VISl
@@ -446,15 +446,15 @@ stages:
           stimulus-duration: 0.25
     outs:
     - path: data/area-responses/
-      md5: 5cb6a828ed37d8df48c2fa19d7ee2179.dir
-      size: 151680322
+      md5: 5a1fcb47edf4d40be40268f976181185.dir
+      size: 151806722
       nfiles: 2
   timeslice:
     cmd: python3 -u rrr-time-slice-analysis.py
     deps:
     - path: data/area-responses/
-      md5: 5cb6a828ed37d8df48c2fa19d7ee2179.dir
-      size: 151680322
+      md5: 5a1fcb47edf4d40be40268f976181185.dir
+      size: 151806722
       nfiles: 2
     - path: rrr-time-slice-analysis.py
       md5: f0ea99e1ca4e4ed376ba91b5fa4eace3
@@ -694,7 +694,7 @@ stages:
               cv: 2
               rank: 8
         load:
-          session: 1047969464
+          session: 1049514117
           areas:
           - VISp
           - VISl
@@ -705,5 +705,5 @@ stages:
           predictor-time: 0.15
     outs:
     - path: results/rrr-time-slice.pickle
-      md5: c47c8bc3c6b51a9ed4dae5f1392816cc
+      md5: b11bc4267e0cb0c974a128ceacf1990a
       size: 1132
