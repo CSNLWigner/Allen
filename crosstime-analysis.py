@@ -5,10 +5,18 @@ from analyses.data_preprocessing import preprocess_area_responses, z_score_norma
 from analyses.rrr import RRRR
 from utils.data_io import load_pickle, save_pickle
 from utils.utils import printProgressBar
+import sys
 
 """
 cross-time analysis based on timpoints of rrr-param-search lag
 """
+
+# Get the parameters from the command line
+prediction_direction = sys.argv[1]
+
+# Get the predictor and the target from the prediction direction
+predictor = 'VISl' if prediction_direction == 'top-down' else 'VISp'
+target = 'VISp' if prediction_direction == 'top-down' else 'VISl'
 
 # Parameters
 load = yaml.safe_load(open("params.yaml"))["load"]
@@ -25,14 +33,14 @@ N, K, T = full_predictor.shape
 time_bin = int(preprocess["bin-size"] * 1000) # in ms
 
 # Define the parameters
-prediction_direction = 'top-down' if rrr['predictor'] == 'VISl' else 'bottom-up'
+# prediction_direction = 'top-down' if rrr['predictor'] == 'VISl' else 'bottom-up'
 session = load['session']
 cv = rrr[session][prediction_direction]['cv']
 rank = rrr[session][prediction_direction]['rank']
 
 scaling_factor = params["scaling-factor"]
 xseries = np.arange(0, 200, scaling_factor)
-yseries = np.arange(120, 150, scaling_factor)
+yseries = [144]
 
 # Init results
 results = np.full((len(xseries), len(yseries)), fill_value=np.nan)
@@ -57,5 +65,5 @@ for x, t_x in enumerate(xseries):
     printProgressBar(x + 1, len(xseries), prefix='t_predictor:')
 
 # Save the results
-save_pickle(results, "cross-time-RRR")
+save_pickle(results, f"{prediction_direction}_cross-time-RRR")
         
