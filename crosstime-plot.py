@@ -32,5 +32,5 @@ fig, ax = plt.subplots()
 plots.crosstime_RRR(ax, matrix, rrr['predictor'], rrr['target'], timeseries)
 
 # Save the plot
-save_fig("cross-time-RRR")
-save_fig(f"{prediction_direction}_cross-time-RRR_{session}", path="cache")
+save_fig(fig, "cross-time-RRR")
+save_fig(fig, f"{prediction_direction}_cross-time-RRR_{session}", path="cache")
