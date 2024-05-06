@@ -27,8 +27,8 @@ timeseries = np.arange(0, 200, 5)
 # Add the first timepoint to each element in timeseries
 timeseries = timeseries + search['timepoints'][0]
 
-# Create a plot with 2 columns
-fig, ax = plt.subplots(1, 3, figsize=(12, 6))
+# Create a plot
+fig, ax = plt.subplots()
 plots.crosstime_RRR(ax, matrix, rrr['predictor'], rrr['target'], timeseries)
 
 # Save the plot
