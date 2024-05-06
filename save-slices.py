@@ -23,4 +23,4 @@ rrr = yaml.safe_load(open('params.yaml'))['rrr']
 results = load_pickle('cross-time-RRR', path='results')
 
 # Save the results in a different loction
-save_pickle(results, f'{prediction_direction}_cross-time-RRR_{session}', path='cache')
+save_pickle(results, f'{prediction_direction}_cross-time-RRR_{session}', path='cache/crosstime')
