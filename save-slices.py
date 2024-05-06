@@ -12,7 +12,8 @@ import sys
 prediction_direction = sys.argv[1]
 
 # Load the params
-session = yaml.safe_load(open('params.yaml'))['load']['session']
+load = yaml.safe_load(open('params.yaml'))['load']
+session = load['session']
 rrr = yaml.safe_load(open('params.yaml'))['rrr']
 
 # Define the prediction direction
