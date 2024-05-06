@@ -21,7 +21,7 @@ stages:
     outs:
       - results/cross-time-RRR.pickle
   save:
-    cmd: python3 -u save-slices.py V1
+    cmd: python3 -u save-slices.py LM
     deps:
       - save-slices.py
       - results/cross-time-RRR.pickle
@@ -29,7 +29,7 @@ stages:
       - load
       - rrr
   plot:
-    cmd: python3 -u crosstime-plot.py V1
+    cmd: python3 -u crosstime-plot.py LM
     deps:
       - crosstime-plot.py
       - results/cross-time-RRR.pickle
