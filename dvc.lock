@@ -9,7 +9,7 @@ stages:
     params:
       params.yaml:
         load:
-          session: 1067588044
+          session: 1067781390
           areas:
           - VISp
           - VISl
@@ -18,8 +18,8 @@ stages:
           stimulus-duration: 0.25
     outs:
     - path: data/raw-area-responses/
-      md5: 96c16af4dbdf280fc159e70173626276.dir
-      size: 2623530322
+      md5: c73a4c9103d7d3ae692320017b393644.dir
+      size: 2005146322
       nfiles: 2
   analysis:
     cmd: python3 -u crosstime-analysis.py
@@ -28,8 +28,8 @@ stages:
       md5: 8430c874ccf15087e15ddd07d126d575
       size: 2486
     - path: data/raw-area-responses/
-      md5: 96c16af4dbdf280fc159e70173626276.dir
-      size: 2623530322
+      md5: c73a4c9103d7d3ae692320017b393644.dir
+      size: 2005146322
       nfiles: 2
     params:
       params.yaml:
@@ -266,7 +266,7 @@ stages:
               cv: 2
               rank: 8
         load:
-          session: 1067588044
+          session: 1067781390
           areas:
           - VISp
           - VISl
@@ -313,7 +313,7 @@ stages:
           time-step: 0.025
     outs:
     - path: results/cross-time-RRR.pickle
-      md5: d4bcd56a5962dbf05943df66915358ee
+      md5: 73660baced7b3649f915e74c760a8a07
       size: 12958
   plot:
     cmd: python3 -u crosstime-plot.py V1
@@ -322,7 +322,7 @@ stages:
       md5: a1247128f1895696cc652dc4b79b5cae
       size: 1060
     - path: results/cross-time-RRR.pickle
-      md5: d4bcd56a5962dbf05943df66915358ee
+      md5: 73660baced7b3649f915e74c760a8a07
       size: 12958
     params:
       params.yaml:
@@ -350,8 +350,8 @@ stages:
           time-step: 0.025
     outs:
     - path: figures/cross-time-RRR.png
-      md5: 3c8be5d5473f473916315ff3b469008c
-      size: 14825
+      md5: 021e4110ffdfc090eec3b9ad53577db9
+      size: 38517
   plots:
     cmd: python3 -u crosstime-timeslice-plot.py
     deps:
@@ -711,7 +711,7 @@ stages:
     cmd: python3 -u save-slices.py V1
     deps:
     - path: results/cross-time-RRR.pickle
-      md5: d4bcd56a5962dbf05943df66915358ee
+      md5: 73660baced7b3649f915e74c760a8a07
       size: 12958
     - path: save-slices.py
       md5: a6925604e2324b851ac92cb73aa23216
@@ -719,7 +719,7 @@ stages:
     params:
       params.yaml:
         load:
-          session: 1067588044
+          session: 1067781390
           areas:
           - VISp
           - VISl
