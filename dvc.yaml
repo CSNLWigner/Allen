@@ -27,7 +27,6 @@ stages:
       - results/cross-time-RRR.pickle
     params:
       - load
-      - session
       - rrr
   plot:
     cmd: python3 -u crosstime-plot.py V1
