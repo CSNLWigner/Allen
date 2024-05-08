@@ -9,7 +9,7 @@ stages:
     params:
       params.yaml:
         load:
-          session: 1091039902
+          session: 1093864136
           areas:
           - VISp
           - VISl
@@ -18,8 +18,8 @@ stages:
           stimulus-duration: 0.25
     outs:
     - path: data/raw-area-responses/
-      md5: 6026edda613bce51453955aa0f1b6251.dir
-      size: 2094108322
+      md5: d3a6842b3d3260442674e4f9bb36f2bc.dir
+      size: 1410612322
       nfiles: 2
   analysis:
     cmd: python3 -u crosstime-analysis.py
@@ -593,7 +593,7 @@ stages:
               cv: 2
               rank: 8
         load:
-          session: 1091039902
+          session: 1093864136
           areas:
           - VISp
           - VISl
@@ -617,8 +617,8 @@ stages:
           - 0.15
     outs:
     - path: figures/rrr-cross-time-slice-mega-plot.png
-      md5: 87371e32b2f69e9f3db51193d94e6d38
-      size: 598740
+      md5: 9f0a39834ea6f9e7e2f5f5c4515e0590
+      size: 441946
   cache:
     cmd: python3 -u save-slices.py
     deps:
@@ -649,8 +649,8 @@ stages:
     cmd: python3 -u preprocessing.py
     deps:
     - path: data/raw-area-responses/
-      md5: 6026edda613bce51453955aa0f1b6251.dir
-      size: 2094108322
+      md5: d3a6842b3d3260442674e4f9bb36f2bc.dir
+      size: 1410612322
       nfiles: 2
     - path: preprocessing.py
       md5: 3f55ca4c5a9147f2533e099f2eaee84c
@@ -658,7 +658,7 @@ stages:
     params:
       params.yaml:
         load:
-          session: 1091039902
+          session: 1093864136
           areas:
           - VISp
           - VISl
@@ -676,8 +676,8 @@ stages:
           stimulus-duration: 0.25
     outs:
     - path: data/area-responses/
-      md5: 5aa2d170232d6597e851bf323080c8c2.dir
-      size: 209411122
+      md5: af1b66db4cdb768b6d99cfdfff9470e1.dir
+      size: 141061522
       nfiles: 2
   timeslice:
     cmd: python3 -u rrr-time-slice-analysis.py
