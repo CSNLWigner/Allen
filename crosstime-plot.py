@@ -14,20 +14,21 @@ prediction_direction = sys.argv[1]
 session = yaml.safe_load(open("params.yaml"))["load"]["session"]
 search = yaml.safe_load(open("params.yaml"))["rrr-param-search"]
 rrr = yaml.safe_load(open("params.yaml"))["rrr"]
+params = yaml.safe_load(open("params.yaml"))["crosstime"]
 
 # Load cross-time-RRR from results
 matrix = load_pickle("cross-time-RRR", path="results")
 
 # print(matrix)
 
-# timeseries = np.arange(0, preprocess["stimulus-duration"], search['lag']/1000)
-timeseries = np.arange(0, 200, 5)
-# timeseries = np.array(search['lag'])
+# Define the parameters
+scaling_factor = params["scaling-factor"]
+timeseries = np.arange(0, 200, scaling_factor)
 
 # Add the first timepoint to each element in timeseries
 timeseries = timeseries + search['timepoints'][0]
 
-# Create a plot
+# Create a plot with 2 columns
 fig, ax = plt.subplots()
 plots.crosstime_RRR(ax, matrix, rrr['predictor'], rrr['target'], timeseries)
 

@@ -353,19 +353,245 @@ stages:
       md5: 8855f2d0c3cc6ba8f712d4919d4b8bfd
       size: 77549
   plots:
-    cmd: python3 -u crosstime-timeslice-plot.py
+    cmd: python3 -u multiple-timeslices.py cache/crosstime
     deps:
-    - path: crosstime-timeslice-plot.py
-      md5: 5bcaefd3fdd9b53a7fc98b6d802bb454
-      size: 1665
-    - path: results/cross-time-RRR.pickle
-      md5: 653fc8960b4dc3f265a5bfd64f68fa02
-      size: 36070
-    - path: results/rrr-time-slice.pickle
-      md5: a0c68103559e9d7ba4524cd6ffa5564c
-      size: 1132
+    - path: multiple-timeslices.py
+      md5: 3a23deae5422d31919c5d23122c13bdf
+      size: 3857
     params:
       params.yaml:
+        best-rrr-params:
+          1111013640:
+            top-down:
+              cv: 2
+              rank: 16
+            bottom-up:
+              cv: 2
+              rank: 16
+          1108334384:
+            top-down:
+              cv: 2
+              rank: 14
+            bottom-up:
+              cv: 3
+              rank: 18
+          1112515874:
+            top-down:
+              cv: 3
+              rank: 12
+            bottom-up:
+              cv: 2
+              rank: 12
+          1112302803:
+            top-down:
+              cv: 3
+              rank: 14
+            bottom-up:
+              cv: 2
+              rank: 14
+          1113751921:
+            top-down:
+              cv: 4
+              rank: 20
+            bottom-up:
+              cv: 2
+              rank: 10
+          1048189115:
+            top-down:
+              cv: 5
+              rank: 16
+            bottom-up:
+              cv: 3
+              rank: 16
+          1047969464:
+            top-down:
+              cv: 5
+              rank: 16
+            bottom-up:
+              cv: 3
+              rank: 18
+          1049514117:
+            top-down:
+              cv: 2
+              rank: 8
+            bottom-up:
+              cv: 5
+              rank: 10
+          1052533639:
+            top-down:
+              cv: 4
+              rank: 20
+            bottom-up:
+              cv: 4
+              rank: 16
+          1053718935:
+            top-down:
+              cv: 4
+              rank: 18
+            bottom-up:
+              cv: 4
+              rank: 18
+          1053941483:
+            top-down:
+              cv: 2
+              rank: 16
+            bottom-up:
+              cv: 4
+              rank: 12
+          1055415082:
+            top-down:
+              cv: 2
+              rank: 12
+            bottom-up:
+              cv: 4
+              rank: 20
+          1062755779:
+            top-down:
+              cv: 5
+              rank: 12
+            bottom-up:
+              cv: 3
+              rank: 10
+          1063010385:
+            top-down:
+              cv: 2
+              rank: 10
+            bottom-up:
+              cv: 4
+              rank: 14
+          1064639378:
+            top-down:
+              cv: 4
+              rank: 20
+            bottom-up:
+              cv: 2
+              rank: 16
+          1065905010:
+            top-down:
+              cv: 4
+              rank: 20
+            bottom-up:
+              cv: 4
+              rank: 16
+          1065908084:
+            top-down:
+              cv: 2
+              rank: 10
+            bottom-up:
+              cv: 4
+              rank: 12
+          1067588044:
+            top-down:
+              cv: 2
+              rank: 12
+            bottom-up:
+              cv: 5
+              rank: 18
+          1067781390:
+            top-down:
+              cv: 2
+              rank: 12
+            bottom-up:
+              cv: 5
+              rank: 20
+          1069461581:
+            top-down:
+              cv: 2
+              rank: 16
+            bottom-up:
+              cv: 3
+              rank: 20
+          1071300149:
+            top-down:
+              cv: 2
+              rank: 14
+            bottom-up:
+              cv: 2
+              rank: 8
+          1081079981:
+            top-down:
+              cv: 4
+              rank: 12
+            bottom-up:
+              cv: 4
+              rank: 12
+          1081429294:
+            top-down:
+              cv: 4
+              rank: 14
+            bottom-up:
+              cv: 3
+              rank: 18
+          1086200042:
+            top-down:
+              cv: 4
+              rank: 10
+            bottom-up:
+              cv: 2
+              rank: 10
+          1086410738:
+            top-down:
+              cv: 5
+              rank: 14
+            bottom-up:
+              cv: 3
+              rank: 10
+          1087720624:
+            top-down:
+              cv: 3
+              rank: 12
+            bottom-up:
+              cv: 3
+              rank: 14
+          1087992708:
+            top-down:
+              cv: 2
+              rank: 10
+            bottom-up:
+              cv: 2
+              rank: 12
+          1090803859:
+            top-down:
+              cv: 2
+              rank: 12
+            bottom-up:
+              cv: 2
+              rank: 12
+          1091039376:
+            top-down:
+              cv: 2
+              rank: 12
+            bottom-up:
+              cv: 2
+              rank: 6
+          1091039902:
+            top-down:
+              cv: 2
+              rank: 12
+            bottom-up:
+              cv: 2
+              rank: 20
+          1093864136:
+            top-down:
+              cv: 2
+              rank: 4
+            bottom-up:
+              cv: 2
+              rank: 10
+          1095340643:
+            top-down:
+              cv: 3
+              rank: 14
+            bottom-up:
+              cv: 4
+              rank: 25
+          1098119201:
+            top-down:
+              cv: 2
+              rank: 12
+            bottom-up:
+              cv: 2
+              rank: 8
         load:
           session: 1098119201
           areas:
@@ -384,11 +610,15 @@ stages:
           bin-size: 0.1
           stimulus-duration: 0.25
         rrr-time-slice:
-          predictor-time: 0.15
+          predictor-time:
+          - 0.06
+          - 0.09
+          - 0.12
+          - 0.15
     outs:
-    - path: figures/crosstime-timeslice-plot.png
-      md5: 3aa1efcee72b4034349c113e75a7e209
-      size: 177531
+    - path: figures/rrr-cross-time-slice-mega-plot.png
+      md5: 883dedb9daf44814a453f2892447266e
+      size: 496477
   cache:
     cmd: python3 -u save-slices.py
     deps:

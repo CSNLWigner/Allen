@@ -38,7 +38,8 @@ def RRRR_time_slice(predictor, target, predictor_time, cv, rank, log=True):
     sem  = np.full((T), fill_value=np.nan)
     
     # Print progress bar
-    printProgressBar(0, T, prefix = 'RRR analysis:', length = 50)
+    if log:
+        printProgressBar(0, T, prefix = 'RRR analysis:', length = 50)
 
     for x in range(T):
         
@@ -54,10 +55,60 @@ def RRRR_time_slice(predictor, target, predictor_time, cv, rank, log=True):
         sem[x] = SEM(model['test_score'])
         
         # Update progress bar
-        printProgressBar(x + 1, T, prefix = 'RRR analysis:', length = 50)
+        if log:
+            printProgressBar(x + 1, T, prefix = 'RRR analysis:', length = 50)
         
     # Return the results
     return {
         'mean': mean,
         'sem': sem
     }
+
+def bidirectional_time_slice(session, V1_activity, LM_activity, best_params, predictor_time, log=False):
+    """
+    Perform bidirectional time slice analysis using RRRR.
+
+    Args:
+        session (str): The session identifier.
+        V1_activity (numpy.ndarray): The activity data for V1.
+        LM_activity (numpy.ndarray): The activity data for LM.
+        best_params (dict): The best parameters for each prediction direction and session.
+        predictor_time (numpy.ndarray): The time points for the predictor activity.
+
+    Returns:
+        dict: A dictionary containing the results for each prediction direction.
+
+    """
+    
+    # Define the parameters
+    abstract_areas = {
+        'top-down': {
+            'predictor': LM_activity,
+            'target': V1_activity
+        },
+        'bottom-up': {
+            'predictor': V1_activity,
+            'target': LM_activity
+        }
+    }
+
+    # Init results
+    results = {}
+
+    # Iterate through the prediction directions
+    for prediction_direction in ['top-down', 'bottom-up']:
+
+        # Extract the data
+        predictor_activity = abstract_areas[prediction_direction]['predictor']
+        target_activity = abstract_areas[prediction_direction]['target']
+        cv = best_params[session][prediction_direction]['cv']
+        rank = best_params[session][prediction_direction]['rank']
+
+        # Calculate the RRRR
+        result = RRRR_time_slice(
+            predictor_activity, target_activity, predictor_time, cv, rank, log=log)
+
+        # Save the results
+        results[prediction_direction] = result
+
+    return results

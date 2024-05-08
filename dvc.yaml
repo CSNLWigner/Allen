@@ -7,33 +7,26 @@ stages:
       - load
     outs:
       - data/raw-area-responses/
-  analysis:
-    cmd: python3 -u crosstime-analysis.py
+  preprocess:
+    cmd: python3 -u preprocessing.py
     deps:
-      - crosstime-analysis.py
+      - preprocessing.py
       - data/raw-area-responses/
     params:
       - load
       - preprocess
-      - rrr
-      - best-rrr-params
-      - rrr-param-search
     outs:
-      - results/cross-time-RRR.pickle
-  save:
-    cmd: python3 -u save-slices.py LM
+      - data/area-responses/
+  plots:
+    cmd: python3 -u multiple-timeslices.py cache/crosstime
     deps:
-      - save-slices.py
-      - results/cross-time-RRR.pickle
+      - multiple-timeslices.py
+      # - results/cross-time-RRR.pickle
+      # - results/rrr-time-slice.pickle
     params:
       - load
-      - rrr
-  plot:
-    cmd: python3 -u crosstime-plot.py LM
-    deps:
-      - crosstime-plot.py
-      - results/cross-time-RRR.pickle
-    params:
-      - rrr-param-search
+      - preprocess
+      - best-rrr-params
+      - rrr-time-slice
     outs:
-      - figures/cross-time-RRR.png
+      - figures/rrr-cross-time-slice-mega-plot.png
