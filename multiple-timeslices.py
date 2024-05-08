@@ -32,10 +32,10 @@ timepoints = np.arange(0, preprocess['stimulus-duration'], preprocess['step-size
 names = {
     'V1': {
         'V1': 'V1',
-        'LM': 'top-down'
+        'LM': 'bottom-up'
     },
     'LM': {
-        'V1': 'bottom-up',
+        'V1': 'top-down',
         'LM': 'LM'
     }
 }
@@ -92,7 +92,8 @@ for i, predictor_time in enumerate(predictor_times):
     # Plot the results
     ax = plot[:, 2+i]
     plots.rrr_time_slice(ax, results, predictor_time, timepoints,
-                         (top_down_color, bottom_up_color))
+                         (top_down_color, bottom_up_color),
+                         ylim=(.03, .30))  # ylim=(.025, .250)
     
     printProgressBar(i + 1, len(predictor_times), prefix = 'RRR analysis:', length = 30)
 

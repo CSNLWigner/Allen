@@ -89,6 +89,14 @@ def bidirectional_time_slice(session, V1_activity, LM_activity, best_params, pre
         'bottom-up': {
             'predictor': V1_activity,
             'target': LM_activity
+        },
+        'V1': {
+            'predictor': V1_activity,
+            'target': V1_activity
+        },
+        'LM': {
+            'predictor': LM_activity,
+            'target': LM_activity
         }
     }
 
@@ -96,13 +104,19 @@ def bidirectional_time_slice(session, V1_activity, LM_activity, best_params, pre
     results = {}
 
     # Iterate through the prediction directions
-    for prediction_direction in ['top-down', 'bottom-up']:
+    for prediction_direction in ['top-down', 'bottom-up', 'V1', 'LM']:
 
         # Extract the data
         predictor_activity = abstract_areas[prediction_direction]['predictor']
         target_activity = abstract_areas[prediction_direction]['target']
-        cv = best_params[session][prediction_direction]['cv']
-        rank = best_params[session][prediction_direction]['rank']
+        if prediction_direction in ['top-down', 'bottom-up']:
+            session_key = prediction_direction
+        if prediction_direction is 'V1':
+            session_key = 'bottom-up'
+        if prediction_direction is 'LM':
+            session_key = 'top-down'
+        cv = best_params[session][session_key]['cv']
+        rank = best_params[session][session_key]['rank']
 
         # Calculate the RRRR
         result = RRRR_time_slice(
