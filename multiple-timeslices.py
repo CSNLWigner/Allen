@@ -48,10 +48,10 @@ bottom_up_color = colors[1]
 
 # Init subplots
 plot = megaplot(nrows=2, ncols=2+len(predictor_times), title=session)
+plot.rownames(range(2), ['predictor V1', 'predictor LM'])
 plot.colnames(range(2+len(predictor_times)),
-              ['predictor V1', 'predictor LM'] +
+              ['target V1', 'target LM'] +
               [f"{i} s" for i in predictor_times])
-plot.rownames(range(2), ['target V1', 'target LM'])
 
 '''
           | predictor:V1 | predictor:LM | time:0 | time:1 | time:2 | time:3 | time:4 | time:5 |
@@ -61,8 +61,8 @@ target:LM | V1 -> LM     | LM -> LM     | slice  | slice  | slice  | slice  | sl
 
 # The first two columns are the predictor areas
 # The two rows of the first to columns are the target areas
-for i, predictor in zip([0, 1], ['V1', 'LM']):
-    for j, target in zip([0, 1], ['V1', 'LM']):
+for i, predictor in zip([0, 1], ['V1', 'LM']): # ROWS
+    for j, target in zip([0, 1], ['V1', 'LM']): # COLUMNS
         
         # Load the crosstime results from cache/*.pickle
         results = load_pickle(f"{names[predictor][target]}_cross-time-RRR_{session}", path=crosstime_path)
