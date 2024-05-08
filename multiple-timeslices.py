@@ -48,10 +48,10 @@ bottom_up_color = colors[1]
 
 # Init subplots
 plot = megaplot(nrows=2, ncols=2+len(predictor_times), title=session)
+plot.rownames(range(2), ['predictor V1', 'predictor LM'])
 plot.colnames(range(2+len(predictor_times)),
-              ['predictor V1', 'predictor LM'] +
+              ['target V1', 'target LM'] +
               [f"{i} s" for i in predictor_times])
-plot.rownames(range(2), ['target V1', 'target LM'])
 
 '''
           | predictor:V1 | predictor:LM | time:0 | time:1 | time:2 | time:3 | time:4 | time:5 |
