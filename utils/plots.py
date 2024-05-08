@@ -14,7 +14,7 @@ from scipy.stats import sem
 preprocess = yaml.safe_load(open('params.yaml'))['preprocess']
 
 
-def simple_mean_SEM_time_plot(ax, mean, ylabel, title=None, SEM=None, SEM_multiplier=2, time_series=None, color=None, xlabel=None, alpha=0.2, linewidth=None, xticks=None, xticklabels=None, yticks=None, yticklabels=None, label=None) -> plt.Figure:
+def simple_mean_SEM_time_plot(ax, mean, ylabel, title=None, SEM=None, SEM_multiplier=2, time_series=None, color=None, xlabel=None, alpha=0.2, linewidth=None, xticks=None, xticklabels=None, yticks=None, yticklabels=None, label=None, xlim=None, ylim=None) -> plt.Figure:
     """
     Plots the mean and standard error of the mean of the results as a function of time.
 
@@ -45,6 +45,10 @@ def simple_mean_SEM_time_plot(ax, mean, ylabel, title=None, SEM=None, SEM_multip
                         mean+SEM*SEM_multiplier,
                         alpha=alpha, color=color)
     cax=ax.plot(time_series, mean, color=color, linewidth=linewidth, label=label)
+    
+    # Set the lims
+    ax.set_xlim(xlim)
+    ax.set_ylim(ylim)
     
     # Set the x-axis and y-axis labels
     ax.set_xlabel(xlabel)
@@ -500,7 +504,9 @@ def crosstime_RRR(ax, matrix, predictor, target, timeseries):
 
     return cax
 
-def rrr_time_slice(ax, results, predictor_time, timepoints=None, colors=None):
+def rrr_time_slice(ax, results, predictor_time, timepoints=None, colors=None, ylim=(None, None)):
+    
+    # TODO: Plot self prediction
     
     if type(colors) == tuple:
         color_TD, color_BU = colors
@@ -515,13 +521,14 @@ def rrr_time_slice(ax, results, predictor_time, timepoints=None, colors=None):
         raise Warning('Timepoints are not provided. Using the length of the results instead.')
 
     # Plot the results
-    cax_TD = simple_mean_SEM_time_plot(ax, results['top-down']['mean'], 'R^2', title='Top-down', SEM=results['top-down']['sem'], time_series=timepoints, color=color_TD, label='Top-down')
-    cax_BU = simple_mean_SEM_time_plot(ax, results['bottom-up']['mean'], 'R^2', title='Bottom-up', SEM=results['bottom-up']['sem'], time_series=timepoints, color=color_BU, label='Bottom-up')
+    cax_V1 = simple_mean_SEM_time_plot(ax, results['V1']['mean'], 'R^2', title='V1', SEM=results['V1']['sem'], time_series=timepoints, color='blue', label='V1', xlim=(0, timepoints[-1]), ylim=ylim, alpha=0.05, linewidth=0.5)
+    cax_LM = simple_mean_SEM_time_plot(ax, results['LM']['mean'], 'R^2', title='LM', SEM=results['LM']['sem'], time_series=timepoints, color='red', label='LM', xlim=(0, timepoints[-1]), ylim=ylim, alpha=0.05, linewidth=0.5)
+    cax_TD = simple_mean_SEM_time_plot(ax, results['top-down']['mean'], 'R^2', title='Top-down', SEM=results['top-down']['sem'], time_series=timepoints, color=color_TD, label='Top-down', xlim=(0, timepoints[-1]), ylim=ylim, linewidth=2)
+    cax_BU = simple_mean_SEM_time_plot(ax, results['bottom-up']['mean'], 'R^2', title='Bottom-up', SEM=results['bottom-up']['sem'], time_series=timepoints, color=color_BU, label='Bottom-up', xlim=(0, timepoints[-1]), ylim=ylim, linewidth=2)
     ax.legend()
     
     # Make a vertical line at the predictor time
     ax.axvline(x=predictor_time, color='k', linestyle='--')
     ax.set_xticks([0, predictor_time, timepoints[-1]])
-    ax.set_xlim([0, timepoints[-1]])
     
-    return cax_TD, cax_BU
+    return cax_TD, cax_BU, cax_V1, cax_LM
