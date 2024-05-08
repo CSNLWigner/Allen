@@ -37,7 +37,7 @@ do
 
     # Copy results
     filename=$(grep -w "figures" dvc.yaml | awk -d' ' '{print $2}')
-    dest="cache/${git_name}_${new_param}.png"
+    dest="cache/${git_name}_${param_value}.png"
     echo "$dest"
     cp $filename $dest
 
