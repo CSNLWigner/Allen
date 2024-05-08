@@ -35,6 +35,11 @@ do
     git add .
     git commit -m "$git_name $param_key $param_value"
 
+    # Copy results
+    filename=${grep -w "figures" dvc.yaml | awk -d' ' '{print $2}'}
+    dest="cache/${git_name}_${new_param}.png"
+    cp $filename $dest
+
     # Reset the parameters to avoid conflicts in the next iteration
     sed -i "s/$new_param/$old_param/g" params.yaml
 
