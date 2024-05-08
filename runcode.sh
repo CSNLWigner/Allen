@@ -36,7 +36,7 @@ do
     git commit -m "$git_name $param_key $param_value"
 
     # Copy results
-    filename=${grep -w "figures" dvc.yaml | awk -d' ' '{print $2}'}
+    filename=$(grep -w "figures" dvc.yaml | awk -d' ' '{print $2}')
     dest="cache/${git_name}_${new_param}.png"
     cp $filename $dest
 
