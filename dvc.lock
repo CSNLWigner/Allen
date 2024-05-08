@@ -9,7 +9,7 @@ stages:
     params:
       params.yaml:
         load:
-          session: 1095340643
+          session: 1069461581
           areas:
           - VISp
           - VISl
@@ -18,8 +18,8 @@ stages:
           stimulus-duration: 0.25
     outs:
     - path: data/raw-area-responses/
-      md5: 20cd4bae1e4b119e4359f7bc15156752.dir
-      size: 1786716322
+      md5: 675ab7a5fba1dbe81dee3416379aa676.dir
+      size: 1852800322
       nfiles: 2
   analysis:
     cmd: python3 -u crosstime-analysis.py
@@ -356,7 +356,7 @@ stages:
     cmd: python3 -u multiple-timeslices.py cache/crosstime
     deps:
     - path: multiple-timeslices.py
-      md5: d566cf7fd81c226e001285097acd6f84
+      md5: 9e4adf4c0aec4a7a9a261944ca9c45cd
       size: 3840
     params:
       params.yaml:
@@ -593,7 +593,7 @@ stages:
               cv: 2
               rank: 8
         load:
-          session: 1095340643
+          session: 1069461581
           areas:
           - VISp
           - VISl
@@ -617,8 +617,8 @@ stages:
           - 0.15
     outs:
     - path: figures/rrr-cross-time-slice-mega-plot.png
-      md5: 5091602378cb93a2c28a845604c21442
-      size: 610594
+      md5: 08854c775e439183f53ce9d195e8fa3f
+      size: 724453
   cache:
     cmd: python3 -u save-slices.py
     deps:
@@ -649,8 +649,8 @@ stages:
     cmd: python3 -u preprocessing.py
     deps:
     - path: data/raw-area-responses/
-      md5: 20cd4bae1e4b119e4359f7bc15156752.dir
-      size: 1786716322
+      md5: 675ab7a5fba1dbe81dee3416379aa676.dir
+      size: 1852800322
       nfiles: 2
     - path: preprocessing.py
       md5: 3f55ca4c5a9147f2533e099f2eaee84c
@@ -658,7 +658,7 @@ stages:
     params:
       params.yaml:
         load:
-          session: 1095340643
+          session: 1069461581
           areas:
           - VISp
           - VISl
@@ -676,8 +676,8 @@ stages:
           stimulus-duration: 0.25
     outs:
     - path: data/area-responses/
-      md5: 932a2617df9927e0edbe414c7ae51a86.dir
-      size: 178671922
+      md5: 76ecada7908b1cb9a92329b3a1d0a57e.dir
+      size: 185280322
       nfiles: 2
   timeslice:
     cmd: python3 -u rrr-time-slice-analysis.py
