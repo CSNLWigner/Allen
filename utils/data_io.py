@@ -50,7 +50,9 @@ def load_csv(name, path=""):
 
 def load_pickle(name, path="results"):
     if path != "":
-        name = f'{path}/{name}'
+        if path[-1] != "/":
+            path = path + "/"
+        name = f'{path}{name}'
     with open(f"{name}.pickle", "rb") as f:
         data = pickle.load(f)
     return data

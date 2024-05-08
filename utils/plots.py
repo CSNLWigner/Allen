@@ -13,6 +13,56 @@ from scipy.stats import sem
 
 preprocess = yaml.safe_load(open('params.yaml'))['preprocess']
 
+
+def simple_mean_SEM_time_plot(ax, mean, ylabel, title=None, SEM=None, SEM_multiplier=2, time_series=None, color=None, xlabel=None, alpha=0.2, linewidth=None, xticks=None, xticklabels=None, yticks=None, yticklabels=None, label=None) -> plt.Figure:
+    """
+    Plots the mean and standard error of the mean of the results as a function of time.
+
+    Parameters:
+    mean (array-like): A one-dimensional array-like object representing the mean of the results.
+    SEM (array-like): A one-dimensional array-like object representing the standard error of the mean of the results.
+    title (str, optional): The title of the plot. Default is 'Mean and SEM of the results'.
+    time_series (array-like, optional): A one-dimensional array-like object representing the time series. If not provided, it will be generated using the params.yaml file.
+    ax (matplotlib.axes.Axes, optional): The axes on which to plot. If not provided, a new figure and axes will be created.
+
+    Returns:
+    matplotlib.figure.Figure: The figure object containing the plot.
+    """
+    
+    # Set default values
+    if time_series is None:
+        duration = preprocess['stimulus-duration']
+        time_step = preprocess['step-size']
+        time_series = np.arange(0, duration+time_step, time_step).round(3)
+    
+    if xlabel is None:
+        xlabel = 'Time (s)'
+    
+    # Plot the mean and standard error of the mean of the results as a function of time
+    if SEM is not None:
+        ax.fill_between(time_series,
+                        mean-SEM*SEM_multiplier,
+                        mean+SEM*SEM_multiplier,
+                        alpha=alpha, color=color)
+    cax=ax.plot(time_series, mean, color=color, linewidth=linewidth, label=label)
+    
+    # Set the x-axis and y-axis labels
+    ax.set_xlabel(xlabel)
+    ax.set_ylabel(ylabel)
+    
+    # Set the title of the plot
+    ax.set_title(title)
+    
+    # Set xticks and yticks
+    if xticks is not None:
+        ax.set_xticks(xticks)
+    if xticklabels is not None:
+        ax.set_xticklabels(xticklabels)
+    if yticks is not None:
+        ax.set_yticks(yticks)
+    
+    return cax
+
 def simple_rrr_plot(result, axs=None) -> plt.Figure:
     
     # Add a third dimension if not present
@@ -427,30 +477,51 @@ def crosstime_RRR(ax, matrix, predictor, target, timeseries):
     """
 
     # The diagonal of the matrix should be nan
-    np.fill_diagonal(matrix, np.nan)
+    # np.fill_diagonal(matrix, np.nan)
+    
+    # Reverse the rows of the matrix
+    matrix = matrix[::-1]
 
     # tick frequency
     tick_frequency = 5
     # Plot the matrix. colormap do not use white color. Make the resolution higher.
-    cax = ax.imshow(matrix, cmap='terrain', interpolation='bilinear')
-    ax.set_xticks(range(0, timeseries.shape[0], tick_frequency))
-    ax.set_xticklabels(timeseries[::tick_frequency])
-    ax.set_yticks(range(0, timeseries.shape[0], tick_frequency))
-    ax.set_yticklabels(timeseries[::tick_frequency])
+    cax = ax.imshow(matrix, cmap='terrain', interpolation='bilinear', 
+                    extent=[0, timeseries[-1], 0, timeseries[-1]])
+    
+    # black line from 0;0 to the max;max
+    ax.plot([0, timeseries[-1]], [0, timeseries[-1]],
+            color='black', linewidth=1)
+    
+    # Set the ticks and labels
+    ax.set_xticks(timeseries[::tick_frequency])
+    ax.set_yticks(timeseries[::tick_frequency])
     ax.set_xlabel(f"Timepoints of {target}")
     ax.set_ylabel(f"Timepoints of {predictor}")
 
     return cax
 
-def rrr_time_slice(ax, mean_TD, mean_BU, timepoints, predictor_time):
+def rrr_time_slice(ax, results, predictor_time, timepoints=None, colors=None):
+    
+    if type(colors) == tuple:
+        color_TD, color_BU = colors
+    else:
+        prop_cycle = plt.rcParams['axes.prop_cycle']
+        colors = prop_cycle.by_key()['color']
+        color_TD = colors[0]
+        color_BU = colors[1]
+
+    if type(timepoints) is None:
+        timepoints = np.arange(len(results['top-down']['mean']))
+        raise Warning('Timepoints are not provided. Using the length of the results instead.')
 
     # Plot the results
-    ax.plot(timepoints, mean_TD, label='Top-down')
-    ax.plot(timepoints, mean_BU, label='Bottom-up')
-    ax.set_xlabel('Time (s)')
-    ax.set_ylabel('R^2')
+    cax_TD = simple_mean_SEM_time_plot(ax, results['top-down']['mean'], 'R^2', title='Top-down', SEM=results['top-down']['sem'], time_series=timepoints, color=color_TD, label='Top-down')
+    cax_BU = simple_mean_SEM_time_plot(ax, results['bottom-up']['mean'], 'R^2', title='Bottom-up', SEM=results['bottom-up']['sem'], time_series=timepoints, color=color_BU, label='Bottom-up')
+    ax.legend()
+    
     # Make a vertical line at the predictor time
     ax.axvline(x=predictor_time, color='k', linestyle='--')
     ax.set_xticks([0, predictor_time, timepoints[-1]])
     ax.set_xlim([0, timepoints[-1]])
-    ax.legend()
+    
+    return cax_TD, cax_BU
