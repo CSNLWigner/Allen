@@ -27,3 +27,32 @@ To enable auto staging, run:
 
 	dvc config core.autostage true
 Use `dvc push` to send your updates to remote storage.
+[compute 29504e4] TD_param-search_stimresidual session 1111013640
+ Committer: szabo.zsombor <szabo.zsombor@m3.rmki.kfki.hu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 11 files changed, 471 insertions(+), 12862 deletions(-)
+ rewrite GEN3.txt (99%)
+ rewrite TD_GEN3.txt (100%)
+ mode change 100644 => 100755 old_param-search-crosstime-test.sh
+ create mode 100644 pipelines/multiple-timeslices/dvc.yaml
+ create mode 100644 pipelines/multiple-timeslices/params.yaml
+cache/TD_param-search_stimresidual_1111013640.png
+2024. máj. 13., hétfő, 18:38:10 CEST
+TD_param-search_stimresidual session 1108334384
+Running stage 'load':
+> python3 -u load_raw_activity_data.py
+Cache location: data/.vbn_s3_cache
+Your allensdk version is: 2.15.2
+the most up-to-date manifest available:  visual-behavior-neuropixels_project_manifest_v0.5.0.json
+the most up-to-date manifest downloaded: visual-behavior-neuropixels_project_manifest_v0.5.0.json
