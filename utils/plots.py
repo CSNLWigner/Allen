@@ -532,3 +532,14 @@ def rrr_time_slice(ax, results, predictor_time, timepoints=None, colors=None, yl
     ax.set_xticks([0, predictor_time, timepoints[-1]])
     
     return cax_TD, cax_BU
+
+def plot_stimuli(ecephys_session):
+    """['im104_r', 'im114_r', 'im083_r', 'im005_r', 'im087_r', 'im024_r', 'im111_r', 'im034_r']"""
+
+    # Visualizing all stimuli templates for the unwarped images on a subplot
+    fig, ax = plt.subplots(2, 4, figsize=(20, 10))
+    for i, key in enumerate(ecephys_session.stimulus_templates['unwarped'].keys()):
+        ax[i//4, i %
+            4].imshow(ecephys_session.stimulus_templates['unwarped'][key], cmap='gray')
+        ax[i//4, i % 4].set_title(key)
+    plt.show()
