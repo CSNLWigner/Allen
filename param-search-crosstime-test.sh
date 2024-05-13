@@ -74,8 +74,8 @@ do
     fi
 
     # get BU variables from log cache
-    BU_cv=$(sed -n 's/cv=\(.*\)/\1/' < log_cache.txt) # add '
-    BU_rank=$(sed -n 's/rank=\(.*\)/\1/' < log_cache.txt) # add '
+    BU_cv=$(sed -n 's/cv=\([[:alnum:]]*\)/\1/' < log_cache.txt) # add '
+    BU_rank=$(sed -n 's/rank=\([[:alnum:]]*\)/\1/' < log_cache.txt) # add '
     echo "cv is $BU_cv"
     echo "rank is $BU_rank"
 

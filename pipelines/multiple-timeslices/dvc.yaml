@@ -1,0 +1,32 @@
+stages:
+  load:
+    cmd: python3 -u load_raw_activity_data.py
+    deps:
+      - load_raw_activity_data.py
+    params:
+      - load
+    outs:
+      - data/raw-area-responses/
+  preprocess:
+    cmd: python3 -u preprocessing.py
+    deps:
+      - preprocessing.py
+      - data/raw-area-responses/
+    params:
+      - load
+      - preprocess
+    outs:
+      - data/area-responses/
+  plots:
+    cmd: python3 -u multiple-timeslices.py cache/crosstime
+    deps:
+      - multiple-timeslices.py
+      # - results/cross-time-RRR.pickle
+      # - results/rrr-time-slice.pickle
+    params:
+      - load
+      - preprocess
+      - best-rrr-params
+      - rrr-time-slice
+    outs:
+      - figures/rrr-cross-time-slice-mega-plot.png

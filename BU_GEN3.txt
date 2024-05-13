@@ -1,3 +1,0 @@
-Error: The initial value of session should be 0 in params.yaml
-Error: The initial value of session should be 0 in params.yaml
-Error: The initial value of session should be 0 in params.yaml

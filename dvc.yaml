@@ -7,26 +7,26 @@ stages:
       - load
     outs:
       - data/raw-area-responses/
-  preprocess:
-    cmd: python3 -u preprocessing.py
+  analysis:
+    cmd: python3 -u cv-time-lag-analysis.py
     deps:
-      - preprocessing.py
+      - cv-time-lag-analysis.py
       - data/raw-area-responses/
     params:
       - load
       - preprocess
+      - rrr
+      - rrr-param-search
     outs:
-      - data/area-responses/
+      - results/CV-lag-time.pickle
   plots:
-    cmd: python3 -u multiple-timeslices.py cache/crosstime
+    cmd: python3 -u cv-time-lag-plot.py
     deps:
-      - multiple-timeslices.py
-      # - results/cross-time-RRR.pickle
-      # - results/rrr-time-slice.pickle
+      - cv-time-lag-plot.py
+      - results/CV-lag-time.pickle
     params:
-      - load
       - preprocess
-      - best-rrr-params
-      - rrr-time-slice
+      - rrr
+      - rrr-param-search
     outs:
-      - figures/rrr-cross-time-slice-mega-plot.png
+      - figures/rrr-param-search.png
