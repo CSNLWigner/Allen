@@ -523,12 +523,23 @@ def rrr_time_slice(ax, results, predictor_time, timepoints=None, colors=None, yl
     # Plot the results
     cax_V1 = simple_mean_SEM_time_plot(ax, results['V1']['mean'], 'R^2', title='V1', SEM=results['V1']['sem'], time_series=timepoints, color='blue', label='V1', xlim=(0, timepoints[-1]), ylim=ylim, alpha=0.05, linewidth=0.5)
     cax_LM = simple_mean_SEM_time_plot(ax, results['LM']['mean'], 'R^2', title='LM', SEM=results['LM']['sem'], time_series=timepoints, color='red', label='LM', xlim=(0, timepoints[-1]), ylim=ylim, alpha=0.05, linewidth=0.5)
-    cax_TD = simple_mean_SEM_time_plot(ax, results['top-down']['mean'], 'R^2', title='Top-down', SEM=results['top-down']['sem'], time_series=timepoints, color=color_TD, label='Top-down', xlim=(0, timepoints[-1]), ylim=ylim, linewidth=2)
-    cax_BU = simple_mean_SEM_time_plot(ax, results['bottom-up']['mean'], 'R^2', title='Bottom-up', SEM=results['bottom-up']['sem'], time_series=timepoints, color=color_BU, label='Bottom-up', xlim=(0, timepoints[-1]), ylim=ylim, linewidth=2)
+    cax_TD = simple_mean_SEM_time_plot(ax, results['top-down']['mean'], 'R^2', SEM=results['top-down']['sem'], time_series=timepoints, color=color_TD, label='Top-down', xlim=(0, timepoints[-1]), ylim=ylim, linewidth=2)
+    cax_BU = simple_mean_SEM_time_plot(ax, results['bottom-up']['mean'], 'R^2', SEM=results['bottom-up']['sem'], time_series=timepoints, color=color_BU, label='Bottom-up', xlim=(0, timepoints[-1]), ylim=ylim, linewidth=2)
     ax.legend()
     
     # Make a vertical line at the predictor time
     ax.axvline(x=predictor_time, color='k', linestyle='--')
     ax.set_xticks([0, predictor_time, timepoints[-1]])
     
-    return cax_TD, cax_BU, cax_V1, cax_LM
+    return cax_TD, cax_BU
+
+def plot_stimuli(ecephys_session):
+    """['im104_r', 'im114_r', 'im083_r', 'im005_r', 'im087_r', 'im024_r', 'im111_r', 'im034_r']"""
+
+    # Visualizing all stimuli templates for the unwarped images on a subplot
+    fig, ax = plt.subplots(2, 4, figsize=(20, 10))
+    for i, key in enumerate(ecephys_session.stimulus_templates['unwarped'].keys()):
+        ax[i//4, i %
+            4].imshow(ecephys_session.stimulus_templates['unwarped'][key], cmap='gray')
+        ax[i//4, i % 4].set_title(key)
+    plt.show()

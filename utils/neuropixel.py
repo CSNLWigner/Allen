@@ -2,6 +2,8 @@ from allensdk.brain_observatory.ecephys.visualization import plot_mean_waveforms
 from matplotlib import pyplot as plt
 import numpy as np
 import pandas as pd
+
+from utils.utils import printProgressBar
 # import yaml
 
 # params = yaml.safe_load(open('params.yaml'))['cache']
@@ -330,7 +332,7 @@ def get_average_unit_responses(units, spike_times, trial_start, duration=0.03, b
     return np.array(response)
 
 
-def get_unit_responses(units, spike_times, trial_start, duration=0.250, stepSize=0.010, binSize=0.050):
+def get_unit_responses(units, spike_times, trial_start, duration=0.250, stepSize=0.010, binSize=0.050, progressbar=True):
     """
     Calculate the unit responses for each unit in the given units DataFrame.
 
@@ -351,27 +353,41 @@ def get_unit_responses(units, spike_times, trial_start, duration=0.250, stepSize
     n_step = int(duration / stepSize)
     n_bin = int(duration / binSize)
 
+    # Initialize tensor
     tensor = np.zeros((n_unit, n_trial, n_step))
+    
+    # Print progressbar
+    if progressbar:
+        printProgressBar(0, n_unit, prefix='Units:', length=50)
 
     for i, unit_ID in enumerate([unit_ID for unit_ID, unit_data, in units.iterrows()]):  # Units
-        # print(unit_ID)
+
+        # Get the spike times for the unit
         unit_spike_times = spike_times[unit_ID]
-        # print(type(unit_spike_times))
-        # print(unit_spike_times.shape)
+        
+        # Loop through trials and time
         for j, start in enumerate(trial_start):  # Trials
             for k, time in enumerate(np.arange(start, start + duration, stepSize)): # Time
                 
-                # print(unit_spike_times, time)
+                # Check if k is out of range
                 if k == n_bin: # This can happen because of different floating point rounding in int() and np.arange() functions i guess.
                     break # print('Warning: k is out of range')
                 
+                # Find the bin indices
                 bin_start_idx = np.searchsorted(unit_spike_times, time)
                 bin_end_idx = np.searchsorted(unit_spike_times, time+binSize)
                 
+                # Get the spikes in the time bin
                 spikes_in_timebin = unit_spike_times[bin_start_idx:bin_end_idx]
                 
+                # Count the number of spikes in the time bin
                 tensor[i, j, k] = len(spikes_in_timebin) # spike_count
+        
+        # Update Progress Bar
+        if progressbar:
+            printProgressBar(i + 1, n_unit, prefix='Units:', length=50)
 
+    # Count the number of spikes in the tensor
     count = np.count_nonzero(tensor)
     print('Spike count in the data:', count)
 

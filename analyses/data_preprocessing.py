@@ -4,6 +4,7 @@ import pandas as pd
 import yaml
 
 from utils.neuropixel import get_area_units, get_unit_responses, stimulus_duration
+from utils.utils import printProgressBar
 from scipy.signal import convolve
 
 # Load the parameters
@@ -61,19 +62,14 @@ def get_behav_responses(behav_data:pd.DataFrame, value_name:str, trial_start, du
 
     return data
 
-def get_area_responses(session: BehaviorEcephysSession, area: str, session_block: int, log=False) -> np.ndarray:
+def get_area_responses(session: BehaviorEcephysSession, area: str, trials:pd.DataFrame, log=False) -> np.ndarray:
     """
     Get the responses of the units in a specific brain area to a specific stimulus block.
 
     Args:
         session (BehaviorEcephysSession): The session object containing the spike times and stimulus presentations.
         area (str): The name of the brain area.
-        session_block (int): The stimulus block number.
-            0: change detection task
-            2: receptive field mapping by gabor stimuli
-            4: full-flash
-            5: passive replay
-        log (bool, optional): Whether to log the progress. Defaults to False.
+        trials (pd.DataFrame): DataFrame containing the trial information.
 
     Returns:
         Numpy array containing the area responses of the units. Shape (units, trials, time)
@@ -95,11 +91,9 @@ def get_area_responses(session: BehaviorEcephysSession, area: str, session_block
     """
 
     # Parameters
-    stimulus_block = session_block
     stepSize = load['step-size']
     binSize = load['step-size']
     duration = load['stimulus-duration']
-    time_length = duration/binSize
 
     # Get area units
     if log:
@@ -110,18 +104,13 @@ def get_area_responses(session: BehaviorEcephysSession, area: str, session_block
         print('area_units number', n_area_units)  # shape (units)
 
     # Get the time of the start of each trial
-    stimulus_presentations = session.stimulus_presentations
-    trial_start = stimulus_presentations[stimulus_presentations['stimulus_block']
-                                         == stimulus_block]['start_time'].values
+    trial_start = trials['start_time'].values
     
     # Average difference between trial start times and the duration of the stimulus
     if log:
-        
         average_difference = np.mean(np.diff(trial_start))
         print("Average difference between neighboring elements in trial_start:",
               average_difference)
-        
-        stimulus_duration(session, stimulus_block)
 
     area_responses = get_unit_responses(
         area_units, session.spike_times, trial_start, duration=duration, stepSize=stepSize, binSize=binSize)  # shape (units, trials, time)
@@ -164,12 +153,13 @@ def stimulus_log(session: BehaviorEcephysSession, trial_start, stimulus_block: i
     
     
     
-def calculate_residual_activity(full_activity: np.ndarray) -> np.ndarray:
+def calculate_residual_activity(full_activity: np.ndarray, axis=None) -> np.ndarray:
     """
     Calculate the residual activity by subtracting the baseline (PSTH) from the full activity.
 
     Args:
         full_activity (np.ndarray): The full activity of the units. Shape (units, trials, time)
+        axis (int, tuple, None): The axis along which to calculate the mean. Default is None.
 
     Returns:
         Numpy array containing the residual activity of the units. Shape (units, trials, time)
@@ -182,18 +172,19 @@ def calculate_residual_activity(full_activity: np.ndarray) -> np.ndarray:
                                        [0.4, 0.5, 0.6]],
                                       [[0.7, 0.8, 0.9],
                                        [1.0, 1.1, 1.2]]])
-        >>> calculate_residual_activity(full_activity)
-        array([[[0.1, 0.2, 0.3],
-                [0.4, 0.5, 0.6]],
-               [[0.7, 0.8, 0.9],
-                [1.0, 1.1, 1.2]]])
+        >>> print(calculate_residual_activity(full_activity, axis=0))
+            [[[-0.25 -0.15 -0.05]
+            [ 0.05  0.15  0.25]]
+
+            [[-0.25 -0.15 -0.05]
+            [ 0.05  0.15  0.25]]]
     """
+    
+    # Get the inverse of the axis
+    axis = tuple(np.delete(np.arange(full_activity.ndim), axis))
 
     # Get trial average activity
-    baseline = full_activity.mean(axis=1)  # shape (units, time)
-
-    # Make sure the baseline is the same shape as the full activity by repeating it
-    baseline = np.repeat(baseline[:, np.newaxis, :], full_activity.shape[1], axis=1)
+    baseline = full_activity.mean(axis=axis, keepdims=True)
 
     # Subtract baseline (PSTH) from responses to get the residual activity
     residual_activity = full_activity - baseline
@@ -314,6 +305,9 @@ def recalculate_neural_activity(neural_activity: np.ndarray, duration: float, ti
     # Create an empty array to store the recalculated neural activity
     recalculated_activity = np.zeros((N, K, T_new))
     
+    # TODO: Progress bar
+    # printProgressBar(0, T_new, prefix='Recalculating neural activity:', length=30)
+    
     for t in range(T_new):
 
         # Calculate the start and end indices for the original time step
@@ -322,11 +316,65 @@ def recalculate_neural_activity(neural_activity: np.ndarray, duration: float, ti
         
         # Recalculate the neural activity
         recalculated_activity[:, :, t] = np.sum(neural_activity[:, :, start_idx:end_idx], axis=2)
+        
+        # TODO: Update the progress bar
+        # printProgressBar(t + 1, T_new, prefix='Recalculating neural activity:', length=30)
                 
     return recalculated_activity
 
 
-def preprocess_area_responses(raw_activity, method='z-score', stimulus_duration=params['stimulus-duration'], step_size=params['step-size'], bin_size=params['bin-size']):
+def residual_for_each_stimulus_identity(full_activity: np.ndarray, stimulus_identities: pd.core.series.Series) -> np.ndarray:
+    """
+    Calculate the residual activity for each stimulus identity.
+
+    Args:
+        full_activity (np.ndarray): The full activity of the units. Shape (units, trials, time)
+        stimulus_presentations (pd.core.series.Series): The stimulus presentations.
+
+    Returns:
+        np.ndarray: Numpy array containing the residual activity for each stimulus identity. Shape (units, n_identities, time)
+
+    Raises:
+        None
+
+    Example:
+        >>> full_activity = np.array([[[0.1, 0.2, 0.3],
+                                       [0.4, 0.5, 0.6]],
+                                      [[0.7, 0.8, 0.9],
+                                       [1.0, 1.1, 1.2]]])
+        >>> stimulus_identities = np.array([0, 1])
+        >>> residual_for_each_stimulus_identity(full_activity, stimulus_identities)
+        array([[[0.1, 0.2, 0.3],
+                [0.4, 0.5, 0.6]],
+               [[0.7, 0.8, 0.9],
+                [1.0, 1.1, 1.2]]])
+    """
+    
+    # Get the unique stimulus identities
+    unique_identities = stimulus_identities.unique()
+
+    # Create an empty array to store the residual activity for each stimulus identity
+    residual_activities = []
+    
+    print('idx of first stimulus', np.where(stimulus_identities == unique_identities[0])[0])
+    print('stimulus_identities shape', stimulus_identities.shape)
+    print('idx shape of first stimulus', np.where(stimulus_identities == unique_identities[0])[0].shape)
+    print('full activity', full_activity.shape)
+    print('unique identities', unique_identities)
+
+    # Calculate the residual activity for each stimulus identity
+    for identity in unique_identities:
+        print('identity', identity)
+        idx = np.where(stimulus_identities == identity)[0]
+        residual_activity = calculate_residual_activity(full_activity[:, idx, :], axis=1)
+        residual_activities.append(residual_activity)
+    
+    residual_activity = np.concatenate(residual_activities, axis=1)
+
+    return residual_activity
+
+
+def preprocess_area_responses(raw_activity, stimulus_names, method='z-score', stimulus_duration=params['stimulus-duration'], step_size=params['step-size'], bin_size=params['bin-size']):
     """
     Preprocesses the raw neural activity of a specific brain area.
 
@@ -343,11 +391,12 @@ def preprocess_area_responses(raw_activity, method='z-score', stimulus_duration=
                                                 stimulus_duration, step_size, bin_size,
                                                 orig_time_step=load['step-size'])
 
-    # Get residual activity
-    residual_activity = calculate_residual_activity(full_activity)  # Neuron-wise AND time-wise
+    # Get residual activity To get rid of high-frequency noise neurons, times and stimuli
+    stimulus_residual = residual_for_each_stimulus_identity(full_activity, stimulus_names) # Stimulus-wise
+    all_residual = calculate_residual_activity(stimulus_residual, axis=(0, 2))  # Neuron-wise AND time-wise
 
-    # Normalize the responses
+    # Normalize the responses to better model performance
     if method == 'z-score':
-        normalized_activity = z_score_normalize(residual_activity, dims=(0, 1, 2))  # TODO: Normalize based on ITI activity?
+        normalized_activity = z_score_normalize(all_residual, dims=(0, 1, 2))  # TODO: Normalize based on ITI activity?
 
     return normalized_activity
