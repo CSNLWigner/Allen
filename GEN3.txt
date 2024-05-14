@@ -1306,3 +1306,7 @@ To enable auto staging, run:
 
 	dvc config core.autostage true
 Use `dvc push` to send your updates to remote storage.
+TD_param-search-analysis_stimresidual session 1111013640
+Running stage 'analysis':
+> python3 -u cv-time-lag-analysis.py
+Calculating something
