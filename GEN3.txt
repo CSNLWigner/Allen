@@ -1772,3 +1772,24 @@ TD_param-search-analysis_stimresidual session 1081429294
 Running stage 'analysis':
 > python3 -u cv-time-lag-analysis.py
 Calculating something
+[compute b819931] TD_param-search-analysis_stimresidual session 1081429294
+ Committer: szabo.zsombor <szabo.zsombor@m3.rmki.kfki.hu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 3 files changed, 29 insertions(+), 1 deletion(-)
+cache/TD_param-search-analysis_stimresidual_1081429294.png
+2024. máj. 14., kedd, 15:24:39 CEST
+TD_param-search-analysis_stimresidual session 1086200042
+Running stage 'analysis':
+> python3 -u cv-time-lag-analysis.py
+Calculating something
