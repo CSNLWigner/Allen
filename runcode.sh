@@ -29,7 +29,7 @@ do
     sed -i "s/$old_param/$new_param/g" params.yaml
 
     # Run code
-    dvc repro
+    dvc repro -fs analysis
 
     # Git
     git add .
