@@ -97,23 +97,17 @@ print('result.shape:', result.shape)
 # Save the results
 save_pickle(result, f'CV-lag-time')
 
+# Get the maximum
+max = np.nanmax(result).round(3)
 
-for idx, t in enumerate(timepoints):
-    
-    # Get the result at the time
-    result_t = result[:, :, :, idx]
+# Get the indices of the maximum value
+max_idx = np.unravel_index(np.nanargmax(result), result.shape)
 
-    # Get the maximum
-    max = np.nanmax(result).round(3)
+# Print the maximum value and the corresponding parameters
+print(f'maximum value({max}) is at time={timepoints[max_idx[3]]} s, cv={cv[max_idx[0]]} fold, lag={time_lag[max_idx[1]]} ms, and rank={rank[max_idx[2]]}')
 
-    # Get the indices of the maximum value
-    max_idx = np.unravel_index(np.nanargmax(result), result.shape)
-    
-    # Print the maximum value and the corresponding parameters
-    print(f'maximum value({max}) at {t} ms is at cv={cv[max_idx[0]]}, lag={time_lag[max_idx[1]]}, rank={rank[max_idx[2]]}')
-    
-    # Append the maximum value and the corresponding parameters to a csv file
-    with open('best-rrr-params.csv', 'a') as f:
-        f.write(f'{load["session"]},{t},{max},{cv[max_idx[0]]},{time_lag[max_idx[1]]},{rank[max_idx[2]]}\n')
+# Append the maximum value and the corresponding parameters to a csv file
+with open('best-rrr-params.csv', 'a') as f:
+    f.write(f'{load["session"]},{timepoints[max_idx[3]]},{max},{cv[max_idx[0]]},{time_lag[max_idx[1]]},{rank[max_idx[2]]}\n')
 
 
