@@ -2,6 +2,14 @@ from analyses.data_preprocessing import get_area_responses, preprocess_area_resp
 from utils.download_allen import cache_allen
 from utils.data_io import load_pickle, save_pickle
 import yaml
+import sys
+
+# Get the arguments
+opts = [opt for opt in sys.argv[1:] if opt.startswith("-")]
+args = [arg for arg in sys.argv[1:] if not arg.startswith("-")]
+log=False
+if "-l" in opts:
+    log = True
 
 # Load parameters
 load = yaml.safe_load(open('params.yaml'))['load']
@@ -61,7 +69,7 @@ def calculate_something():
                 for t, time in zip(timepoint_indices, timepoints):
                     
                     # Reduced Rank Regression
-                    # print(f'Cross-validation: {c}, Time lag: {lag}')
+                    if log: print(f'Cross-validation: {c}, Time lag: {lag}')
                     # result = RRRR(V1.mean(axis=0), V2.mean(axis=0), params['rank'], cv=c) # cross-time RRRR
                     result = RRRR(predictor[:,:,t].T, lagged_target[:,:,t].T, rank=r, cv=c)
                     
@@ -89,19 +97,17 @@ print('result.shape:', result.shape)
 # Save the results
 save_pickle(result, f'CV-lag-time')
 
+# Get the maximum
+max = np.nanmax(result).round(3)
 
-for idx, t in enumerate(timepoints):
-    
-    # Get the result at the time
-    result_t = result[:, :, :, idx]
+# Get the indices of the maximum value
+max_idx = np.unravel_index(np.nanargmax(result), result.shape)
 
-    # Get the maximum
-    max = np.nanmax(result)
+# Print the maximum value and the corresponding parameters
+print(f'maximum value({max}) is at time={timepoints[max_idx[3]]} s, cv={cv[max_idx[0]]} fold, lag={time_lag[max_idx[1]]} ms, and rank={rank[max_idx[2]]}')
 
-    # Get the indices of the maximum value
-    max_idx = np.unravel_index(np.nanargmax(result), result.shape)
-    
-    # Print the maximum value and the corresponding parameters
-    print(f'maximum value({max.round(3)}) at {t} ms is at cv={cv[max_idx[0]]}, lag={time_lag[max_idx[1]]}, rank={rank[max_idx[2]]}')
+# Append the maximum value and the corresponding parameters to a csv file
+with open('best-rrr-params.csv', 'a') as f:
+    f.write(f'{load["session"]},{timepoints[max_idx[3]]},{max},{cv[max_idx[0]]},{time_lag[max_idx[1]]},{rank[max_idx[2]]}\n')
 
 
