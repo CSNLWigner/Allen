@@ -23,8 +23,8 @@ preprocess:
   areas: ["VISp", "VISl"] # "VISpm" # "VISm" has no spikes
   lag-time: 0 # in milliseconds
   lag-area: ""
-  step-size: 0.010 # time-step in seconds # 0.010
-  bin-size: 0.100 # time-window in seconds # Joao's default: 0.100
+  step-size: 0.050 # time-step in seconds # 0.010
+  bin-size: 0.050 # time-window in seconds # Joao's default: 0.100
   stimulus-duration: 0.250 # in seconds
 
 cca:
@@ -36,8 +36,8 @@ rrr:
   cv: 3
   rank: 18
   error-score: 'raise'
-  predictor: 'VISp'
-  target: 'VISl'
+  predictor: 'VISl'
+  target: 'VISp'
   timepoint: 0.050 # in seconds
 
 rrr-time-slice:
@@ -47,13 +47,13 @@ crosstime:
   scaling-factor: 5 # in ms
 
 rrr-param-search:
-  cv: [3] # [2,3,4,5]
-  rank: [14] # [2,4,6,8,10,12,14,16,18,20]
-  lag: [100,105,110,115,120,125,130,135,140,145,150] # [0,3,6]
-  timepoints: [0] # [0,100]
-  duration: 0.250
-  time-bin: 0.050
-  time-step: 0.025
+  cv: [2,3,4,5,6,7,8] # [3]
+  rank: [2,4,6,8,10,12,14,16,18,20,25,30,35,40,45,50,75,100] # [14]
+  lag: [0,3,6] # [100,105,110,115,120,125,130,135,140,145,150]
+  timepoints: [0,50,100,150] # [0]
+  # duration: 0.250
+  # time-bin: 0.050
+  # time-step: 0.025
 
 best-rrr-params:
   1111013640:
