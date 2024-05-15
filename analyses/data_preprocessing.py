@@ -356,15 +356,8 @@ def residual_for_each_stimulus_identity(full_activity: np.ndarray, stimulus_iden
     # Create an empty array to store the residual activity for each stimulus identity
     residual_activities = []
     
-    print('idx of first stimulus', np.where(stimulus_identities == unique_identities[0])[0])
-    print('stimulus_identities shape', stimulus_identities.shape)
-    print('idx shape of first stimulus', np.where(stimulus_identities == unique_identities[0])[0].shape)
-    print('full activity', full_activity.shape)
-    print('unique identities', unique_identities)
-
     # Calculate the residual activity for each stimulus identity
     for identity in unique_identities:
-        print('identity', identity)
         idx = np.where(stimulus_identities == identity)[0]
         residual_activity = calculate_residual_activity(full_activity[:, idx, :], axis=1)
         residual_activities.append(residual_activity)
