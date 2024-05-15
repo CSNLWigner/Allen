@@ -2,6 +2,14 @@ from analyses.data_preprocessing import get_area_responses, preprocess_area_resp
 from utils.download_allen import cache_allen
 from utils.data_io import load_pickle, save_pickle
 import yaml
+import sys
+
+# Get the arguments
+opts = [opt for opt in sys.argv[1:] if opt.startswith("-")]
+args = [arg for arg in sys.argv[1:] if not arg.startswith("-")]
+log=False
+if "-l" in opts:
+    log = True
 
 # Load parameters
 load = yaml.safe_load(open('params.yaml'))['load']
@@ -12,9 +20,9 @@ main_params = yaml.safe_load(open('params.yaml'))['rrr-param-search']
 # Load the activity
 full_activity_predictor = load_pickle(f'{load["stimulus-block"]}_block_{rrr_params["predictor"]}-activity', path='data/raw-area-responses')
 full_activity_target    = load_pickle(f'{load["stimulus-block"]}_block_{rrr_params["target"]}-activity', path='data/raw-area-responses')
-
-# Import preprocessing functions
-from analyses.data_preprocessing import calculate_residual_activity, recalculate_neural_activity, z_score_normalize
+    
+# Get the image names
+image_names = load_pickle(f'{load["stimulus-block"]}_block_{rrr_params["target"]}-image-names', path='data/stimulus-presentations')
 
 # Import utile functions
 import numpy as np
@@ -50,8 +58,8 @@ def calculate_something():
     for j, lag in enumerate(time_lag):
         
         # Preprocess the area responses
-        predictor = preprocess_area_responses(full_activity_predictor)
-        target = preprocess_area_responses(full_activity_target)
+        predictor = preprocess_area_responses(full_activity_predictor, image_names)
+        target = preprocess_area_responses(full_activity_target, image_names)
         
         # Move the activity of V2 back in time by the actual time lag
         lagged_target = np.roll(target, -lag, axis=2)
@@ -61,7 +69,7 @@ def calculate_something():
                 for t, time in zip(timepoint_indices, timepoints):
                     
                     # Reduced Rank Regression
-                    # print(f'Cross-validation: {c}, Time lag: {lag}')
+                    if log: print(f'Cross-validation: {c}, Time lag: {lag}')
                     # result = RRRR(V1.mean(axis=0), V2.mean(axis=0), params['rank'], cv=c) # cross-time RRRR
                     result = RRRR(predictor[:,:,t].T, lagged_target[:,:,t].T, rank=r, cv=c)
                     
@@ -96,12 +104,16 @@ for idx, t in enumerate(timepoints):
     result_t = result[:, :, :, idx]
 
     # Get the maximum
-    max = np.nanmax(result)
+    max = np.nanmax(result).round(3)
 
     # Get the indices of the maximum value
     max_idx = np.unravel_index(np.nanargmax(result), result.shape)
     
     # Print the maximum value and the corresponding parameters
-    print(f'maximum value({max.round(3)}) at {t} ms is at cv={cv[max_idx[0]]}, lag={time_lag[max_idx[1]]}, rank={rank[max_idx[2]]}')
+    print(f'maximum value({max}) at {t} ms is at cv={cv[max_idx[0]]}, lag={time_lag[max_idx[1]]}, rank={rank[max_idx[2]]}')
+    
+    # Append the maximum value and the corresponding parameters to a csv file
+    with open('best-rrr-params.csv', 'a') as f:
+        f.write(f'{load["session"]},{t},{max},{cv[max_idx[0]]},{time_lag[max_idx[1]]},{rank[max_idx[2]]}\n')
 
 
