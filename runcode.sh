@@ -29,11 +29,11 @@ do
     sed -i "s/$old_param/$new_param/g" params.yaml
 
     # Run code
-    dvc repro -fs analysis
+    dvc repro
 
     # Git
-    git add .
-    git commit -m "$git_name $param_key $param_value"
+    #git add .
+    #git commit -m "$git_name $param_key $param_value"
 
     # Copy results
     filename=$(grep -w "figures" dvc.yaml | awk -d' ' '{print $2}')

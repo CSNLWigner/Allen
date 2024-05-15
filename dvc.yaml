@@ -8,7 +8,7 @@ stages:
     outs:
       - data/raw-area-responses/
   analysis:
-    cmd: python3 -u cv-time-lag-analysis.py
+    cmd: python3 -u cv-time-lag-analysis.py -l
     deps:
       - cv-time-lag-analysis.py
       - data/raw-area-responses/
