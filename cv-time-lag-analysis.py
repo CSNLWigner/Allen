@@ -12,9 +12,9 @@ main_params = yaml.safe_load(open('params.yaml'))['rrr-param-search']
 # Load the activity
 full_activity_predictor = load_pickle(f'{load["stimulus-block"]}_block_{rrr_params["predictor"]}-activity', path='data/raw-area-responses')
 full_activity_target    = load_pickle(f'{load["stimulus-block"]}_block_{rrr_params["target"]}-activity', path='data/raw-area-responses')
-
-# Import preprocessing functions
-from analyses.data_preprocessing import calculate_residual_activity, recalculate_neural_activity, z_score_normalize
+    
+# Get the image names
+image_names = load_pickle(f'{load["stimulus-block"]}_block_{rrr_params["target"]}-image-names', path='data/stimulus-presentations')
 
 # Import utile functions
 import numpy as np
@@ -50,8 +50,8 @@ def calculate_something():
     for j, lag in enumerate(time_lag):
         
         # Preprocess the area responses
-        predictor = preprocess_area_responses(full_activity_predictor)
-        target = preprocess_area_responses(full_activity_target)
+        predictor = preprocess_area_responses(full_activity_predictor, image_names)
+        target = preprocess_area_responses(full_activity_target, image_names)
         
         # Move the activity of V2 back in time by the actual time lag
         lagged_target = np.roll(target, -lag, axis=2)
