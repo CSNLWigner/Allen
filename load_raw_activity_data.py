@@ -32,6 +32,5 @@ for area in params['areas']:
     save_pickle(full_activity,
                 f'{params["stimulus-block"]}_block_{area}-activity', path='data/raw-area-responses')
         
-    # Save the stimulus names
-    save_pickle(image_names,
-                f'{params["stimulus-block"]}_block_{area}-image-names', path='data/stimulus-presentations')
+# Save the stimulus names
+save_pickle(image_names, f'{params["stimulus-block"]}_block_image-names', path='data/stimulus-presentations')

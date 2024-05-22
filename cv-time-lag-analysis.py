@@ -1,8 +1,10 @@
-from analyses.data_preprocessing import get_area_responses, preprocess_area_responses
-from utils.download_allen import cache_allen
-from utils.data_io import load_pickle, save_pickle
-import yaml
 import sys
+
+import yaml
+
+from analyses.data_preprocessing import (get_area_responses,
+                                         preprocess_area_responses)
+from utils.data_io import load_pickle, save_pickle
 
 # Get the arguments
 opts = [opt for opt in sys.argv[1:] if opt.startswith("-")]
@@ -22,7 +24,7 @@ full_activity_predictor = load_pickle(f'{load["stimulus-block"]}_block_{rrr_para
 full_activity_target    = load_pickle(f'{load["stimulus-block"]}_block_{rrr_params["target"]}-activity', path='data/raw-area-responses')
     
 # Get the image names
-image_names = load_pickle(f'{load["stimulus-block"]}_block_{rrr_params["target"]}-image-names', path='data/stimulus-presentations')
+image_names = load_pickle(f'{load["stimulus-block"]}_block_image-names', path='data/stimulus-presentations')
 
 # Import utile functions
 import numpy as np
