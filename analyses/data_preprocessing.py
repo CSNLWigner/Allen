@@ -352,6 +352,7 @@ def residual_for_each_stimulus_identity(full_activity: np.ndarray, stimulus_iden
     
     # Get the unique stimulus identities
     unique_identities = stimulus_identities.unique()
+    #ic(unique_identities)
 
     # Create an empty array to store the residual activity for each stimulus identity
     residual_activities = []
@@ -361,6 +362,7 @@ def residual_for_each_stimulus_identity(full_activity: np.ndarray, stimulus_iden
         idx = np.where(stimulus_identities == identity)[0]
         residual_activity = calculate_residual_activity(full_activity[:, idx, :], axis=1)
         residual_activities.append(residual_activity)
+        #ic(identity, full_activity[:, idx, :].shape, residual_activity.shape)
     
     residual_activity = np.concatenate(residual_activities, axis=1)
 

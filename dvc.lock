@@ -9,7 +9,7 @@ stages:
     params:
       params.yaml:
         load:
-          session: 1098119201
+          session: 1111013640
           areas:
           - VISp
           - VISl
@@ -18,23 +18,23 @@ stages:
           stimulus-duration: 0.25
     outs:
     - path: data/raw-area-responses/
-      md5: 658e8e2b98d678858312f18ee9192073.dir
-      size: 2293922322
+      md5: 537d07c7ee7323400792f9b83dd9bfbe.dir
+      size: 2649600322
       nfiles: 2
   analysis:
-    cmd: python3 -u cv-time-lag-analysis.py
+    cmd: python3 -u cv-time-lag-analysis.py -l
     deps:
     - path: cv-time-lag-analysis.py
-      md5: 5aaee89679c4fda561b9bcad4051af56
-      size: 3825
+      md5: 9e8c854b4d00f1146e646c41183b381f
+      size: 4586
     - path: data/raw-area-responses/
-      md5: 658e8e2b98d678858312f18ee9192073.dir
-      size: 2293922322
+      md5: 537d07c7ee7323400792f9b83dd9bfbe.dir
+      size: 2649600322
       nfiles: 2
     params:
       params.yaml:
         load:
-          session: 1098119201
+          session: 1111013640
           areas:
           - VISp
           - VISl
@@ -47,22 +47,21 @@ stages:
           - VISl
           lag-time: 0
           lag-area: VISl
-          step-size: 0.1
-          bin-size: 0.1
+          step-size: 0.05
+          bin-size: 0.05
           stimulus-duration: 0.25
         rrr:
           cv: 3
           rank: 18
           error-score: raise
-          predictor: VISl
-          target: VISp
+          predictor: VISp
+          target: VISl
           timepoint: 0.05
         rrr-param-search:
           cv:
           - 2
           - 3
           - 4
-          - 5
           rank:
           - 2
           - 4
@@ -78,18 +77,12 @@ stages:
           - 30
           lag:
           - 0
-          - 3
-          - 6
+          - 2
           timepoints:
           - 0
+          - 50
           - 100
-          duration: 0.25
-          time-bin: 0.05
-          time-step: 0.025
-    outs:
-    - path: results/CV-lag-time.pickle
-      md5: 3af5fa2657bb83c855012f1138740fcb
-      size: 2467
+          - 150
   plot:
     cmd: python3 -u crosstime-plot.py LM
     deps:
@@ -134,7 +127,7 @@ stages:
       md5: 94c99302fd551b26e4a997234af1fcbb
       size: 1767
     - path: results/CV-lag-time.pickle
-      md5: 3af5fa2657bb83c855012f1138740fcb
+      md5: 34a31e07794db3bac15e6433eddde639
       size: 2467
     params:
       params.yaml:
@@ -144,22 +137,21 @@ stages:
           - VISl
           lag-time: 0
           lag-area: VISl
-          step-size: 0.1
-          bin-size: 0.1
+          step-size: 0.05
+          bin-size: 0.05
           stimulus-duration: 0.25
         rrr:
           cv: 3
           rank: 18
           error-score: raise
-          predictor: VISl
-          target: VISp
+          predictor: VISp
+          target: VISl
           timepoint: 0.05
         rrr-param-search:
           cv:
           - 2
           - 3
           - 4
-          - 5
           rank:
           - 2
           - 4
@@ -175,18 +167,19 @@ stages:
           - 30
           lag:
           - 0
-          - 3
-          - 6
+          - 2
           timepoints:
           - 0
+          - 50
           - 100
+          - 150
           duration: 0.25
           time-bin: 0.05
           time-step: 0.025
     outs:
     - path: figures/rrr-param-search.png
-      md5: 08185c1a61f2daaff2a600caed206008
-      size: 94445
+      md5: cc13c27dd7b5159227589f0867dd6194
+      size: 108367
   cache:
     cmd: python3 -u save-slices.py
     deps:

@@ -20,9 +20,11 @@ main_params = yaml.safe_load(open('params.yaml'))['rrr-param-search']
 # Load the activity
 full_activity_predictor = load_pickle(f'{load["stimulus-block"]}_block_{rrr_params["predictor"]}-activity', path='data/raw-area-responses')
 full_activity_target    = load_pickle(f'{load["stimulus-block"]}_block_{rrr_params["target"]}-activity', path='data/raw-area-responses')
-    
+#print(full_activity_predictor.shape, full_activity_target.shape)
+
 # Get the image names
 image_names = load_pickle(f'{load["stimulus-block"]}_block_{rrr_params["target"]}-image-names', path='data/stimulus-presentations')
+#print(image_names)
 
 # Import utile functions
 import numpy as np
@@ -35,6 +37,9 @@ cv = main_params['cv']
 time_lag = main_params['lag']
 rank = main_params['rank']
 timepoints = main_params['timepoints'] # ms
+
+#cv, rank, timepoints, time_lag = [4], [30], [50], [0]
+
 timepoint_indices = [int(t / preproc['step-size'] / 1000) for t in timepoints]
 
 # Some calculations
@@ -69,9 +74,8 @@ def calculate_something():
                 for t, time in zip(timepoint_indices, timepoints):
                     
                     # Reduced Rank Regression
-                    if log: print(f'Cross-validation: {c}, Time lag: {lag}')
                     # result = RRRR(V1.mean(axis=0), V2.mean(axis=0), params['rank'], cv=c) # cross-time RRRR
-                    result = RRRR(predictor[:,:,t].T, lagged_target[:,:,t].T, rank=r, cv=c)
+                    result = RRRR(predictor[:,:,t].T, lagged_target[:,:,t].T, rank=r, cv=c, log=True)
                     
                     # Save the result averaged over the folds
                     results[i, j, k, t] = result['test_score'].mean()
@@ -93,6 +97,7 @@ print(f'Calculating something')
 result = calculate_something()
 
 print('result.shape:', result.shape)
+#debug(result)
 
 # Save the results
 save_pickle(result, f'CV-lag-time')
