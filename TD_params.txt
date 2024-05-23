@@ -1,0 +1,944 @@
+maximum value(0.246) at 0 ms is at cv=4, lag=0, rank=20
+maximum value(0.246) at 50 ms is at cv=4, lag=0, rank=20
+maximum value(0.246) at 100 ms is at cv=4, lag=0, rank=20
+maximum value(0.246) at 150 ms is at cv=4, lag=0, rank=20
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(3, 2, 12, 4)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+cache/TD_param-search-analysis_stimresidual_1111013640.png
+2024. máj. 15., szerda, 12:45:41 CEST
+TD_param-search-analysis_stimresidual session 1108334384
+--
+maximum value(0.257) at 0 ms is at cv=4, lag=0, rank=16
+maximum value(0.257) at 50 ms is at cv=4, lag=0, rank=16
+maximum value(0.257) at 100 ms is at cv=4, lag=0, rank=16
+maximum value(0.257) at 150 ms is at cv=4, lag=0, rank=16
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(3, 2, 12, 4)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+cache/TD_param-search-analysis_stimresidual_1109889304.png
+2024. máj. 15., szerda, 12:50:03 CEST
+TD_param-search-analysis_stimresidual session 1113751921
+--
+maximum value(0.191) at 0 ms is at cv=4, lag=0, rank=18
+maximum value(0.191) at 50 ms is at cv=4, lag=0, rank=18
+maximum value(0.191) at 100 ms is at cv=4, lag=0, rank=18
+maximum value(0.191) at 150 ms is at cv=4, lag=0, rank=18
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(3, 2, 12, 4)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+cache/TD_param-search-analysis_stimresidual_1113751921.png
+2024. máj. 15., szerda, 12:52:15 CEST
+TD_param-search-analysis_stimresidual session 1048189115
+--
+maximum value(0.216) at 0 ms is at cv=3, lag=0, rank=18
+maximum value(0.216) at 50 ms is at cv=3, lag=0, rank=18
+maximum value(0.216) at 100 ms is at cv=3, lag=0, rank=18
+maximum value(0.216) at 150 ms is at cv=3, lag=0, rank=18
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(3, 2, 12, 4)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+cache/TD_param-search-analysis_stimresidual_1048189115.png
+2024. máj. 15., szerda, 12:53:36 CEST
+TD_param-search-analysis_stimresidual session 1047969464
+--
+maximum value(0.254) at 0 ms is at cv=3, lag=0, rank=16
+maximum value(0.254) at 50 ms is at cv=3, lag=0, rank=16
+maximum value(0.254) at 100 ms is at cv=3, lag=0, rank=16
+maximum value(0.254) at 150 ms is at cv=3, lag=0, rank=16
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(3, 2, 12, 4)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+cache/TD_param-search-analysis_stimresidual_1047969464.png
+2024. máj. 15., szerda, 12:55:11 CEST
+TD_param-search-analysis_stimresidual session 1049514117
+--
+maximum value(0.062) at 0 ms is at cv=3, lag=0, rank=12
+maximum value(0.062) at 50 ms is at cv=3, lag=0, rank=12
+maximum value(0.062) at 100 ms is at cv=3, lag=0, rank=12
+maximum value(0.062) at 150 ms is at cv=3, lag=0, rank=12
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(3, 2, 12, 4)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+cache/TD_param-search-analysis_stimresidual_1049514117.png
+2024. máj. 15., szerda, 12:56:49 CEST
+TD_param-search-analysis_stimresidual session 1052533639
+--
+maximum value(0.224) at 0 ms is at cv=4, lag=0, rank=16
+maximum value(0.224) at 50 ms is at cv=4, lag=0, rank=16
+maximum value(0.224) at 100 ms is at cv=4, lag=0, rank=16
+maximum value(0.224) at 150 ms is at cv=4, lag=0, rank=16
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(3, 2, 12, 4)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+cache/TD_param-search-analysis_stimresidual_1052533639.png
+2024. máj. 15., szerda, 12:59:01 CEST
+TD_param-search-analysis_stimresidual session 1053718935
+--
+maximum value(0.166) at 0 ms is at cv=4, lag=0, rank=16
+maximum value(0.166) at 50 ms is at cv=4, lag=0, rank=16
+maximum value(0.166) at 100 ms is at cv=4, lag=0, rank=16
+maximum value(0.166) at 150 ms is at cv=4, lag=0, rank=16
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(3, 2, 12, 4)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+cache/TD_param-search-analysis_stimresidual_1053941483.png
+2024. máj. 15., szerda, 14:36:56 CEST
+TD_param-search-analysis_stimresidual session 1055221968
+--
+maximum value(0.201) at 0 ms is at cv=3, lag=0, rank=16
+maximum value(0.201) at 50 ms is at cv=3, lag=0, rank=16
+maximum value(0.201) at 100 ms is at cv=3, lag=0, rank=16
+maximum value(0.201) at 150 ms is at cv=3, lag=0, rank=16
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(3, 2, 12, 4)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+cache/TD_param-search-analysis_stimresidual_1055415082.png
+2024. máj. 15., szerda, 14:40:45 CEST
+TD_param-search-analysis_stimresidual session 1062755779
+--
+maximum value(0.246) at 0 ms is at cv=4, lag=0, rank=18
+maximum value(0.246) at 50 ms is at cv=4, lag=0, rank=18
+maximum value(0.246) at 100 ms is at cv=4, lag=0, rank=18
+maximum value(0.246) at 150 ms is at cv=4, lag=0, rank=18
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(3, 2, 12, 4)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+cache/TD_param-search-analysis_stimresidual_1064639378.png
+2024. máj. 15., szerda, 14:43:57 CEST
+TD_param-search-analysis_stimresidual session 1065905010
+--
+maximum value(0.208) at 0 ms is at cv=4, lag=0, rank=16
+maximum value(0.208) at 50 ms is at cv=4, lag=0, rank=16
+maximum value(0.208) at 100 ms is at cv=4, lag=0, rank=16
+maximum value(0.208) at 150 ms is at cv=4, lag=0, rank=16
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(3, 2, 12, 4)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+cache/TD_param-search-analysis_stimresidual_1065905010.png
+2024. máj. 15., szerda, 14:45:15 CEST
+TD_param-search-analysis_stimresidual session 1067781390
+--
+maximum value(0.225) at 0 ms is at cv=4, lag=0, rank=20
+maximum value(0.225) at 50 ms is at cv=4, lag=0, rank=20
+maximum value(0.225) at 100 ms is at cv=4, lag=0, rank=20
+maximum value(0.225) at 150 ms is at cv=4, lag=0, rank=20
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(3, 2, 12, 4)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+cache/TD_param-search-analysis_stimresidual_1069461581.png
+2024. máj. 15., szerda, 14:48:59 CEST
+TD_param-search-analysis_stimresidual session 1071300149
+--
+maximum value(0.233) at 0 ms is at cv=3, lag=0, rank=16
+maximum value(0.233) at 50 ms is at cv=3, lag=0, rank=16
+maximum value(0.233) at 100 ms is at cv=3, lag=0, rank=16
+maximum value(0.233) at 150 ms is at cv=3, lag=0, rank=16
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(3, 2, 12, 4)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+cache/TD_param-search-analysis_stimresidual_1081079981.png
+2024. máj. 15., szerda, 14:51:45 CEST
+TD_param-search-analysis_stimresidual session 1081429294
+--
+maximum value(0.223) at 0 ms is at cv=4, lag=0, rank=16
+maximum value(0.223) at 50 ms is at cv=4, lag=0, rank=16
+maximum value(0.223) at 100 ms is at cv=4, lag=0, rank=16
+maximum value(0.223) at 150 ms is at cv=4, lag=0, rank=16
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(3, 2, 12, 4)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+cache/TD_param-search-analysis_stimresidual_1081429294.png
+2024. máj. 15., szerda, 14:53:15 CEST
+TD_param-search-analysis_stimresidual session 1086200042
+--
+maximum value(0.207) at 0 ms is at cv=4, lag=0, rank=14
+maximum value(0.207) at 50 ms is at cv=4, lag=0, rank=14
+maximum value(0.207) at 100 ms is at cv=4, lag=0, rank=14
+maximum value(0.207) at 150 ms is at cv=4, lag=0, rank=14
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(3, 2, 12, 4)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+cache/TD_param-search-analysis_stimresidual_1086200042.png
+2024. máj. 15., szerda, 14:55:14 CEST
+TD_param-search-analysis_stimresidual session 1086410738
+--
+maximum value(0.154) at 0 ms is at cv=3, lag=0, rank=10
+maximum value(0.154) at 50 ms is at cv=3, lag=0, rank=10
+maximum value(0.154) at 100 ms is at cv=3, lag=0, rank=10
+maximum value(0.154) at 150 ms is at cv=3, lag=0, rank=10
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(3, 2, 12, 4)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+cache/TD_param-search-analysis_stimresidual_1086410738.png
+2024. máj. 15., szerda, 14:57:07 CEST
+TD_param-search-analysis_stimresidual session 1087720624
+--
+maximum value(0.298) at 0 ms is at cv=4, lag=0, rank=12
+maximum value(0.298) at 50 ms is at cv=4, lag=0, rank=12
+maximum value(0.298) at 100 ms is at cv=4, lag=0, rank=12
+maximum value(0.298) at 150 ms is at cv=4, lag=0, rank=12
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(3, 2, 12, 4)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+cache/TD_param-search-analysis_stimresidual_1087720624.png
+2024. máj. 15., szerda, 14:58:54 CEST
+TD_param-search-analysis_stimresidual session 1087992708
+--
+maximum value(0.194) at 0 ms is at cv=4, lag=0, rank=14
+maximum value(0.194) at 50 ms is at cv=4, lag=0, rank=14
+maximum value(0.194) at 100 ms is at cv=4, lag=0, rank=14
+maximum value(0.194) at 150 ms is at cv=4, lag=0, rank=14
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(3, 2, 12, 4)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+cache/TD_param-search-analysis_stimresidual_1087992708.png
+2024. máj. 15., szerda, 15:00:52 CEST
+TD_param-search-analysis_stimresidual session 1090803859
+--
+maximum value(0.215) is at time=50 s, cv=4 fold, lag=0 ms, and rank=16
+maximum value(0.215) is at time=50 s, cv=4 fold, lag=0 ms, and rank=16
+maximum value(0.215) is at time=50 s, cv=4 fold, lag=0 ms, and rank=16
+maximum value(0.215) is at time=50 s, cv=4 fold, lag=0 ms, and rank=16
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(3, 2, 12, 4)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+cache/TD_param-search-analysis_stimresidual_1091039376.png
+2024. máj. 15., szerda, 15:03:38 CEST
+TD_param-search-analysis_stimresidual session 1091039902
+--
+maximum value(0.226) is at time=50 s, cv=4 fold, lag=0 ms, and rank=20
+maximum value(0.226) is at time=50 s, cv=4 fold, lag=0 ms, and rank=20
+maximum value(0.226) is at time=50 s, cv=4 fold, lag=0 ms, and rank=20
+maximum value(0.226) is at time=50 s, cv=4 fold, lag=0 ms, and rank=20
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(3, 2, 12, 4)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+cache/TD_param-search-analysis_stimresidual_1091039902.png
+2024. máj. 15., szerda, 15:05:43 CEST
+TD_param-search-analysis_stimresidual session 1093864136
+--
+maximum value(0.175) is at time=50 s, cv=4 fold, lag=0 ms, and rank=16
+maximum value(0.175) is at time=50 s, cv=4 fold, lag=0 ms, and rank=16
+maximum value(0.175) is at time=50 s, cv=4 fold, lag=0 ms, and rank=16
+maximum value(0.175) is at time=50 s, cv=4 fold, lag=0 ms, and rank=16
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(3, 2, 12, 4)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+cache/TD_param-search-analysis_stimresidual_1095340643.png
+2024. máj. 15., szerda, 15:08:39 CEST
+TD_param-search-analysis_stimresidual session 1098119201
+--
+maximum value(0.039) is at time=150 s, cv=2 fold, lag=2 ms, and rank=4
+maximum value(0.039) is at time=150 s, cv=2 fold, lag=2 ms, and rank=4
+maximum value(0.039) is at time=150 s, cv=2 fold, lag=2 ms, and rank=4
+maximum value(0.039) is at time=150 s, cv=2 fold, lag=2 ms, and rank=4
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(3, 2, 12, 4)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+cache/TD_param-search-analysis_stimresidual_1098119201.png
+2024. máj. 15., szerda, 15:10:58 CEST
+TD_param-search-analysis_stimresidual session 1111013640
+--
+maximum value(0.209) is at time=50 s, cv=4 fold, lag=0 ms, and rank=25
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(3, 2, 12, 4)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+cache/TD_param-search-analysis_stimresidual_1111013640.png
+2024. máj. 15., szerda, 16:07:01 CEST
+TD_param-search-analysis_stimresidual session 1108334384
+--
+maximum value(0.268) is at time=50 s, cv=3 fold, lag=0 ms, and rank=16
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(3, 2, 12, 4)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+cache/TD_param-search-analysis_stimresidual_1109889304.png
+2024. máj. 15., szerda, 16:11:34 CEST
+TD_param-search-analysis_stimresidual session 1113751921
+--
+maximum value(0.152) is at time=50 s, cv=4 fold, lag=0 ms, and rank=20
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(3, 2, 12, 4)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+cache/TD_param-search-analysis_stimresidual_1113751921.png
+2024. máj. 15., szerda, 16:13:46 CEST
+TD_param-search-analysis_stimresidual session 1048189115
+--
+maximum value(0.277) is at time=50 s, cv=4 fold, lag=0 ms, and rank=18
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(3, 2, 12, 4)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+cache/TD_param-search-analysis_stimresidual_1048189115.png
+2024. máj. 15., szerda, 16:15:05 CEST
+TD_param-search-analysis_stimresidual session 1047969464
+--
+maximum value(0.166) is at time=50 s, cv=3 fold, lag=0 ms, and rank=18
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(3, 2, 12, 4)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+cache/TD_param-search-analysis_stimresidual_1047969464.png
+2024. máj. 15., szerda, 16:16:39 CEST
+TD_param-search-analysis_stimresidual session 1049514117
+--
+maximum value(0.218) is at time=50 s, cv=4 fold, lag=0 ms, and rank=10
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(3, 2, 12, 4)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+cache/TD_param-search-analysis_stimresidual_1049514117.png
+2024. máj. 15., szerda, 16:18:01 CEST
+TD_param-search-analysis_stimresidual session 1052533639
+--
+maximum value(0.219) is at time=50 s, cv=4 fold, lag=0 ms, and rank=14
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(3, 2, 12, 4)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+cache/TD_param-search-analysis_stimresidual_1052533639.png
+2024. máj. 15., szerda, 16:20:21 CEST
+TD_param-search-analysis_stimresidual session 1053718935
+--
+maximum value(0.133) is at time=50 s, cv=4 fold, lag=0 ms, and rank=20
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(3, 2, 12, 4)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+cache/TD_param-search-analysis_stimresidual_1053941483.png
+2024. máj. 15., szerda, 16:23:00 CEST
+TD_param-search-analysis_stimresidual session 1055221968
+--
+maximum value(0.248) is at time=50 s, cv=3 fold, lag=0 ms, and rank=16
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(3, 2, 12, 4)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+cache/TD_param-search-analysis_stimresidual_1055415082.png
+2024. máj. 15., szerda, 16:26:37 CEST
+TD_param-search-analysis_stimresidual session 1062755779
+--
+maximum value(0.209) is at time=50 s, cv=4 fold, lag=0 ms, and rank=18
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(3, 2, 12, 4)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+cache/TD_param-search-analysis_stimresidual_1064639378.png
+2024. máj. 15., szerda, 16:29:49 CEST
+TD_param-search-analysis_stimresidual session 1065905010
+--
+maximum value(0.172) is at time=50 s, cv=4 fold, lag=0 ms, and rank=16
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(3, 2, 12, 4)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+cache/TD_param-search-analysis_stimresidual_1065905010.png
+2024. máj. 15., szerda, 16:31:06 CEST
+TD_param-search-analysis_stimresidual session 1067781390
+--
+maximum value(0.222) is at time=50 s, cv=4 fold, lag=0 ms, and rank=18
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(3, 2, 12, 4)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+cache/TD_param-search-analysis_stimresidual_1069461581.png
+2024. máj. 15., szerda, 16:34:19 CEST
+TD_param-search-analysis_stimresidual session 1071300149
+--
+maximum value(0.267) is at time=50 s, cv=3 fold, lag=0 ms, and rank=16
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(3, 2, 12, 4)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+cache/TD_param-search-analysis_stimresidual_1081079981.png
+2024. máj. 15., szerda, 16:36:55 CEST
+TD_param-search-analysis_stimresidual session 1081429294
+--
+maximum value(0.25) is at time=50 s, cv=4 fold, lag=0 ms, and rank=14
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(3, 2, 12, 4)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+cache/TD_param-search-analysis_stimresidual_1081429294.png
+2024. máj. 15., szerda, 16:38:21 CEST
+TD_param-search-analysis_stimresidual session 1086200042
+--
+maximum value(0.17) is at time=50 s, cv=4 fold, lag=0 ms, and rank=16
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(3, 2, 12, 4)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+cache/TD_param-search-analysis_stimresidual_1086200042.png
+2024. máj. 15., szerda, 16:40:17 CEST
+TD_param-search-analysis_stimresidual session 1086410738
+--
+maximum value(0.136) is at time=50 s, cv=3 fold, lag=0 ms, and rank=14
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(3, 2, 12, 4)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+cache/TD_param-search-analysis_stimresidual_1086410738.png
+2024. máj. 15., szerda, 16:42:14 CEST
+TD_param-search-analysis_stimresidual session 1087720624
+--
+maximum value(0.172) is at time=50 s, cv=4 fold, lag=0 ms, and rank=14
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(3, 2, 12, 4)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+cache/TD_param-search-analysis_stimresidual_1087720624.png
+2024. máj. 15., szerda, 16:44:18 CEST
+TD_param-search-analysis_stimresidual session 1087992708
+--
+maximum value(0.159) is at time=100 s, cv=4 fold, lag=0 ms, and rank=14
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(3, 2, 12, 4)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+cache/TD_param-search-analysis_stimresidual_1087992708.png
+2024. máj. 15., szerda, 16:46:29 CEST
+TD_param-search-analysis_stimresidual session 1090803859
+--
+maximum value(0.223) is at time=50 s, cv=3 fold, lag=0 ms, and rank=16
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(3, 2, 12, 4)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+cache/TD_param-search-analysis_stimresidual_1091039376.png
+2024. máj. 15., szerda, 16:49:07 CEST
+TD_param-search-analysis_stimresidual session 1091039902
+--
+maximum value(0.261) is at time=50 s, cv=4 fold, lag=0 ms, and rank=20
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(3, 2, 12, 4)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+cache/TD_param-search-analysis_stimresidual_1091039902.png
+2024. máj. 15., szerda, 16:51:18 CEST
+TD_param-search-analysis_stimresidual session 1093864136
+--
+maximum value(0.156) is at time=50 s, cv=4 fold, lag=0 ms, and rank=16
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(3, 2, 12, 4)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+cache/TD_param-search-analysis_stimresidual_1095340643.png
+2024. máj. 15., szerda, 16:54:15 CEST
+TD_param-search-analysis_stimresidual session 1098119201
+--
+maximum value(0.038) is at time=0 s, cv=2 fold, lag=0 ms, and rank=6
+Updating lock file 'dvc.lock'
+
+Running stage 'plots':
+> python3 -u cv-time-lag-plot.py
+(3, 2, 12, 4)
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+    git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+cache/TD_param-search-analysis_stimresidual_1098119201.png
+2024. máj. 15., szerda, 16:56:36 CEST
