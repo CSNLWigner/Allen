@@ -139,17 +139,17 @@ stages:
     deps:
     - path: cv-time-lag-analysis.py
       hash: md5
-      md5: a3296bfc81d7becaa547cc78eacbaedf
-      size: 4297
+      md5: 6406b3353b6379f698b85210a92d450b
+      size: 4235
     - path: data/raw-area-responses/
       hash: md5
-      md5: 90173a39471e6a306b64b6be692881b9.dir
-      size: 2649600328
+      md5: 16eecdc300a64dd681ce05a93619e9cb.dir
+      size: 1305600328
       nfiles: 2
     params:
       params.yaml:
         load:
-          session: 1111013640
+          session: 1048189115
           areas:
           - VISp
           - VISl
@@ -231,7 +231,7 @@ stages:
     params:
       params.yaml:
         load:
-          session: 1111013640
+          session: 1048189115
           areas:
           - VISp
           - VISl
@@ -241,8 +241,8 @@ stages:
     outs:
     - path: data/raw-area-responses/
       hash: md5
-      md5: 90173a39471e6a306b64b6be692881b9.dir
-      size: 2649600328
+      md5: 16eecdc300a64dd681ce05a93619e9cb.dir
+      size: 1305600328
       nfiles: 2
   dimensionality-reduction:
     cmd: python3 -u cv-lag-time-selection.py

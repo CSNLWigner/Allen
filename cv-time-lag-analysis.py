@@ -23,11 +23,9 @@ main_params = yaml.safe_load(open('params.yaml'))['rrr-param-search']
 # Load the activity
 full_activity_predictor = load_pickle(f'{load["stimulus-block"]}_block_{rrr_params["predictor"]}-activity', path='data/raw-area-responses')
 full_activity_target    = load_pickle(f'{load["stimulus-block"]}_block_{rrr_params["target"]}-activity', path='data/raw-area-responses')
-ic(full_activity_predictor.shape, full_activity_target.shape)
 
 # Get the image names
 image_names = load_pickle(f'{load["stimulus-block"]}_block_image-names', path='data/stimulus-presentations')
-ic(hasharr(image_names))
 
 # Import utile functions
 import numpy as np
@@ -41,7 +39,7 @@ time_lag = main_params['lag']
 rank = main_params['rank']
 timepoints = main_params['timepoints'] # ms
 
-cv, rank, timepoints, time_lag = [4], [30], [50], [0]
+# cv, rank, timepoints, time_lag = [4], [30], [50], [0]
 
 timepoint_indices = [int(t / preproc['step-size'] / 1000) for t in timepoints]
 
@@ -66,9 +64,7 @@ def calculate_something():
     for j, lag in enumerate(time_lag):
         
         # Preprocess the area responses
-        ic(hasharr(full_activity_predictor))
         predictor = preprocess_area_responses(full_activity_predictor, image_names)
-        ic(hasharr(predictor))
         target = preprocess_area_responses(full_activity_target, image_names)
         
         # Move the activity of V2 back in time by the actual time lag
@@ -81,9 +77,7 @@ def calculate_something():
                     # Reduced Rank Regression
                     # result = RRRR(V1.mean(axis=0), V2.mean(axis=0), params['rank'], cv=c) # cross-time RRRR
                     
-                    debug(predictor[:, :, t])
                     result = RRRR(predictor[:,:,t].T, lagged_target[:,:,t].T, rank=r, cv=c, log=True)
-                    ic('cv', c, 'lag', lag, 'rank', r, 'time', time)
                     
                     # Save the result averaged over the folds
                     results[i, j, k, t] = result['test_score'].mean()
@@ -105,10 +99,9 @@ print(f'Calculating something')
 result = calculate_something()
 
 print('result.shape:', result.shape)
-# debug(result)
 
 # Save the results
-# save_pickle(result, f'CV-lag-time')
+save_pickle(result, f'CV-lag-time')
 
 # Get the maximum
 max = np.nanmax(result).round(3)
