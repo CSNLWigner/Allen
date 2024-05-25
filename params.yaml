@@ -8,7 +8,7 @@ neuropixel:
   block: "active behavior"
 
 load:
-  session: 1113751921
+  session: 1111013640
   areas: ["VISp", "VISl"] # "VISpm" # "VISm" has no spikes
   stimulus-block: 5
   # Stimulus blocks:
@@ -36,58 +36,22 @@ rrr:
   cv: 3
   rank: 18
   error-score: 'raise'
-  predictor: 'VISl'
-  target: 'VISp'
+  predictor: 'VISp'
+  target: 'VISl'
   timepoint: 0.050 # in seconds
 
 rrr-time-slice:
   predictor-time: [.060, .090, .120, .150] # in seconds
 
 crosstime:
-  scaling-factor: 5 # in ms
+  scaling-factor: 10 # in ms
 
 rrr-param-search:
   cv: [2,3,4] # [3]
-  rank: [2,4,6,8,10,12,14,16,18,20,25,30,35,40] # [14]
-  lag: [0,1,2,3,4] # [100,105,110,115,120,125,130,135,140,145,150]
+  rank: [2,4,6,8,10,12,14,16,18,20,25,30] # [14]
+  lag: [0,2] # [100,105,110,115,120,125,130,135,140,145,150]
   timepoints: [0,50,100,150] # [0]
   # duration: 0.250
   # time-bin: 0.050
   # time-step: 0.025
 
-best-rrr-params:
-  1111013640:
-    top-down:
-      cv: 2
-      rank: 16
-    bottom-up:
-      cv: 2
-      rank: 16
-  1108334384:
-    top-down:
-      cv: 2
-      rank: 14
-    bottom-up:
-      cv: 3
-      rank: 18
-  1112515874:
-    top-down:
-      cv: 3
-      rank: 12
-    bottom-up:
-      cv: 2
-      rank: 12
-  1112302803:
-    top-down:
-      cv: 3
-      rank: 14
-    bottom-up:
-      cv: 2
-      rank: 14
-  1113751921:
-    top-down:
-      cv: 4
-      rank: 20
-    bottom-up:
-      cv: 2
-      rank: 10

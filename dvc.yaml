@@ -1,3 +1,36 @@
+# stages:
+#   load:
+#     cmd: python3 -u load_raw_activity_data.py
+#     params:
+#       - load
+#     outs:
+#       - data/raw-area-responses/
+#   preprocess:
+#     cmd: python3 -u preprocessing.py
+#     deps:
+#       - preprocessing.py
+#       - data/raw-area-responses/
+#     params:
+#       - load
+#       - preprocess
+#     outs:
+#       - data/area-responses/
+#   plots:
+#     cmd: python3 -u multiple-timeslices.py
+#     deps:
+#       - multiple-timeslices.py
+#       - data/area-responses/
+#       - data/raw-area-responses/
+#       # - results/cross-time-RRR.pickle
+#       # - results/rrr-time-slice.pickle
+#       - sessions-params.csv
+#     params:
+#       - load
+#       - preprocess
+#       - rrr-time-slice
+#     outs:
+#       - figures/rrr-cross-time-slice-mega-plot.png
+
 stages:
   load:
     cmd: python3 -u load_raw_activity_data.py
@@ -17,16 +50,16 @@ stages:
       - preprocess
       - rrr
       - rrr-param-search
-    outs:
-      - results/CV-lag-time.pickle
-  plots:
-    cmd: python3 -u cv-time-lag-plot.py
-    deps:
-      - cv-time-lag-plot.py
-      - results/CV-lag-time.pickle
-    params:
-      - preprocess
-      - rrr
-      - rrr-param-search
-    outs:
-      - figures/rrr-param-search.png
+  #   outs:
+  #     - results/CV-lag-time.pickle
+  # plots:
+  #   cmd: python3 -u cv-time-lag-plot.py
+  #   deps:
+  #     - cv-time-lag-plot.py
+  #     - results/CV-lag-time.pickle
+  #   params:
+  #     - preprocess
+  #     - rrr
+  #     - rrr-param-search
+  #   outs:
+  #     - figures/rrr-param-search.png
