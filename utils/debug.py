@@ -85,39 +85,104 @@ def get_head_by_dimension_pairs(arr, m=0, n=5, log=True):
     
     return result
 
-def debug(*args, **kwargs):
-    
-    n = 5
-    
-    frame = inspect.currentframe()
-    frame = inspect.getouterframes(frame)[1]
-    code_context = inspect.getframeinfo(frame[0]).code_context[0].strip()
-    arg_names = code_context[code_context.find('(') + 1:-1].split(',')
-    arg_names = [name.strip() for name in arg_names]
-    
-    for i, var in enumerate(args):
-        var_name = arg_names[i]
-        var_content = var
-        # ic(var_name, var_content)
+
+class debug:
+    """
+    A class for debugging variables and their values.
+
+    This class provides a convenient way to print the names and values of variables for debugging purposes.
+    It supports printing numpy arrays with different dimensions.
+
+    Args:
+        *args: Variable arguments to be debugged.
+        **kwargs: Keyword arguments to set the parameters of the debug instance.
+
+    Keyword Args:
+        first (int): The starting index for slicing arrays. Default is 0.
+        last (int): The ending index for slicing arrays. Default is 5. If negative, all elements are included.
+
+    Attributes:
+        first (int): The starting index for slicing arrays.
+        last (int): The ending index for slicing arrays.
+
+    Example:
+        debug(1, 2, 3, first=1, last=3)
+        # Output:
+        # var_name: 1, var_content: 2
+        # var_name: 2, var_content: 3
+    """
+
+    def __call__(self, *args, **kwargs):
         
-        if type(var_content) == np.ndarray:
-            if var_content.ndim == 1:
-                ic(var_name, var_content)
-                continue
-            elif var_content.ndim == 2:
-                var_head = var_content[-n:, -n:]
-                var_shape = var_content.shape
-                ic(var_name, var_shape, var_head)
-                continue
+        n = 5
+        
+        frame = inspect.currentframe()
+        frame = inspect.getouterframes(frame)[1]
+        code_context = inspect.getframeinfo(frame[0]).code_context[0].strip()
+        arg_names = code_context[code_context.find('(') + 1:-1].split(',')
+        arg_names = [name.strip() for name in arg_names]
+        
+        for i, var in enumerate(args):
+            var_name = arg_names[i]
+            var_content = var
+            # ic(var_name, var_content)
+            
+            if type(var_content) == np.ndarray:
+                if var_content.ndim == 1:
+                    ic(var_name, var_content)
+                    continue
+                elif var_content.ndim == 2:
+                    var_head = var_content[self.first:, self.first:]
+                    var_shape = var_content.shape
+                    ic(var_name, var_shape, var_head)
+                    continue
+                else:
+                    ic(var_name)
+                    var_head = get_head_by_dimension_pairs(var_content, m=self.first, n=self.last)
+                    # print(*var_head, sep='\n')
+                    # ic(var_name, *var_head)
             else:
-                ic(var_name)
-                var_head = get_head_by_dimension_pairs(var_content, n=n)
-                # print(*var_head, sep='\n')
-                # ic(var_name, *var_head)
-        else:
-            ic(var_name, var_content)
+                ic(var_name, var_content)
     
+    def __init__(self, *args, **kwargs):
+        self.params(**kwargs)
+        self.__call__(*args, **kwargs)
+        
+    def params(self, first=0, last=5):
+        if first < 0:
+            last = None
+        self.first = first
+        self.last = last
+            
+        
 
 '''# Example usage
 vmi = np.random.rand(3, 4, 5)
-debug(vmi)'''
+debug(vmi)
+'''
+
+
+import hashlib
+
+import numpy as np
+
+
+def hasharr(arr: np.ndarray):
+    """
+    Calculate the hash value of a numpy array.
+
+    Parameters:
+    arr (numpy.ndarray): The input array.
+
+    Returns:
+    str: The hash value of the array.
+
+    """
+    
+    # If type is not numpy array, then we can assume that it has an underlying numpy array, so it has a .to_numpy() method
+    if not isinstance(arr, np.ndarray):
+        arr = arr.to_numpy()
+    
+    hash_value = hashlib.blake2b(arr.tobytes(), digest_size=20).hexdigest()
+    # ic(hash_value)
+    return hash_value
