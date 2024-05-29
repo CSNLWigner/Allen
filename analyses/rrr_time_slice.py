@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 from analyses.data_preprocessing import preprocess_area_responses, z_score_normalize
 from analyses.rrr import RRRR
 from scipy.stats import sem as SEM
@@ -64,15 +65,15 @@ def RRRR_time_slice(predictor, target, predictor_time, cv, rank, log=True):
         'sem': sem
     }
 
-def bidirectional_time_slice(session, V1_activity, LM_activity, best_params, predictor_time, log=False):
+
+def bidirectional_time_slice(V1_activity, LM_activity, session_params:pd.DataFrame, predictor_time, log=False):
     """
     Perform bidirectional time slice analysis using RRRR.
 
     Args:
-        session (str): The session identifier.
         V1_activity (numpy.ndarray): The activity data for V1.
         LM_activity (numpy.ndarray): The activity data for LM.
-        best_params (dict): The best parameters for each prediction direction and session.
+        session_params (pd.DataFrame): The best parameters for each prediction direction and session.
         predictor_time (numpy.ndarray): The time points for the predictor activity.
 
     Returns:
@@ -105,18 +106,21 @@ def bidirectional_time_slice(session, V1_activity, LM_activity, best_params, pre
 
     # Iterate through the prediction directions
     for prediction_direction in ['top-down', 'bottom-up', 'V1', 'LM']:
-
+        
         # Extract the data
         predictor_activity = abstract_areas[prediction_direction]['predictor']
         target_activity = abstract_areas[prediction_direction]['target']
+        
+        # Extract the session parameters
         if prediction_direction in ['top-down', 'bottom-up']:
             session_key = prediction_direction
         if prediction_direction is 'V1':
             session_key = 'bottom-up'
         if prediction_direction is 'LM':
             session_key = 'top-down'
-        cv = best_params[session][session_key]['cv']
-        rank = best_params[session][session_key]['rank']
+        params = session_params[session_params['direction'] == session_key]
+        cv = params['cv'].values[0]
+        rank = params['rank'].values[0]
 
         # Calculate the RRRR
         result = RRRR_time_slice(
