@@ -1,11 +1,10 @@
 # Import
-import numpy as np
-import yaml
-from analyses.data_preprocessing import preprocess_area_responses, z_score_normalize
-from analyses.rrr import RRRR
-from utils.data_io import load_pickle, save_pickle
-from utils.utils import printProgressBar
 import sys
+
+import yaml
+
+from analyses.rrr import RRRR, crosstime_analysis
+from utils.data_io import load_pickle, save_pickle
 
 """
 cross-time analysis based on timpoints of rrr-param-search lag
@@ -29,40 +28,8 @@ params = yaml.safe_load(open("params.yaml"))["crosstime"]
 full_predictor = load_pickle(f"{load['stimulus-block']}_block_{rrr['predictor']}-activity", path="data/raw-area-responses")
 full_target    = load_pickle(f"{load['stimulus-block']}_block_{rrr['target']}-activity",    path="data/raw-area-responses")
 
-N, K, T = full_predictor.shape
-time_bin = int(preprocess["bin-size"] * 1000) # in ms
-
-# Define the parameters
-# prediction_direction = 'top-down' if rrr['predictor'] == 'VISl' else 'bottom-up'
-session = load['session']
-cv = rrr[session][prediction_direction]['cv']
-rank = rrr[session][prediction_direction]['rank']
-
-scaling_factor = params["scaling-factor"]
-xseries = np.arange(0, 200, scaling_factor)
-yseries = [144]
-
-# Init results
-results = np.full((len(xseries), len(yseries)), fill_value=np.nan)
-
-# Print progressbar
-printProgressBar(0, len(xseries), prefix='t_predictor:')
-
-for x, t_x in enumerate(xseries):
-    for y, t_y in enumerate(yseries):
-        
-        # Preprocess the data (the trial duration is only one bin now).
-        predictor = preprocess_area_responses(full_predictor[:, :, t_x : t_x + time_bin], stimulus_duration=preprocess["bin-size"], step_size=0.100).squeeze()
-        target    = preprocess_area_responses(full_target   [:, :, t_y : t_y + time_bin], stimulus_duration=preprocess["bin-size"], step_size=0.100).squeeze()
-        
-        # Calculate the RRRR
-        model = RRRR(predictor.T, target.T, rank=rank, cv=cv, success_log=False)
-        
-        # Save results
-        results[x, y] = model['test_score'].mean()
-        
-    # Print progressbar
-    printProgressBar(x + 1, len(xseries), prefix='t_predictor:')
+# Run crosstime-analysis
+results = crosstime_analysis(full_predictor, full_target, rrr, params)
 
 # Save the results
 save_pickle(results, f"{prediction_direction}_cross-time-RRR")

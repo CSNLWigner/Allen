@@ -1,14 +1,16 @@
 
 
-import pandas as pd
-from sklearn.model_selection import cross_val_score, cross_validate
-from analyses.machine_learning_models import ReducedRankRidgeRegression
-import yaml
 import numpy as np
-from allensdk.brain_observatory.ecephys.behavior_ecephys_session import BehaviorEcephysSession
-from utils.data_io import load_pickle
+import pandas as pd
+import yaml
+from allensdk.brain_observatory.ecephys.behavior_ecephys_session import \
+    BehaviorEcephysSession
+from sklearn.model_selection import cross_validate
 
-from utils.utils import MSE
+from analyses.data_preprocessing import preprocess_area_responses
+from analyses.machine_learning_models import ReducedRankRidgeRegression
+from utils.data_io import load_pickle
+from utils.utils import MSE, printProgressBar
 
 preprocess = yaml.safe_load(open('params.yaml'))['preprocess']
 params = yaml.safe_load(open('params.yaml'))['rrr']
@@ -61,7 +63,9 @@ def RRRR(X_data, Y_data, rank=None, cv=None, log=False, success_log=True) -> dic
         print(f'CV: {cv}, Rank: {rank}, Mean test score: {np.mean(results["test_score"])}')
         
     # Negative scores are not meaningful, so set them to nan
-    results['test_score'][results['test_score'] < 0] = np.nan
+    # results['test_score'][results['test_score'] < 0] = np.nan
+    if np.mean(results['test_score']) < 0:
+        results['test_score'] = np.array([np.nan])
     
     return results
 
@@ -284,3 +288,63 @@ def cross_time_rrr_coeffs(V1_activity, V2_activity, cv=None, rank=None) -> np.nd
     """
     return RRRR(V1_activity.mean(axis=0), V2_activity.mean(
         axis=0), cv=cv, rank=rank, log=True)
+
+
+def crosstime_analysis(predictor, target, stimuli, cv, rank, scaling_factor=10, ProgressBar=True):
+    """
+    Perform cross-time analysis based on timpoints of rrr-param-search lag.
+    
+    Args:
+        predictor (ndarray): Array of shape (neurons, trials, timepoints) representing the activity of the predictor area.
+        target (ndarray): Array of shape (neurons, trials, timepoints) representing the activity of the target area.
+        stimuli (list): List of stimulus names.
+        cv (int): Number of cross-validation folds to use.
+        rank (int): Rank of the reduced-rank regression model.
+        scaling_factor (int, optional): Scaling factor for the time points. Defaults to 1.
+        ProgressBar (bool, optional): Whether to display a progress bar. Defaults to True.
+    
+    Returns:
+        ndarray: Array of shape (len(xseries), len(yseries)) containing the results of the cross-time analysis.
+    """
+    predictor_orig = predictor
+    target_orig = target
+    
+    # Get the time bin
+    time_bin = int(preprocess["bin-size"] * 1000) # in ms
+    
+    # Define the parameters
+    xseries = np.arange(0, 200, scaling_factor)
+    yseries = np.arange(0, 200, scaling_factor)
+    
+    # Init results
+    results = np.full((len(xseries), len(yseries)), fill_value=np.nan)
+    
+    # Print progressbar
+    if ProgressBar: printProgressBar(0, len(xseries), prefix='t_predictor:')
+    
+    # print(target_orig[:10, 0, :10])
+    # print(target_orig[0, :10, :10])
+    
+    for x, t_x in enumerate(xseries):
+        for y, t_y in enumerate(yseries):
+            
+            # Preprocess the data (the trial duration is only one bin now).
+            predictor = preprocess_area_responses(predictor_orig[:, :, t_x : t_x + time_bin], 
+                                                  stimulus_names=stimuli,
+                                                  stimulus_duration=preprocess["bin-size"], 
+                                                  step_size=preprocess["step-size"]).squeeze()
+            target    = preprocess_area_responses(target_orig[:, :, t_y : t_y + time_bin], 
+                                                  stimulus_names=stimuli,
+                                                  stimulus_duration=preprocess["bin-size"], 
+                                                  step_size=preprocess["step-size"]).squeeze()
+            
+            # Calculate the RRRR
+            model = RRRR(predictor.T, target.T, rank=rank, cv=cv, success_log=False)
+            
+            # Save results
+            results[x, y] = model['test_score'].mean()
+            
+        # Print progressbar
+        if ProgressBar: printProgressBar(x + 1, len(xseries), prefix='t_predictor:')
+    
+    return results
