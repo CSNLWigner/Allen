@@ -161,3 +161,40 @@ vmi = np.random.rand(3, 4, 5)
 debug(vmi)
 '''
 
+
+import hashlib
+
+import numpy as np
+
+
+def hasharr(arr: np.ndarray):
+    """
+    Calculate the hash value of a numpy array.
+
+    Parameters:
+    arr (numpy.ndarray): The input array.
+
+    Returns:
+    str: The hash value of the array.
+
+    """
+    
+    # If type is not numpy array, then we can assume that it has an underlying numpy array, so it has a .to_numpy() method
+    if not isinstance(arr, np.ndarray):
+        arr = arr.to_numpy()
+    
+    hash_value = hashlib.blake2b(arr.tobytes(), digest_size=20).hexdigest()
+    # ic(hash_value)
+    return hash_value
+
+"""# Fix the random seed
+np.random.seed(0)
+
+# Create a random array
+arr = np.random.rand(3, 4)
+
+# Make a dataframe with the array
+import pandas as pd
+df = pd.DataFrame(arr)
+
+print(hasharr(df))"""
