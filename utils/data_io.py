@@ -2,6 +2,7 @@ import csv
 import pickle
 import numpy as np
 import os
+import pandas as pd
 import matplotlib.figure
 
 
@@ -40,12 +41,12 @@ def save_dict_items(dictionary, name="", path="results", log=True):
 
 ############################################################################################################
 
-def load_csv(name, path=""):
+def load_csv(name, path="") -> pd.DataFrame:
     if path != "":
-        name = f'{path}/{name}'
-    with open(f"{name}.csv", "r") as f:
-        reader = csv.reader(f, delimiter=",")
-        data = np.array(list(reader)) # float?
+        if path[-1] != "/":
+            path = path + "/"
+        name = f'{path}{name}'
+    data = pd.read_csv(f"{name}.csv")
     return data
 
 def load_pickle(name, path="results"):
