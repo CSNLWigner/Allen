@@ -12,3 +12,4 @@ figures/**
 **pickle
 **tempCodeRunnerFile.py
 fromm3/**
+utils/debug.py
