@@ -1,3 +1,5 @@
+from functools import reduce
+
 import numpy as np
 import pandas as pd
 from allensdk.brain_observatory.ecephys.visualization import (
@@ -54,36 +56,65 @@ def dict_from_dataframe(df:pd.DataFrame, name:str) -> dict:
 
 class AllenTables():
     
-    def __init__(self, cache, session_id):
-        self.cache = cache
-        self.session_id = session_id
-        
-        # get the metadata tables
-        self.session = pd.DataFrame(cache.get_ecephys_session_table().loc[session_id])
-        self.behavior = cache.get_behavior_session_table()[cache.get_behavior_session_table()['ecephys_session_id'] == session_id]
-        self.probes = cache.get_probe_table()[cache.get_probe_table()['ecephys_session_id'] == session_id]
-        self.units = cache.get_unit_table()[cache.get_unit_table()['ecephys_session_id'] == session_id]
-        self.channels = cache.get_channel_table()[cache.get_channel_table()['ecephys_session_id'] == session_id]
-        
-        # Make a dictionary of the tables
+    def make_tables(self):
         self.tables = {
-            # 'session': self.session,
+            'session': self.session,
             'behavior': self.behavior,
             'probes': self.probes,
             'units': self.units,
             'channels': self.channels
         }
+        return self.tables
+    
+    def make_columns(self):
         
-        # Make a dictionary of the column names
-        self.col_names = {}
-        for table_name, table in self.tables.items():
-            self.col_names.update(dict_from_dataframe(table, table_name))
+        self.columns = {}
+
+        for name, table in self.tables.items():
             
-    def __getitem__(self, name: str)-> pd.DataFrame:
-        table = self.tables.get(name)
-        if table is not None:
-            raise AttributeError(f"'AllenTables' object has no attribute '{name}'")
-        return table[name]
+            # Get the columns from the dataframe
+            new_columns = dict_from_dataframe(table, name)
+            
+            # Merge the new columns with the existing columns
+            for key, value in new_columns.items():
+                if key in self.columns:
+                    # Key exists in dictionary
+                    # ic(key, self.tables[value][key], self.tables[self.columns[key]][key])
+                    self.columns[key].append(value)
+                    
+                    # Merge the two dataframes: self.columns[key] = pd.concat([self.tables[self.columns[key]], self.tables[value]], axis=1)
+                else:
+                    # Key does not exist in dictionary, add it
+                    self.columns[key] = [value]
+                
+        return self.tables
+    
+    def __init__(self, cache, session_id):
+        self.cache = cache
+        self.session_id = session_id
+        
+        # get the metadata tables
+        self.session = pd.DataFrame(cache.get_ecephys_session_table().loc[[session_id]])
+        self.behavior = cache.get_behavior_session_table()[cache.get_behavior_session_table()['ecephys_session_id'] == session_id]
+        self.probes = cache.get_probe_table()[cache.get_probe_table()['ecephys_session_id'] == session_id]
+        self.units = cache.get_unit_table()[cache.get_unit_table()['ecephys_session_id'] == session_id]
+        self.channels = cache.get_channel_table()[cache.get_channel_table()['ecephys_session_id'] == session_id]
+        
+        self.make_tables()
+        self.make_columns()
+            
+    def __getitem__(self, key: str)-> pd.DataFrame:
+        
+        # Get all the tables with the same key
+        tables = [self.tables[table] for table in self.columns[key]]
+        
+        # Get the columns with the key from each table and reset the index
+        columns = [table[key].reset_index() for table in tables]
+
+        # Merge the columns
+        mergedColumns = reduce(lambda left, right: pd.merge(left, right, how='outer'), columns)
+        
+        return mergedColumns
 
 def get_unit_channels(session, log_all_areas=False) -> pd.DataFrame:
 
