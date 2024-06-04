@@ -1,9 +1,11 @@
-from allensdk.brain_observatory.ecephys.visualization import plot_mean_waveforms, plot_spike_counts, raster_plot
-from matplotlib import pyplot as plt
 import numpy as np
 import pandas as pd
+from allensdk.brain_observatory.ecephys.visualization import (
+    plot_mean_waveforms, plot_spike_counts, raster_plot)
+from matplotlib import pyplot as plt
 
 from utils.utils import printProgressBar
+
 # import yaml
 
 # params = yaml.safe_load(open('params.yaml'))['cache']
@@ -25,6 +27,63 @@ from utils.utils import printProgressBar
 """
 This dataset contains ephys recording sessions from 3 genotypes (C57BL6J, VIP-IRES-CrexAi32 and SST-IRES-CrexAi32). For each mouse, two recordings were made on consecutive days. One of these sessions used the image set that was familiar to the mouse from training. The other session used a novel image set containing two familiar images from training and six new images that the mouse had never seen.
 """
+
+from utils.debug import ic
+
+
+def get_table(cache, session_id, table_name):
+    """
+    Get a table from the cache.
+
+    Parameters:
+    cache (EcephysProjectCache): The cache object.
+    session_id (int): The session identifier.
+    table_name (str): The name of the table to retrieve.
+
+    Returns:
+    DataFrame: The table data.
+    """
+    return cache.get_session_data(session_id)[table_name]
+
+def dict_from_dataframe(df:pd.DataFrame, name:str) -> dict:
+    """
+    With this you can search for a dataframe name from column names.
+    """
+    return {col_name: name for col_name in df.columns}
+
+
+class AllenTables():
+    
+    def __init__(self, cache, session_id):
+        self.cache = cache
+        self.session_id = session_id
+        
+        # get the metadata tables
+        self.session = pd.DataFrame(cache.get_ecephys_session_table().loc[session_id])
+        self.behavior = cache.get_behavior_session_table()[cache.get_behavior_session_table()['ecephys_session_id'] == session_id]
+        self.probes = cache.get_probe_table()[cache.get_probe_table()['ecephys_session_id'] == session_id]
+        self.units = cache.get_unit_table()[cache.get_unit_table()['ecephys_session_id'] == session_id]
+        self.channels = cache.get_channel_table()[cache.get_channel_table()['ecephys_session_id'] == session_id]
+        
+        # Make a dictionary of the tables
+        self.tables = {
+            # 'session': self.session,
+            'behavior': self.behavior,
+            'probes': self.probes,
+            'units': self.units,
+            'channels': self.channels
+        }
+        
+        # Make a dictionary of the column names
+        self.col_names = {}
+        for table_name, table in self.tables.items():
+            self.col_names.update(dict_from_dataframe(table, table_name))
+            
+    def __getitem__(self, name: str)-> pd.DataFrame:
+        table = self.tables.get(name)
+        if table is not None:
+            raise AttributeError(f"'AllenTables' object has no attribute '{name}'")
+        return table[name]
 
 def get_unit_channels(session, log_all_areas=False) -> pd.DataFrame:
 
