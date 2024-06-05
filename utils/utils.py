@@ -178,3 +178,38 @@ def printProgressBar(iteration, total, prefix='', suffix='', decimals=1, length=
         
         if onComplete == 'newline':
             print()
+
+def options_and_arguments():
+    """
+    A simple example of using options and arguments in a Python script.
+
+    Options:
+        -h, --help: Show a help message and exit.
+        -v, --verbose: Print verbose output.
+        -o, --output <file>: Specify an output file.
+
+    Arguments:
+        input_file: The input file to process.
+
+    Example:
+        python script.py -v -o output.txt input_file.txt
+    """
+    import argparse
+
+    # Create the parser
+    parser = argparse.ArgumentParser(description='A simple example of using options and arguments.')
+
+    # Add options
+    parser.add_argument('-v', '--verbose', action='store_true', help='Print verbose output.')
+    parser.add_argument('-o', '--output', type=str, help='Specify an output file.')
+
+    # Add arguments
+    parser.add_argument('input_file', type=str, help='The input file to process.')
+
+    # Parse the arguments
+    args = parser.parse_args()
+
+    # Print the arguments
+    print('Input file:', args.input_file)
+    print('Verbose:', args.verbose)
+    print('Output file:', args.output)
