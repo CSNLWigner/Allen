@@ -1,4 +1,5 @@
 
+from collections import defaultdict
 from scipy.stats import shapiro
 import numpy as np
 import yaml
@@ -213,3 +214,66 @@ def options_and_arguments():
     print('Input file:', args.input_file)
     print('Verbose:', args.verbose)
     print('Output file:', args.output)
+
+
+def dfs(node, graph, visited, component):
+    """
+    Function to find the connected components in a graph using DFS
+
+    Parameters:
+    - node: The starting node for the DFS traversal
+    - graph: The graph represented as an adjacency list
+    - visited: A boolean array to keep track of visited nodes
+    - component: A list to store the nodes in the connected component
+
+    Returns:
+    None
+    """
+    stack = [node]
+    while stack:
+        current = stack.pop()
+        if not visited[current]:
+            visited[current] = True
+            component.append(current)
+            for neighbor in graph[current]:
+                if not visited[neighbor]:
+                    stack.append(neighbor)
+
+def merge_lists_iterable(lists):
+    """
+    Generator function to yield merged lists with common elements.
+    Merge multiple lists into a single list by finding connected components in a graph.
+
+    Args:
+        lists (list): A list of lists to be merged.
+
+    Yields:
+        list: A merged list containing unique elements from the input lists.
+
+    """
+    # Step 1: Create a graph
+    element_to_lists = defaultdict(set)
+    for idx, lst in enumerate(lists):
+        for element in lst:
+            element_to_lists[element].add(idx)
+
+    graph = defaultdict(list)
+    for indices in element_to_lists.values():
+        indices = list(indices)
+        for i in range(len(indices)):
+            for j in range(i + 1, len(indices)):
+                graph[indices[i]].append(indices[j])
+                graph[indices[j]].append(indices[i])
+
+    # Step 2: Find connected components
+    visited = [False] * len(lists)
+
+    for i in range(len(lists)):
+        if not visited[i]:
+            component = []
+            dfs(i, graph, visited, component)
+            # Step 3: Merge lists in each component
+            merged_set = set()
+            for idx in component:
+                merged_set.update(lists[idx])
+            yield list(merged_set)
