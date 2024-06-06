@@ -63,8 +63,27 @@ jointColumns = {
 }
 
 class AllenTables():
-    
+    """
+    A class that represents tables related to Allen Institute's Neuropixel data.
+
+    Attributes:
+        cache (object): The cache object used to retrieve data.
+        session_id (int): The ID of the session.
+
+    Methods:
+        make_tables: Creates a dictionary of tables.
+        make_columns: Creates a dictionary of columns.
+        __init__: Initializes the AllenTables object.
+        __getitem__: Retrieves a dataframe based on the given key.
+    """
+
     def make_tables(self):
+        """
+        Creates a dictionary of tables.
+
+        Returns:
+            dict: A dictionary of tables.
+        """
         self.tables = {
             'session': self.session,
             'behavior': self.behavior,
@@ -75,11 +94,15 @@ class AllenTables():
         return self.tables
     
     def make_columns(self):
-        
+        """
+        Creates a dictionary of columns.
+
+        Returns:
+            dict: A dictionary of columns.
+        """
         self.columns = {}
 
         for name, table in self.tables.items():
-            
             # Get the columns from the dataframe
             new_columns = dict_from_dataframe(table, name)
             
@@ -87,10 +110,7 @@ class AllenTables():
             for key, value in new_columns.items():
                 if key in self.columns:
                     # Key exists in dictionary
-                    # ic(key, self.tables[value][key], self.tables[self.columns[key]][key])
                     self.columns[key].append(value)
-                    
-                    # Merge the two dataframes: self.columns[key] = pd.concat([self.tables[self.columns[key]], self.tables[value]], axis=1)
                 else:
                     # Key does not exist in dictionary, add it
                     self.columns[key] = [value]
@@ -98,6 +118,16 @@ class AllenTables():
         return self.tables
     
     def __init__(self, cache, session_id):
+        """
+        Initializes the AllenTables object.
+        
+        Args:
+            cache (object): The cache object used to retrieve data.
+            session_id (int): The ID of the session.
+        
+        Note:
+            The elapsed time for this function is approximately 0.198 seconds.
+        """
         self.cache = cache
         self.session_id = session_id
         
@@ -114,7 +144,15 @@ class AllenTables():
         self.table_names = list(self.tables.keys())
             
     def __getitem__(self, key: str)-> pd.DataFrame:
-        
+        """
+        Retrieves a dataframe based on the given key.
+
+        Args:
+            key (str): The key to search for in the tables.
+
+        Returns:
+            pd.DataFrame: The dataframe containing the columns with the given key.
+        """
         # Make a mask for the self.tables with the key
         key_mask = [name for name, table in self.tables.items() if key in table.columns]
         
@@ -138,7 +176,7 @@ class AllenTables():
         if len(mergedColumns) == 1:
             return mergedColumns[0]
         else:
-            # TODO: Do this whole prodecure in __getitem__ twice (or more), to merge the distant columns. (In the first time it can be only a list with more than one merged subtables)
+            # TODO: Do this whole procedure in __getitem__ twice (or more), to merge the distant columns. (In the first time it can be only a list with more than one merged subtables)
             raise ValueError('The mergedColumns is not a single dataframe')
 
 def get_unit_channels(session, log_all_areas=False) -> pd.DataFrame:

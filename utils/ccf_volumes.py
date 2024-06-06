@@ -2,6 +2,10 @@
 Created on Tue Apr  7 08:41:07 2020
 
 @author: joshs
+
+https://community.brain-map.org/t/cortical-layers-using-ccfv3-in-neuropixels-data/1247/4
+
+https://www.dropbox.com/scl/fo/6x7ovegu2jp4jxrhyv0fi/APGHNCbZrJFU6xfccmyu1Vw?dl=0&e=2&rlkey=qqn8efbm4pto0olh0g9o5ctjs
 """
 
 # %%
@@ -16,6 +20,8 @@ from allensdk.brain_observatory.ecephys.behavior_ecephys_session import \
     BehaviorEcephysSession
 from allensdk.brain_observatory.ecephys.ecephys_project_cache import \
     EcephysProjectCache
+
+from utils.neuropixel import get_unit_channels
 
 # %%
 
@@ -82,10 +88,8 @@ def get_structure_ids(df, annotations):
 
 # %% First half of the layer assignment (called by the second half)
 
-def cortical_depth_calculation(session: BehaviorEcephysSession) -> pd.DataFrame:
+def cortical_depth_calculation(channels) -> pd.DataFrame:
     
-    channels = session.get_channels()
-
     channels = channels[channels.anterior_posterior_ccf_coordinate > 0]
 
     x = (channels.anterior_posterior_ccf_coordinate.values / 10).astype('int')
@@ -103,7 +107,7 @@ def cortical_depth_calculation(session: BehaviorEcephysSession) -> pd.DataFrame:
 
 # %% Second half of the layer assignment (called by the user and calls the first half)
 
-def layer_assignment_to_channels(session: BehaviorEcephysSession) -> pd.DataFrame:
+def layer_assignment_to_channels(channels) -> pd.DataFrame:
     """
     It will also allow you calculate unit depth along cortical “streamlines” (paths normal to the cortical surface), which is more accurate than using distance along the probe.
 
@@ -126,7 +130,7 @@ def layer_assignment_to_channels(session: BehaviorEcephysSession) -> pd.DataFram
     
     """
         
-    channels = cortical_depth_calculation(session)
+    channels = cortical_depth_calculation(channels)
 
     structure_ids = get_structure_ids(channels, annotations)
     structure_acronyms = structure_tree.loc[structure_ids].acronym
@@ -141,13 +145,26 @@ def layer_assignment_to_channels(session: BehaviorEcephysSession) -> pd.DataFram
 from utils.debug import ic
 
 
-def cortical_layer_assignment(session:BehaviorEcephysSession, units) -> pd.DataFrame:
+def cortical_layer_assignment(channels, units) -> pd.DataFrame:
+    """
+    Assigns cortical layers to units based on their ecephys_channel_id.
+    
+    **ATTENTION! Please keep in mind that these layer assignments are only estimates, and not definitive labels**. 
+
+    Args:
+        session (BehaviorEcephysSession): The behavior ecephys session object.
+        units (pd.DataFrame): The units dataframe containing ecephys_channel_id.
+
+    Returns:
+        pd.DataFrame: The units dataframe with an additional 'layer' column containing the cortical layer assignments.
+    """
     
     # Get the channels with the layer assignment
-    channels = layer_assignment_to_channels(session)  # session.get_channels()
+    channels = layer_assignment_to_channels(channels)  # session.get_channels()
             
     # Get the channel ids for the units whom session is the same as the input session
     unit_channel_ids = units.ecephys_channel_id
+    # unit_channel_ids = get_unit_channels(session).ecephys_channel_id
     
     # Filter channel_ids to only those that are in the channels index
     filtered_channel_ids = unit_channel_ids[unit_channel_ids.isin(channels.index)]
