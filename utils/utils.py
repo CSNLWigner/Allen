@@ -1,8 +1,11 @@
 
 from collections import defaultdict
-from scipy.stats import shapiro
+from collections.abc import Iterable
+
 import numpy as np
+import pandas as pd
 import yaml
+from scipy.stats import shapiro
 
 preprocess = yaml.safe_load(open('params.yaml'))['preprocess']
 
@@ -239,7 +242,41 @@ def dfs(node, graph, visited, component):
                 if not visited[neighbor]:
                     stack.append(neighbor)
 
-def merge_lists_iterable(lists):
+
+def elements_to_dfs(input: iter) -> defaultdict:
+    column_to_dfs = defaultdict(set)
+    for idx, df in enumerate(input):
+        for column in df.columns:
+            column_to_dfs[column].add(idx)
+    return column_to_dfs
+
+
+def dfs_to_graph(column_to_dfs: defaultdict) -> defaultdict:
+    graph = defaultdict(list)
+    for indices in column_to_dfs.values():
+        indices = list(indices)
+        for i in range(len(indices)):
+            for j in range(i + 1, len(indices)):
+                graph[indices[i]].append(indices[j])
+                graph[indices[j]].append(indices[i])
+    return graph
+
+
+def createGraph(input: Iterable) -> defaultdict:
+    """
+    Creates a graph based on the input data.
+
+    Args:
+        input (iter): An iterable containing the input data.
+
+    Returns:
+        defaultdict: A defaultdict representing the graph.
+    """
+    column_to_dfs = elements_to_dfs(input)
+    graph = dfs_to_graph(column_to_dfs)
+    return graph
+
+def iterate_common_elements(lists):
     """
     Generator function to yield merged lists with common elements.
     Merge multiple lists into a single list by finding connected components in a graph.
@@ -252,18 +289,7 @@ def merge_lists_iterable(lists):
 
     """
     # Step 1: Create a graph
-    element_to_lists = defaultdict(set)
-    for idx, lst in enumerate(lists):
-        for element in lst:
-            element_to_lists[element].add(idx)
-
-    graph = defaultdict(list)
-    for indices in element_to_lists.values():
-        indices = list(indices)
-        for i in range(len(indices)):
-            for j in range(i + 1, len(indices)):
-                graph[indices[i]].append(indices[j])
-                graph[indices[j]].append(indices[i])
+    graph = createGraph(lists)
 
     # Step 2: Find connected components
     visited = [False] * len(lists)
@@ -275,5 +301,57 @@ def merge_lists_iterable(lists):
             # Step 3: Merge lists in each component
             merged_set = set()
             for idx in component:
-                merged_set.update(lists[idx])
+                if not merged_set:
+                    merged_set = set(lists[idx])
+                else:
+                    # yield (idx, lists[idx])
+                    merged_set.update(lists[idx])
             yield list(merged_set)
+
+
+def mergeDataframes(dataframes: pd.DataFrame) -> list:
+    """
+    Merges a list of DataFrames into a list of merged DataFrames.
+
+    Args:
+        dataframes (list): A list of pandas DataFrames to be merged.
+
+    Returns:
+        list: A list of merged pandas DataFrames.
+
+    Example:
+        df1 = pd.DataFrame({'A': [1, 2, 3], 'B': [4, 5, 6]})
+        df2 = pd.DataFrame({'B': [6, 7, 8], 'C': [9, 10, 11]})
+        df3 = pd.DataFrame({'D': [12, 13, 14], 'E': [15, 16, 17]})
+        df4 = pd.DataFrame({'C': [10, 11, 12], 'F': [18, 19, 20]})
+        dataframes = [df1, df2, df3, df4]
+
+        for df in mergeDataframes(dataframes):
+            print(df)
+    """
+    # Create a graph
+    graph = createGraph(dataframes)
+
+    # Find connected components
+    visited = [False] * len(dataframes)
+
+    # Merge DataFrames in each component
+    merged_graphs = []
+    for i in range(len(dataframes)):
+        if not visited[i]:
+            component = []
+            
+            # Find connected components
+            dfs(i, graph, visited, component)
+            
+            # Merge DataFrames in each component
+            merged_df = pd.DataFrame()
+            for idx in component:
+                if merged_df.empty:
+                    merged_df = dataframes[idx]
+                else:
+                    merged_df = pd.merge(merged_df, dataframes[idx], how='outer', on=list(
+                        merged_df.columns.intersection(dataframes[idx].columns)) or None)
+            merged_graphs.append(merged_df)
+    return merged_graphs
+
