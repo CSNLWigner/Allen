@@ -6,7 +6,7 @@ from allensdk.brain_observatory.ecephys.visualization import (
     plot_mean_waveforms, plot_spike_counts, raster_plot)
 from matplotlib import pyplot as plt
 
-from utils.utils import printProgressBar
+from utils.utils import mergeDataframes, printProgressBar
 
 # import yaml
 
@@ -54,6 +54,14 @@ def dict_from_dataframe(df:pd.DataFrame, name:str) -> dict:
     return {col_name: name for col_name in df.columns}
 
 
+jointColumns = {
+    'session': ['behavior_session_id'],
+    'behavior': ['ecephys_session_id'],
+    'probes': ['ecephys_session_id'],
+    'units': ['ecephys_session_id', 'ecephys_probe_id', 'ecephys_channel_id'],
+    'channels': ['ecephys_session_id', 'ecephys_probe_id']
+}
+
 class AllenTables():
     
     def make_tables(self):
@@ -95,6 +103,7 @@ class AllenTables():
         
         # get the metadata tables
         self.session = pd.DataFrame(cache.get_ecephys_session_table().loc[[session_id]])
+        self.session['ecephys_session_id'] = session_id
         self.behavior = cache.get_behavior_session_table()[cache.get_behavior_session_table()['ecephys_session_id'] == session_id]
         self.probes = cache.get_probe_table()[cache.get_probe_table()['ecephys_session_id'] == session_id]
         self.units = cache.get_unit_table()[cache.get_unit_table()['ecephys_session_id'] == session_id]
@@ -102,19 +111,35 @@ class AllenTables():
         
         self.make_tables()
         self.make_columns()
+        self.table_names = list(self.tables.keys())
             
     def __getitem__(self, key: str)-> pd.DataFrame:
         
-        # Get all the tables with the same key
-        tables = [self.tables[table] for table in self.columns[key]]
+        # Make a mask for the self.tables with the key
+        key_mask = [name for name, table in self.tables.items() if key in table.columns]
         
-        # Get the columns with the key from each table and reset the index
-        columns = [table[key].reset_index() for table in tables]
-
+        # If there are no tables with the key, return None
+        if len(key_mask) == 0:
+            print(f'No tables with the key: {key}')
+            return None
+        
+        # Add the key to each list of the table if it is not already there
+        commonColNames = jointColumns
+        for tab in commonColNames:
+            if key not in commonColNames[tab]:
+                commonColNames[tab].append(key)
+        
+        # Get the columns with the key from each table
+        subtables = [self.tables[name][commonColNames[name]].reset_index() for name in key_mask]
+        
         # Merge the columns
-        mergedColumns = reduce(lambda left, right: pd.merge(left, right, how='outer'), columns)
+        mergedColumns = mergeDataframes(subtables)
         
-        return mergedColumns
+        if len(mergedColumns) == 1:
+            return mergedColumns[0]
+        else:
+            # TODO: Do this whole prodecure in __getitem__ twice (or more), to merge the distant columns. (In the first time it can be only a list with more than one merged subtables)
+            raise ValueError('The mergedColumns is not a single dataframe')
 
 def get_unit_channels(session, log_all_areas=False) -> pd.DataFrame:
 
