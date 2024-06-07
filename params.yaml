@@ -55,3 +55,10 @@ rrr-param-search:
   # time-bin: 0.050
   # time-step: 0.025
 
+interaction-layers:
+  V1:
+    input: [1, 5] # [2, 3]
+    output: [2, 3]
+  V2:
+    input: [4]
+    output: [6]
