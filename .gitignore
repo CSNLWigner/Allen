@@ -1,3 +1,4 @@
+Allen_project.code-workspace
 test.py
 __pycache__/**
 **/__pycache__
@@ -7,9 +8,13 @@ __pycache__/**
 note.md
 data/area-responses/**
 data/raw-area-responses/**
+data/ccf_volumes/**
 results/**
 figures/**
 **pickle
 **tempCodeRunnerFile.py
 fromm3/**
 utils/debug.py
+notes/**
+pipelines/**
+stimulus_templates.png
