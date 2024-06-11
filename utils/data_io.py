@@ -1,15 +1,24 @@
 import csv
-import pickle
-import numpy as np
 import os
-import pandas as pd
-import matplotlib.figure
+import pickle
 
+import matplotlib.figure
+import numpy as np
+import pandas as pd
+
+
+def path_name(path, name):
+    if path != "":
+        if path[-1] != "/":
+            path = path + "/"
+        name = f'{path}{name}'
+    return name
 
 def save_csv(data, name, path="results"):
     if not os.path.exists(path):
         os.makedirs(path)
-    with open(f"{path}/{name}.csv", "w") as f:
+    name = path_name(path, name)
+    with open(f"{name}.csv", "w") as f:
         writer = csv.writer(f, delimiter=",")
         writer.writerows(data)
 
@@ -17,7 +26,8 @@ def save_csv(data, name, path="results"):
 def save_pickle(data, name, path="results"):
     if not os.path.exists(path):
         os.makedirs(path)
-    with open(f"{path}/{name}.pickle", "wb") as f:
+    name = path_name(path, name)
+    with open(f"{name}.pickle", "wb") as f:
         pickle.dump(data, f)
 
 def save_fig(fig:matplotlib.figure.Figure, name, path="figures"):
@@ -42,18 +52,12 @@ def save_dict_items(dictionary, name="", path="results", log=True):
 ############################################################################################################
 
 def load_csv(name, path="") -> pd.DataFrame:
-    if path != "":
-        if path[-1] != "/":
-            path = path + "/"
-        name = f'{path}{name}'
+    name = path_name(path, name)
     data = pd.read_csv(f"{name}.csv")
     return data
 
 def load_pickle(name, path="results"):
-    if path != "":
-        if path[-1] != "/":
-            path = path + "/"
-        name = f'{path}{name}'
+    name = path_name(path, name)
     with open(f"{name}.pickle", "rb") as f:
         data = pickle.load(f)
     return data
