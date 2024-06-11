@@ -1,36 +1,3 @@
-# stages:
-#   load:
-#     cmd: python3 -u load_raw_activity_data.py
-#     params:
-#       - load
-#     outs:
-#       - data/raw-area-responses/
-#   preprocess:
-#     cmd: python3 -u preprocessing.py
-#     deps:
-#       - preprocessing.py
-#       - data/raw-area-responses/
-#     params:
-#       - load
-#       - preprocess
-#     outs:
-#       - data/area-responses/
-#   plots:
-#     cmd: python3 -u multiple-timeslices.py
-#     deps:
-#       - multiple-timeslices.py
-#       - data/area-responses/
-#       - data/raw-area-responses/
-#       # - results/cross-time-RRR.pickle
-#       # - results/rrr-time-slice.pickle
-#       - sessions-params.csv
-#     params:
-#       - load
-#       - preprocess
-#       - rrr-time-slice
-#     outs:
-#       - figures/rrr-cross-time-slice-mega-plot.png
-
 stages:
   load:
     cmd: python3 -u load_raw_activity_data.py
@@ -40,26 +7,25 @@ stages:
       - load
     outs:
       - data/raw-area-responses/
-  analysis:
-    cmd: python3 -u cv-time-lag-analysis.py
+  layer-assignment:
+    cmd: python3 -u layer-assignment-analysis.py
     deps:
-      - cv-time-lag-analysis.py
-      - data/raw-area-responses/
+      - layer-assignment-analysis.py
+      - data/ccf_volumes/
+    params:
+      - load
+    outs:
+      - data/units/
+  plots:
+    cmd: python3 -u multiple-timeslices-layers.py
+    deps:
+      - multiple-timeslices-layers.py
+      - session-params-old.csv
+      - data/units/
     params:
       - load
       - preprocess
-      - rrr
-      - rrr-param-search
-  #   outs:
-  #     - results/CV-lag-time.pickle
-  # plots:
-  #   cmd: python3 -u cv-time-lag-plot.py
-  #   deps:
-  #     - cv-time-lag-plot.py
-  #     - results/CV-lag-time.pickle
-  #   params:
-  #     - preprocess
-  #     - rrr
-  #     - rrr-param-search
-  #   outs:
-  #     - figures/rrr-param-search.png
+      - rrr-time-slice
+      - interaction-layers
+    outs:
+      - figures/rrr-cross-time-slice-mega-plot.png

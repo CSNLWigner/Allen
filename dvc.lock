@@ -59,30 +59,36 @@ stages:
       md5: 602969e22ae61fd2082ce408273d3275
       size: 360803
   plots:
-    cmd: python3 -u multiple-timeslices.py
+    cmd: python3 -u multiple-timeslices-layers.py
     deps:
-    - path: data/area-responses/
+    - path: data/units/
       hash: md5
-      md5: a957ab84d97f44398ba66bfe431ec6e9.dir
-      size: 52992328
+      md5: 0fce768797b5d60092cdef75f44f6676.dir
+      size: 4580
       nfiles: 2
-    - path: data/raw-area-responses/
+    - path: multiple-timeslices-layers.py
       hash: md5
-      md5: 90173a39471e6a306b64b6be692881b9.dir
-      size: 2649600328
-      nfiles: 2
-    - path: multiple-timeslices.py
+      md5: 5cfa26c70bcbafefa8cddda07016733f
+      size: 5091
+    - path: session-params-old.csv
       hash: md5
-      md5: 385e68fc6ca16961f7a204b81aa2b43b
-      size: 5078
-    - path: sessions-params.csv
-      hash: md5
-      md5: 2b498be690b0c612db2c0d8e3385ed6e
-      size: 1940
+      md5: 710ad8a583b69602103bb548e6de29db
+      size: 3120
     params:
       params.yaml:
+        interaction-layers:
+          V1:
+            input:
+            - 5
+            output:
+            - 2
+          LM:
+            input:
+            - 4
+            output:
+            - 6
         load:
-          session: 1111013640
+          session: 1048189115
           areas:
           - VISp
           - VISl
@@ -107,8 +113,8 @@ stages:
     outs:
     - path: figures/rrr-cross-time-slice-mega-plot.png
       hash: md5
-      md5: 3cbcfc20fd3625f897c1f3a1c7530913
-      size: 89280
+      md5: 5d1d02c73a76c2d70f47598825993a7e
+      size: 118371
   time_lag_analysis:
     cmd: python3 -u time_lag_analysis.py
     deps:
@@ -359,3 +365,31 @@ stages:
       hash: md5
       md5: 23a4bf7827deb7daf60a2cdf5693abf4
       size: 91316
+  layer-assignment:
+    cmd: python3 -u layer-assignment-analysis.py
+    deps:
+    - path: data/ccf_volumes/
+      hash: md5
+      md5: e0cb9ef7140957722e4c2d7453290ab0.dir
+      size: 2851845665
+      nfiles: 3
+    - path: layer-assignment-analysis.py
+      hash: md5
+      md5: c5f8d5663250453d1a516b1459cbc594
+      size: 1428
+    params:
+      params.yaml:
+        load:
+          session: 1048189115
+          areas:
+          - VISp
+          - VISl
+          stimulus-block: 5
+          step-size: 0.001
+          stimulus-duration: 0.25
+    outs:
+    - path: data/units/
+      hash: md5
+      md5: 0fce768797b5d60092cdef75f44f6676.dir
+      size: 4580
+      nfiles: 2

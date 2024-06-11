@@ -57,8 +57,8 @@ rrr-param-search:
 
 interaction-layers:
   V1:
-    input: [1, 5] # [2, 3]
-    output: [2, 3]
-  V2:
+    input: [5] # [1, 2]
+    output: [2] # 2 is 2/3
+  LM:
     input: [4]
     output: [6]
