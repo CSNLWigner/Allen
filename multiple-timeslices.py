@@ -96,11 +96,11 @@ for i, predictor, predictor_activity in zip([0, 1], ['V1', 'LM'], [raw_V1, raw_L
         # results = load_pickle(f"{names[predictor][target]}_cross-time-RRR_{session}", path=crosstime_path)
         
         # Calculate crosstime analysis
-        # results = crosstime_analysis(predictor_activity, target_activity, stimuli, cv, rank, scaling_factor=crosstime['scaling-factor'])
+        results = crosstime_analysis(predictor_activity, target_activity, stimuli, cv, rank, scaling_factor=crosstime['scaling-factor'])
         
         # Plot the results
         ax = plot[i, j]
-        # plots.crosstime_RRR(ax, results, predictor, target, timepoints[timepoints < 0.200])
+        plots.crosstime_RRR(ax, results, predictor, target, timepoints[timepoints < 0.200])
         
         # Blue and orange lines on the cross-time plots
         if predictor == 'V1' and target == 'LM':
