@@ -21,8 +21,6 @@ from allensdk.brain_observatory.ecephys.behavior_ecephys_session import \
 from allensdk.brain_observatory.ecephys.ecephys_project_cache import \
     EcephysProjectCache
 
-from utils.neuropixel import get_unit_channels
-
 # %%
 
 # cache_dir = 'data/.vbn_s3_cache' 
@@ -141,9 +139,6 @@ def layer_assignment_to_channels(channels) -> pd.DataFrame:
     
     return channels
 # %%
-
-from utils.debug import ic
-
 
 def cortical_layer_assignment(channels, units) -> pd.DataFrame:
     """

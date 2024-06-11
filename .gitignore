@@ -9,6 +9,7 @@ note.md
 data/area-responses/**
 data/raw-area-responses/**
 data/ccf_volumes/**
+data/units/**
 results/**
 figures/**
 **pickle
