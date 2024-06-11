@@ -374,7 +374,7 @@ def residual_for_each_stimulus_identity(full_activity: np.ndarray, stimulus_iden
     return residual_activity
 
 
-def preprocess_area_responses(raw_activity, stimulus_names, method='z-score', stimulus_duration=params['stimulus-duration'], step_size=params['step-size'], bin_size=params['bin-size']):
+def preprocess_area_responses(raw_activity, method='z-score', stimulus_duration=params['stimulus-duration'], step_size=params['step-size'], bin_size=params['bin-size']):
     """
     Preprocesses the raw neural activity of a specific brain area.
 
@@ -392,11 +392,10 @@ def preprocess_area_responses(raw_activity, stimulus_names, method='z-score', st
                                                 orig_time_step=load['step-size'])
 
     # Get residual activity To get rid of high-frequency noise neurons, times and stimuli
-    stimulus_residual = residual_for_each_stimulus_identity(full_activity, stimulus_names) # Stimulus-wise
-    all_residual = calculate_residual_activity(stimulus_residual, axis=(0, 2))  # Neuron-wise AND time-wise
+    full_activity = calculate_residual_activity(full_activity, axis=(0, 2))  # Neuron-wise AND time-wise
 
     # Normalize the responses to better model performance
     if method == 'z-score':
-        normalized_activity = z_score_normalize(all_residual, dims=(0, 1, 2))  # TODO: Normalize based on ITI activity?
+        normalized_activity = z_score_normalize(full_activity, dims=(0, 1, 2))  # TODO: Normalize based on ITI activity?
 
     return normalized_activity

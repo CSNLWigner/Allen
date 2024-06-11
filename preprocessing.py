@@ -9,10 +9,6 @@ from utils.data_io import load_pickle, save_pickle
 load = yaml.safe_load(open('params.yaml'))['load']
 params = yaml.safe_load(open('params.yaml'))['preprocess']
 
-# Get the image names
-image_names = load_pickle(
-    f'{load["stimulus-block"]}_block_image-names', path='data/stimulus-presentations')
-
 for area in params['areas']:
 
     # Get the full activity for the area
@@ -23,7 +19,7 @@ for area in params['areas']:
     if area == params['lag-area']:
         full_activity = np.roll(full_activity, -params['lag-time'], axis=2)
     
-    normalized_activity = preprocess_area_responses(full_activity, image_names, method='z-score')
+    normalized_activity = preprocess_area_responses(full_activity, method='z-score')
     
     # Save the residual activity
     save_pickle(normalized_activity,

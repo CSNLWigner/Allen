@@ -290,14 +290,13 @@ def cross_time_rrr_coeffs(V1_activity, V2_activity, cv=None, rank=None) -> np.nd
         axis=0), cv=cv, rank=rank, log=True)
 
 
-def crosstime_analysis(predictor, target, stimuli, cv, rank, scaling_factor=10, ProgressBar=True):
+def crosstime_analysis(predictor, target, cv, rank, scaling_factor=10, ProgressBar=True):
     """
     Perform cross-time analysis based on timpoints of rrr-param-search lag.
     
     Args:
         predictor (ndarray): Array of shape (neurons, trials, timepoints) representing the activity of the predictor area.
         target (ndarray): Array of shape (neurons, trials, timepoints) representing the activity of the target area.
-        stimuli (list): List of stimulus names.
         cv (int): Number of cross-validation folds to use.
         rank (int): Rank of the reduced-rank regression model.
         scaling_factor (int, optional): Scaling factor for the time points. Defaults to 1.
@@ -330,11 +329,9 @@ def crosstime_analysis(predictor, target, stimuli, cv, rank, scaling_factor=10, 
             
             # Preprocess the data (the trial duration is only one bin now).
             predictor = preprocess_area_responses(predictor_orig[:, :, t_x : t_x + time_bin], 
-                                                  stimulus_names=stimuli,
                                                   stimulus_duration=preprocess["bin-size"], 
                                                   step_size=preprocess["step-size"]).squeeze()
             target    = preprocess_area_responses(target_orig[:, :, t_y : t_y + time_bin], 
-                                                  stimulus_names=stimuli,
                                                   stimulus_duration=preprocess["bin-size"], 
                                                   step_size=preprocess["step-size"]).squeeze()
             
