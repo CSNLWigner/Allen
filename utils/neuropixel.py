@@ -6,6 +6,7 @@ from allensdk.brain_observatory.ecephys.visualization import (
     plot_mean_waveforms, plot_spike_counts, raster_plot)
 from matplotlib import pyplot as plt
 
+from utils.ccf_volumes import cortical_layer_assignment
 from utils.utils import mergeDataframes, printProgressBar
 
 # import yaml
@@ -73,6 +74,7 @@ class AllenTables():
     Methods:
         make_tables: Creates a dictionary of tables.
         make_columns: Creates a dictionary of columns.
+        layer_assignment: Assigns cortical layer information to the units based on the channels and units tables.
         __init__: Initializes the AllenTables object.
         __getitem__: Retrieves a dataframe based on the given key.
     """
@@ -117,13 +119,31 @@ class AllenTables():
                 
         return self.tables
     
-    def __init__(self, cache, session_id):
+    def layer_assignment(self):
+        """
+        Assigns cortical layer information to the units based on the channels and units tables.
+
+        This method uses the cortical_layer_assignment function to assign the cortical layer information
+        to the units in the tables. The assigned layer information is then appended to the 'layer' column
+        in the columns list.
+
+        Parameters:
+            None
+
+        Returns:
+            None
+        """
+        self.units = cortical_layer_assignment(self.tables.channels, self.tables.units)
+        self.columns.append('layer')
+    
+    def __init__(self, cache, session_id, layer_assignment=False):
         """
         Initializes the AllenTables object.
         
         Args:
             cache (object): The cache object used to retrieve data.
             session_id (int): The ID of the session.
+            layer_assignment (bool, optional): Whether to assign cortical layers to the units. Defaults to False.
         
         Note:
             The elapsed time for this function is approximately 0.198 seconds.
@@ -139,9 +159,14 @@ class AllenTables():
         self.units = cache.get_unit_table()[cache.get_unit_table()['ecephys_session_id'] == session_id]
         self.channels = cache.get_channel_table()[cache.get_channel_table()['ecephys_session_id'] == session_id]
         
+        # Make the tables and columns utilities
         self.make_tables()
         self.make_columns()
         self.table_names = list(self.tables.keys())
+        
+        # Assign cortical layers to the units
+        if layer_assignment:
+            self.layer_assignment()
             
     def __getitem__(self, key: str)-> pd.DataFrame:
         """
@@ -276,32 +301,29 @@ def get_stimulus_presentations(session):
     return stimulus_presentations
     
 
-def get_area_units(session, area_of_interest) -> pd.DataFrame:
+def get_area_units(tables: AllenTables, area_of_interest) -> pd.DataFrame:
     """
     Retrieves the units in a specific area of interest.
 
     Args:
-        session (str): The session identifier.
-        area_of_interest (str): The acronym of the area of interest.
+        tables (AllenTables): The AllenTables object containing the tables.
+        area_of_interest (str or list[str]): The acronym of the area of interest.
 
     Returns:
         pd.DataFrame: A DataFrame containing the units in the specified area.
     """
     
-    # first let's sort our units by depth
-    unit_channels = get_unit_channels(session)
-    unit_channels = unit_channels.sort_values(
-        'probe_vertical_position', ascending=False)
+    # get the metadata tables
+    units = tables.units
 
     # now we'll filter them
-    good_unit_filter = ((unit_channels['snr'] > 1) &
-                        (unit_channels['isi_violations'] < 1) & # If anyone spikes in the refracter period, they will be excluded
-                        (unit_channels['firing_rate'] > 0.1)) # When they are fires too sparse, then they cannot involved in the time of the trial
-
-    good_units = unit_channels.loc[good_unit_filter]
+    good_unit_filter = ((units['snr'] > 1) &
+                        (units['isi_violations'] < 1) & # If anyone spikes in the refracter period, they will be excluded
+                        (units['firing_rate'] > 0.1)) # When they are fires too sparse, then they cannot involved in the time of the trial
+    good_units = units.loc[good_unit_filter]
     
-    area_units = good_units[good_units['structure_acronym']
-                            == area_of_interest]
+    # get the units in the area of interest
+    area_units = good_units[good_units['structure_acronym'].isin(area_of_interest)]
     
     return area_units
 

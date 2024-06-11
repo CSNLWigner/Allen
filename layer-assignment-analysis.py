@@ -9,7 +9,7 @@ from utils.allen_cache import cache_allen
 from utils.ccf_volumes import cortical_layer_assignment
 from utils.data_io import save_pickle
 from utils.debug import ic
-from utils.neuropixel import AllenTables
+from utils.neuropixel import AllenTables, get_area_units
 
 # Load parameters
 params = yaml.safe_load(open('params.yaml'))['load']
@@ -21,8 +21,11 @@ cache = cache_allen()
 # Create the tables object
 tables = AllenTables(cache, session_id)
 
+# Get the filtered units for the areas
+filteredUnits = get_area_units(tables, ['VISp', 'VISl'])
+
 # Get the units and their layer assignment DataFrame
-layerAssignments = cortical_layer_assignment(tables.channels, tables.units)
+layerAssignments = cortical_layer_assignment(tables.channels, filteredUnits)
 
 # Save the units
 for area in params['areas']:
