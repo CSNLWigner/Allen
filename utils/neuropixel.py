@@ -6,7 +6,6 @@ from allensdk.brain_observatory.ecephys.visualization import (
     plot_mean_waveforms, plot_spike_counts, raster_plot)
 from matplotlib import pyplot as plt
 
-from utils.ccf_volumes import cortical_layer_assignment
 from utils.utils import mergeDataframes, printProgressBar
 
 # import yaml
@@ -31,7 +30,6 @@ from utils.utils import mergeDataframes, printProgressBar
 This dataset contains ephys recording sessions from 3 genotypes (C57BL6J, VIP-IRES-CrexAi32 and SST-IRES-CrexAi32). For each mouse, two recordings were made on consecutive days. One of these sessions used the image set that was familiar to the mouse from training. The other session used a novel image set containing two familiar images from training and six new images that the mouse had never seen.
 """
 
-from utils.debug import ic
 
 
 def get_table(cache, session_id, table_name):
@@ -133,8 +131,8 @@ class AllenTables():
         Returns:
             None
         """
-        self.units = cortical_layer_assignment(self.tables.channels, self.tables.units)
-        self.columns.append('layer')
+        # self.units = cortical_layer_assignment(self.tables.channels, self.tables.units)
+        # self.columns.append('layer')
     
     def __init__(self, cache, session_id, layer_assignment=False):
         """
@@ -166,6 +164,7 @@ class AllenTables():
         
         # Assign cortical layers to the units
         if layer_assignment:
+            raise NotImplementedError("The layer_assignment method is not implemented yet.") # TODO: move this class to a new file, bcs the import of ccf files are too slow. Then just uncomment the lines in the layer_assignment function
             self.layer_assignment()
             
     def __getitem__(self, key: str)-> pd.DataFrame:
