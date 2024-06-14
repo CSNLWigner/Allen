@@ -59,42 +59,14 @@ stages:
       md5: 602969e22ae61fd2082ce408273d3275
       size: 360803
   plots:
-    cmd: python3 -u multiple-timeslices-layers.py
+    cmd: python3 -u layer-interaction-plot.py
     deps:
-    - path: data/units/
+    - path: layer-interaction-plot.py
       hash: md5
-      md5: 0fce768797b5d60092cdef75f44f6676.dir
-      size: 4580
-      nfiles: 2
-    - path: multiple-timeslices-layers.py
-      hash: md5
-      md5: 5cfa26c70bcbafefa8cddda07016733f
-      size: 5091
-    - path: session-params-old.csv
-      hash: md5
-      md5: 710ad8a583b69602103bb548e6de29db
-      size: 3120
+      md5: 22938615547a28c25e3717b31a9e3313
+      size: 1341
     params:
       params.yaml:
-        interaction-layers:
-          V1:
-            input:
-            - 5
-            output:
-            - 2
-          LM:
-            input:
-            - 4
-            output:
-            - 6
-        load:
-          session: 1048189115
-          areas:
-          - VISp
-          - VISl
-          stimulus-block: 5
-          step-size: 0.001
-          stimulus-duration: 0.25
         preprocess:
           areas:
           - VISp
@@ -104,17 +76,15 @@ stages:
           step-size: 0.05
           bin-size: 0.05
           stimulus-duration: 0.25
-        rrr-time-slice:
-          predictor-time:
-          - 0.06
-          - 0.09
-          - 0.12
-          - 0.15
     outs:
-    - path: figures/rrr-cross-time-slice-mega-plot.png
+    - path: figures/layer-interaction_LM-to-V1.png
       hash: md5
-      md5: 5d1d02c73a76c2d70f47598825993a7e
-      size: 118371
+      md5: 55292ef23ec72a483eca8ac59ea3eb3c
+      size: 770766
+    - path: figures/layer-interaction_V1-to-LM.png
+      hash: md5
+      md5: aa054823d1faa063d1584fe8cf199f5e
+      size: 743089
   time_lag_analysis:
     cmd: python3 -u time_lag_analysis.py
     deps:

@@ -1,9 +1,11 @@
 
-from math import sqrt
 import warnings
-from matplotlib import gridspec, pyplot as plt
-from matplotlib.axes import Axes
+from math import sqrt
+
 import numpy as np
+from matplotlib import gridspec
+from matplotlib import pyplot as plt
+from matplotlib.axes import Axes
 from matplotlib.backends.backend_pdf import PdfPages
 
 
@@ -245,7 +247,7 @@ class megaplot():
         self.final()
         plt.show()
     
-    def savefig(self, filename, type='png', path='outputs', makedir=False, log=None, **kwargs):
+    def save(self, filename, type='png', path='outputs', makedir=False, log=None, **kwargs):
         """
         ### Params:
         filename: string of the file name
@@ -279,7 +281,7 @@ class megaplot():
             if not '.' in pathnfile: pathnfile = pathnfile + '.pdf'
             from matplotlib.backends.backend_pdf import PdfPages
             with PdfPages(pathnfile) as pdf: pdf.savefig(bbox_inches='tight')
-                
+    
     def append2pdf(self,pdf:PdfPages):
         """pdf: the handler of the file"""
         self.final()

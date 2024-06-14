@@ -27,15 +27,12 @@ stages:
     outs:
       - results/layer-interaction_V1-to-LM.pickle
       - results/layer-interaction_LM-to-V1.pickle
-  # plots:
-  #   cmd: python3 -u multiple-timeslices-layers.py
-  #   deps:
-  #     - multiple-timeslices-layers.py
-  #     - session-params-old.csv
-  #   params:
-  #     - load
-  #     - preprocess
-  #     - rrr-time-slice
-  #     - interaction-layers
-  #   outs:
-  #     - figures/rrr-cross-time-slice-mega-plot.png
+  plots:
+    cmd: python3 -u layer-interaction-plot.py
+    deps:
+      - layer-interaction-plot.py
+    params:
+      - preprocess
+    outs:
+      - figures/layer-interaction_V1-to-LM.png
+      - figures/layer-interaction_LM-to-V1.png
