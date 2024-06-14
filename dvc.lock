@@ -141,19 +141,21 @@ stages:
       md5: 3ab7d9da547a0cfffcdb0b7bf2eec32f
       size: 20152
   analysis:
-    cmd: python3 -u cv-time-lag-analysis.py
+    cmd: python3 -u layer-interaction-analysis.py
     deps:
-    - path: cv-time-lag-analysis.py
+    - path: data/units/
       hash: md5
-      md5: 6406b3353b6379f698b85210a92d450b
-      size: 4235
-    - path: data/raw-area-responses/
-      hash: md5
-      md5: 16eecdc300a64dd681ce05a93619e9cb.dir
-      size: 1305600328
+      md5: 0fce768797b5d60092cdef75f44f6676.dir
+      size: 4580
       nfiles: 2
+    - path: layer-interaction-analysis.py
+      hash: md5
+      md5: 2b78b373923353b8e7e22a01c382ce56
+      size: 2607
     params:
       params.yaml:
+        crosstime:
+          scaling-factor: 10
         load:
           session: 1048189115
           areas:
@@ -162,48 +164,15 @@ stages:
           stimulus-block: 5
           step-size: 0.001
           stimulus-duration: 0.25
-        preprocess:
-          areas:
-          - VISp
-          - VISl
-          lag-time: 0
-          lag-area: ''
-          step-size: 0.05
-          bin-size: 0.05
-          stimulus-duration: 0.25
-        rrr:
-          cv: 3
-          rank: 18
-          error-score: raise
-          predictor: VISp
-          target: VISl
-          timepoint: 0.05
-        rrr-param-search:
-          cv:
-          - 2
-          - 3
-          - 4
-          rank:
-          - 2
-          - 4
-          - 6
-          - 8
-          - 10
-          - 12
-          - 14
-          - 16
-          - 18
-          - 20
-          - 25
-          - 30
-          lag:
-          - 0
-          - 2
-          timepoints:
-          - 0
-          - 50
-          - 100
-          - 150
+    outs:
+    - path: results/layer-interaction_LM-to-V1.pickle
+      hash: md5
+      md5: 483256a99df6a08ef10c6255bca6d012
+      size: 52322
+    - path: results/layer-interaction_V1-to-LM.pickle
+      hash: md5
+      md5: dce9fb84e03b104c1e4ab05dc06f5b68
+      size: 52322
   behav-preprocess:
     cmd: python3 -u behav-preprocessing.py
     deps:
