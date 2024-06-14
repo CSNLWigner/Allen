@@ -210,7 +210,7 @@ class ProgressBarManager:
         # Clear the screen or move the cursor back to the top
         for id, bar in self.progress_bars.items():
             printProgressBar(bar['current'], bar['total'],
-                             prefix=f'Progress {id}:', length=50, printEnd='\n')
+                             prefix=f'{id}:', length=50, printEnd='\n')
 
         for _ in range(self.n_progress_bars):
             print("\033[F", end='')
@@ -261,6 +261,9 @@ class ProgressBarManager:
         # Delete the progress bar with the given id
         del self.progress_bars[id]
         self.n_progress_bars -= 1
+
+global manager
+manager = ProgressBarManager()
 
 def options_and_arguments():
     """

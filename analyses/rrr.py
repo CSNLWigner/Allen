@@ -10,7 +10,7 @@ from sklearn.model_selection import cross_validate
 from analyses.data_preprocessing import preprocess_area_responses
 from analyses.machine_learning_models import ReducedRankRidgeRegression
 from utils.data_io import load_pickle
-from utils.utils import MSE, printProgressBar
+from utils.utils import MSE, manager
 
 preprocess = yaml.safe_load(open('params.yaml'))['preprocess']
 params = yaml.safe_load(open('params.yaml'))['rrr']
@@ -319,10 +319,11 @@ def crosstime_analysis(predictor, target, cv, rank, scaling_factor=10, ProgressB
     results = np.full((len(xseries), len(yseries)), fill_value=np.nan)
     
     # Print progressbar
-    if ProgressBar: printProgressBar(0, len(xseries), prefix='t_predictor:')
-    
-    # print(target_orig[:10, 0, :10])
-    # print(target_orig[0, :10, :10])
+    progress_bar_id = 'crosstime analysis'
+    if type(ProgressBar) == str:
+        progress_bar_id = ProgressBar
+        ProgressBar = True
+    if ProgressBar: manager.progress_bar(progress_bar_id, 0, len(xseries))
     
     for x, t_x in enumerate(xseries):
         for y, t_y in enumerate(yseries):
@@ -342,6 +343,6 @@ def crosstime_analysis(predictor, target, cv, rank, scaling_factor=10, ProgressB
             results[x, y] = model['test_score'].mean()
             
         # Print progressbar
-        if ProgressBar: printProgressBar(x + 1, len(xseries), prefix='t_predictor:')
+        if ProgressBar: manager.progress_bar(progress_bar_id, x+1, len(xseries))
     
     return results
