@@ -183,6 +183,85 @@ def printProgressBar(iteration, total, prefix='', suffix='', decimals=1, length=
         if onComplete == 'newline':
             print()
 
+
+class ProgressBarManager:
+    def __init__(self):
+        '''
+        Initializes a ProgressBarManager object.
+
+        Usage:
+        manager = ProgressBarManager()
+
+        Example:
+        manager = ProgressBarManager()
+
+        # Simulate progress
+        for i in range(10):
+            manager.progress_bar('Download', i, 10)
+            # time.sleep(5)
+            for j in range(50):
+                manager.progress_bar('Upload', j, 50)
+                time.sleep(0.01)
+        '''
+        self.progress_bars = {}
+        self.n_progress_bars = 0
+
+    def print_progress_bars(self):
+        # Clear the screen or move the cursor back to the top
+        for id, bar in self.progress_bars.items():
+            printProgressBar(bar['current'], bar['total'],
+                             prefix=f'Progress {id}:', length=50, printEnd='\n')
+
+        for _ in range(self.n_progress_bars):
+            print("\033[F", end='')
+
+    def progress_bar(self, id, current, total):
+        '''
+        Updates the progress bar with the given id, current value, and total value.
+
+        Parameters:
+        - id (str): The id of the progress bar.
+        - current (int): The current value of the progress bar.
+        - total (int): The total value of the progress bar.
+
+        Example:
+        manager = ProgressBarManager()
+
+        # Simulate progress
+        for i in range(10):
+            manager.progress_bar('Download', i, 10)
+            # time.sleep(5)
+            for j in range(50):
+                manager.progress_bar('Upload', j, 50)
+                time.sleep(0.01)
+        '''
+        # If not already initialized, initialize a new progress bar
+        if id not in self.progress_bars:
+            self.new_progress_bar(id, current, total)
+        else:
+            self.update_progress_bar(id, current)
+
+        # If the progress bar is complete, delete it
+        if current == total:
+            self.delete_progress_bar(id)
+
+        # Print all the progress bars
+        self.print_progress_bars()
+
+    def new_progress_bar(self, id, current, total):
+        # Initialize a new progress bar with the given id and step
+        self.progress_bars[id] = {'current': current, 'total': total}
+        self.n_progress_bars += 1
+
+    def update_progress_bar(self, id, current):
+        # Update the progress bar with the given id
+        self.progress_bars[id]['current'] = current
+
+    def delete_progress_bar(self, id):
+        # Delete the progress bar with the given id
+        del self.progress_bars[id]
+        self.n_progress_bars -= 1
+
 def options_and_arguments():
     """
     A simple example of using options and arguments in a Python script.
