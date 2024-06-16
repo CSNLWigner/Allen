@@ -9,6 +9,7 @@ from utils import plots
 from utils.data_io import load_pickle
 from utils.megaplot import megaplot
 
+session = yaml.safe_load(open("params.yaml"))["load"]['session']
 preprocess = yaml.safe_load(open("params.yaml"))["preprocess"]
 timepoints = np.arange(0, preprocess['stimulus-duration'], preprocess['step-size'])  # in seconds
 
@@ -33,3 +34,4 @@ for originArea, targetArea in zip(['V1', 'LM'], ['LM', 'V1']):
     
     # Save
     plot.save(f"layer-interaction_{originArea}-to-{targetArea}", path='figures')
+    plot.save(f"layer-interaction_{originArea}-to-{targetArea}_{session}", path='cache')

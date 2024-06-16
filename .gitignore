@@ -19,3 +19,4 @@ utils/debug.py
 notes/**
 pipelines/**
 stimulus_templates.png
+cache/**

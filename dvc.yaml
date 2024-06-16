@@ -32,6 +32,7 @@ stages:
     deps:
       - layer-interaction-plot.py
     params:
+      - load
       - preprocess
     outs:
       - figures/layer-interaction_V1-to-LM.png
