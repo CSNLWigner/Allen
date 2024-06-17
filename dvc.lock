@@ -63,10 +63,18 @@ stages:
     deps:
     - path: layer-interaction-plot.py
       hash: md5
-      md5: 22938615547a28c25e3717b31a9e3313
-      size: 1341
+      md5: 5fa18c5ea68662dbf595f3f42a435c21
+      size: 1944
     params:
       params.yaml:
+        load:
+          session: 1048189115
+          areas:
+          - VISp
+          - VISl
+          stimulus-block: 5
+          step-size: 0.001
+          stimulus-duration: 0.25
         preprocess:
           areas:
           - VISp
@@ -79,12 +87,12 @@ stages:
     outs:
     - path: figures/layer-interaction_LM-to-V1.png
       hash: md5
-      md5: 55292ef23ec72a483eca8ac59ea3eb3c
-      size: 770766
+      md5: 7fb27fa4f8ad3f3be7a30fc14619cd0e
+      size: 105561
     - path: figures/layer-interaction_V1-to-LM.png
       hash: md5
-      md5: aa054823d1faa063d1584fe8cf199f5e
-      size: 743089
+      md5: 79dc5415c8cbf9f41ed86cc10be3fd47
+      size: 584067
   time_lag_analysis:
     cmd: python3 -u time_lag_analysis.py
     deps:

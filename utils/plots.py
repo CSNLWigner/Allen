@@ -3,13 +3,13 @@
 
 import matplotlib.pyplot as plt
 import numpy as np
-from allensdk.brain_observatory.ecephys.visualization import _VlPlotter
 import yaml
-from utils.data_io import save_pickle
-
-from utils.utils import get_time, iterate_dimension
-
+from allensdk.brain_observatory.ecephys.visualization import _VlPlotter
+from matplotlib import image
 from scipy.stats import sem
+
+from utils.data_io import save_pickle
+from utils.utils import get_time, iterate_dimension
 
 preprocess = yaml.safe_load(open('params.yaml'))['preprocess']
 
@@ -465,7 +465,7 @@ def score_time(mean, sem, title=None, xlabel='Time', ylabel='R^2', time_series=N
     
     return fig
 
-def crosstime_RRR(ax, matrix, predictor, target, timeseries):
+def crosstime_RRR(ax, matrix, predictor, target, timeseries, vlim) -> image.AxesImage:
     """
     Plot a cross-timepoint correlation matrix.
 
@@ -475,6 +475,7 @@ def crosstime_RRR(ax, matrix, predictor, target, timeseries):
     - predictor (str): The label for the predictor variable.
     - target (str): The label for the target variable.
     - timeseries (numpy.ndarray): The array of timepoints.
+    - vlim (tuple): The range of values for the colormap.
 
     Returns:
     - cax (matplotlib.image.AxesImage): The plotted image of the matrix.
@@ -490,11 +491,11 @@ def crosstime_RRR(ax, matrix, predictor, target, timeseries):
     tick_frequency = 5
     # Plot the matrix. colormap do not use white color. Make the resolution higher.
     cax = ax.imshow(matrix, cmap='terrain', interpolation='bilinear', 
-                    extent=[0, timeseries[-1], 0, timeseries[-1]])
+            extent=[0, timeseries[-1], 0, timeseries[-1]], vmin=vlim[0], vmax=vlim[1])
     
     # black line from 0;0 to the max;max
     ax.plot([0, timeseries[-1]], [0, timeseries[-1]],
-            color='black', linewidth=1)
+        color='black', linewidth=1)
     
     # Set the ticks and labels
     ax.set_xticks(timeseries[::tick_frequency])
@@ -504,7 +505,8 @@ def crosstime_RRR(ax, matrix, predictor, target, timeseries):
 
     return cax
 
-def rrr_time_slice(ax, results, predictor_time, timepoints=None, colors=None, ylim=(None, None)):
+
+def rrr_time_slice(ax, results, predictor_time, timepoints=None, colors=None, ylim=(None, None), isWithinSameArea=True):
     
     # TODO: Plot self prediction
     
@@ -521,8 +523,9 @@ def rrr_time_slice(ax, results, predictor_time, timepoints=None, colors=None, yl
         raise Warning('Timepoints are not provided. Using the length of the results instead.')
 
     # Plot the results
-    cax_V1 = simple_mean_SEM_time_plot(ax, results['V1']['mean'], 'R^2', title='V1', SEM=results['V1']['sem'], time_series=timepoints, color='blue', label='V1', xlim=(0, timepoints[-1]), ylim=ylim, alpha=0.05, linewidth=0.5)
-    cax_LM = simple_mean_SEM_time_plot(ax, results['LM']['mean'], 'R^2', title='LM', SEM=results['LM']['sem'], time_series=timepoints, color='red', label='LM', xlim=(0, timepoints[-1]), ylim=ylim, alpha=0.05, linewidth=0.5)
+    if isWithinSameArea:
+        cax_V1 = simple_mean_SEM_time_plot(ax, results['V1']['mean'], 'R^2', title='V1', SEM=results['V1']['sem'], time_series=timepoints, color='blue', label='V1', xlim=(0, timepoints[-1]), ylim=ylim, alpha=0.05, linewidth=0.5)
+        cax_LM = simple_mean_SEM_time_plot(ax, results['LM']['mean'], 'R^2', title='LM', SEM=results['LM']['sem'], time_series=timepoints, color='red', label='LM', xlim=(0, timepoints[-1]), ylim=ylim, alpha=0.05, linewidth=0.5)
     cax_TD = simple_mean_SEM_time_plot(ax, results['top-down']['mean'], 'R^2', SEM=results['top-down']['sem'], time_series=timepoints, color=color_TD, label='Top-down', xlim=(0, timepoints[-1]), ylim=ylim, linewidth=2)
     cax_BU = simple_mean_SEM_time_plot(ax, results['bottom-up']['mean'], 'R^2', SEM=results['bottom-up']['sem'], time_series=timepoints, color=color_BU, label='Bottom-up', xlim=(0, timepoints[-1]), ylim=ylim, linewidth=2)
     ax.legend()
