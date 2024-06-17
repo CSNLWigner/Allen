@@ -1,12 +1,15 @@
 
 import warnings
 from math import sqrt
+from typing import List, Union
 
 import numpy as np
 from matplotlib import gridspec
 from matplotlib import pyplot as plt
 from matplotlib.axes import Axes
 from matplotlib.backends.backend_pdf import PdfPages
+from matplotlib.contour import ContourSet
+from matplotlib.image import AxesImage
 
 
 class SubPlot():
@@ -170,7 +173,7 @@ class megaplot():
 
     def __getitem__(self, items) -> Axes:
         
-        items = self.soft_concretize(items) # Transform items to concrete bounds
+        items = self.getCoordinates(items) # Transform items to concrete bounds
                 
         if items in self.geometry:
             return self.get_axes(items)
@@ -337,7 +340,7 @@ class megaplot():
         
         l = []
         
-        for tile in self.area(self.toConcreteSlices(items)):
+        for tile in self.area(self.getCoordinates(items)):
             
             if self.table.item(tile) > 0:
                 l.append(self.fig.axes[int(self.table.item(tile))-1])
@@ -347,6 +350,7 @@ class megaplot():
     def expand(self, nrows, ncols):
         """
         https://github.com/matplotlib/matplotlib/issues/7225/
+        
         None, if not to change
         """
         
@@ -390,7 +394,7 @@ class megaplot():
         """add items tuple to the table. warn if already occupied"""
         
         # Iterate through gridspec tiles of the designated area
-        for tile in self.area(self.toConcreteSlices(items)):
+        for tile in self.area(self.getCoordinates(items)):
             
             # Check if occupied
             if table.__getitem__(tile) == 1 and (log or self.log):
@@ -403,13 +407,13 @@ class megaplot():
     
     def addaxes(self, items, log=True):
         
-        self.geometry.append(self.soft_concretize(items))
+        self.geometry.append(self.getCoordinates(items))
         
         self.table = self.table_update(self.table, items, len(self.fig.axes)+1, log=log) # len(axes)+1 bcs u have not added yet the axes to the fig
             
         return self.fig.add_subplot(self.gs.__getitem__(items))
      
-    def concretize(self, sl, max:int): # Transorm slice to fit the subplots by nrwos and ncols
+    def transformSizeToFitSubplots(self, sl, max:int): # Transorm slice to fit the subplots by nrwos and ncols
         if type(sl) == int: sl = slice(sl,sl+1)
         
         if type(sl) == slice:
@@ -426,27 +430,27 @@ class megaplot():
                 if stop < start: stop += max # is sl.stop == sl.start+1
             
             # Check
-            if stop > max: raise ValueError('max must be greater than slice.stop')
+            if stop > max: raise ValueError(f'stop {stop} is greater than max {max}')
             
             return slice(start,stop)
         
         else: raise TypeError('I can only concretize only on int or slice')
     
-    def soft_concretize(self, items:tuple) -> tuple:
+    def getCoordinates(self, items:tuple) -> tuple:
         
-        x = self.concretize(items[0],self.nrows)
-        y = self.concretize(items[1],self.ncols)
+        x = self.transformSizeToFitSubplots(items[0],self.nrows)
+        y = self.transformSizeToFitSubplots(items[1],self.ncols)
         
         return (x,y)
     
-    def toConcreteSlices(self, items) -> tuple:
-        l=[]
-        for i, max in zip(items, [self.nrows, self.ncols]):
-            if type(i) == int: ret = self.concretize(slice(i,i+1), max)
-            elif type(i) == slice: ret = self.concretize(i, max)
-            else: raise TypeError('elements of "items" tuple must be int or slice')
-            l.append(ret)
-        return tuple(l)
+    # def toConcreteSlices(self, items) -> tuple:
+    #     l=[]
+    #     for i, max in zip(items, [self.nrows, self.ncols]):
+    #         if type(i) == int: ret = self.concretize(slice(i,i+1), max)
+    #         elif type(i) == slice: ret = self.concretize(i, max)
+    #         else: raise TypeError('elements of "items" tuple must be int or slice')
+    #         l.append(ret)
+    #     return tuple(l)
     
     class shareXax():
         def __init__(self):
@@ -514,7 +518,7 @@ class megaplot():
         
         items = (row,column)
         
-        items = self.soft_concretize(items) # Transform items to concrete bounds
+        items = self.getCoordinates(items) # Transform items to concrete bounds
         
         if items in self.geometry:
             return self.get_axes(items)
@@ -552,8 +556,63 @@ class megaplot():
              'axis':.5
              }
         return d[type] * sqrt(self.nrows**2 + self.ncols**2) * 3
+    
+    class colorbar():
+        def __init__(self):
+            pass
+        def __getitem__(self, items):
+            area = self.area(items)
+            return self.fig.colorbar(self.fig.axes[0].collections[0], ax=items, orientation='vertical', label=None)
+    
+    def add_colorbar(self, imshow: Union[AxesImage, ContourSet], orientation: str = 'vertical', label: str = None):
+        """
+        Add colorbar axes to the side of the figure or below the figure.
 
+        Parameters:
+        - imshow (AxesImage or ContourSet): The image or contour set to which the colorbar corresponds.
+        - orientation (str): The orientation and position of the colorbar. Can be 'vertical' or 'horizontal'. Default is 'vertical'.
+        - label (str): The label of the colorbar. Default is None.
+        """
+        
+        # Initialize subplot. It must be AxesImage or ContourSet.
+        if (type(imshow) is not AxesImage) and \
+            (type(imshow) is not ContourSet):
+            raise ValueError('imshow must be AxesImage or ContourSet')
+        
+        # Add colorbar axes
+        # if orientation == 'vertical':
+        #     self.expand(self.nrows, self.ncols+1)
+        #     location = (slice(None),-1)
+        #     print('location', location)
+        #     print('nrows, ncols', self.nrows, self.ncols)
+        #     location = self.getCoordinates(location) # Transform items to concrete bounds
+        # elif orientation == 'horizontal':
+        #     self.expand(self.nrows+1, self.ncols)
+        #     location = (-1,slice(None))
+        #     location = self.getCoordinates(location)
 
+        if orientation == 'vertical':
+            # Get the horizontal position of the colorbar
+            col = self.ncols
+            h_pos = 0.9 + (col)*0.01
+            dx = 0.95 - h_pos
+            # Add colorbar axes
+            cbar_ax = self.fig.add_axes([h_pos, 0.15, dx, 0.7])
+            # Add colorbar
+            cbar = self.fig.colorbar(imshow, cax=cbar_ax, orientation=orientation, label=label)
+            
+        elif orientation == 'horizontal':
+            raise NotImplementedError('Horizontal colorbar is not implemented yet, bcs of the xlabel would overlap with the colorbar.')
+            # Get the vertical position of the colorbar
+            row = self.nrows
+            dy = row/10
+            # Add colorbar axes
+            cbar_ax = self.fig.add_axes([0.15, 0.05, 0.7, dy])
+            # Add colorbar
+            cbar = self.fig.colorbar(imshow, cax=cbar_ax, orientation=orientation, label=label)
+        
+        return cbar
+        
 """
 EZ MŰKÖDIK:
 import numpy as np
@@ -580,7 +639,7 @@ forrás: https://stackoverflow.com/questions/42973223/how-to-share-x-axes-of-two
 
 
 # # Create 2x2 figure and two Axes at [0,:] and [1,0]
-# myfig = subplot(2,2,constrained_layout=True,title='title',xlabel='axis')
+# myfig = megaplot(2,2,constrained_layout=True,title='title',xlabel='axis')
 # ax = myfig[0,:]
 # ax.plot([2,1,3])
 # ax = myfig[1,0]
