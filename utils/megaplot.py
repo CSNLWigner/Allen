@@ -249,6 +249,7 @@ class megaplot():
     def show(self) -> None:
         self.final()
         plt.show()
+        self.reverse_final()
     
     def save(self, filename, type='png', path='outputs', makedir=False, log=None, **kwargs):
         """
@@ -284,24 +285,52 @@ class megaplot():
             if not '.' in pathnfile: pathnfile = pathnfile + '.pdf'
             from matplotlib.backends.backend_pdf import PdfPages
             with PdfPages(pathnfile) as pdf: pdf.savefig(bbox_inches='tight')
+        
+        self.reverse_final()
     
     def append2pdf(self,pdf:PdfPages):
         """pdf: the handler of the file"""
         self.final()
         pdf.savefig(bbox_inches='tight')
+        self.reverse_final()
     
     mathtextdict = {'{':'',
                     '}':'',
                     '_': ' '}
     
+    def reverse_final(self):
+        """
+        Reverse the changes made by the final() method.
+        """
+        # Reset rows
+        for cnt, name in enumerate(self.row_names):
+            if name != None and self.table[cnt,0] > 0:
+                ax = self.fig.axes[self.table[cnt, 0]-1]
+                ax.set_ylabel(self.ytitles.pop(0))
+        
+        # Reset columns
+        for cnt, name in enumerate(self.row_names):
+            if name != None and self.table[cnt, 0] > 0:
+                ax = self.fig.axes[self.table[0, cnt]-1]
+                ax.set_title(self.xtitles.pop(0))
+        
+        # Reset fig attributes
+        self.fig.suptitle('')
+        self.fig.supxlabel('')
+        self.fig.supylabel('')
+        
+        
     def final(self):
+        
+        self.ytitles = []
+        self.xtitles = []
         
         # Rows
         for cnt, name in enumerate(self.row_names):
             if name != None and self.table[cnt,0] > 0:
                 ax = self.fig.axes[self.table[cnt,0]-1]
                 title = ax.get_ylabel()
-                # print(cnt,0,title,name)
+                self.ytitles.append(title)
                 name = str(name)
                 name = ''.join(self.mathtextdict.get(c,c) for c in name) # delete chars, that corrupt the string in mathtex
                 name = ' '.join(rf'$\bf{{{word}}}$' for word in str(name).split()) # or instead: name = ' '.join(rf'$**{word}**$' for word in str(name).split()) # bold by mathtex
@@ -312,7 +341,7 @@ class megaplot():
             if name != None and self.table[0,cnt] > 0:
                 ax = self.fig.axes[self.table[0,cnt]-1]
                 title = ax.get_title()
-                # print(0,cnt,title,name)
+                self.xtitles.append(title)
                 name = str(name)
                 name = ''.join(self.mathtextdict.get(c,c) for c in name) # delete chars, that corrupt the string in mathtex
                 name = ' '.join(rf'$\bf{{{word}}}$' for word in str(name).split()) # bold by mathtex
