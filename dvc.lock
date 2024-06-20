@@ -63,8 +63,8 @@ stages:
     deps:
     - path: data/units/
       hash: md5
-      md5: 0fce768797b5d60092cdef75f44f6676.dir
-      size: 4580
+      md5: 4375173207daf47cf7511d5a4b733519.dir
+      size: 7940
       nfiles: 2
     - path: layer-interaction-plot.py
       hash: md5
@@ -75,7 +75,7 @@ stages:
         crosstime:
           scaling-factor: 10
         load:
-          session: 1048189115
+          session: 1111013640
           areas:
           - VISp
           - VISl
@@ -94,12 +94,12 @@ stages:
     outs:
     - path: figures/layer-interaction_LM-to-V1.png
       hash: md5
-      md5: a4ad2dfdfb065448d654392aba415802
-      size: 578213
+      md5: 7d2ef3dffbd78191624e84d9d728524b
+      size: 439554
     - path: figures/layer-interaction_V1-to-LM.png
       hash: md5
-      md5: c636a1a7526088aa48d15cb452dc3820
-      size: 629541
+      md5: 6d7facd58af34ff7b935f806d0ca2321
+      size: 520697
   time_lag_analysis:
     cmd: python3 -u time_lag_analysis.py
     deps:
@@ -130,8 +130,8 @@ stages:
     deps:
     - path: data/units/
       hash: md5
-      md5: 0fce768797b5d60092cdef75f44f6676.dir
-      size: 4580
+      md5: 4375173207daf47cf7511d5a4b733519.dir
+      size: 7940
       nfiles: 2
     - path: layer-interaction-analysis.py
       hash: md5
@@ -142,7 +142,7 @@ stages:
         crosstime:
           scaling-factor: 10
         load:
-          session: 1048189115
+          session: 1111013640
           areas:
           - VISp
           - VISl
@@ -152,11 +152,11 @@ stages:
     outs:
     - path: results/layer-interaction_LM-to-V1.pickle
       hash: md5
-      md5: 483256a99df6a08ef10c6255bca6d012
+      md5: 6257e755a769b6c05ace94726a051703
       size: 52322
     - path: results/layer-interaction_V1-to-LM.pickle
       hash: md5
-      md5: dce9fb84e03b104c1e4ab05dc06f5b68
+      md5: 0b8c9f1a54f3ac30e79ee5d829380061
       size: 52322
   behav-preprocess:
     cmd: python3 -u behav-preprocessing.py
@@ -191,7 +191,7 @@ stages:
     params:
       params.yaml:
         load:
-          session: 1048189115
+          session: 1111013640
           areas:
           - VISp
           - VISl
@@ -201,8 +201,8 @@ stages:
     outs:
     - path: data/raw-area-responses/
       hash: md5
-      md5: 16eecdc300a64dd681ce05a93619e9cb.dir
-      size: 1305600328
+      md5: 90173a39471e6a306b64b6be692881b9.dir
+      size: 2649600328
       nfiles: 2
   dimensionality-reduction:
     cmd: python3 -u cv-lag-time-selection.py
@@ -334,7 +334,7 @@ stages:
     params:
       params.yaml:
         load:
-          session: 1048189115
+          session: 1111013640
           areas:
           - VISp
           - VISl
@@ -344,6 +344,6 @@ stages:
     outs:
     - path: data/units/
       hash: md5
-      md5: 0fce768797b5d60092cdef75f44f6676.dir
-      size: 4580
+      md5: 4375173207daf47cf7511d5a4b733519.dir
+      size: 7940
       nfiles: 2
