@@ -465,7 +465,7 @@ def score_time(mean, sem, title=None, xlabel='Time', ylabel='R^2', time_series=N
     
     return fig
 
-def crosstime_RRR(ax, matrix, predictor, target, timeseries, vlim) -> image.AxesImage:
+def crosstime_RRR(ax, matrix, predictor, target, timeseries, vlim, tick_frequency = 5) -> image.AxesImage:
     """
     Plot a cross-timepoint correlation matrix.
 
@@ -476,6 +476,7 @@ def crosstime_RRR(ax, matrix, predictor, target, timeseries, vlim) -> image.Axes
     - target (str): The label for the target variable.
     - timeseries (numpy.ndarray): The array of timepoints.
     - vlim (tuple): The range of values for the colormap.
+    - tick_frequency (int): The frequency of the ticks on the axes.
 
     Returns:
     - cax (matplotlib.image.AxesImage): The plotted image of the matrix.
@@ -487,8 +488,6 @@ def crosstime_RRR(ax, matrix, predictor, target, timeseries, vlim) -> image.Axes
     # Reverse the rows of the matrix
     matrix = matrix[::-1]
 
-    # tick frequency
-    tick_frequency = 5
     # Plot the matrix. colormap do not use white color. Make the resolution higher.
     cax = ax.imshow(matrix, cmap='terrain', interpolation='bilinear', 
             extent=[0, timeseries[-1], 0, timeseries[-1]], vmin=vlim[0], vmax=vlim[1])
@@ -500,8 +499,8 @@ def crosstime_RRR(ax, matrix, predictor, target, timeseries, vlim) -> image.Axes
     # Set the ticks and labels
     ax.set_xticks(timeseries[::tick_frequency])
     ax.set_yticks(timeseries[::tick_frequency])
-    ax.set_xlabel(f"Timepoints of {target}")
-    ax.set_ylabel(f"Timepoints of {predictor}")
+    ax.set_xlabel(f"{target} time (s)")
+    ax.set_ylabel(f"{predictor} time (s)")
 
     return cax
 

@@ -61,4 +61,4 @@ interaction-layers:
     output: [2] # 2 is 2/3
   LM:
     input: [4]
-    output: [6]
+    output: [6] # [2]

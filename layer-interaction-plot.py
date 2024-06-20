@@ -8,11 +8,36 @@ from utils.megaplot import megaplot
 
 session = yaml.safe_load(open("params.yaml"))["load"]['session']
 preprocess = yaml.safe_load(open("params.yaml"))["preprocess"]
-timepoints = np.arange(0, preprocess['stimulus-duration'], preprocess['step-size'])  # in seconds
+crosstime = yaml.safe_load(open("params.yaml"))["crosstime"]
+timepoints = np.arange(0, preprocess['stimulus-duration'], crosstime['scaling-factor']/1000)  # in seconds
+print(f"timepoints: {timepoints}")
+
+areaName = {
+    'V1': 'VISp',
+    'LM': 'VISl'
+}
+
+def get_minmax(results):
+    vmin = np.inf
+    vmax = -np.inf
+    for output in results.keys():
+        for input in results[output].keys():
+            result = results[output][input]
+            vmin = min(vmin, np.nanmin(result))
+            vmax = max(vmax, np.nanmax(result))
+    return vmin, vmax
 
 # for direction in ['bottom-up', 'top-down']:
 for originArea, targetArea in zip(['V1', 'LM'], ['LM', 'V1']):
     print(f"Plotting {originArea} to {targetArea}")
+    
+    # Load layer-assignments
+    layer_assignments_originArea = load_pickle(f'layer-assignments-{areaName[originArea]}', path='data/units')
+    layer_assignments_targetArea = load_pickle(f'layer-assignments-{areaName[targetArea]}', path='data/units')
+    
+    # Count the number of units for each layer in the origin and target areas
+    n_units_originArea = {layer: len(layer_assignments_originArea[layer_assignments_originArea == layer]) for layer in layer_assignments_originArea.unique()}
+    n_units_targetArea = {layer: len(layer_assignments_targetArea[layer_assignments_targetArea == layer]) for layer in layer_assignments_targetArea.unique()}
     
     # Results
     results = load_pickle(f"layer-interaction_{originArea}-to-{targetArea}")
@@ -24,25 +49,22 @@ for originArea, targetArea in zip(['V1', 'LM'], ['LM', 'V1']):
     input_layers = sorted(input_layers)
     
     # Get the minimum and maximum values for the colorbar across all plots
-    vmin = np.inf
-    vmax = -np.inf
-    for y, output in enumerate(results.keys()):
-        for x, input in enumerate(results[output].keys()):
-            result = results[output][input]
-            vmin = min(vmin, np.nanmin(result))
-            vmax = max(vmax, np.nanmax(result))
+    vmin, vmax = get_minmax(results)
     print(f"vmin: {vmin}, vmax: {vmax}")
     
     # Plot
-    plot = megaplot(nrows=len(output_layers), ncols=len(input_layers), title=f"{originArea} to {targetArea}")
-    plot.row_names = [f'{originArea} l{output_layers}' for output_layers in output_layers]
-    plot.col_names = [f'{targetArea} l{input_layers}' for input_layers in input_layers]
+    plot = megaplot(nrows=len(output_layers), ncols=len(input_layers), title=f"{session}\n{originArea} to {targetArea}")
+    plot.row_names = [f'{originArea} l{output_layer} (n={n_units_originArea[output_layer]})' for output_layer in output_layers]
+    plot.col_names = [f'{targetArea} l{input_layer} (n={n_units_targetArea[input_layer]})' for input_layer in input_layers]
     for y, output in enumerate(results.keys()):
         for x, input in enumerate(results[output].keys()):
             # print(f"l{output} -> l{input}: {results[output][input]}")
             ax = plot[y, x]
             result = results[output][input]
-            imshow = plots.crosstime_RRR(ax, result, 'LM', 'V1', timepoints[timepoints < 0.200], vlim=(vmin, vmax))
+            nUnits = result.shape[0]
+            tick_frequency = int(0.25 / preprocess['step-size'])  # every 250 ms
+            imshow = plots.crosstime_RRR(ax, result, originArea, targetArea, timepoints[timepoints < 0.200], vlim=(vmin, vmax), tick_frequency=tick_frequency)
+            ax.grid(True)
     
     # Add colorbar
     plot.add_colorbar(imshow)

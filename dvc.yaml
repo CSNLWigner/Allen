@@ -31,9 +31,11 @@ stages:
     cmd: python3 -u layer-interaction-plot.py
     deps:
       - layer-interaction-plot.py
+      - data/units/
     params:
       - load
       - preprocess
+      - crosstime
     outs:
       - figures/layer-interaction_V1-to-LM.png
       - figures/layer-interaction_LM-to-V1.png

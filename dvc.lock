@@ -61,12 +61,19 @@ stages:
   plots:
     cmd: python3 -u layer-interaction-plot.py
     deps:
+    - path: data/units/
+      hash: md5
+      md5: 0fce768797b5d60092cdef75f44f6676.dir
+      size: 4580
+      nfiles: 2
     - path: layer-interaction-plot.py
       hash: md5
-      md5: 5fa18c5ea68662dbf595f3f42a435c21
-      size: 1944
+      md5: 00b6d210c1439de2b840e61897a0a826
+      size: 3328
     params:
       params.yaml:
+        crosstime:
+          scaling-factor: 10
         load:
           session: 1048189115
           areas:
@@ -87,12 +94,12 @@ stages:
     outs:
     - path: figures/layer-interaction_LM-to-V1.png
       hash: md5
-      md5: 7fb27fa4f8ad3f3be7a30fc14619cd0e
-      size: 105561
+      md5: a4ad2dfdfb065448d654392aba415802
+      size: 578213
     - path: figures/layer-interaction_V1-to-LM.png
       hash: md5
-      md5: 79dc5415c8cbf9f41ed86cc10be3fd47
-      size: 584067
+      md5: c636a1a7526088aa48d15cb452dc3820
+      size: 629541
   time_lag_analysis:
     cmd: python3 -u time_lag_analysis.py
     deps:
