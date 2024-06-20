@@ -7,6 +7,7 @@ from utils.data_io import load_pickle
 from utils.megaplot import megaplot
 
 session = yaml.safe_load(open("params.yaml"))["load"]['session']
+blockNumber = yaml.safe_load(open("params.yaml"))["load"]['block']
 preprocess = yaml.safe_load(open("params.yaml"))["preprocess"]
 crosstime = yaml.safe_load(open("params.yaml"))["crosstime"]
 timepoints = np.arange(0, preprocess['stimulus-duration'], crosstime['scaling-factor']/1000)  # in seconds
@@ -15,6 +16,10 @@ print(f"timepoints: {timepoints}")
 areaName = {
     'V1': 'VISp',
     'LM': 'VISl'
+}
+blockNames = {
+    2: 'gabor',
+    5: 'natural'
 }
 
 def get_minmax(results):
@@ -53,7 +58,7 @@ for originArea, targetArea in zip(['V1', 'LM'], ['LM', 'V1']):
     print(f"vmin: {vmin}, vmax: {vmax}")
     
     # Plot
-    plot = megaplot(nrows=len(output_layers), ncols=len(input_layers), title=f"{session}\n{originArea} to {targetArea}")
+    plot = megaplot(nrows=len(output_layers), ncols=len(input_layers), title=f"{session} {blockNames[blockNumber]} {originArea} to {targetArea}")
     plot.row_names = [f'{originArea} l{output_layer} (n={n_units_originArea[output_layer]})' for output_layer in output_layers]
     plot.col_names = [f'{targetArea} l{input_layer} (n={n_units_targetArea[input_layer]})' for input_layer in input_layers]
     for y, output in enumerate(results.keys()):
@@ -71,5 +76,5 @@ for originArea, targetArea in zip(['V1', 'LM'], ['LM', 'V1']):
     
     # Save
     plot.save(f"layer-interaction_{originArea}-to-{targetArea}", path='figures')
-    plot.save(f"layer-interaction_{originArea}-to-{targetArea}_{session}", path='cache')
+    plot.save(f"layer-interaction_{originArea}-to-{targetArea}_{session}_{blockNames[blockNumber]}", path='cache')
     del plot
