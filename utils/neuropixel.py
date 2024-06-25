@@ -300,7 +300,7 @@ def get_stimulus_presentations(session):
     return stimulus_presentations
     
 
-def get_area_units(tables: AllenTables, area_of_interest) -> pd.DataFrame:
+def get_area_units(units: pd.DataFrame, area_of_interest) -> pd.DataFrame:
     """
     Retrieves the units in a specific area of interest.
 
@@ -311,10 +311,6 @@ def get_area_units(tables: AllenTables, area_of_interest) -> pd.DataFrame:
     Returns:
         pd.DataFrame: A DataFrame containing the units in the specified area.
     """
-    
-    # get the metadata tables
-    units = tables.units
-
     # now we'll filter them
     good_unit_filter = ((units['snr'] > 1) &
                         (units['isi_violations'] < 1) & # If anyone spikes in the refracter period, they will be excluded
@@ -322,7 +318,12 @@ def get_area_units(tables: AllenTables, area_of_interest) -> pd.DataFrame:
     good_units = units.loc[good_unit_filter]
     
     # get the units in the area of interest
-    area_units = good_units[good_units['structure_acronym'].isin(area_of_interest)]
+    if type(area_of_interest) == str:
+        area_units = good_units[good_units['structure_acronym'] == area_of_interest]
+    elif type(area_of_interest) == list:
+        area_units = good_units[good_units['structure_acronym'].isin(area_of_interest)]
+    else:
+        raise ValueError('area_of_interest must be a string or a list of strings')
     
     return area_units
 

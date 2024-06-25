@@ -22,7 +22,7 @@ cache = cache_allen()
 tables = AllenTables(cache, session_id)
 
 # Get the filtered units for the areas
-filteredUnits = get_area_units(tables, ['VISp', 'VISl'])
+filteredUnits = get_area_units(tables.units, ['VISp', 'VISl'])
 
 # Get the units and their layer assignment DataFrame
 layerAssignments = cortical_layer_assignment(tables.channels, filteredUnits)

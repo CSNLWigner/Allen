@@ -62,7 +62,7 @@ def get_behav_responses(behav_data:pd.DataFrame, value_name:str, trial_start, du
 
     return data
 
-def get_area_responses(session: BehaviorEcephysSession, area: str, trials:pd.DataFrame, log=False) -> np.ndarray:
+def get_area_responses(session: BehaviorEcephysSession, area: str, trials:pd.DataFrame, units:pd.DataFrame, log=False) -> np.ndarray:
     """
     Get the responses of the units in a specific brain area to a specific stimulus block.
 
@@ -98,7 +98,7 @@ def get_area_responses(session: BehaviorEcephysSession, area: str, trials:pd.Dat
     # Get area units
     if log:
         print('Get area units...')
-    area_units = get_area_units(session, area)  # shape (units)
+    area_units = get_area_units(units, area)  # shape (units)
     n_area_units = area_units.shape[0]
     if log:
         print('area_units number', n_area_units)  # shape (units)

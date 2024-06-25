@@ -1,8 +1,6 @@
 stages:
   load:
     cmd: python3 -u load_raw_activity_data.py
-    deps:
-      - load_raw_activity_data.py
     params:
       - load
     outs:
