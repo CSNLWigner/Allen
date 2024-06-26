@@ -10,7 +10,7 @@ neuropixel:
 load:
   session: 1111013640
   areas: ["VISp", "VISl"] # "VISpm" # "VISm" has no spikes
-  stimulus-block: 5
+  stimulus-block: 2
   # Stimulus blocks:
   # 0: change detection task
   # 2: receptive field mapping by gabor stimuli

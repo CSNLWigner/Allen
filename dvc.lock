@@ -68,8 +68,8 @@ stages:
       nfiles: 2
     - path: layer-interaction-plot.py
       hash: md5
-      md5: 00b6d210c1439de2b840e61897a0a826
-      size: 3328
+      md5: fe54e3ab42a3f227e69c37c038f46de2
+      size: 3505
     params:
       params.yaml:
         crosstime:
@@ -79,7 +79,7 @@ stages:
           areas:
           - VISp
           - VISl
-          stimulus-block: 5
+          stimulus-block: 2
           step-size: 0.001
           stimulus-duration: 0.25
         preprocess:
@@ -94,12 +94,12 @@ stages:
     outs:
     - path: figures/layer-interaction_LM-to-V1.png
       hash: md5
-      md5: 7d2ef3dffbd78191624e84d9d728524b
-      size: 439554
+      md5: 9c128623b7e6e76f4ad72a3cd2bac8fe
+      size: 370134
     - path: figures/layer-interaction_V1-to-LM.png
       hash: md5
-      md5: 6d7facd58af34ff7b935f806d0ca2321
-      size: 520697
+      md5: 12a31748a83f73a20ddcb0b6e7b458ec
+      size: 322379
   time_lag_analysis:
     cmd: python3 -u time_lag_analysis.py
     deps:
@@ -146,17 +146,17 @@ stages:
           areas:
           - VISp
           - VISl
-          stimulus-block: 5
+          stimulus-block: 2
           step-size: 0.001
           stimulus-duration: 0.25
     outs:
     - path: results/layer-interaction_LM-to-V1.pickle
       hash: md5
-      md5: 6257e755a769b6c05ace94726a051703
+      md5: 61f84c7ad2d68bece4d5a39aaf5c5180
       size: 52322
     - path: results/layer-interaction_V1-to-LM.pickle
       hash: md5
-      md5: 0b8c9f1a54f3ac30e79ee5d829380061
+      md5: 74b0c1fcfff27fc4b1adc817810e2197
       size: 52322
   behav-preprocess:
     cmd: python3 -u behav-preprocessing.py
@@ -183,11 +183,6 @@ stages:
       nfiles: 3
   load:
     cmd: python3 -u load_raw_activity_data.py
-    deps:
-    - path: load_raw_activity_data.py
-      hash: md5
-      md5: 1dd409d49f216300296e0db453bcb731
-      size: 1274
     params:
       params.yaml:
         load:
@@ -195,14 +190,14 @@ stages:
           areas:
           - VISp
           - VISl
-          stimulus-block: 5
+          stimulus-block: 2
           step-size: 0.001
           stimulus-duration: 0.25
     outs:
     - path: data/raw-area-responses/
       hash: md5
-      md5: 90173a39471e6a306b64b6be692881b9.dir
-      size: 2649600328
+      md5: cd44cf309e5646f46f4b5cd7cdb4e83f.dir
+      size: 2012040328
       nfiles: 2
   dimensionality-reduction:
     cmd: python3 -u cv-lag-time-selection.py
@@ -329,8 +324,8 @@ stages:
       nfiles: 3
     - path: layer-assignment-analysis.py
       hash: md5
-      md5: c5f8d5663250453d1a516b1459cbc594
-      size: 1428
+      md5: c8764495b19c319fbf00b7622c376b9a
+      size: 1434
     params:
       params.yaml:
         load:
@@ -338,7 +333,7 @@ stages:
           areas:
           - VISp
           - VISl
-          stimulus-block: 5
+          stimulus-block: 2
           step-size: 0.001
           stimulus-duration: 0.25
     outs:

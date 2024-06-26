@@ -7,7 +7,7 @@ from utils.data_io import load_pickle
 from utils.megaplot import megaplot
 
 session = yaml.safe_load(open("params.yaml"))["load"]['session']
-blockNumber = yaml.safe_load(open("params.yaml"))["load"]['block']
+blockNumber = yaml.safe_load(open("params.yaml"))["load"]['stimulus-block']
 preprocess = yaml.safe_load(open("params.yaml"))["preprocess"]
 crosstime = yaml.safe_load(open("params.yaml"))["crosstime"]
 timepoints = np.arange(0, preprocess['stimulus-duration'], crosstime['scaling-factor']/1000)  # in seconds
