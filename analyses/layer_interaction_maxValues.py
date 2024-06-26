@@ -1,10 +1,11 @@
 
-import csv
-
 import numpy as np
+import yaml
 from scipy.signal import argrelextrema
 
 from utils.data_io import load_pickle
+
+timeBin = yaml.safe_load(open("params.yaml"))["crosstime"]['scaling-factor']
 
 areaName = {
     'V1': 'VISp',
@@ -34,9 +35,21 @@ def getUnitsNumber(originArea: str, targetArea: str) -> dict:
     
     return {f'{originArea}-{layer}-units': n_units_originArea[layer] for layer in n_units_originArea.keys()} | {f'{targetArea}-{layer}-units': n_units_targetArea[layer] for layer in n_units_targetArea.keys()}
 
-def getLocalMaxima(dataDict: dict, slice_index: slice) -> dict:
+
+def find_max_value(data):
+
+    max_ind = np.unravel_index(
+        np.nanargmax(data),  # argrelextrema(dataSlice, np.greater)
+        data.shape)  # in case of nan error, preprocess the array by replacing nan with -np.inf
+
+    # get the actual values using these indices
+    max_val = data[max_ind]
+    
+    return max_val, max_ind
+
+def getGlobalMaxima(dataDict: dict, slice_index: slice) -> dict:
     """
-    Finds the local maxima in a given data dictionary for a specific slice.
+    Finds the global maxima in a given data dictionary for a specific slice.
 
     Args:
         dataDict (dict): A dictionary containing the data.
@@ -52,14 +65,15 @@ def getLocalMaxima(dataDict: dict, slice_index: slice) -> dict:
         for input in dataDict[output].keys():
             dataSlice = dataDict[output][input][slice_index]
 
-            # determine the indices of the local maxima
-            # in case of nan error, preprocess the array by replacing nan with -np.inf
-            max_ind = np.unravel_index(
-                         argrelextrema(dataSlice, np.greater), 
-                         dataSlice.shape)
-
-            # get the actual values using these indices
-            max_val = dataSlice[max_ind]
+            # Check if all values in dataSlice are NaN
+            if np.all(np.isnan(dataSlice)):
+                max_val, max_ind = np.nan, None  # Placeholder for indices, adjust as needed
+            else:
+                max_val, max_ind = find_max_value(dataSlice)
+            
+            # turn the indices to timepoints by multiplying with the timeBin
+            if type(max_ind) is tuple:
+                max_ind = tuple([i * timeBin for i in max_ind])
             
             # get the maximum value and index
             result_dict[f"{output}-{input}-val"] = max_val
@@ -68,35 +82,44 @@ def getLocalMaxima(dataDict: dict, slice_index: slice) -> dict:
     return result_dict
 
 
-def update_csv(data: dict, filename: str) -> None:
+import pandas as pd
+
+
+def update_csv(data: dict, filename: str, force=False) -> None:
     """
     Appends the given data to a CSV file if certain keys are not already present.
 
     Args:
-        data (dict): The data to be written to the CSV file.
+        data (dict): The data to be append to the end of the CSV file as a row.
         filename (str): The path of the CSV file.
+        force (bool): If True, the existing row with the same fixedKeys values will be replaced. Default is False.
 
     Returns:
         None
     """
     # Fixed keys
     fixedKeys = ['session', 'direction', 'slice']
-    should_append = False
 
-    # Open the file in read mode to check conditions
+    # Step 1: Read the existing data
     try:
-        with open(filename, 'r', newline='') as file:
-            # Check if the fixedKeys are already present in the table
-            if not any(all(row[key] == data[key] for key in fixedKeys) for row in csv.DictReader(file)):
-                should_append = True
+        df = pd.read_csv(filename)
     except FileNotFoundError:
-        # If the file doesn't exist, we'll create it, so we should append.
-        should_append = True
+        df = pd.DataFrame(columns=data.keys())
 
-    # If conditions are met, open the file in append mode to write data
-    if should_append:
-        with open(filename, 'a', newline='') as file:
-            dictWriter = csv.DictWriter(file, fieldnames=data.keys())
-            dictWriter.writerow(data)
+    # Ensure all fixedKeys are in the DataFrame, add them if not
+    for key in fixedKeys:
+        if key not in df.columns:
+            df[key] = None  # or pd.NA or another appropriate default value
+    
+    # Step 2: Check if the row with the same fixedKeys values exists
+    if df[(df['session'] == data['session']) & (df['direction'] == data['direction']) & (df['slice'] == data['slice'])].empty:
+        # Append the new data
+        df = df.append(data, ignore_index=True)
+    elif force:
+        df = df.drop(df[(df['session'] == data['session']) & (df['direction'] == data['direction']) & (df['slice'] == data['slice'])].index)
+        df = df.append(data, ignore_index=True)
+
+    # Step 3: Overwrite the whole file
+    df.to_csv(filename, index=False)
 
 
