@@ -46,8 +46,10 @@ for originArea, targetArea in zip(['V1', 'LM'], ['LM', 'V1']):
                 # Check if all values in dataSlice are NaN
                 if np.all(np.isnan(dataSlice)):
                     max_val, max_ind = np.nan, None  # Placeholder for indices, adjust as needed
+                    mean_val = np.nan
                 else:
                     max_val, max_ind = find_max_value(dataSlice)
+                    mean_val = np.nanmean(dataSlice)
 
                 # turn the indices to timepoints by multiplying with the timeBin
                 if type(max_ind) is tuple:
@@ -64,6 +66,7 @@ for originArea, targetArea in zip(['V1', 'LM'], ['LM', 'V1']):
                 result_dict['input layer'] = input
                 result_dict['max value'] = max_val
                 result_dict['max index'] = max_ind
+                result_dict['mean value'] = mean_val
                 
                 # Additional information
                 result_dict['origin area'] = originArea
