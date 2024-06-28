@@ -7,33 +7,30 @@ from utils.data_io import load_pickle
 
 timeBin = yaml.safe_load(open("params.yaml"))["crosstime"]['scaling-factor']
 
-areaName = {
+areaDict = {
     'V1': 'VISp',
     'LM': 'VISl'
 }
 
-def getUnitsNumber(originArea: str, targetArea: str) -> dict:
+def getUnitsNumber(areaName: str) -> dict:
     """
     Get the number of units for each layer in the origin and target areas.
 
     Args:
-        originArea (str): The name of the origin area.
-        targetArea (str): The name of the target area.
+        areaName (str): The name of the area.
 
     Returns:
         dict: A dictionary containing the number of units for each layer in the origin and target areas.
-              The keys are in the format '{originArea}-{layer}-units' and '{targetArea}-{layer}-units'.
+              The keys are the layer names.
     """
     
     # Load layer-assignments
-    layer_assignments_originArea = load_pickle(f'layer-assignments-{areaName[originArea]}', path='data/units')
-    layer_assignments_targetArea = load_pickle(f'layer-assignments-{areaName[targetArea]}', path='data/units')
+    layerAssignment = load_pickle(f'layer-assignments-{areaDict[areaName]}', path='data/units')
     
     # Count the number of units for each layer in the origin and target areas
-    n_units_originArea = {layer: len(layer_assignments_originArea[layer_assignments_originArea == layer]) for layer in layer_assignments_originArea.unique()}
-    n_units_targetArea = {layer: len(layer_assignments_targetArea[layer_assignments_targetArea == layer]) for layer in layer_assignments_targetArea.unique()}
+    unitNumber = {layer: len(layerAssignment[layerAssignment == layer]) for layer in layerAssignment.unique()}
     
-    return {f'{originArea}-{layer}-units': n_units_originArea[layer] for layer in n_units_originArea.keys()} | {f'{targetArea}-{layer}-units': n_units_targetArea[layer] for layer in n_units_targetArea.keys()}
+    return unitNumber
 
 
 def find_max_value(data):
@@ -85,18 +82,19 @@ def getGlobalMaxima(dataDict: dict, slice_index: slice) -> dict:
 import pandas as pd
 
 
-def update_csv(data: dict, filename: str, force=False) -> None:
+def update_csv(data: pd.DataFrame, filename: str, force=False) -> None:
     """
     Appends the given data to a CSV file if certain keys are not already present.
 
     Args:
-        data (dict): The data to be append to the end of the CSV file as a row.
+        data (pd.DataFrame): The data to be append to the end of the CSV file as a row.
         filename (str): The path of the CSV file.
         force (bool): If True, the existing row with the same fixedKeys values will be replaced. Default is False.
 
     Returns:
         None
     """
+    
     # Fixed keys
     fixedKeys = ['session', 'direction', 'slice']
 
@@ -104,22 +102,28 @@ def update_csv(data: dict, filename: str, force=False) -> None:
     try:
         df = pd.read_csv(filename)
     except FileNotFoundError:
-        df = pd.DataFrame(columns=data.keys())
+        df = pd.DataFrame(columns=fixedKeys)
 
     # Ensure all fixedKeys are in the DataFrame, add them if not
     for key in fixedKeys:
         if key not in df.columns:
             df[key] = None  # or pd.NA or another appropriate default value
-    
-    # Step 2: Check if the row with the same fixedKeys values exists
-    if df[(df['session'] == data['session']) & (df['direction'] == data['direction']) & (df['slice'] == data['slice'])].empty:
-        # Append the new data
-        df = df.append(data, ignore_index=True)
-    elif force:
-        df = df.drop(df[(df['session'] == data['session']) & (df['direction'] == data['direction']) & (df['slice'] == data['slice'])].index)
-        df = df.append(data, ignore_index=True)
 
-    # Step 3: Overwrite the whole file
+    # Step 2: Check for duplicates and append or replace data
+    if not df.empty:
+        # Create a mask for rows in 'df' that match the 'fixedKeys' in 'data'
+        mask = pd.concat([df[fixedKeys] == data[fixedKeys].iloc[0]]).all(axis=1)
+        if mask.any():
+            if force:
+                # If forcing, drop the matching rows and append 'data'
+                df = df[~mask]
+            else:
+                # If not forcing, and there's a match, do not append 'data'
+                return
+    # Append 'data' if no duplicates or if forcing
+    df = pd.concat([df, data], ignore_index=True)
+
+    # Step 3: Save the updated DataFrame back to the CSV
     df.to_csv(filename, index=False)
 
 

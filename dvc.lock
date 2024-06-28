@@ -352,8 +352,8 @@ stages:
       nfiles: 2
     - path: layer-interaction-maxValues.py
       hash: md5
-      md5: 6f650f69fead47ef5c97b92f634523cb
-      size: 1466
+      md5: fb833fd05b41a13a827da03e618a76e8
+      size: 3218
     - path: results/layer-interaction_LM-to-V1.pickle
       hash: md5
       md5: 6257e755a769b6c05ace94726a051703
