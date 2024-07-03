@@ -8,6 +8,7 @@ from allensdk.brain_observatory.ecephys.behavior_ecephys_session import \
 from sklearn.model_selection import cross_validate
 
 from analyses.data_preprocessing import preprocess_area_responses
+from analyses.imbalanced_data import undersampled_cross_validation
 from analyses.machine_learning_models import ReducedRankRidgeRegression
 from utils.data_io import load_pickle
 from utils.utils import MSE, manager
@@ -42,8 +43,11 @@ def RRRR(X_data, Y_data, rank=None, cv=None, log=False, success_log=True) -> dic
     # Make RRR model
     model = ReducedRankRidgeRegression(rank=rank)
     
+    # Set the undersampling sample size
+    sample_size = params['sample-size']
+    
     # Perform cross-validation
-    results = cross_validate(model, X_data, Y_data, cv=cv, return_estimator=True, scoring='r2', error_score=params['error-score'])
+    results = undersampled_cross_validation(model, X_data, Y_data, sample_size, k_folds=cv)
     if log:
         print('Cross-validation scores:', results['test_score'])
     

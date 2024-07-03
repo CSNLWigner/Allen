@@ -41,7 +41,7 @@ for originArea, targetArea in zip(['V1', 'LM'], ['LM', 'V1']):
         # Get the maximum values for each layer-pair
         for output in data.keys():
             for input in data[output].keys():
-                dataSlice = data[output][input][slice_index]
+                dataSlice = data[output][input][slice_index, slice_index]
 
                 # Check if all values in dataSlice are NaN
                 if np.all(np.isnan(dataSlice)):

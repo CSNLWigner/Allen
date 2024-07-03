@@ -39,6 +39,7 @@ rrr:
   predictor: 'VISp'
   target: 'VISl'
   timepoint: 0.050 # in seconds
+  sample-size: 10 # under-sampling size
 
 rrr-time-slice:
   predictor-time: [.060, .090, .120, .150] # in seconds
