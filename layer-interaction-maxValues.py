@@ -45,11 +45,13 @@ for originArea, targetArea in zip(['V1', 'LM'], ['LM', 'V1']):
 
                 # Check if all values in dataSlice are NaN
                 if np.all(np.isnan(dataSlice)):
-                    max_val, max_ind = np.nan, (np.nan, np.nan)  # Placeholder for indices, adjust as needed
+                    maxVal, maxInd = np.nan, (np.nan, np.nan)  # Placeholder for indices, adjust as needed
                     mean_val = np.nan
                 else:
-                    max_val, max_ind = find_max_value(dataSlice)
-                    max_ind = tuple([(i + slice_index.start) * timeBin for i in max_ind])
+                    maxVal, maxInd_raw = find_max_value(dataSlice)
+                    maxInd = tuple([(i + slice_index.start) * timeBin for i in maxInd_raw])
+                    if slice_name == 'second' and (maxInd[0] < 100 or maxInd[1] < 100):
+                        print(f"maxInd: {maxInd} (raw: {maxInd_raw}, slice: {slice_index})")
                     mean_val = np.nanmean(dataSlice)
                     
                 # Store the results in a dictionary
@@ -61,9 +63,9 @@ for originArea, targetArea in zip(['V1', 'LM'], ['LM', 'V1']):
                 result_dict['slice'] = slice_name
                 result_dict['output layer'] = output
                 result_dict['input layer'] = input
-                result_dict['max value'] = max_val
-                result_dict['x'] = max_ind[0]
-                result_dict['y'] = max_ind[1]
+                result_dict['max value'] = maxVal
+                result_dict['x'] = maxInd[0]
+                result_dict['y'] = maxInd[1]
                 result_dict['mean value'] = mean_val
                 
                 # Additional information

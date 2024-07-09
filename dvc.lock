@@ -130,19 +130,19 @@ stages:
     deps:
     - path: data/units/
       hash: md5
-      md5: 4375173207daf47cf7511d5a4b733519.dir
-      size: 7940
+      md5: a54ece4209fd2669668f7791fdcc0e62.dir
+      size: 7748
       nfiles: 2
     - path: layer-interaction-analysis.py
       hash: md5
-      md5: 5f9d2efb5a9d47e113b3535f97d33363
-      size: 2662
+      md5: 2b78b373923353b8e7e22a01c382ce56
+      size: 2607
     params:
       params.yaml:
         crosstime:
           scaling-factor: 10
         load:
-          session: 1111013640
+          session: 1108334384
           areas:
           - VISp
           - VISl
@@ -152,11 +152,11 @@ stages:
     outs:
     - path: results/layer-interaction_LM-to-V1.pickle
       hash: md5
-      md5: f123b1946d0afe701173689f3032da28
+      md5: 7f8d2901a8861e7f193db612fb7fa3c0
       size: 52322
     - path: results/layer-interaction_V1-to-LM.pickle
       hash: md5
-      md5: 542b69baded50507f21a978522c4c860
+      md5: d24c026a381c3d73b72bed09c02e049f
       size: 52322
   behav-preprocess:
     cmd: python3 -u behav-preprocessing.py
@@ -186,7 +186,7 @@ stages:
     params:
       params.yaml:
         load:
-          session: 1111013640
+          session: 1108334384
           areas:
           - VISp
           - VISl
@@ -196,8 +196,8 @@ stages:
     outs:
     - path: data/raw-area-responses/
       hash: md5
-      md5: 90173a39471e6a306b64b6be692881b9.dir
-      size: 2649600328
+      md5: 348a206c3f90eccd79e5d0dc64cd2bbd.dir
+      size: 2575480328
       nfiles: 2
   dimensionality-reduction:
     cmd: python3 -u cv-lag-time-selection.py
@@ -329,7 +329,7 @@ stages:
     params:
       params.yaml:
         load:
-          session: 1111013640
+          session: 1108334384
           areas:
           - VISp
           - VISl
@@ -339,35 +339,35 @@ stages:
     outs:
     - path: data/units/
       hash: md5
-      md5: 4375173207daf47cf7511d5a4b733519.dir
-      size: 7940
+      md5: a54ece4209fd2669668f7791fdcc0e62.dir
+      size: 7748
       nfiles: 2
   stat:
     cmd: python3 -u layer-interaction-maxValues.py
     deps:
     - path: data/units/
       hash: md5
-      md5: 4375173207daf47cf7511d5a4b733519.dir
-      size: 7940
+      md5: a54ece4209fd2669668f7791fdcc0e62.dir
+      size: 7748
       nfiles: 2
     - path: layer-interaction-maxValues.py
       hash: md5
-      md5: 228e63166089051f3dded3919eefd05a
-      size: 3336
+      md5: ab719e25308500ea24eef085b4d95f3c
+      size: 3516
     - path: results/layer-interaction_LM-to-V1.pickle
       hash: md5
-      md5: f123b1946d0afe701173689f3032da28
+      md5: 7f8d2901a8861e7f193db612fb7fa3c0
       size: 52322
     - path: results/layer-interaction_V1-to-LM.pickle
       hash: md5
-      md5: 542b69baded50507f21a978522c4c860
+      md5: d24c026a381c3d73b72bed09c02e049f
       size: 52322
     params:
       params.yaml:
         crosstime:
           scaling-factor: 10
         load:
-          session: 1111013640
+          session: 1108334384
           areas:
           - VISp
           - VISl
