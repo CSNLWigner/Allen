@@ -16,7 +16,38 @@ from utils.utils import MSE, manager
 preprocess = yaml.safe_load(open('params.yaml'))['preprocess']
 params = yaml.safe_load(open('params.yaml'))['rrr']
 
-def RRRR(X_data, Y_data, rank=None, cv=None, log=False, success_log=True) -> dict:
+def getCoeffs(model, log=False):
+    """
+    Calculate the mean coefficients of a model over cross-validation folds.
+
+    Parameters:
+        model (list): A list of estimators representing the model.
+        log (bool, optional): Whether to print the shape of the coefficients. Default is False.
+
+    Returns:
+        numpy.ndarray: The mean coefficients of the model.
+
+    Note:
+        If the model is None, None is returned.
+    """
+
+    # If the model is None, return None
+    if model[0] is None:
+        return None
+
+    # Concatenate the coefficients over the cross-validation folds
+    coefficients = np.array(
+        [estimator.coef_ for estimator in model])
+    if log:
+        print('coefficients.shape', coefficients.shape)
+
+    # Calculate the mean of the coefficients
+    mean_coefficients = np.mean(coefficients, axis=0)
+
+    # Append the mean coefficients to the results
+    return mean_coefficients.T
+
+def RRRR(X_data, Y_data, rank=None, cv=None, log=False, success_log=True, warn=True) -> dict:
     """
     Make Reduced Rank Regression (RRR) analysis.
 
@@ -47,20 +78,11 @@ def RRRR(X_data, Y_data, rank=None, cv=None, log=False, success_log=True) -> dic
     sample_size = params['sample-size']
     
     # Perform cross-validation
-    results = undersampled_cross_validation(model, X_data, Y_data, sample_size, k_folds=cv)
+    results = undersampled_cross_validation(model, X_data, Y_data, sample_size, k_folds=cv, warn=warn)
     if log:
         print('Cross-validation scores:', results['test_score'])
     
-    # Concatenate the coefficients over the cross-validation folds
-    coefficients = np.array([estimator.coef_ for estimator in results['estimator']])
-    if log:
-        print('coefficients.shape', coefficients.shape)
-    
-    # Calculate the mean of the coefficients
-    mean_coefficients = np.mean(coefficients, axis=0)
-    
-    # Append the mean coefficients to the results
-    results['mean_coefficients'] = mean_coefficients.T
+    results['mean_coefficients'] = getCoeffs(results['estimator'], log=log)
     
     # If mean of the scores is not negative, then print the cv, rank and the mean of the scores
     if success_log and np.mean(results['test_score']) > 0:
@@ -322,6 +344,12 @@ def crosstime_analysis(predictor, target, cv, rank, scaling_factor=10, ProgressB
     # Init results
     results = np.full((len(xseries), len(yseries)), fill_value=np.nan)
     
+    # If sample_size is greater than the number of samples, then log a warning and return empty results
+    y_length = target_orig.shape[0]
+    if params['sample-size'] > y_length:
+        print(f"Waring: sample_size ({params['sample-size']}) is greater than the number of samples ({y_length}). Returning empty results.")
+        return results
+    
     # Print progressbar
     progress_bar_id = 'crosstime analysis'
     if type(ProgressBar) == str:
@@ -341,7 +369,7 @@ def crosstime_analysis(predictor, target, cv, rank, scaling_factor=10, ProgressB
                                                   step_size=preprocess["step-size"]).squeeze()
             
             # Calculate the RRRR
-            model = RRRR(predictor.T, target.T, rank=rank, cv=cv, success_log=False)
+            model = RRRR(predictor.T, target.T, rank=rank, cv=cv, success_log=False, warn=False)
             
             # Save results
             results[x, y] = model['test_score'].mean()

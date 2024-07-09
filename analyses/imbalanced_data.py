@@ -26,7 +26,7 @@ def evaluate_fold(model, X_train, X_test, y_train, y_test, sample_size, replace)
 
     return r2, mse, model
 
-def undersampled_cross_validation(estimator, X, y, sample_size, k_folds=5, replace=False, log=False, n_jobs=-1) -> dict:
+def undersampled_cross_validation(estimator, X, y, sample_size, k_folds=5, replace=False, log=False, n_jobs=-1, warn=True) -> dict:
     """
     Perform undersampled cross-validation on the given dataset using the specified model, in parallel.
 
@@ -39,12 +39,24 @@ def undersampled_cross_validation(estimator, X, y, sample_size, k_folds=5, repla
     - replace (bool): Whether to allow replacement when undersampling. Default is False.
     - log (bool): Whether to log the overall performance metrics. Default is False.
     - n_jobs (int): The number of CPUs to use to do the computation. -1 means using all processors.
+    - warn (bool): Whether to log a warning if sample_size is greater than the number of samples. Default is True.
 
     Returns:
     dict: A dictionary containing the test scores, F1 scores, and the trained model.
     """
 
     kf = KFold(n_splits=k_folds, shuffle=True)
+    
+    # If sample_size is greater than the number of samples, then log a warning and return aret dictionary filled with corresponding number of values.
+    y_length = y.shape[1] if y.ndim > 1 else len(y)
+    if sample_size > y_length:
+        if warn:
+            print(f"Waring: sample_size ({sample_size}) is greater than the number of samples ({y_length}). Returning empty results.")
+        return {
+            'test_score': np.array([np.nan] * k_folds),
+            'mse_score': np.array([np.nan] * k_folds),
+            'estimator': [None] * k_folds
+        }
 
     # Parallelize the cross-validation using joblib
     results = Parallel(n_jobs=n_jobs)(delayed(evaluate_fold)(

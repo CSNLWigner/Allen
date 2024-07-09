@@ -21,6 +21,7 @@ stages:
       - data/units/
     params:
       - load
+      - rrr
       - crosstime
     outs:
       - results/layer-interaction_V1-to-LM.pickle

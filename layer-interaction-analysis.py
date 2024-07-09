@@ -9,6 +9,7 @@ from utils.debug import ic
 from utils.utils import manager
 
 # Import params
+# rrr loaded in analyses.rrr as params (as it is only used there)
 load = yaml.safe_load(open("params.yaml"))["load"]
 crosstime = yaml.safe_load(open("params.yaml"))["crosstime"]
 
