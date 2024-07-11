@@ -48,12 +48,16 @@ for originArea, targetArea in zip([V1_data, LM_data], [LM_data, V1_data]):
             # Print Progress Bar
             # printProgressBar(iterationProgress, layer_combinations, prefix=f'l{output} -> l{input}', length=50)
             
+            # Test the undersampling lower boundary of layer 5
+            # dataBalancing = 'undersampled' if output == 5 or input == 5 else 'none'
+            # print('output:', output, 'input:', input, 'dataBalancing:', dataBalancing)
+            
             V1 = originArea['activity'][originArea['layer-assignments'].isin([output]), :, :]
             LM = targetArea['activity'][targetArea['layer-assignments'].isin([input]), :, :]
             direction_params = session_params[session_params['direction'] == 'bottom-up']
             cv = direction_params['cv'].values[0]
             rank = direction_params['rank'].values[0]
-            result = crosstime_analysis(V1, LM, cv, rank, scaling_factor=crosstime['scaling-factor'])
+            result = crosstime_analysis(V1, LM, cv, rank, scaling_factor=crosstime['scaling-factor']) # dataBalancing=dataBalancing # in case of layer-specific undersampling
             
             # Save the results
             results[output][input] = result

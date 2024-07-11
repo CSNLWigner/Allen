@@ -48,10 +48,10 @@ def undersampled_cross_validation(estimator, X, y, sample_size, k_folds=5, repla
     kf = KFold(n_splits=k_folds, shuffle=True)
     
     # If sample_size is greater than the number of samples, then log a warning and return aret dictionary filled with corresponding number of values.
-    y_length = y.shape[1] if y.ndim > 1 else len(y)
-    if sample_size > y_length:
+    n_features = X.shape[1]
+    if sample_size > n_features:
         if warn:
-            print(f"Waring: sample_size ({sample_size}) is greater than the number of samples ({y_length}). Returning empty results.")
+            print(f"Waring: sample_size ({sample_size}) is greater than the number of samples ({n_features}). Returning empty results.")
         return {
             'test_score': np.array([np.nan] * k_folds),
             'mse_score': np.array([np.nan] * k_folds),

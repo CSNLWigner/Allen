@@ -47,13 +47,14 @@ def getCoeffs(model, log=False):
     # Append the mean coefficients to the results
     return mean_coefficients.T
 
-def RRRR(X_data, Y_data, rank=None, cv=None, log=False, success_log=True, warn=True) -> dict:
+def RRRR(X_data, Y_data, dataBalancing='none', rank=None, cv=None, log=False, success_log=True, warn=True) -> dict:
     """
     Make Reduced Rank Regression (RRR) analysis.
 
     Args:
         X_data (np.ndarray): The data of the first brain area. Shape (n_samples, n_features_X)
         Y_data (np.ndarray): The data of the second brain area. Shape (n_samples, n_features_Y)
+        type (str, optional): The type of the RRR analysis. Either 'none' or 'undersampled'. Defaults to 'none'.
         log (bool, optional): Whether to log the progress. Defaults to True.
         rank (int, optional): The rank of the RRR model. Defaults to None.
         cv (int, optional): The number of cross-validation folds. Defaults to None.
@@ -78,10 +79,18 @@ def RRRR(X_data, Y_data, rank=None, cv=None, log=False, success_log=True, warn=T
     sample_size = params['sample-size']
     
     # Perform cross-validation
-    results = undersampled_cross_validation(model, X_data, Y_data, sample_size, k_folds=cv, warn=warn)
+    if dataBalancing == 'none':
+        results = cross_validate(model, X_data, Y_data, cv=cv, scoring='r2', return_estimator=True)
+    elif dataBalancing == 'undersampled':
+        results = undersampled_cross_validation(model, X_data, Y_data, sample_size, k_folds=cv, warn=warn)
+    else:
+        raise ValueError('Invalid type. Use either "normal" or "undersampled".')
+    
+    # Log the cross-validation scores
     if log:
         print('Cross-validation scores:', results['test_score'])
     
+    # Get the coefficients
     results['mean_coefficients'] = getCoeffs(results['estimator'], log=log)
     
     # If mean of the scores is not negative, then print the cv, rank and the mean of the scores
@@ -316,7 +325,7 @@ def cross_time_rrr_coeffs(V1_activity, V2_activity, cv=None, rank=None) -> np.nd
         axis=0), cv=cv, rank=rank, log=True)
 
 
-def crosstime_analysis(predictor, target, cv, rank, scaling_factor=10, ProgressBar=True):
+def crosstime_analysis(predictor, target, cv, rank, scaling_factor=10, dataBalancing='normal', ProgressBar=True):
     """
     Perform cross-time analysis based on timpoints of rrr-param-search lag.
     
@@ -350,6 +359,10 @@ def crosstime_analysis(predictor, target, cv, rank, scaling_factor=10, ProgressB
         print(f"Waring: sample_size ({params['sample-size']}) is greater than the number of samples ({y_length}). Returning empty results.")
         return results
     
+    # In case of undersampling lower boundary of layer 5 -> do not calculate the other layers
+    # if dataBalancing == 'none': # TODO: wipe this out
+    #     return results
+    
     # Print progressbar
     progress_bar_id = 'crosstime analysis'
     if type(ProgressBar) == str:
@@ -369,7 +382,7 @@ def crosstime_analysis(predictor, target, cv, rank, scaling_factor=10, ProgressB
                                                   step_size=preprocess["step-size"]).squeeze()
             
             # Calculate the RRRR
-            model = RRRR(predictor.T, target.T, rank=rank, cv=cv, success_log=False, warn=False)
+            model = RRRR(predictor.T, target.T, dataBalancing=dataBalancing, rank=rank, cv=cv, success_log=False, warn=False)
             
             # Save results
             results[x, y] = model['test_score'].mean()
