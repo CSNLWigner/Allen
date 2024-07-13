@@ -112,11 +112,17 @@ def RRRR(X_data, Y_data, dataBalancing='none', rank=None, cv=None, log=False, su
     
     return results
 
-def RFECV(X_data, Y_data, rank=None):
+def RFE_CV(X_data, Y_data, rank=None, cv=None):
+
+    # Set default values
+    if rank is None:
+        rank = params['rank']
+    if cv is None:
+        cv = params['cv']
 
     min_features_to_select = 1  # Minimum number of features to consider
     clf = ReducedRankRidgeRegression(rank=rank)
-    cv = StratifiedKFold(5)
+    cv = StratifiedKFold(cv)
 
     rfecv = RFECV(
         estimator=clf,
@@ -412,10 +418,10 @@ def crosstime_analysis(predictor, target, cv, rank, scaling_factor=10, dataBalan
                                                   step_size=preprocess["step-size"]).squeeze()
             
             # Calculate the RRRR
-            model = RRRR(predictor.T, target.T, dataBalancing=dataBalancing, rank=rank, cv=cv, success_log=False, warn=False)
+            res = RFE_CV(predictor.T, target.T, rank=rank, cv=cv)
             
             # Save results
-            results[x, y] = model['adjusted_r2'].mean()
+            results[x, y] = res
             
         # Print progressbar
         if ProgressBar: manager.progress_bar(progress_bar_id, x+1, len(xseries))
