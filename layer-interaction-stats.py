@@ -3,19 +3,42 @@ import numpy as np
 import pandas as pd
 import yaml
 from matplotlib import pyplot as plt
-from scipy import stats
 
 from utils.megaplot import megaplot
 
 scaler = yaml.safe_load(open("params.yaml"))["crosstime"]['scaling-factor']
 
 # Load the data
-df = pd.read_csv('results/maxValues.csv')
+filenames = {
+    '1': 'results/maxValues.csv',
+    '2': 'results/maxValues-notUnderSampling.csv',
+    '3': 'results/maxValues-firstUnderSampling.csv',
+    '4': 'results/maxValues-adjR2.csv'
+}
+filename = filenames[input(filenames)]
+print('Loading', filename)
+df = pd.read_csv(filename)
+# i = input('Enter the end of file name: ')
+# i = '-' + i if i != '' else ''
+# df = pd.read_csv(f'results/maxValues{i}.csv')
 df = df.set_index(['session', 'direction', 'slice', 'output layer', 'input layer'])
 
-# Slice the data
-df_first = df[df.index.get_level_values('slice') == 'first']
-df_second = df[df.index.get_level_values('slice') == 'second']
+# Get rid of the session 1087720624
+df = df.drop([1087720624], level='session')
+
+# Create a dictionary of rows, with one entry for each slice
+rows = {}
+rows['first'] = df[df.index.get_level_values('slice') == 'first']
+rows['second'] = df[df.index.get_level_values('slice') == 'second']
+
+# Add directional data to the rows dictionary
+for rowName, rowData in rows.items():
+    TD = rowData[rowData.index.get_level_values('direction') == 'LM-to-V1']
+    BU = rowData[rowData.index.get_level_values('direction') == 'V1-to-LM']
+    rows[rowName] = {
+        'top-down': TD,
+        'bottom-up': BU
+    }
 
 # print('shape:', df_first.shape)
 
@@ -40,12 +63,21 @@ def plot_indices(df: pd.DataFrame, ax: plt.Axes) -> plt.Axes:
     
     # Create an empty 2D numpy array for the scaled dimensions
     table = np.empty((x_max - x_min + 1, y_max - y_min + 1))
+    table.fill(0)  # Initialize the table with zeros
     
     # Iterate through the rows of df and increase the corresponding scaled x and y values in the table
     for index, row in df.iterrows():
+        if pd.isna(row['x']) or pd.isna(row['y']):
+            continue  # Skip rows where 'x' or 'y' is NaN
         scaled_x = int(row['x'] / scaler) - x_min
         scaled_y = int(row['y'] / scaler) - y_min
-        table[scaled_x, scaled_y] += 1
+        if row['x'] != 100 and row['y'] != 100:
+            table[scaled_x, scaled_y] += 1
+        else:
+            print(f"Skipping row with x={row['x']} and y={row['y']}")
+    
+    # Flip the table along the x-axis to match the orientation of the plot
+    table = table[::-1, :]
     
     # Use imshow with adjusted extent to reflect the original x and y range, scaled for visualization
     im = ax.imshow(table, extent=[x_min * scaler, (x_max + 1) * scaler, y_min * scaler, (y_max + 1) * scaler], aspect='auto')
@@ -56,22 +88,43 @@ def plot_values(df: pd.DataFrame, ax: plt.Axes, name) -> plt.Axes:
     df_sem = df.groupby(name).sem()
     df_mean = df_mean.drop(columns=['x', 'y', 'output layer units', 'input layer units'])
     im = df_mean.plot(kind='bar', yerr=df_sem, ax=ax)
+    max_val = df_mean['max value'].max() + df_sem['max value'].max()
+    ax.set_ylim(-0.01, max_val)
+    # add a horizontal bar to the 0
+    ax.axhline(0, color='black', linewidth=0.5)
     return im
 
 
 # Create the plot
-plot = megaplot(ncols=3, nrows=2)
-plot.row_names = ['First slice', 'Second slice']
-
-# TODO: bottom-up and top-down separately.
+plot = megaplot(nrows=4, ncols=3)
+plot.row_names = ['First slice top-down', 'First slice bottom-up', 'Second slice top-down', 'Second slice bottom-up']
+plot.col_names = ['Indices', 'Output layer', 'Input layer']
 
 # Plot the data
-plot_indices(df_first, plot[0, 0])
-plot_values(df_first, plot[0, 1], 'output layer')
-plot_values(df_first, plot[0, 2], 'input layer')
-plot_indices(df_second, plot[1, 0])
-plot_values(df_second, plot[1, 1], 'output layer')
-plot_values(df_second, plot[1, 2], 'input layer')
+for i, rowName in enumerate(['first', 'second']):
+    rowNumber = i*2
+    rowNumber_TD = rowNumber
+    rowNumber_BU = rowNumber + 1
+    
+    for direction, row in zip(['top-down', 'bottom-up'], [rowNumber_TD, rowNumber_BU]):
+    
+        # Plot the indices
+        ax = plot[row, 0]
+        im = plot_indices(rows[rowName][direction], ax)
+        ax.set_xlabel('time target area')
+        ax.set_ylabel('time source area')
+
+        # Plot the values
+        ax = plot[row, 1]
+        im = plot_values(rows[rowName][direction], ax, 'output layer')
+        ax.set_xlabel('Output layer')
+        ax.set_ylabel('RRR')
+        
+        # Plot the values
+        ax = plot[row, 2]
+        im = plot_values(rows[rowName][direction], ax, 'input layer')
+        ax.set_xlabel('Input layer')
+        ax.set_ylabel('RRR')
 
 # Show the plot
 plot.show()
