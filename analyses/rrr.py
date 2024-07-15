@@ -5,15 +5,14 @@ import pandas as pd
 import yaml
 from allensdk.brain_observatory.ecephys.behavior_ecephys_session import \
     BehaviorEcephysSession
-from sklearn.feature_selection import RFECV
-from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import StratifiedKFold, cross_validate
+from sklearn.model_selection import cross_validate
 
 from analyses.data_preprocessing import preprocess_area_responses
 from analyses.imbalanced_data import undersampled_cross_validation
-from analyses.machine_learning_models import ReducedRankRidgeRegression
+from analyses.machine_learning_models import (ReducedRankRidgeRegression,
+                                              custom_feature_selection)
 from utils.data_io import load_pickle
-from utils.utils import MSE, manager
+from utils.utils import manager
 
 preprocess = yaml.safe_load(open('params.yaml'))['preprocess']
 params = yaml.safe_load(open('params.yaml'))['rrr']
@@ -119,24 +118,11 @@ def RFE_CV(X_data, Y_data, rank=None, cv=None):
         rank = params['rank']
     if cv is None:
         cv = params['cv']
-
-    min_features_to_select = 1  # Minimum number of features to consider
-    clf = ReducedRankRidgeRegression(rank=rank)
-    cv = StratifiedKFold(cv)
-
-    rfecv = RFECV(
-        estimator=clf,
-        step=1,
-        cv=cv,
-        scoring="accuracy",
-        min_features_to_select=min_features_to_select,
-        n_jobs=2,
-    )
-    rfecv.fit(X_data, Y_data)
-
-    print(f"Optimal number of features: {rfecv.n_features_}")
     
-    return rfecv.n_features_
+    # Make RFE model
+    optimal_features = custom_feature_selection(X_data, Y_data, rank, n_splits=cv)
+    
+    return optimal_features
 
 def compare_two_areas(area_X_responses:np.ndarray, area_Y_responses:np.ndarray, log=False) -> dict:
     """

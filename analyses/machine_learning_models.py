@@ -7,13 +7,13 @@ dchrisrayner AT gmail DOT com
 
 Optimal linear 'bottlenecking' or 'multitask learning'.
 """
-from matplotlib import pyplot as plt
+from sklearn.model_selection import KFold
+from sklearn.metrics import r2_score
+import numpy as np
 import sklearn.datasets
 import sklearn.linear_model
-import numpy as np
+from matplotlib import pyplot as plt
 from scipy import sparse
-
-
 
 
 class ReducedRankRegressor(object):
@@ -175,33 +175,75 @@ class ReducedRankRidgeRegression(sklearn.base.MultiOutputMixin, sklearn.base.Reg
         """
         return np.dot(X, self.coef_.T)
 
+    def feature_importances_(self):
+        # Return the absolute values of the coefficients as the importance scores
+        return np.abs(self.coef_)
 
-"""
-# from analyses.machine_learning_models import ReducedRankRidge, ReducedRankRegressor
+    def rfe(self, X, y, n_features_to_select):
+        # Initialize the full set of features
+        features = list(range(X.shape[1]))
+        while len(features) > n_features_to_select:
+            # Fit the model
+            self.fit(X[:, features], y)
+            # Get feature importances
+            importances = self.feature_importances_()
+            # Find the least important feature and remove it
+            least_important = np.argmin(importances)
+            features.pop(least_important)
+        # Finally, fit the model with the selected features
+        self.fit(X[:, features], y)
+        # Store the selected features for prediction use
+        self.selected_features_ = features
 
-X, Y = sklearn.datasets.make_regression(
-    n_samples=500, n_features=100, n_targets=30, random_state=1, n_informative=10)
-print(Y[0])
+    def predict_with_rfe(self, X):
+        # Ensure prediction is done using only the selected features
+        if hasattr(self, 'selected_features_'):
+            return self.predict(X[:, self.selected_features_])
+        else:
+            raise ValueError("Model has not been fitted using RFE.")
 
-estimator = ReducedRankRidgeRegression(rank=10)
-estimator.fit(X, Y)
-Y_hat_1 = estimator.predict(X)
-print('\nY_hat_1')
-print(Y_hat_1[0])
 
-model = ReducedRankRegressor(X, Y, rank=10)
-Y_hat_2 = model.predict(X)
-print('\nY_hat_2')
-print(Y_hat_2[0])
+def custom_feature_selection(X_data, Y_data, rank, n_splits=5):
+    """
+    Custom feature selection for multioutput regression using ReducedRankRidgeRegression.
 
-plt.plot(Y[0])
-plt.plot(Y_hat_1[0])
-plt.plot(Y_hat_2[0])
-plt.show()
+    Args:
+        X_data (np.ndarray): The input features.
+        Y_data (np.ndarray): The target outputs.
+        rank (int): The rank for the ReducedRankRidgeRegression model.
+        n_splits (int): Number of folds for cross-validation.
 
-Y_hat = estimator.predict(X)
-score = estimator.score(X, Y) # 0.9149982934373226
-print(score)
-score = estimator.score(X, Y_hat) # 1.0
-print(score)
-"""
+    Returns:
+        int: The optimal number of features.
+    """
+    n_features = X_data.shape[1]
+    scores = np.zeros(n_features)
+    kf = KFold(n_splits=n_splits)
+
+    for i in range(n_features):
+        current_scores = []
+        for train_index, test_index in kf.split(X_data):
+            X_train, X_test = X_data[train_index], X_data[test_index]
+            Y_train, Y_test = Y_data[train_index], Y_data[test_index]
+
+            # Use only a subset of features
+            X_train_subset = X_train[:, :i+1]
+            X_test_subset = X_test[:, :i+1]
+
+            model = ReducedRankRidgeRegression(rank=rank)
+            model.fit(X_train_subset, Y_train)
+            Y_pred = model.predict(X_test_subset)
+
+            # Evaluate the model
+            score = r2_score(Y_test, Y_pred, multioutput='uniform_average')
+            current_scores.append(score)
+
+        # Store the average score for the current number of features
+        scores[i] = np.mean(current_scores)
+
+    # Find the number of features with the best average score
+    # Adding 1 because index 0 means 1 feature
+    optimal_features = np.argmax(scores) + 1
+
+    print(f"Optimal number of features: {optimal_features}")
+    return optimal_features
