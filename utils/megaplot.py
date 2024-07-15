@@ -173,6 +173,11 @@ class megaplot():
 
     def __getitem__(self, items) -> Axes:
         
+        # Check if the values are lesser then self.nrows and self.ncols
+        if abs(items[0]) >= self.nrows: raise ValueError(f'The first index ({items[0]}) is not smaller than nrows {self.nrows}')
+        if abs(items[1]) >= self.ncols: raise ValueError(f'The second index ({items[1]}) is not smaller than ncols {self.ncols}')
+            
+        
         items = self.getCoordinates(items) # Transform items to concrete bounds
                 
         if items in self.geometry:
@@ -303,16 +308,18 @@ class megaplot():
         Reverse the changes made by the final() method.
         """
         # Reset rows
-        for cnt, name in enumerate(self.row_names):
-            if name != None and self.table[cnt,0] > 0:
-                ax = self.fig.axes[self.table[cnt, 0]-1]
-                ax.set_ylabel(self.ytitles.pop(0))
+        if self.ytitles:
+            for cnt, name in enumerate(self.row_names):
+                if name != None and self.table[cnt,0] > 0:
+                    ax = self.fig.axes[self.table[cnt, 0]-1]
+                    ax.set_ylabel(self.ytitles.pop(0))
         
         # Reset columns
-        for cnt, name in enumerate(self.row_names):
-            if name != None and self.table[cnt, 0] > 0:
-                ax = self.fig.axes[self.table[0, cnt]-1]
-                ax.set_title(self.xtitles.pop(0))
+        if self.xtitles:
+            for cnt, name in enumerate(self.col_names):
+                if name != None and self.table[cnt, 0] > 0:
+                    ax = self.fig.axes[self.table[0, cnt]-1]
+                    ax.set_title(self.xtitles.pop(0))
         
         # Reset fig attributes
         self.fig.suptitle('')
