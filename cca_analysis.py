@@ -3,12 +3,12 @@
 
 # from analyses.cca import compare_VISp_VISpm_with_CCA, cca_plot
 from analyses import cca
-from utils.download_allen import cache_allen
 from utils.data_io import save_dict_items
+from utils.download_allen import cacheData
 
 # An arbitrary session from the Allen Neuropixel dataset
 session_id = 1064644573  # 1052533639
-cache = cache_allen()
+cache = cacheData()
 session = cache.get_ecephys_session(ecephys_session_id=session_id)
 
 # Compare VISp and VISpm areas with CCA

@@ -5,7 +5,7 @@ import time
 import pandas as pd
 import yaml
 
-from utils.allen_cache import cache_allen
+from utils.allen_cache import cacheData
 from utils.ccf_volumes import cortical_layer_assignment
 from utils.data_io import save_pickle
 from utils.debug import ic
@@ -16,7 +16,7 @@ params = yaml.safe_load(open('params.yaml'))['load']
 
 # An arbitrary session from the Allen Neuropixel dataset
 session_id = params['session']  # 1064644573  # 1052533639
-cache = cache_allen()
+cache = cacheData()
 
 # Create the tables object
 tables = AllenTables(cache, session_id)

@@ -2,15 +2,25 @@ import yaml
 
 from analyses.data_preprocessing import get_area_responses
 from utils.data_io import save_pickle
-from utils.download_allen import cache_allen
+from utils.download_allen import cacheData
 
 # Load parameters
 params = yaml.safe_load(open('params.yaml'))['load']
 
 # An arbitrary session from the Allen Neuropixel dataset
 session_id = params['session'] # 1064644573  # 1052533639
-cache = cache_allen()
-session = cache.get_ecephys_session(ecephys_session_id=session_id)
+cache = cacheData()
+try:
+    # session = cache.get_ecephys_session(ecephys_session_id=session_id)
+    session = cache.get_session_data(
+              cache.get_session_table().index.values[session_id])
+except Exception as e:
+    # print("Session not found. Check the session ID. Here are the available sessions:")
+    # sessions = cache.get_session_table()
+    # print(sessions.index.values)
+    n_sessions = len(cache.get_session_table())
+    print(f"Session not found. Check the session ID. There are {n_sessions} available sessions.")
+    raise e
 
 # Get one block type trials of the session
 all_trials = session.stimulus_presentations

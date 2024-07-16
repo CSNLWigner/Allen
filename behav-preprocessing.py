@@ -1,14 +1,15 @@
-from analyses.data_preprocessing import transform_behav_data
-from utils.download_allen import cache_allen
-from utils.data_io import save_pickle
 import yaml
+
+from analyses.data_preprocessing import transform_behav_data
+from utils.data_io import save_pickle
+from utils.download_allen import cacheData
 
 # Load parameters
 preprocess = yaml.safe_load(open('params.yaml'))['preprocess']
 
 # An arbitrary session from the Allen Neuropixel dataset
 session_id = 1064644573  # 1052533639
-cache = cache_allen()
+cache = cacheData()
 session = cache.get_ecephys_session(ecephys_session_id=session_id)
 
 params = {

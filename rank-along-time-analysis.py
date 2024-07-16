@@ -1,10 +1,14 @@
-from analyses.rrr import RRRR
 import numpy as np
-from analyses.data_preprocessing import calculate_residual_activity, recalculate_neural_activity, z_score_normalize
-from analyses.data_preprocessing import get_area_responses, preprocess_area_responses
-from utils.download_allen import cache_allen
-from utils.data_io import load_pickle, save_pickle
 import yaml
+
+from analyses.data_preprocessing import (calculate_residual_activity,
+                                         get_area_responses,
+                                         preprocess_area_responses,
+                                         recalculate_neural_activity,
+                                         z_score_normalize)
+from analyses.rrr import RRRR
+from utils.data_io import load_pickle, save_pickle
+from utils.download_allen import cacheData
 
 # Load parameters
 load = yaml.safe_load(open('params.yaml'))['load']
