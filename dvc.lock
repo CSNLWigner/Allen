@@ -186,18 +186,18 @@ stages:
     params:
       params.yaml:
         load:
-          session: 1108334384
+          session: 0
           areas:
           - VISp
           - VISl
-          stimulus-block: 5
+          stimulus-block: natural_scenes
           step-size: 0.001
           stimulus-duration: 0.25
     outs:
     - path: data/raw-area-responses/
       hash: md5
-      md5: 348a206c3f90eccd79e5d0dc64cd2bbd.dir
-      size: 2575480328
+      md5: 7ab2ba1f341828f2187ee0f729b55fcf.dir
+      size: 1154300328
       nfiles: 2
   dimensionality-reduction:
     cmd: python3 -u cv-lag-time-selection.py
