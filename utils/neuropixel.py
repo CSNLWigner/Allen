@@ -16,7 +16,7 @@ from utils.utils import mergeDataframes, printProgressBar
 #                     force_download=params['force-download'])
 
 # # get the metadata tables
-# units_table = cache.get_unit_table()
+# units_table = cache.get_units()
 
 # channels_table = cache.get_channel_table()
 
@@ -154,7 +154,7 @@ class AllenTables():
         self.session['ecephys_session_id'] = session_id
         self.behavior = cache.get_behavior_session_table()[cache.get_behavior_session_table()['ecephys_session_id'] == session_id]
         self.probes = cache.get_probe_table()[cache.get_probe_table()['ecephys_session_id'] == session_id]
-        self.units = cache.get_unit_table()[cache.get_unit_table()['ecephys_session_id'] == session_id]
+        self.units = cache.get_units()
         self.channels = cache.get_channel_table()[cache.get_channel_table()['ecephys_session_id'] == session_id]
         
         # Make the tables and columns utilities
@@ -213,7 +213,7 @@ def get_unit_channels(session, log_all_areas=False) -> pd.DataFrame:
     unit_channels = units.merge(channels, left_on='peak_channel_id', right_index=True)
 
     "which brain structures were recorded during this session"
-    brain_areas_recorded = unit_channels.value_counts('structure_acronym')
+    brain_areas_recorded = unit_channels.value_counts('ecephys_structure_acronym')
     
     if log_all_areas:
         print(brain_areas_recorded, '\n', brain_areas_recorded)
@@ -319,9 +319,9 @@ def get_area_units(units: pd.DataFrame, area_of_interest) -> pd.DataFrame:
     
     # get the units in the area of interest
     if type(area_of_interest) == str:
-        area_units = good_units[good_units['structure_acronym'] == area_of_interest]
+        area_units = good_units[good_units['ecephys_structure_acronym'] == area_of_interest]
     elif type(area_of_interest) == list:
-        area_units = good_units[good_units['structure_acronym'].isin(area_of_interest)]
+        area_units = good_units[good_units['ecephys_structure_acronym'].isin(area_of_interest)]
     else:
         raise ValueError('area_of_interest must be a string or a list of strings')
     
@@ -507,26 +507,29 @@ def get_average_unit_responses(units, spike_times, trial_start, duration=0.03, b
     return np.array(response)
 
 
-def get_unit_responses(units, spike_times, trial_start, duration=0.250, stepSize=0.010, binSize=0.050, progressbar=True):
+def get_unit_responses(units, spike_times, trial_start, trial_end, stepSize=0.010, binSize=0.050, progressbar=True):
     """
-    Calculate the unit responses for each unit in the given units DataFrame.
+    Calculate the unit responses for each trial and time bin.
 
     Parameters:
-    units (DataFrame): DataFrame containing information about the units.
-    spike_times (list): List of spike times for each unit.
-    trial_start (float): Start time of the trial.
-    duration (float): Total duration of trial for PSTH in seconds. Default is 0.03.
-    binSize (float): Bin size for PSTH in seconds. Default is 0.001.
+    units (DataFrame): A DataFrame containing unit data.
+    spike_times (dict): A dictionary mapping unit IDs to their corresponding spike times.
+    trial_start (array-like): An array-like object containing the start times of each trial.
+    trial_end (array-like): An array-like object containing the end times of each trial.
+    stepSize (float, optional): The size of the time step. Defaults to 0.010.
+    binSize (float, optional): The size of the time bin. Defaults to 0.050.
+    progressbar (bool, optional): Whether to display a progress bar. Defaults to True.
 
     Returns:
-    numpy.ndarray: Array containing the unit responses, shape (feature, sample, time)
+    tensor (ndarray): A 3-dimensional numpy array containing the unit responses for each trial and time bin.
     """
     
     # def convert_to_tensor(spike_times, binSize, duration):
     n_unit = len(units)
     n_trial = len(trial_start)
-    n_step = int(duration / stepSize)
-    n_bin = int(duration / binSize)
+    trial_length = np.mean(trial_end - trial_start)
+    n_step = int(trial_length / stepSize)
+    n_bin = int(trial_length / binSize)
 
     # Initialize tensor
     tensor = np.zeros((n_unit, n_trial, n_step))
@@ -541,8 +544,8 @@ def get_unit_responses(units, spike_times, trial_start, duration=0.250, stepSize
         unit_spike_times = spike_times[unit_ID]
         
         # Loop through trials and time
-        for j, start in enumerate(trial_start):  # Trials
-            for k, time in enumerate(np.arange(start, start + duration, stepSize)): # Time
+        for j, (start, end) in enumerate(zip(trial_start, trial_end)):  # Trials
+            for k, time in enumerate(np.arange(start, end, stepSize)): # Time
                 
                 # Check if k is out of range
                 if k == n_bin: # This can happen because of different floating point rounding in int() and np.arange() functions i guess.

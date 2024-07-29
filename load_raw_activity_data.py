@@ -22,18 +22,20 @@ except Exception as e:
     print(f"Session not found. Check the session ID. There are {n_sessions} available sessions.")
     raise e
 
-# Get one block type trials of the session
-all_trials = session.stimulus_presentations
-stimulus_block = params['stimulus-block']
-one_block_type_trials = all_trials[all_trials['stimulus_block'] == stimulus_block]
-
 # Get the units
-units = cache.get_unit_table()[cache.get_unit_table()['ecephys_session_id'] == session_id]
+units = session.units
+
+# print('\n'.join([attr_or_method for attr_or_method in dir(
+#     units) if attr_or_method[0] != '_']))
+
+# print(session.stimulus_presentations.stimulus_name.unique())
+
+stim_table = session.stimulus_presentations[session.stimulus_presentations.stimulus_name == params['stimulus-block']]
 
 for area in params['areas']:
     
     # Get the responses for the area
-    full_activity = get_area_responses(session, area, one_block_type_trials, units, log=False)
+    full_activity = get_area_responses(session, area, stim_table, units, log=False)
 
     print(full_activity.shape)
 
@@ -43,7 +45,7 @@ for area in params['areas']:
                 path='data/raw-area-responses')
 
 # Get the image names
-image_names = one_block_type_trials['image_name']
+image_names = stim_table['image_name']
         
 # Save the stimulus names
 save_pickle(image_names, f'{params["stimulus-block"]}_block_image-names', path='data/stimulus-presentations')

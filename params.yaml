@@ -10,14 +10,9 @@ neuropixel:
 load:
   session: 0
   areas: ["VISp", "VISl"] # "VISpm" # "VISm" has no spikes
-  stimulus-block: 5
-  # Stimulus blocks:
-  # 0: change detection task
-  # 2: receptive field mapping by gabor stimuli
-  # 4: full-flash
-  # 5: passive replay
+  stimulus-block: 'natural_scenes'
   step-size: 0.001 # in seconds
-  stimulus-duration: 0.250 # in seconds
+  stimulus-duration: .25 # in seconds
 
 preprocess:
   areas: ["VISp", "VISl"] # "VISpm" # "VISm" has no spikes
@@ -25,7 +20,7 @@ preprocess:
   lag-area: ""
   step-size: 0.050 # time-step in seconds # 0.010
   bin-size: 0.050 # time-window in seconds # Joao's default: 0.100
-  stimulus-duration: 0.250 # in seconds
+  stimulus-duration: None # in seconds
 
 cca:
   cv: 5

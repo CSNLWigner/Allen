@@ -1,11 +1,13 @@
-from allensdk.brain_observatory.ecephys.behavior_ecephys_session import BehaviorEcephysSession
 import numpy as np
 import pandas as pd
 import yaml
-
-from utils.neuropixel import get_area_units, get_unit_responses, stimulus_duration
-from utils.utils import printProgressBar
+from allensdk.brain_observatory.ecephys.behavior_ecephys_session import \
+    BehaviorEcephysSession
 from scipy.signal import convolve
+
+from utils.neuropixel import (get_area_units, get_unit_responses,
+                              stimulus_duration)
+from utils.utils import printProgressBar
 
 # Load the parameters
 load = yaml.safe_load(open('params.yaml'))['load']
@@ -105,6 +107,7 @@ def get_area_responses(session: BehaviorEcephysSession, area: str, trials:pd.Dat
 
     # Get the time of the start of each trial
     trial_start = trials['start_time'].values
+    trial_end = trials['stop_time'].values
     
     # Average difference between trial start times and the duration of the stimulus
     if log:
@@ -113,7 +116,7 @@ def get_area_responses(session: BehaviorEcephysSession, area: str, trials:pd.Dat
               average_difference)
 
     area_responses = get_unit_responses(
-        area_units, session.spike_times, trial_start, duration=duration, stepSize=stepSize, binSize=binSize)  # shape (units, trials, time)
+        area_units, session.spike_times, trial_start, trial_end, stepSize=stepSize, binSize=binSize)  # shape (units, trials, time)
     if log:
         print('area_responses.shape', area_responses.shape)  # shape (units, trials, time)
 
