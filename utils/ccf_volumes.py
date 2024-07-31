@@ -158,8 +158,9 @@ def cortical_layer_assignment(channels, units) -> pd.DataFrame:
     channels = layer_assignment_to_channels(channels)  # session.get_channels()
             
     # Get the channel ids for the units whom session is the same as the input session
-    unit_channel_ids = units.ecephys_channel_id
-    # unit_channel_ids = get_unit_channels(session).ecephys_channel_id
+    unit_channel_ids = units.peak_channel_id
+    # print('units.probe_channel_number: ', units.probe_channel_number)
+    # print('units.peak_channel_id: ', units.peak_channel_id)
     
     # Filter channel_ids to only those that are in the channels index
     filtered_channel_ids = unit_channel_ids[unit_channel_ids.isin(channels.index)]
@@ -171,6 +172,6 @@ def cortical_layer_assignment(channels, units) -> pd.DataFrame:
     units['layer'] = np.nan
 
     # Update only the filtered units
-    units.loc[units['ecephys_channel_id'].isin(filtered_channel_ids), 'layer'] = layer_assignments
+    units.loc[units['peak_channel_id'].isin(filtered_channel_ids), 'layer'] = layer_assignments
 
     return units

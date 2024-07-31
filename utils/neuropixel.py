@@ -86,7 +86,7 @@ class AllenTables():
         """
         self.tables = {
             'session': self.session,
-            'behavior': self.behavior,
+            # 'behavior': self.behavior,
             'probes': self.probes,
             'units': self.units,
             'channels': self.channels
@@ -149,13 +149,15 @@ class AllenTables():
         self.cache = cache
         self.session_id = session_id
         
+        session = cache.get_session_data(cache.get_session_table().index.values[session_id])
+        
         # get the metadata tables
-        self.session = pd.DataFrame(cache.get_ecephys_session_table().loc[[session_id]])
+        self.session = pd.DataFrame(cache.get_session_table().iloc[session_id])
         self.session['ecephys_session_id'] = session_id
-        self.behavior = cache.get_behavior_session_table()[cache.get_behavior_session_table()['ecephys_session_id'] == session_id]
-        self.probes = cache.get_probe_table()[cache.get_probe_table()['ecephys_session_id'] == session_id]
-        self.units = cache.get_units()
-        self.channels = cache.get_channel_table()[cache.get_channel_table()['ecephys_session_id'] == session_id]
+        # self.behavior = cache.get_behavior_session_table()[cache.get_behavior_session_table()['ecephys_session_id'] == session_id]
+        self.probes = session.probes
+        self.units = session.units
+        self.channels = session.channels
         
         # Make the tables and columns utilities
         self.make_tables()
