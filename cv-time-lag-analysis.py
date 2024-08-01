@@ -5,7 +5,7 @@ import yaml
 from analyses.data_preprocessing import (get_area_responses,
                                          preprocess_area_responses)
 from utils.data_io import load_pickle, save_pickle
-from utils.debug import ic, debug, hasharr
+from utils.debug import debug, hasharr, ic
 
 # Get the arguments
 opts = [opt for opt in sys.argv[1:] if opt.startswith("-")]
@@ -25,7 +25,7 @@ full_activity_predictor = load_pickle(f'{load["stimulus-block"]}_block_{rrr_para
 full_activity_target    = load_pickle(f'{load["stimulus-block"]}_block_{rrr_params["target"]}-activity', path='data/raw-area-responses')
 
 # Get the image names
-image_names = load_pickle(f'{load["stimulus-block"]}_block_image-names', path='data/stimulus-presentations')
+image_names = None # load_pickle(f'{load["stimulus-block"]}_block_image-names', path='data/stimulus-presentations')
 
 # Import utile functions
 import numpy as np
@@ -64,8 +64,8 @@ def calculate_something():
     for j, lag in enumerate(time_lag):
         
         # Preprocess the area responses
-        predictor = preprocess_area_responses(full_activity_predictor, image_names)
-        target = preprocess_area_responses(full_activity_target, image_names)
+        predictor = preprocess_area_responses(full_activity_predictor)
+        target = preprocess_area_responses(full_activity_target)
         
         # Move the activity of V2 back in time by the actual time lag
         lagged_target = np.roll(target, -lag, axis=2)

@@ -21,3 +21,4 @@ pipelines/**
 stimulus_templates.png
 cache/**
 timestamp
+data/.from_warehouse/**

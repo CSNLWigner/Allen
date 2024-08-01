@@ -59,29 +59,18 @@ stages:
       md5: 602969e22ae61fd2082ce408273d3275
       size: 360803
   plots:
-    cmd: python3 -u layer-interaction-plot.py
+    cmd: python3 -u cv-time-lag-plot.py
     deps:
-    - path: data/units/
+    - path: cv-time-lag-plot.py
       hash: md5
-      md5: 4375173207daf47cf7511d5a4b733519.dir
-      size: 7940
-      nfiles: 2
-    - path: layer-interaction-plot.py
+      md5: 94c99302fd551b26e4a997234af1fcbb
+      size: 1767
+    - path: results/CV-lag-time.pickle
       hash: md5
-      md5: fe54e3ab42a3f227e69c37c038f46de2
-      size: 3505
+      md5: 59581af8a9f9dacb231fa66d6b44350f
+      size: 2461
     params:
       params.yaml:
-        crosstime:
-          scaling-factor: 10
-        load:
-          session: 1111013640
-          areas:
-          - VISp
-          - VISl
-          stimulus-block: 2
-          step-size: 0.001
-          stimulus-duration: 0.25
         preprocess:
           areas:
           - VISp
@@ -91,15 +80,45 @@ stages:
           step-size: 0.05
           bin-size: 0.05
           stimulus-duration: 0.25
+        rrr:
+          cv: 3
+          rank: 18
+          error-score: raise
+          predictor: VISp
+          target: VISl
+          timepoint: 0.05
+          sample-size: 15
+        rrr-param-search:
+          cv:
+          - 2
+          - 3
+          - 4
+          rank:
+          - 2
+          - 4
+          - 6
+          - 8
+          - 10
+          - 12
+          - 14
+          - 16
+          - 18
+          - 20
+          - 25
+          - 30
+          lag:
+          - 0
+          - 2
+          timepoints:
+          - 0
+          - 50
+          - 100
+          - 150
     outs:
-    - path: figures/layer-interaction_LM-to-V1.png
+    - path: figures/rrr-param-search.png
       hash: md5
-      md5: 9c128623b7e6e76f4ad72a3cd2bac8fe
-      size: 370134
-    - path: figures/layer-interaction_V1-to-LM.png
-      hash: md5
-      md5: 12a31748a83f73a20ddcb0b6e7b458ec
-      size: 322379
+      md5: ef6f6e7a4d594cb813c912c62249bf43
+      size: 100891
   time_lag_analysis:
     cmd: python3 -u time_lag_analysis.py
     deps:
@@ -126,38 +145,75 @@ stages:
       md5: 3ab7d9da547a0cfffcdb0b7bf2eec32f
       size: 20152
   analysis:
-    cmd: python3 -u layer-interaction-analysis.py
+    cmd: python3 -u cv-time-lag-analysis.py
     deps:
-    - path: data/units/
+    - path: cv-time-lag-analysis.py
       hash: md5
-      md5: a54ece4209fd2669668f7791fdcc0e62.dir
-      size: 7748
+      md5: ff158571b95e9d7db859365e936c0b31
+      size: 4216
+    - path: data/raw-area-responses/
+      hash: md5
+      md5: 7ab2ba1f341828f2187ee0f729b55fcf.dir
+      size: 1154300328
       nfiles: 2
-    - path: layer-interaction-analysis.py
-      hash: md5
-      md5: 2b78b373923353b8e7e22a01c382ce56
-      size: 2607
     params:
       params.yaml:
-        crosstime:
-          scaling-factor: 10
         load:
-          session: 1108334384
+          session: 0
           areas:
           - VISp
           - VISl
-          stimulus-block: 5
+          stimulus-block: natural_scenes
           step-size: 0.001
           stimulus-duration: 0.25
+        preprocess:
+          areas:
+          - VISp
+          - VISl
+          lag-time: 0
+          lag-area: ''
+          step-size: 0.05
+          bin-size: 0.05
+          stimulus-duration: 0.25
+        rrr:
+          cv: 3
+          rank: 18
+          error-score: raise
+          predictor: VISp
+          target: VISl
+          timepoint: 0.05
+          sample-size: 15
+        rrr-param-search:
+          cv:
+          - 2
+          - 3
+          - 4
+          rank:
+          - 2
+          - 4
+          - 6
+          - 8
+          - 10
+          - 12
+          - 14
+          - 16
+          - 18
+          - 20
+          - 25
+          - 30
+          lag:
+          - 0
+          - 2
+          timepoints:
+          - 0
+          - 50
+          - 100
+          - 150
     outs:
-    - path: results/layer-interaction_LM-to-V1.pickle
+    - path: results/CV-lag-time.pickle
       hash: md5
-      md5: 7f8d2901a8861e7f193db612fb7fa3c0
-      size: 52322
-    - path: results/layer-interaction_V1-to-LM.pickle
-      hash: md5
-      md5: d24c026a381c3d73b72bed09c02e049f
-      size: 52322
+      md5: 59581af8a9f9dacb231fa66d6b44350f
+      size: 2461
   behav-preprocess:
     cmd: python3 -u behav-preprocessing.py
     deps:

@@ -5,36 +5,35 @@ stages:
       - load
     outs:
       - data/raw-area-responses/
-  layer-assignment:
-    cmd: python3 -u layer-assignment-analysis.py
-    deps:
-      - layer-assignment-analysis.py
-      - data/ccf_volumes/
-    params:
-      - load
-    outs:
-      - data/units/
+  # preprocess:
+  #   cmd: python3 -u preprocess_data.py
+  #   deps:
+  #     - preprocess_data.py
+  #     - data/raw-area-responses/
+  #   params:
+  #     - preprocess
+  #   outs:
+  #     - data/preprocessed-area-responses/
   analysis:
-    cmd: python3 -u layer-interaction-analysis.py
+    cmd: python3 -u cv-time-lag-analysis.py
     deps:
-      - layer-interaction-analysis.py
-      - data/units/
-    params:
-      - load
-      - rrr
-      - crosstime
-    outs:
-      - results/layer-interaction_V1-to-LM.pickle
-      - results/layer-interaction_LM-to-V1.pickle
-  plots:
-    cmd: python3 -u layer-interaction-plot.py
-    deps:
-      - layer-interaction-plot.py
-      - data/units/
+      - cv-time-lag-analysis.py
+      - data/raw-area-responses/
     params:
       - load
       - preprocess
-      - crosstime
+      - rrr
+      - rrr-param-search
     outs:
-      - figures/layer-interaction_V1-to-LM.png
-      - figures/layer-interaction_LM-to-V1.png
+      - results/CV-lag-time.pickle
+  plots:
+    cmd: python3 -u cv-time-lag-plot.py
+    deps:
+      - cv-time-lag-plot.py
+      - results/CV-lag-time.pickle
+    params:
+      - preprocess
+      - rrr
+      - rrr-param-search
+    outs:
+      - figures/rrr-param-search.png

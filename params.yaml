@@ -20,7 +20,7 @@ preprocess:
   lag-area: ""
   step-size: 0.050 # time-step in seconds # 0.010
   bin-size: 0.050 # time-window in seconds # Joao's default: 0.100
-  stimulus-duration: None # in seconds
+  stimulus-duration: .25 # in seconds
 
 cca:
   cv: 5
