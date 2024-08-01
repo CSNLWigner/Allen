@@ -67,8 +67,8 @@ stages:
       size: 1767
     - path: results/CV-lag-time.pickle
       hash: md5
-      md5: 59581af8a9f9dacb231fa66d6b44350f
-      size: 2461
+      md5: dc8f282791f211819f63dc76090abf7e
+      size: 1757
     params:
       params.yaml:
         preprocess:
@@ -91,24 +91,19 @@ stages:
         rrr-param-search:
           cv:
           - 2
-          - 3
-          - 4
-          rank:
-          - 2
           - 4
           - 6
           - 8
           - 10
-          - 12
-          - 14
-          - 16
-          - 18
+          rank:
+          - 5
+          - 10
+          - 15
           - 20
           - 25
-          - 30
           lag:
           - 0
-          - 2
+          - 1
           timepoints:
           - 0
           - 50
@@ -117,8 +112,8 @@ stages:
     outs:
     - path: figures/rrr-param-search.png
       hash: md5
-      md5: ef6f6e7a4d594cb813c912c62249bf43
-      size: 100891
+      md5: 5a8b554c28633782c559eab7f108ebd3
+      size: 94061
   time_lag_analysis:
     cmd: python3 -u time_lag_analysis.py
     deps:
@@ -186,24 +181,19 @@ stages:
         rrr-param-search:
           cv:
           - 2
-          - 3
-          - 4
-          rank:
-          - 2
           - 4
           - 6
           - 8
           - 10
-          - 12
-          - 14
-          - 16
-          - 18
+          rank:
+          - 5
+          - 10
+          - 15
           - 20
           - 25
-          - 30
           lag:
           - 0
-          - 2
+          - 1
           timepoints:
           - 0
           - 50
@@ -212,8 +202,8 @@ stages:
     outs:
     - path: results/CV-lag-time.pickle
       hash: md5
-      md5: 59581af8a9f9dacb231fa66d6b44350f
-      size: 2461
+      md5: dc8f282791f211819f63dc76090abf7e
+      size: 1757
   behav-preprocess:
     cmd: python3 -u behav-preprocessing.py
     deps:
