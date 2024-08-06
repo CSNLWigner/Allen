@@ -5,23 +5,15 @@ stages:
     deps:
     - path: data/raw-area-responses/
       hash: md5
-      md5: 90173a39471e6a306b64b6be692881b9.dir
-      size: 2649600328
+      md5: 7ab2ba1f341828f2187ee0f729b55fcf.dir
+      size: 1154300328
       nfiles: 2
     - path: preprocessing.py
       hash: md5
-      md5: 12c78a66850914865aa21f0dafd75847
-      size: 1423
+      md5: 832cd232344d6e03c5355222e4024265
+      size: 966
     params:
       params.yaml:
-        load:
-          session: 1111013640
-          areas:
-          - VISp
-          - VISl
-          stimulus-block: 5
-          step-size: 0.001
-          stimulus-duration: 0.25
         preprocess:
           areas:
           - VISp
@@ -34,8 +26,8 @@ stages:
     outs:
     - path: data/area-responses/
       hash: md5
-      md5: a957ab84d97f44398ba66bfe431ec6e9.dir
-      size: 52992328
+      md5: c2641c2488e885cadcb5d397621bae5b.dir
+      size: 23086328
       nfiles: 2
   rrr_analysis:
     cmd: python3 -u rrr_analysis.py
@@ -140,19 +132,44 @@ stages:
       md5: 3ab7d9da547a0cfffcdb0b7bf2eec32f
       size: 20152
   analysis:
-    cmd: python3 -u cv-time-lag-analysis.py
+    cmd: python3 -u layer-rank-analysis.py
     deps:
-    - path: cv-time-lag-analysis.py
+    - path: analyses/layer_rank.py
       hash: md5
-      md5: ff158571b95e9d7db859365e936c0b31
-      size: 4216
-    - path: data/raw-area-responses/
+      md5: d80e5a52cc06d1af401c5d9660289fd3
+      size: 4069
+    - path: data/area-responses/
       hash: md5
-      md5: 7ab2ba1f341828f2187ee0f729b55fcf.dir
-      size: 1154300328
+      md5: c2641c2488e885cadcb5d397621bae5b.dir
+      size: 23086328
       nfiles: 2
+    - path: data/units/
+      hash: md5
+      md5: bae13c27578d80797c7a86c55f82a995.dir
+      size: 3644
+      nfiles: 2
+    - path: layer-rank-analysis.py
+      hash: md5
+      md5: f44576886c0f20cebd06890abd8d0fb5
+      size: 1544
     params:
       params.yaml:
+        layer-rank:
+          cv:
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+          - 9
+          - 10
+          bestRank: 15
+          minRank: 5
+          maxRank: 25
+          stepRank: 1
+          timepoint: 100
         load:
           session: 0
           areas:
@@ -170,40 +187,11 @@ stages:
           step-size: 0.05
           bin-size: 0.05
           stimulus-duration: 0.25
-        rrr:
-          cv: 3
-          rank: 18
-          error-score: raise
-          predictor: VISp
-          target: VISl
-          timepoint: 0.05
-          sample-size: 15
-        rrr-param-search:
-          cv:
-          - 2
-          - 4
-          - 6
-          - 8
-          - 10
-          rank:
-          - 5
-          - 10
-          - 15
-          - 20
-          - 25
-          lag:
-          - 0
-          - 1
-          timepoints:
-          - 0
-          - 50
-          - 100
-          - 150
     outs:
-    - path: results/CV-lag-time.pickle
+    - path: results/layer-rank.pickle
       hash: md5
-      md5: dc8f282791f211819f63dc76090abf7e
-      size: 1757
+      md5: 0c5d43779ee19b535eefff5d586b014c
+      size: 4077
   behav-preprocess:
     cmd: python3 -u behav-preprocessing.py
     deps:
