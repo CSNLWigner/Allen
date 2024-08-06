@@ -441,13 +441,13 @@ class megaplot():
         
         return table
     
-    def addaxes(self, items, log=True):
-        
-        self.geometry.append(self.getCoordinates(items))
-        
-        self.table = self.table_update(self.table, items, len(self.fig.axes)+1, log=log) # len(axes)+1 bcs u have not added yet the axes to the fig
+    def addaxes(self, items, log=True, **kwargs):
             
-        return self.fig.add_subplot(self.gs.__getitem__(items))
+        self.geometry.append(self.getCoordinates(items))
+            
+        self.table = self.table_update(self.table, items, len(self.fig.axes)+1, log=log) # len(axes)+1 bcs u have not added yet the axes to the fig
+                
+        return self.fig.add_subplot(self.gs.__getitem__(items), **kwargs)
      
     def transformSizeToFitSubplots(self, sl, max:int): # Transorm slice to fit the subplots by nrwos and ncols
         if type(sl) == int: sl = slice(sl,sl+1)
@@ -545,10 +545,9 @@ class megaplot():
         self.table = table
         self.row_names, self.col_names = [___ for ___ in self.col_names], [___ for ___ in self.row_names] # change
     
-    def ax(self,row,column,forced=False,log=True) -> Axes:
+    def ax(self,row,column,log=True,**kwargs) -> Axes:
         """
         ### Parameters
-        forced_plot (bool): whether to create axes, if another axes overlaps the location
         log (bool): whether to print warning message, if another axes overlaps the location
         """
         
@@ -559,7 +558,7 @@ class megaplot():
         if items in self.geometry:
             return self.get_axes(items)
         else:
-            return self.addaxes(items, log=log)
+            return self.addaxes(items, log=log, **kwargs)
 
     def rownames(self, positions:list, names:list):
         

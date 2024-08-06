@@ -309,45 +309,32 @@ stages:
       md5: 805bc6159cea03e97789675c123c5998
       size: 17841
   plot:
-    cmd: python3 -u crosstime-plot.py
+    cmd: python3 -u layer-rank-plot.py
     deps:
-    - path: crosstime-plot.py
+    - path: layer-rank-plot.py
       hash: md5
-      md5: bd5ebae0b105f7c1b7bba894cf31769a
-      size: 1226
-    - path: results/cross-time-RRR.pickle
+      md5: eaf5fd3a86e4dffffa3340eaaf5de85c
+      size: 891
+    - path: results/layer-rank.pickle
       hash: md5
-      md5: bb09d002bde6277f856e3b8381b5b4e3
-      size: 36064
+      md5: 0c5d43779ee19b535eefff5d586b014c
+      size: 4077
     params:
       params.yaml:
-        rrr-param-search:
-          cv:
-          - 3
-          rank:
-          - 14
-          lag:
-          - 100
-          - 105
-          - 110
-          - 115
-          - 120
-          - 125
-          - 130
-          - 135
-          - 140
-          - 145
-          - 150
-          timepoints:
-          - 0
-          duration: 0.25
-          time-bin: 0.05
-          time-step: 0.025
+        preprocess:
+          areas:
+          - VISp
+          - VISl
+          lag-time: 0
+          lag-area: ''
+          step-size: 0.05
+          bin-size: 0.05
+          stimulus-duration: 0.25
     outs:
-    - path: figures/cross-time-RRR.png
+    - path: figures/layer-rank.png
       hash: md5
-      md5: 23a4bf7827deb7daf60a2cdf5693abf4
-      size: 91316
+      md5: de585c4d2c1a49f74c565ba020d8239d
+      size: 162831
   layer-assignment:
     cmd: python3 -u layer-assignment-analysis.py
     deps:

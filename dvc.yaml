@@ -27,3 +27,12 @@ stages:
       - layer-rank
     outs:
       - results/layer-rank.pickle
+  plot:
+    cmd: python3 -u layer-rank-plot.py
+    deps:
+      - layer-rank-plot.py
+      - results/layer-rank.pickle
+    params:
+      - preprocess
+    outs:
+      - figures/layer-rank.png

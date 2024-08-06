@@ -1,11 +1,13 @@
 # Matplotlib plot for the results of the cca analysis which has compared two brain areas by CCA and saved the results in the results folder.
 # Save the plots in the figures folder.
 
+import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 import yaml
 from allensdk.brain_observatory.ecephys.visualization import _VlPlotter
 from matplotlib import image
+from mpl_toolkits.mplot3d import Axes3D
 from scipy.stats import sem
 
 from utils.data_io import save_pickle
@@ -545,3 +547,60 @@ def plot_stimuli(ecephys_session):
             4].imshow(ecephys_session.stimulus_templates['unwarped'][key], cmap='gray')
         ax[i//4, i % 4].set_title(key)
     plt.show()
+
+
+def plot_3d_scatter_with_color(ax: matplotlib.axes.Axes, data: np.array, title=None, xlabel=None, ylabel=None, zlabel=None, xticks=None, yticks=None, zticks=None) -> None:
+    """
+    Plots 4D data using a 3D scatter plot with color coding.
+
+    Parameters:
+    ax (matplotlib.axes.Axes): The axes on which to plot.
+    data (np.array): A 3D array representing the data to plot.
+    title (str, optional): Title of the plot.
+    xlabel (str, optional): Label for the x-axis.
+    ylabel (str, optional): Label for the y-axis.
+    zlabel (str, optional): Label for the z-axis.
+    xticks (list, optional): Ticks for the x-axis.
+    yticks (list, optional): Ticks for the y-axis.
+    zticks (list, optional): Ticks for the z-axis.
+    """
+    # Assuming data is 3D: (nLayers, nLayers, nTimepoints)
+    nLayers_source, nLayers_target, nTime_indeces = data.shape
+    
+    # Turn time indeces into timepoints
+    vmi = np.arange(nTime_indeces)
+    timepoints = vmi * preprocess['bin-size']
+
+    # Create meshgrid for 3D coordinates
+    x, y, t = np.meshgrid(np.arange(nLayers_source), np.arange(nLayers_target), timepoints, indexing='ij')
+
+    # Flatten the data for 3D scatter plot
+    x = x.flatten()
+    y = y.flatten()
+    z = data.flatten()
+    c = t.flatten()
+    
+    # Plot the 3D scatter plot
+    scatter = ax.scatter(x, y, z, c=c, cmap='viridis', vmin=min(c), vmax=max(c))
+
+    # Add color bar
+    colorbar = plt.colorbar(scatter, ax=ax, pad=0.1)
+    colorbar.set_label('Timepoints (s)')
+
+    # Set labels and title if provided
+    if title:
+        ax.set_title(title)
+    if xlabel:
+        ax.set_xlabel(xlabel)
+    if ylabel:
+        ax.set_ylabel(ylabel)
+    if zlabel:
+        ax.set_zlabel(zlabel, rotation=90)
+
+    # Set ticks if provided
+    if xticks is not None:
+        ax.set_xticks(xticks)
+    if yticks is not None:
+        ax.set_yticks(yticks)
+    if zticks is not None:
+        ax.set_zticks(zticks)
