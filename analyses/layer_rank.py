@@ -118,7 +118,8 @@ def calc_ranks(V1_data, LM_data, timepoints, log=False):
     time_length = int(preproc['stimulus-duration'] / preproc['step-size'])
 
     # Create a results array
-    results = np.full((2, 6+1, 6+1, time_length), np.nan)
+    rank_results = np.full((2, 6+1, 6+1, time_length), np.nan)
+    r2_results = np.full((2, 6+1, 6+1, time_length), np.nan)
 
     for i, sourceArea, targetArea in zip([0, 1], [V1_data, LM_data], [LM_data, V1_data]):
 
@@ -141,6 +142,7 @@ def calc_ranks(V1_data, LM_data, timepoints, log=False):
                                                 log=log)
 
                     # Save the result averaged over the folds
-                    results[i, output, input, t] = best_rank
+                    rank_results[i, output, input, t] = best_rank
+                    r2_results[i, output, input, t] = best_rank
 
-    return results
+    return rank_results, r2_results

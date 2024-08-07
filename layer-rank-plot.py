@@ -1,14 +1,28 @@
+import sys
+
 import numpy as np
-from matplotlib import pyplot as plt
 
 from utils.data_io import load_pickle
 from utils.megaplot import megaplot
 from utils.plots import plot_3d_scatter_with_color
+from utils.utils import get_args
+
+# Get the arguments
+opts, args = get_args(sys.argv)
+
+# Log switch
+rank_r2 = None
+if "-rank" in opts:
+    rank_r2 = 'rank'
+elif "-r2" in opts:
+    rank_r2 = 'r2'
+else:
+    raise ValueError("Please specify '-rank' or '-r2'.")
 
 # ATTENTION! 'preprocess' parameters are used in the subfunctions!
 
 # Load the results
-result = load_pickle('layer-rank') # Shape: (nAreas(2), nLayers(6+1), nLayers(6+1), nTimepoints)
+result = load_pickle(f'layer-{rank_r2}') # Shape: (nAreas(2), nLayers(6+1), nLayers(6+1), nTimepoints)
 
 # Initialize megaplot with 2 rows and 2 columns
 mp = megaplot(nrows=1, ncols=2, constrained_layout=True)

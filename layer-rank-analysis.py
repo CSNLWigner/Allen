@@ -46,8 +46,9 @@ timepoints = np.arange(0, preproc['stimulus-duration'], preproc['step-size'])
 time_indeces = (timepoints / preproc['step-size']).astype(int)
 
 # Calculate the ranks
-result = calc_ranks(V1_data, LM_data, time_indeces, log=log) # Shape: (nAreas(2), nLayers(6+1), nLayers(6+1), nTimepoints)
+rank_results, r2_results = calc_ranks(V1_data, LM_data, time_indeces, log=log) # Shape: (nAreas(2), nLayers(6+1), nLayers(6+1), nTimepoints)
 
 # Save the results
-save_pickle(result, f'layer-rank')
+save_pickle(rank_results, f'layer-rank')
+save_pickle(r2_results, f'layer-r2')
 
