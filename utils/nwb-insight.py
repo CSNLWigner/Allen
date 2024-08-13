@@ -1,5 +1,3 @@
-from IPython.display import display
-from nwbwidgets import nwb2widget
 from pynwb import NWBHDF5IO
 
 # Open the NWB file
@@ -21,10 +19,6 @@ print("\nAcquisition Data:")
 acquisition_data = nwbfile.acquisition
 for name, data in acquisition_data.items():
     print(name, data)
-
-# Visualize the data
-widget = nwb2widget(nwbfile)
-display(widget)
 
 # Close the file
 io.close()
