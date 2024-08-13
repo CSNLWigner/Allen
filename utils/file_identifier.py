@@ -1,9 +1,7 @@
 import argparse
 import csv
 import json
-
 import h5py
-
 
 def detect_file_format(file_path):
     try:
@@ -34,18 +32,16 @@ def detect_file_format(file_path):
             with h5py.File(file_path, 'r') as f:
                 if 'nwb_version' in f.attrs:
                     return 'NWB'
-        except Exception:
+        except Exception as e:
+            print(f"Error opening file as NWB: {e}")
             pass
 
     return 'Unknown format'
 
-
 if __name__ == "__main__":
     # Set up argument parsing
-    parser = argparse.ArgumentParser(
-        description='Detect the format of a file.')
-    parser.add_argument('file_path', type=str,
-                        help='The path to the file to be checked.')
+    parser = argparse.ArgumentParser(description='Detect the format of a file.')
+    parser.add_argument('file_path', type=str, help='The path to the file to be checked.')
 
     # Parse the arguments
     args = parser.parse_args()
