@@ -437,3 +437,19 @@ def mergeDataframes(dataframes: pd.DataFrame) -> list:
             merged_graphs.append(merged_df)
     return merged_graphs
 
+def get_args(argv):
+    """
+    Get the options and arguments from the command line.
+
+    Args:
+        argv (list): The list of command line arguments.
+
+    Returns:
+        tuple: A tuple containing the options and arguments.
+
+    Example:
+        opts, args = get_args(sys.argv)
+    """
+    opts = [arg for arg in argv if arg.startswith('-')]
+    args = [arg for arg in argv if not arg.startswith('-')]
+    return opts, args

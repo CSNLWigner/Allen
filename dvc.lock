@@ -5,8 +5,8 @@ stages:
     deps:
     - path: data/raw-area-responses/
       hash: md5
-      md5: 7ab2ba1f341828f2187ee0f729b55fcf.dir
-      size: 1154300328
+      md5: 18aafbd0798045b6fe822e9da70caacf.dir
+      size: 1082900328
       nfiles: 2
     - path: preprocessing.py
       hash: md5
@@ -26,8 +26,8 @@ stages:
     outs:
     - path: data/area-responses/
       hash: md5
-      md5: c2641c2488e885cadcb5d397621bae5b.dir
-      size: 23086328
+      md5: 702882a711fb5624f23239981eb1c34c.dir
+      size: 21658328
       nfiles: 2
   rrr_analysis:
     cmd: python3 -u rrr_analysis.py
@@ -136,12 +136,12 @@ stages:
     deps:
     - path: analyses/layer_rank.py
       hash: md5
-      md5: d80e5a52cc06d1af401c5d9660289fd3
-      size: 4069
+      md5: fab8ed5ee4f83ad2bc06bad41a90e4db
+      size: 4681
     - path: data/area-responses/
       hash: md5
-      md5: c2641c2488e885cadcb5d397621bae5b.dir
-      size: 23086328
+      md5: 702882a711fb5624f23239981eb1c34c.dir
+      size: 21658328
       nfiles: 2
     - path: data/units/
       hash: md5
@@ -150,8 +150,8 @@ stages:
       nfiles: 2
     - path: layer-rank-analysis.py
       hash: md5
-      md5: f44576886c0f20cebd06890abd8d0fb5
-      size: 1544
+      md5: ed1b048651ee43ff82789f6b343b79e4
+      size: 1605
     params:
       params.yaml:
         layer-rank:
@@ -171,7 +171,7 @@ stages:
           stepRank: 1
           timepoint: 100
         load:
-          session: 0
+          session: 1
           areas:
           - VISp
           - VISl
@@ -190,7 +190,7 @@ stages:
     outs:
     - path: results/layer-rank.pickle
       hash: md5
-      md5: 0c5d43779ee19b535eefff5d586b014c
+      md5: a23d1864cb4b78a2d7a4633d5a53fa0e
       size: 4077
   behav-preprocess:
     cmd: python3 -u behav-preprocessing.py
@@ -220,7 +220,7 @@ stages:
     params:
       params.yaml:
         load:
-          session: 0
+          session: 1
           areas:
           - VISp
           - VISl
@@ -230,8 +230,8 @@ stages:
     outs:
     - path: data/raw-area-responses/
       hash: md5
-      md5: 7ab2ba1f341828f2187ee0f729b55fcf.dir
-      size: 1154300328
+      md5: 18aafbd0798045b6fe822e9da70caacf.dir
+      size: 1082900328
       nfiles: 2
   dimensionality-reduction:
     cmd: python3 -u cv-lag-time-selection.py
