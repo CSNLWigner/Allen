@@ -6,7 +6,7 @@
 
 
 
-This project is aimed at analyzing neural activity data. It includes various analyses such as Canonical Correlation Analysis (CCA).
+This project is aimed at analyzing neural activity data from [Visual Coding - Neuropixels](https://allensdk.readthedocs.io/en/latest/visual_coding_neuropixels.html). It includes Reduced Rank Regression (RRR).
 
 
 

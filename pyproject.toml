@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "neural_analysis_project"
+version = "0.1.0"
+description = "A project for analyzing neural activity data from Visual Coding - Neuropixels."
+authors = ["Your Name <your.email@example.com>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/yourusername/neural_analysis_project"
+repository = "https://github.com/yourusername/neural_analysis_project"
+documentation = "https://yourusername.github.io/neural_analysis_project"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+pandas = "^1.3.0"
+numpy = "^1.21.0"
+allensdk = "^2.13.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2.4"
+black = "^21.6b0"
+flake8 = "^3.9.2"
+mypy = "^0.812"
+sphinx = "^4.0.2"
+sphinx-rtd-theme = "^0.5.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
