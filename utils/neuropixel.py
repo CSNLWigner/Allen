@@ -1,3 +1,25 @@
+# utils/neuropixel.py
+
+"""
+Module: neuropixel.py
+This module contains functions for working with Neuropixel data from the Allen Institute.
+
+Functions:
+- get_table(cache, session_id, table_name) -> DataFrame: Get a table from the cache.
+- dict_from_dataframe(df, name) -> dict: Create a dictionary from a DataFrame.
+- AllenTables(cache, session_id, layer_assignment=False) -> AllenTables: Create an AllenTables object.
+- get_unit_channels(session, log_all_areas=False) -> DataFrame: Get the unit channels for the given session.
+- makePSTH(spikes, startTimes, windowDur, binSize=0.001) -> tuple: Compute the Peri-Stimulus Time Histogram (PSTH).
+- get_stimulus_presentations(session) -> DataFrame: Get the stimulus presentations for the given session.
+- get_area_units(units: pd.DataFrame, area_of_interest) -> DataFrame: Get the units in a specific area of interest.
+- get_area_change_responses(session, area_of_interest) -> np.ndarray: Get the change responses for the units in the area of interest.
+- get_area_receptive_fields(spike_times, stimulus_presentations, area_of_interest) -> list: Get the receptive fields for the units in the area of interest.
+- optotagging(opto_table, spike_times, area_of_interest) -> np.ndarray: Perform optotagging analysis on the units in the area of interest.
+- get_response_magnitudes(opto_response) -> np.ndarray: Calculate the response magnitudes of optogenetic stimulation.
+- get_average_unit_responses(units, spike_times, trial_start, duration=0.03, binSize=0.001) -> np.ndarray: Calculate the unit responses for each unit in the given units DataFrame.
+- get_unit_responses(units, spike_times, trial_start, trial_end, stepSize=0.010, binSize=0.050, progressbar=True) -> np.ndarray: Calculate the unit responses for each trial and time bin.
+"""
+
 from functools import reduce
 
 import numpy as np

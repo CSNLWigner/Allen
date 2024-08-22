@@ -1,3 +1,5 @@
+# analyses/machine_learning_models.py
+
 """
 Reduced rank regression class.
 Requires scipy to be installed.
@@ -6,7 +8,15 @@ Implemented by Chris Rayner (2015)
 dchrisrayner AT gmail DOT com
 
 Optimal linear 'bottlenecking' or 'multitask learning'.
+
+Functions:
+- ReducedRankRegressor(X, Y, rank, reg=None) -> object: Create a ReducedRankRegressor object.
+- custom_feature_selection(X_data, Y_data, rank, n_splits=5) -> int: Custom feature selection for multioutput regression using ReducedRankRidgeRegression.
+- _fit_rrr_no_intercept_all_ranks(X: np.ndarray, Y: np.ndarray, alpha: float, solver: str) -> tuple: Fit the Reduced Rank Ridge Regression model without intercept for all ranks.
+- _fit_rrr_no_intercept(X: np.ndarray, Y: np.ndarray, alpha: float, rank: int, solver: str, memory=None) -> np.ndarray: Fit the Reduced Rank Ridge Regression model without intercept.
+- ReducedRankRidgeRegression(alpha=1.0, fit_intercept=True, rank=None, ridge_solver='auto', memory=None) -> object: Reduced Rank Ridge Regression.
 """
+
 from sklearn.model_selection import KFold
 from sklearn.metrics import r2_score
 import numpy as np

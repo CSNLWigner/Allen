@@ -1,4 +1,12 @@
+# analyses/cv-lag-time-selection.py
 
+"""
+Module: cv-lag-time-selection.py
+This module contains functions for selecting the maximum mean across the CV, lag, and time dimensions.
+
+Functions:
+- None
+"""
 
 
 # Calculate the mean across each dimensions separately

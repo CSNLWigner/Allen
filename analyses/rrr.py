@@ -1,4 +1,20 @@
+# analyses/rrr.py
 
+"""
+Module: rrr.py
+This module contains functions for performing Reduced Rank Regression (RRR) analysis on neural data.
+
+Functions:
+- getCoeffs(model, log=False) -> numpy.ndarray: Calculate the mean coefficients of a model over cross-validation folds.
+- RRRR(X_data, Y_data, dataBalancing='none', rank=None, cv=None, log=False, success_log=True, warn=True) -> dict: Make Reduced Rank Regression (RRR) analysis.
+- RFE_CV(X_data, Y_data, rank=None, cv=None) -> dict: Perform Recursive Feature Elimination (RFE) cross-validation.
+- compare_two_areas(area_X_responses:np.ndarray, area_Y_responses:np.ndarray, log=False) -> dict: Compare the responses of units in two brain areas using Reduced Rank Regression (RRR).
+- control_models(predictor_names=['V1', 'movement', 'pupil'], response_name='V2', log=False) -> np.ndarray: Perform control models analysis using Reduced Rank Regression (RRR).
+- rrr_rank_analysis(V1_activity, V2_activity, max_rank=15, cv=params['cv'], log=False) -> np.ndarray: Perform Reduced Rank Regression (RRR) rank analysis.
+- calculate_cross_time_correlation(areaX, areaY, log=False) -> np.ndarray: Calculate the cross-time correlation RRR between the responses of two brain areas.
+- cross_time_rrr_coeffs(V1_activity, V2_activity, cv=None, rank=None) -> np.ndarray: Calculate the cross-time RRR coefficients between two sets of activities.
+- crosstime_analysis(predictor, target, cv, rank, scaling_factor=10, dataBalancing='none', ProgressBar=True) -> np.ndarray: Perform cross-time analysis based on timpoints of rrr-param-search lag.
+"""
 
 import numpy as np
 import pandas as pd

@@ -1,3 +1,14 @@
+# analyses/imbalanced_data.py
+
+"""
+Module: imbalanced_data.py
+This module contains functions for performing undersampled cross-validation on imbalanced datasets.
+
+Functions:
+- evaluate_fold(model, X_train, X_test, y_train, y_test, sample_size, replace) -> tuple: Train and evaluate the model on a single fold.
+- undersampled_cross_validation(estimator, X, y, sample_size, k_folds=5, replace=False, log=False, n_jobs=-1, warn=True) -> dict: Perform undersampled cross-validation on the given dataset using the specified model, in parallel.
+"""
+
 import numpy as np
 from joblib import Parallel, delayed
 from sklearn import clone

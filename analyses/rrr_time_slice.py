@@ -1,3 +1,14 @@
+# analyses/rrr_time_slice.py
+
+"""
+Module: rrr_time_slice.py
+This module contains functions for performing RRRR analysis on time slices.
+
+Functions:
+- RRRR_time_slice(predictor, target, predictor_time, cv, rank, log=True) -> dict: Calculate the RRRR for each time slice.
+- bidirectional_time_slice(V1_activity, LM_activity, session_params:pd.DataFrame, predictor_time, log=False) -> dict: Perform bidirectional time slice analysis using RRRR.
+"""
+
 import numpy as np
 import pandas as pd
 from analyses.data_preprocessing import preprocess_area_responses, z_score_normalize

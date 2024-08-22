@@ -1,4 +1,14 @@
+# analyses/layer_rank.py
 
+"""
+Module: layer_rank.py
+This module contains functions for performing rank-based analysis on neural data.
+
+Functions:
+- cv_search(predictor, target) -> tuple: Perform a RRRR search for the best cv.
+- rank_search(predictor, target, cv, log=False) -> tuple: Perform a RRRR search for the best rank.
+- calc_ranks(V1_data, LM_data, timepoints, log=False) -> numpy array: Calculate the time lag between two time series.
+"""
 
 import numpy as np
 import yaml

@@ -1,5 +1,14 @@
-# Here will be the functions to be used to CCA analysis
-# They are called by the cca_analysis.py, which is the main program of this analysis
+# analyses/cca.py
+
+"""
+Module: cca.py
+This module contains functions for performing Canonical Correlation Analysis (CCA) on neural data.
+These functions are called by the cca_analysis.py, which is the main program of this analysis.
+
+Functions:
+- cca(X_train, Y_train, X_test, Y_test) -> dict: Perform Canonical Correlation Analysis (CCA) on two sets of variables.
+- compare_two_areas(session, area_X, area_Y, log=True) -> dict: Compare the responses of units in the VISp and VISpm brain areas using Canonical Correlation Analysis (CCA).
+"""
 
 import numpy as np
 from sklearn.cross_decomposition import CCA

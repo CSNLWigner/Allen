@@ -1,3 +1,27 @@
+# utils/utils.py
+
+"""
+Module: utils.py
+This module contains utility functions for various tasks.
+
+Functions:
+- calculate_accuracy(Y_data, prediction) -> float: Calculate the accuracy based on the similarity between Y_data and the prediction.
+- MSE(target, prediction) -> float: Calculate the Mean Squared Error based on the mean squared error between Y_data and the prediction.
+- iterate_dimension(arr, dim) -> None: Iterate through a specific dimension of a numpy array.
+- normality_test(full_activity, dim=2) -> None: Determine if the data has normal distribution.
+- get_time(time_bin, bin_size=preprocess['step-size'], digits=3) -> float: Get the time in seconds based on the time bin and step size.
+- shift_with_nans(arr, shift, axis=2, constant=np.nan) -> np.ndarray: Shift the elements of a numpy array along a specified axis by padding with NaNs.
+- printProgressBar(iteration, total, prefix='', suffix='', decimals=1, length=100, fill='█', printEnd="\r", onComplete='delete') -> None: Print iterations progress.
+- ProgressBarManager -> class: A class to manage multiple progress bars.
+- options_and_arguments() -> None: A simple example of using options and arguments in a Python script.
+- dfs(node, graph, visited, component) -> None: Function to find the connected components in a graph using DFS.
+- elements_to_dfs(input: iter) -> defaultdict: Convert elements to a dictionary of dataframes.
+- dfs_to_graph(column_to_dfs: defaultdict) -> defaultdict: Convert a dictionary of dataframes to a graph.
+- createGraph(input: Iterable) -> defaultdict: Create a graph based on the input data.
+- iterate_common_elements(lists) -> None: Generator function to yield merged lists with common elements.
+- mergeDataframes(dataframes: pd.DataFrame) -> list: Merge a list of DataFrames into a list of merged DataFrames.
+- get_args(argv) -> tuple: Get the options and arguments from the command line.
+"""
 
 from collections import defaultdict
 from collections.abc import Iterable

@@ -1,3 +1,20 @@
+# utils/data_io.py
+
+"""
+Module: data_io.py
+This module contains functions for saving and loading data.
+
+Functions:
+- path_name(path, name) -> str: Return the full path name.
+- save_csv(data, name, path="results") -> None: Save the data to a CSV file.
+- save_pickle(data, name, path="results") -> None: Save the data to a pickle file.
+- save_fig(fig:matplotlib.figure.Figure, name, path="figures") -> None: Save the figure to a PNG file.
+- save_based_on_type(data, name, path="results") -> None: Save the data based on its type.
+- save_dict_items(dictionary, name="", path="results", log=True) -> None: Save the items in a dictionary.
+- load_csv(name, path="") -> pd.DataFrame: Load the data from a CSV file.
+- load_pickle(name, path="results") -> Any: Load the data from a pickle file.
+"""
+
 import csv
 import os
 import pickle

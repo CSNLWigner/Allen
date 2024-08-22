@@ -1,3 +1,14 @@
+# utils/download_allen.py
+
+"""
+Module: download_allen.py
+This module contains functions for downloading and initializing data from the Allen Brain Observatory.
+
+Functions:
+- cacheData(location="") -> EcephysProjectCache: Caches data from the Allen Brain Observatory.
+- completeDownloadData(sessions, cache, output_dir, download_lfp=False) -> None: Downloads the complete dataset for analysis.
+"""
+
 import os
 import shutil
 from pathlib import Path

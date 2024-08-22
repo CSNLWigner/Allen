@@ -1,3 +1,15 @@
+# analyses/layer_interaction_maxValues.py
+
+"""
+Module: layer_interaction_maxValues.py
+This module contains functions for finding the global maxima in a given data dictionary.
+
+Functions:
+- getUnitsNumber(areaName: str) -> dict: Get the number of units for each layer in the origin and target areas.
+- find_max_value(data) -> tuple: Find the maximum value in a given data array.
+- getGlobalMaxima(dataDict: dict, slice_index: slice) -> dict: Finds the global maxima in a given data dictionary for a specific slice.
+- update_csv(data: pd.DataFrame, filename: str, force=False) -> None: Appends the given data to a CSV file if certain keys are not already present.
+"""
 
 import numpy as np
 import yaml

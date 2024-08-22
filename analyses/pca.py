@@ -1,3 +1,12 @@
+# analyses/pca.py
+
+"""
+Module: pca.py
+This module contains functions for performing PCA on neural data.
+
+Functions:
+- pca(neural_activity) -> dict: Perform PCA on the given neural activity data.
+"""
 
 from sklearn.decomposition import PCA
 

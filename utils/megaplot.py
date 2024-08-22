@@ -1,3 +1,10 @@
+# utils/megaplot.py
+
+"""
+Module: megaplot.py
+This module contains a class for creating and managing subplots in matplotlib.
+"""
+
 
 import warnings
 from math import sqrt

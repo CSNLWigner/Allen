@@ -1,4 +1,10 @@
+# utils/ccf_volumes.py
+
 """
+Module: ccf_volumes.py
+
+This module contains functions for assigning cortical layers to channels and units based on the Allen Brain Atlas Common Coordinate Framework (CCF) volumes.
+
 Created on Tue Apr  7 08:41:07 2020
 
 @author: joshs
@@ -6,6 +12,13 @@ Created on Tue Apr  7 08:41:07 2020
 https://community.brain-map.org/t/cortical-layers-using-ccfv3-in-neuropixels-data/1247/4
 
 https://www.dropbox.com/scl/fo/6x7ovegu2jp4jxrhyv0fi/APGHNCbZrJFU6xfccmyu1Vw?dl=0&e=2&rlkey=qqn8efbm4pto0olh0g9o5ctjs
+
+Functions:
+- get_layer_name(acronym) -> int: Get the layer number from the given acronym.
+- get_structure_ids(df, annotations) -> np.ndarray: Get the structure IDs for the given DataFrame.
+- cortical_depth_calculation(channels) -> pd.DataFrame: Calculate the cortical depth for the given channels.
+- layer_assignment_to_channels(channels) -> pd.DataFrame: Assign cortical layers to the given channels.
+- cortical_layer_assignment(channels, units) -> pd.DataFrame: Assign cortical layers to the given units.
 """
 
 # %%

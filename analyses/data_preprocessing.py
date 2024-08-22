@@ -1,3 +1,22 @@
+# analyses/data_preprocessing.py
+
+"""
+Module: data_preprocessing.py
+This module contains functions for preprocessing neural data.
+
+Functions:
+- get_behav_responses(behav_data, value_name, trial_start, duration=0.250, stepSize=0.010, binSize=0.050) -> np.ndarray: Calculate the unit responses for each trial in the given timestamps.
+- get_area_responses(session, area, trials, units, log=False) -> np.ndarray: Get the responses of the units in a specific brain area to a specific stimulus block.
+- transform_behav_data(behav_data, behav_data_type, stimulus_presentations, session_block, log=False) -> np.ndarray: Transform the behavioral data into the desired format.
+- calculate_residual_activity(full_activity, axis=None) -> np.ndarray: Calculate the residual activity by subtracting the baseline (PSTH) from the full activity.
+- z_score_normalize(activity, dims=(2)) -> np.ndarray: Perform Z-score normalization on the activity.
+- min_max_normalize(activity, dims=(0, 1)) -> np.ndarray: Perform min-max normalization on the activity.
+- convolve_spike_train(spike_times, step_size=0.010, kernel='Gaussian', kernel_size=50) -> np.ndarray: Convolve the spike train with a boxcar or Gaussian kernel to get a continuous signal.
+- recalculate_neural_activity(neural_activity, duration, time_step, time_bin, orig_time_step=0.001) -> np.ndarray: Recalculate the neural activity based on the given time step and time bin.
+- residual_for_each_stimulus_identity(full_activity, stimulus_identities) -> np.ndarray: Calculate the residual activity for each stimulus identity.
+- preprocess_area_responses(raw_activity, method='z-score', stimulus_duration=0.250, step_size=0.010, bin_size=0.050) -> np.ndarray: Preprocesses the raw neural activity of a specific brain area.
+"""
+
 import numpy as np
 import pandas as pd
 import yaml

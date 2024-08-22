@@ -1,3 +1,28 @@
+# utils/plots.py
+
+"""
+Module: plots.py
+This module contains functions for plotting the results.
+
+Functions:
+- simple_mean_SEM_time_plot(ax, mean, ylabel, title=None, SEM=None, SEM_multiplier=2, time_series=None, color=None, xlabel=None, alpha=0.2, linewidth=None, xticks=None, xticklabels=None, yticks=None, yticklabels=None, label=None, xlim=None, ylim=None) -> plt.Figure: Plots the mean and standard error of the mean of the results as a function of time.
+- simple_rrr_plot(result, axs=None) -> plt.Figure: Plots the results of the reduced rank regression analysis.
+- simple_rrr_plot_mean(result, ax=None) -> plt.Figure: Plots the mean of the results of the reduced rank regression analysis.
+- raster_plot(spike_times, figsize=(8, 8), cmap=plt.cm.tab20, title='spike raster', cycle_colors=False, ax=None) -> plt.Figure: Plots the spike raster.
+- cross_correlation_plot(cross_correlation, time_series=None, title='Cross-correlation', ax=None) -> plt.Figure: Plots the cross-correlation between two signals.
+- cross_time_correlation_coefficients_plot(coeffs, time_series=None, first_dim_label=None, second_dim_label=None, title='Cross-time-correlation', ax=None) -> plt.Figure: Plots the cross-correlation between two signals.
+- rrr_rank_plot(scores, title='RRR test scores (r2)', time_series=None, ax=None) -> plt.Figure: Plots the RRR test scores as a function of rank and time.
+- rrr_rank_plot_mean(result, ax=None) -> plt.Figure: Plots the mean of the results of the reduced rank regression analysis.
+- rrr_rank_plot_over_time(scores, title='RRR test scores', time_series=None, fig=None, axs=None, label=None, log=False) -> plt.Figure: Plots the RRR test scores as a function of rank and time.
+- score_plot_by_time(scores, title=None, time_series=None, ax=None, label='', color=None) -> plt.Figure: Plots the RRR test scores as a function of rank and time.
+- cv_rank_time_plot(results, title=None, ax=None, max=None, xlabel=None, ylabel=None, xticks=None, yticks=None) -> plt.Figure: Plots the results of the cross-validation and rank.
+- score_time(mean, sem, title=None, xlabel='Time', ylabel='R^2', time_series=None) -> plt.Figure: Plots the mean and standard error of the mean of the results as a function of time.
+- crosstime_RRR(ax, matrix, predictor, target, timeseries, vlim, tick_frequency = 5) -> image.AxesImage: Plot a cross-timepoint correlation matrix.
+- rrr_time_slice(ax, results, predictor_time, timepoints=None, colors=None, ylim=(None, None), isWithinSameArea=True) -> image.AxesImage: Plot the results of the reduced rank regression analysis.
+- plot_stimuli(ecephys_session) -> plt.Figure: Plot the stimuli templates for the unwarped images.
+"""
+
+
 # Matplotlib plot for the results of the cca analysis which has compared two brain areas by CCA and saved the results in the results folder.
 # Save the plots in the figures folder.
 
