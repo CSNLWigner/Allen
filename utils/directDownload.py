@@ -1,7 +1,7 @@
-# directDownload.py
+# utils/directDownload.py
 
 """
-Utility tool for get the download links for all sessions in the given manifest file.
+Utility tool for retrieving the download links for all sessions in a given manifest file.
 
 Functions:
 - retrieve_link(session_id): Retrieves the download link for the given session ID.
@@ -19,6 +19,15 @@ from allensdk.brain_observatory.ecephys.ecephys_project_cache import \
 rma_engine = RmaEngine(scheme="http", host="api.brain-map.org")
 
 def retrieve_link(session_id):
+    """
+    Retrieves the download link for the given session ID.
+
+    Parameters:
+    - session_id (int): The ID of the session.
+
+    Returns:
+    - download_link (str): The download link for the session.
+    """
 
     well_known_files = build_and_execute(
         (
@@ -36,10 +45,10 @@ def retrieve_link(session_id):
 def get_download_links(manifest_path):
     """
     Retrieves the download links for all sessions in the given manifest file.
-    
+
     Parameters:
     - manifest_path (str): The path to the manifest file.
-    
+
     Returns:
     - download_links (list): A list of download links for each session.
     """

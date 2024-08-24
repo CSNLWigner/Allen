@@ -1,8 +1,7 @@
 # utils/utils.py
 
 """
-Module: utils.py
-This module contains utility functions for various tasks.
+This submodule contains utility tools for various tasks.
 
 Functions:
 - calculate_accuracy(Y_data, prediction) -> float: Calculate the accuracy based on the similarity between Y_data and the prediction.
@@ -51,10 +50,10 @@ def calculate_accuracy(Y_data, prediction):
 
 def MSE(target, prediction):
     """
-    Calculate the Mean Squared Error based on the mean squared error between Y_data and the prediction.
+    Calculate the Mean Squared Error based on the mean squared error between target and prediction.
 
     Args:
-        Y_data (np.ndarray): The actual data.
+        target (np.ndarray): The actual data.
         prediction (np.ndarray): The predicted data.
 
     Returns:
@@ -91,14 +90,13 @@ def iterate_dimension(arr, dim):
     for i in range(arr.shape[dim]):
         yield i, arr.take(i, axis=dim)
 
-
-# Determine if the data has normal distribution
 def normality_test(full_activity, dim=2):
     """
     Perform the Shapiro-Wilk test to determine if the data has a normal distribution.
 
     Args:
         full_activity (np.ndarray): The input data.
+        dim (int, optional): The dimension along which to perform the test. Default is 2.
 
     Returns:
         None
@@ -114,30 +112,29 @@ def normality_test(full_activity, dim=2):
         else:
             print(f'{counter}: Activity does not look Gaussian (reject H0)')
 
-def get_time(time_bin, bin_size=preprocess['step-size'], digits=3): return round(time_bin*bin_size, digits)
-"""
-```python
-get_time = lambda time_bin, bin_size: round(time_bin*bin_size, 3)
-def get_time(time_bin, bin_size): return round(time_bin*bin_size, 3)
-```
+def get_time(time_bin, bin_size=preprocess['step-size'], digits=3):
+    """
+    Get the time in seconds based on the time bin and step size.
 
-The difference between the lines is that the first line defines a lambda function, while the second line defines a regular function.
+    Args:
+        time_bin (float): The time bin.
+        bin_size (float, optional): The step size. Default is the value specified in the 'preprocess' parameter.
+        digits (int, optional): The number of decimal places to round the result to. Default is 3.
 
-A lambda function is an anonymous function that can be defined in a single line. It is typically used for simple, one-time operations. In this case, the lambda function get_time takes two arguments time_bin and bin_size, and returns the result of rounding time_bin * bin_size to 3 decimal places.
-
-On the other hand, the regular function get_time is defined using the def keyword. It also takes two arguments time_bin and bin_size, and returns the result of rounding time_bin * bin_size to 3 decimal places.
-"""
-
+    Returns:
+        float: The time in seconds.
+    """
+    return round(time_bin*bin_size, digits)
 
 def shift_with_nans(arr, shift, axis=2, constant=np.nan):
     """
-    Shifts the elements of a numpy array along a specified axis by padding with NaNs.
+    Shift the elements of a numpy array along a specified axis by padding with NaNs.
 
     Args:
         arr (np.ndarray): The input array.
         shift (int): The number of positions to shift the elements. Positive values shift to the right, negative values shift to the left.
-        axis (int): The axis along which to shift the elements. Default is 2.
-        constant (int): The value to use for padding. Default is np.nan.
+        axis (int, optional): The axis along which to shift the elements. Default is 2.
+        constant (int, optional): The value to use for padding. Default is np.nan.
 
     Returns:
         np.ndarray: The shifted array.
@@ -170,12 +167,11 @@ def shift_with_nans(arr, shift, axis=2, constant=np.nan):
     return arr[tuple(slices)]
 
 
-# Print iterations progress
 def printProgressBar(iteration, total, prefix='', suffix='', decimals=1, length=100, fill='█', printEnd="\r", onComplete='delete'):
     """
-    Call in a loop to create a terminal progress bar.
+    Print iterations progress.
 
-    Parameters:
+    Args:
         iteration (int): Current iteration.
         total (int): Total iterations.
         prefix (str, optional): Prefix string. Defaults to ''.
@@ -209,6 +205,10 @@ def printProgressBar(iteration, total, prefix='', suffix='', decimals=1, length=
 
 
 class ProgressBarManager:
+    """
+    A class to manage multiple progress bars.
+    """
+
     def __init__(self):
         '''
         Initializes a ProgressBarManager object.
@@ -243,21 +243,21 @@ class ProgressBarManager:
         '''
         Updates the progress bar with the given id, current value, and total value.
 
-        Parameters:
-        - id (str): The id of the progress bar.
-        - current (int): The current value of the progress bar.
-        - total (int): The total value of the progress bar.
+        Args:
+            id (str): The id of the progress bar.
+            current (int): The current value of the progress bar.
+            total (int): The total value of the progress bar.
 
         Example:
-        manager = ProgressBarManager()
+            manager = ProgressBarManager()
 
-        # Simulate progress
-        for i in range(10):
-            manager.progress_bar('Download', i, 10)
-            # time.sleep(5)
-            for j in range(50):
-                manager.progress_bar('Upload', j, 50)
-                time.sleep(0.01)
+            # Simulate progress
+            for i in range(10):
+                manager.progress_bar('Download', i, 10)
+                # time.sleep(5)
+                for j in range(50):
+                    manager.progress_bar('Upload', j, 50)
+                    time.sleep(0.01)
         '''
         # If not already initialized, initialize a new progress bar
         if id not in self.progress_bars:
@@ -329,14 +329,14 @@ def dfs(node, graph, visited, component):
     """
     Function to find the connected components in a graph using DFS
 
-    Parameters:
-    - node: The starting node for the DFS traversal
-    - graph: The graph represented as an adjacency list
-    - visited: A boolean array to keep track of visited nodes
-    - component: A list to store the nodes in the connected component
+    Args:
+        node: The starting node for the DFS traversal
+        graph: The graph represented as an adjacency list
+        visited: A boolean array to keep track of visited nodes
+        component: A list to store the nodes in the connected component
 
     Returns:
-    None
+        None
     """
     stack = [node]
     while stack:
@@ -350,6 +350,15 @@ def dfs(node, graph, visited, component):
 
 
 def elements_to_dfs(input: iter) -> defaultdict:
+    """
+    Convert elements to a dictionary of dataframes.
+
+    Args:
+        input (iter): An iterable containing the input data.
+
+    Returns:
+        defaultdict: A defaultdict representing the dictionary of dataframes.
+    """
     column_to_dfs = defaultdict(set)
     for idx, df in enumerate(input):
         for column in df.columns:
@@ -358,6 +367,15 @@ def elements_to_dfs(input: iter) -> defaultdict:
 
 
 def dfs_to_graph(column_to_dfs: defaultdict) -> defaultdict:
+    """
+    Convert a dictionary of dataframes to a graph.
+
+    Args:
+        column_to_dfs (defaultdict): A defaultdict representing the dictionary of dataframes.
+
+    Returns:
+        defaultdict: A defaultdict representing the graph.
+    """
     graph = defaultdict(list)
     for indices in column_to_dfs.values():
         indices = list(indices)
@@ -370,10 +388,10 @@ def dfs_to_graph(column_to_dfs: defaultdict) -> defaultdict:
 
 def createGraph(input: Iterable) -> defaultdict:
     """
-    Creates a graph based on the input data.
+    Create a graph based on the input data.
 
     Args:
-        input (iter): An iterable containing the input data.
+        input (Iterable): An iterable containing the input data.
 
     Returns:
         defaultdict: A defaultdict representing the graph.
@@ -417,7 +435,7 @@ def iterate_common_elements(lists):
 
 def mergeDataframes(dataframes: pd.DataFrame) -> list:
     """
-    Merges a list of DataFrames into a list of merged DataFrames.
+    Merge a list of DataFrames into a list of merged DataFrames.
 
     Args:
         dataframes (list): A list of pandas DataFrames to be merged.
@@ -474,6 +492,3 @@ def get_args(argv):
     Example:
         opts, args = get_args(sys.argv)
     """
-    opts = [arg for arg in argv if arg.startswith('-')]
-    args = [arg for arg in argv if not arg.startswith('-')]
-    return opts, args

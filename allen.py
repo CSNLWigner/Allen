@@ -6,7 +6,7 @@ Allen Project
 
 Allen Project is a Python package for data analysis and visualization.
 
-Subpackages
+Packages
 -------------
 
 Allen Project includes subpackages:
@@ -22,6 +22,7 @@ The following main utility tools are available (in the ``utils`` subpackage):
 - ``debug``: Debugging tool.
 - ``megaplot``: This tool contains a class for creating and managing subplots in matplotlib.
 - ``plots``: Plotting tool for all kinds of plots.
+- ``AllenTable``: This tool contains a class for creating tables. See in the ``utils/neuropixel.py`` file.
 
 Preprocessing tools
 -------------------
@@ -63,5 +64,17 @@ The other experiment utilities are:
 - ``multiple-timeslices-layers``: This utility contains functions for creating multiple time slices in the RRR model for each layer.
 - ``layer-interaction-maxValues``: This utility contains functions for plotting the maximum values of the layer interaction in the RRR model.
 - ``layer-interaction-stats``: This utility contains functions for plotting the statistics of the layer interaction in the RRR model.
+- ``print-results``: This utility contains functions for printing the results of the RRR analyses.
 
 """
+
+# Package metadata
+
+__version__ = "1.0"
+__author__ = "Zsombor Szabó"
+
+# Import packages
+
+from . import utils, analyses
+
+__all__ = ['utils', 'analyses']

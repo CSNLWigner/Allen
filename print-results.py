@@ -1,4 +1,8 @@
+# print-results.py
 
+"""
+Module for printing the results of the RRR analyses.
+"""
 
 # Load the params
 import numpy as np

@@ -1,8 +1,7 @@
 # utils/neuropixel.py
 
 """
-Module: neuropixel.py
-This module contains functions for working with Neuropixel data from the Allen Institute.
+This submodule contains tools for working with Neuropixel data from the Allen Institute.
 
 Functions:
 - get_table(cache, session_id, table_name) -> DataFrame: Get a table from the cache.
@@ -18,39 +17,38 @@ Functions:
 - get_response_magnitudes(opto_response) -> np.ndarray: Calculate the response magnitudes of optogenetic stimulation.
 - get_average_unit_responses(units, spike_times, trial_start, duration=0.03, binSize=0.001) -> np.ndarray: Calculate the unit responses for each unit in the given units DataFrame.
 - get_unit_responses(units, spike_times, trial_start, trial_end, stepSize=0.010, binSize=0.050, progressbar=True) -> np.ndarray: Calculate the unit responses for each trial and time bin.
+
+Classes:
+- AllenTables: A class that represents tables related to Allen Institute's Neuropixel data.
+
+Info:
+This module provides functions and a class for working with Neuropixel data from the Allen Institute. It includes functions for retrieving specific tables from the cache, creating dictionaries from DataFrames, and performing various analyses on the data. The AllenTables class represents tables related to Neuropixel data and provides methods for creating tables and columns, assigning cortical layer information to units, and retrieving dataframes based on keys. The module also includes functions for computing the Peri-Stimulus Time Histogram (PSTH), getting unit channels, stimulus presentations, units in a specific area of interest, change responses for units in an area of interest, receptive fields for units in an area of interest, performing optotagging analysis, calculating response magnitudes of optogenetic stimulation, and calculating unit responses for each unit in a given DataFrame.
+
+Acronyms:
+- VISp: Primary Visual Area (V1)
+- VISpl: Posterolateral visual area
+- VISli: Laterointermediate area (visually guided behav)
+- VISl: Lateral visual area (V2, LM)
+- VISal: Anteromedial visual area
+- VISlla: Laterolateral anterior visual area
+- VISrl: Rostrolateral visual area (visually guided behav)
+- VISam: Anteromedial visual area
+- VISpm: Posteromedial visual area (V4-V5, MT; PMC: associative area)
+- VISm: Medial visual area (V6, "medial motion area", see: https://pages.ucsd.edu/~msereno/papers/V6Motion09.pdf)
+- VISmma: Mediomedial anterior visual area
+- VISmmp: Mediomedial posterior visual area
+
+For more information, refer to the AllenSDK documentation: https://allensdk.readthedocs.io/en/latest/_static/examples/nb/ecephys_quickstart.html
 """
 
-from functools import reduce
 
 import numpy as np
 import pandas as pd
-from allensdk.brain_observatory.ecephys.visualization import (
-    plot_mean_waveforms, plot_spike_counts, raster_plot)
+from allensdk.brain_observatory.ecephys.visualization import raster_plot
 from matplotlib import pyplot as plt
 
 from utils.utils import mergeDataframes, printProgressBar
 
-# import yaml
-
-# params = yaml.safe_load(open('params.yaml'))['cache']
-
-# cache = cache_allen(location=params['location'],
-#                     force_download=params['force-download'])
-
-# # get the metadata tables
-# units_table = cache.get_units()
-
-# channels_table = cache.get_channel_table()
-
-# probes_table = cache.get_probe_table()
-
-# behavior_sessions_table = cache.get_behavior_session_table()
-
-# ecephys_sessions_table = cache.get_ecephys_session_table()
-
-"""
-This dataset contains ephys recording sessions from 3 genotypes (C57BL6J, VIP-IRES-CrexAi32 and SST-IRES-CrexAi32). For each mouse, two recordings were made on consecutive days. One of these sessions used the image set that was familiar to the mouse from training. The other session used a novel image set containing two familiar images from training and six new images that the mouse had never seen.
-"""
 
 
 
@@ -58,19 +56,26 @@ def get_table(cache, session_id, table_name):
     """
     Get a table from the cache.
 
-    Parameters:
-    cache (EcephysProjectCache): The cache object.
-    session_id (int): The session identifier.
-    table_name (str): The name of the table to retrieve.
+    Args:
+        cache (EcephysProjectCache): The cache object.
+        session_id (int): The session identifier.
+        table_name (str): The name of the table to retrieve.
 
     Returns:
-    DataFrame: The table data.
+        DataFrame: The table data.
     """
     return cache.get_session_data(session_id)[table_name]
 
-def dict_from_dataframe(df:pd.DataFrame, name:str) -> dict:
+def dict_from_dataframe(df: pd.DataFrame, name: str) -> dict:
     """
-    With this you can search for a dataframe name from column names.
+    Create a dictionary from a DataFrame.
+
+    Args:
+        df (pd.DataFrame): The DataFrame to convert.
+        name (str): The name to assign to each column in the dictionary.
+
+    Returns:
+        dict: A dictionary where the keys are the column names and the values are the assigned name.
     """
     return {col_name: name for col_name in df.columns}
 
@@ -190,7 +195,7 @@ class AllenTables():
         if layer_assignment:
             raise NotImplementedError("The layer_assignment method is not implemented yet.") # TODO: move this class to a new file, bcs the import of ccf files are too slow. Then just uncomment the lines in the layer_assignment function
             self.layer_assignment()
-            
+    
     def __getitem__(self, key: str)-> pd.DataFrame:
         """
         Retrieves a dataframe based on the given key.
@@ -228,17 +233,25 @@ class AllenTables():
             raise ValueError('The mergedColumns is not a single dataframe')
 
 def get_unit_channels(session, log_all_areas=False) -> pd.DataFrame:
+    """
+    Retrieve the unit channels for a given session.
 
-    # session.metadata
+    Args:
+        session (Session): The session object.
+        log_all_areas (bool, optional): Whether to log all brain areas recorded during the session. Defaults to False.
 
-    "Merging unit and channel dataframes will give us CCF coordinates for each unit"
+    Returns:
+        pd.DataFrame: A DataFrame containing the unit channels.
+    """
+    
+    # Merging unit and channel dataframes will give us CCF coordinates for each unit
     units = session.get_units()
     channels = session.get_channels()
     unit_channels = units.merge(channels, left_on='peak_channel_id', right_index=True)
 
-    "which brain structures were recorded during this session"
+    # Which brain structures were recorded during this session
     brain_areas_recorded = unit_channels.value_counts('ecephys_structure_acronym')
-    
+
     if log_all_areas:
         print(brain_areas_recorded, '\n', brain_areas_recorded)
 
@@ -247,7 +260,7 @@ def get_unit_channels(session, log_all_areas=False) -> pd.DataFrame:
 
 def makePSTH(spikes, startTimes, windowDur, binSize=0.001):
     """
-    Convenience function to compute the Peri-Stimulus Time Histogram (PSTH).
+    Compute the Peri-Stimulus Time Histogram (PSTH).
 
     Args:
         spikes (array-like): Array of spike times.
@@ -265,7 +278,9 @@ def makePSTH(spikes, startTimes, windowDur, binSize=0.001):
     """
     bins = np.arange(0, windowDur+binSize, binSize)
     counts = np.zeros(bins.size-1)
-    for i, start in enumerate(startTimes):  # enumerate through trials
+    
+    # enumerate through trials
+    for i, start in enumerate(startTimes):
         startInd = np.searchsorted(spikes, start)
         endInd = np.searchsorted(spikes, start+windowDur)
         counts = counts + np.histogram(spikes[startInd:endInd]-start, bins)[0]
@@ -274,116 +289,62 @@ def makePSTH(spikes, startTimes, windowDur, binSize=0.001):
     return counts/binSize, bins
 
 
-"""
-Acronyms:
-Primary Visual Area (VISp), Posterolateral visual area (VISpl), Laterointermediate
-area (VISli), Lateral visual area (VISl), Anteromedial visual area (VISal), Laterolateral anterior visual area (VISlla), Rostrolateral visual area
-(VISrl), Anteromedial visual area (VISam), Posteromedial visual area (VISpm), Medial visual area (VISm), Mediomedial anterior visual area
-(VISmma), Mediomedial posterior visual area (VISmmp). 
-
-VISp:   V1
-VISpl:  ?
-VISli:  ? (visually guided behav)
-VISl:   V2 (LM)?
-VISal:  anteromedial cuneus
-VISlla: ?
-VISrl:  ?(visually guided behav)
-VISam:  anteromedial cuneus
-VISpm:  V4-V5(MT), PMC (associative area)
-VISm:   V6 (medial motion area) https://pages.ucsd.edu/~msereno/papers/V6Motion09.pdf
-
-other Allen experiment:
-VISp     93
-CA1      85
-VISrl    58
-VISl     56
-VISam    49
-VISal    43
-SUB      41
-CA3      33
-DG       32
-VISpm    17
-LGv      16
-LP        9
-LGd       8
-TH        4
-ZI        4
-CA2       3
-POL       3
-ProS      1
-https://allensdk.readthedocs.io/en/latest/_static/examples/nb/ecephys_quickstart.html
-"""
-
-
-
 def get_stimulus_presentations(session):
-    "We can get the times when the image changes occurred from the stimulus presentations table"
+    """
+    Retrieve the stimulus presentations for a given session.
 
+    Args:
+        session (Session): The session object.
+
+    Returns:
+        stimulus_presentations (DataFrame): A DataFrame containing the stimulus presentations.
+    """
     stimulus_presentations = session.stimulus_presentations
-        
     return stimulus_presentations
-    
+
 
 def get_area_units(units: pd.DataFrame, area_of_interest) -> pd.DataFrame:
     """
-    Retrieves the units in a specific area of interest.
+    Retrieve the units in a specific area of interest.
 
     Args:
-        tables (AllenTables): The AllenTables object containing the tables.
+        units (pd.DataFrame): The DataFrame containing the units.
         area_of_interest (str or list[str]): The acronym of the area of interest.
 
     Returns:
         pd.DataFrame: A DataFrame containing the units in the specified area.
     """
-    # now we'll filter them
-    good_unit_filter = ((units['snr'] > 1) &
-                        (units['isi_violations'] < 1) & # If anyone spikes in the refracter period, they will be excluded
-                        (units['firing_rate'] > 0.1)) # When they are fires too sparse, then they cannot involved in the time of the trial
-    good_units = units.loc[good_unit_filter]
     
-    # get the units in the area of interest
+    # Filter the units based on the area of interest
+    good_unit_filter = ((units['snr'] > 1) &
+                        (units['isi_violations'] < 1) &
+                        (units['firing_rate'] > 0.1))
+    good_units = units.loc[good_unit_filter]
+
+    # Get the units in the area of interest
     if type(area_of_interest) == str:
         area_units = good_units[good_units['ecephys_structure_acronym'] == area_of_interest]
     elif type(area_of_interest) == list:
         area_units = good_units[good_units['ecephys_structure_acronym'].isin(area_of_interest)]
     else:
         raise ValueError('area_of_interest must be a string or a list of strings')
-    
+
     return area_units
 
 
 def get_area_change_responses(session, area_of_interest) -> np.ndarray:
     """
-    Grab spike times and calculate the change response for 'good' units in V1. Note that how you filter units will depend on your analysis
-    
-    VISp:   V1
-    VISpl:  ?
-    VISli:  ? (visually guided behav)
-    VISl:   ?
-    VISal:  anteromedial cuneus
-    VISlla: ?
-    VISrl:  ?(visually guided behav)
-    VISam:  anteromedial cuneus
-    VISpm:  V4-V5(MT), PMC (associative area)
-    VISm:   V6 (medial motion area) https://pages.ucsd.edu/~msereno/papers/V6Motion09.pdf
-    """
-    
-    stimulus_presentations = get_stimulus_presentations(session)
-    
-    """
-    'stimulus_block', 'image_name', 'duration', 'start_time', 'end_time',
-    'start_frame', 'end_frame', 'is_change', 'is_image_novel', 'omitted',
-    'flashes_since_change', 'trials_id', 'contrast', 'active',
-    'is_sham_change', 'rewarded', 'stimulus_name', 'temporal_frequency',
-    'position_y', 'position_x', 'spatial_frequency', 'stimulus_index',
-    'color', 'orientation'
-    
-    See: Allen_change.py **stimulus_presentation_table** function
-    """
-    change_times = stimulus_presentations[stimulus_presentations['active'] &
-                                            stimulus_presentations['is_change']]['start_time'].values  # CHANGE = the image identity changed for this stimulus presentation. ACTIVE + CHANGE = The mouse was rewarded for licking within the response window.
+    Calculate the change responses for units in a specific area of interest.
 
-    # Here's where we loop through the units in our area of interest and compute their PSTHs
+    Args:
+        session (Session): The session object.
+        area_of_interest (str or list[str]): The acronym of the area of interest.
+
+    Returns:
+        np.ndarray: An array containing the change responses.
+    """
+    stimulus_presentations = get_stimulus_presentations(session)
+
     area_change_responses = []
     area_units = get_area_units(area_of_interest=area_of_interest)
     spike_times = session.spike_times
@@ -392,19 +353,25 @@ def get_area_change_responses(session, area_of_interest) -> np.ndarray:
     for iu, unit in area_units.iterrows():
         unit_spike_times = spike_times[iu]
         unit_change_response, bins = makePSTH(unit_spike_times,
-                                            change_times-time_before_change,
-                                            duration, binSize=0.01)
+                                                stimulus_presentations['start_time'].values - time_before_change,
+                                                duration, binSize=0.01)
         area_change_responses.append(unit_change_response)
     area_change_responses = np.array(area_change_responses)
-    
+
     return area_change_responses
-    
+
 
 def get_area_receptive_fields(spike_times, stimulus_presentations, area_of_interest) -> list:
     """
-    Get stimulus presentation data for the receptive field mapping stimulus (gabors).
-    
-    There are many trials, and only in the second block are gabors for the receptive fields.
+    Get the receptive fields for units in a specific area of interest by Gabors. (There are many trials, and only in the second block are gabors for the receptive fields.)
+
+    Args:
+        spike_times (dict): A dictionary mapping unit IDs to their corresponding spike times.
+        stimulus_presentations (DataFrame): A DataFrame containing the stimulus presentations.
+        area_of_interest (str or list[str]): The acronym of the area of interest.
+
+    Returns:
+        list: A list containing the receptive fields.
     """
     rf_stim_table = stimulus_presentations[stimulus_presentations['stimulus_name'].str.contains('gabor')]
 
@@ -413,19 +380,17 @@ def get_area_receptive_fields(spike_times, stimulus_presentations, area_of_inter
     # positions of gabor along elevation
     ys = np.sort(rf_stim_table.position_y.unique())
 
-
     def find_rf(spikes, xs, ys) -> np.ndarray:
         unit_rf = np.zeros([ys.size, xs.size])
         for ix, x in enumerate(xs):
             for iy, y in enumerate(ys):
                 stim_times = rf_stim_table[(rf_stim_table.position_x == x)
-                                        & (rf_stim_table.position_y == y)]['start_time'].values
+                                            & (rf_stim_table.position_y == y)]['start_time'].values
                 unit_response, bins = makePSTH(spikes,
-                                            stim_times+0.01,
-                                            0.2, binSize=0.001)
-                unit_rf[iy, ix] = unit_response.mean() # along stimulus change
+                                                stim_times + 0.01,
+                                                0.2, binSize=0.001)
+                unit_rf[iy, ix] = unit_response.mean()
         return unit_rf
-
 
     area_rfs = []
     area_units = get_area_units(area_of_interest=area_of_interest)
@@ -433,14 +398,24 @@ def get_area_receptive_fields(spike_times, stimulus_presentations, area_of_inter
         unit_spike_times = spike_times[iu]
         unit_rf = find_rf(unit_spike_times, xs, ys)
         area_rfs.append(unit_rf)
-    
-    # area_rfs = np.array(area_rfs)
-    
+
     return area_rfs
 
 
 def optotagging(opto_table, spike_times, area_of_interest) -> np.ndarray:
     """
+    Perform optotagging analysis on units in a specific area of interest.
+
+    Args:
+        opto_table (DataFrame): A DataFrame containing the optotagging stimulus table.
+        spike_times (dict): A dictionary mapping unit IDs to their corresponding spike times.
+        area_of_interest (str or list[str]): The acronym of the area of interest.
+
+    Returns:
+        np.ndarray: An array containing the optogenetic responses.
+    
+    Notes:
+    
     Since this is an SST mouse, we should see putative SST+ interneurons that are activated during our optotagging protocol. Let's load the optotagging stimulus table and plot PSTHs triggered on the laser onset. For more examples and useful info about optotagging, you can check out the Visual Coding Neuropixels Optagging notebook here (though note that not all the functionality in the visual coding SDK will work for this dataset).
     
     We use 2 different laser **waveforms**: a short square pulse that's **10 ms** long and a half-period cosine that's 1 second long.
@@ -449,31 +424,36 @@ def optotagging(opto_table, spike_times, area_of_interest) -> np.ndarray:
     most units don't respond to the short laser pulse.
     Note that the activity occurring at the onset and offset of the laser is artifactual and should be excluded from analysis!
 
+    ```
     opto_table = session.optotagging_table
+    ```
     """
-
     print(opto_table.head())
 
-    duration = opto_table.duration.min()  # get the short pulses
-    level = opto_table.level.max()  # and the high power trials
+    # Get the short pulses
+    duration = opto_table.duration.min()
+    
+    # Get the high power trials
+    level = opto_table.level.max()
 
-    if 'VIS' not in area_of_interest: raise ValueError('To optotagging, the interested area must be a visual area')
+    if 'VIS' not in area_of_interest:
+        raise ValueError('To perform optotagging, the area of interest must be a visual area')
+
     cortical_units = get_area_units(area_of_interest=area_of_interest)
 
-    # Sort trials by duration and level
     opto_times = opto_table.loc[(opto_table['duration'] == duration) &
                                 (opto_table['level'] == level)]['start_time'].values
 
-    time_before = 0.01  # seconds to take before the laser start for PSTH
-    duration = 0.03  # total duration of trial for PSTH in seconds
-    binSize = 0.001  # 1ms bin size for PSTH
+    time_before = 0.01
+    duration = 0.03
+    binSize = 0.001
     opto_response = []
     unit_id = []
     for iu, unit in cortical_units.iterrows():
         unit_spike_times = spike_times[iu]
         unit_response, bins = makePSTH(unit_spike_times,
-                                    opto_times-time_before, duration,
-                                    binSize=binSize)
+                                        opto_times - time_before, duration,
+                                        binSize=binSize)
 
         opto_response.append(unit_response)
         unit_id.append(iu)
@@ -487,43 +467,42 @@ def get_response_magnitudes(opto_response):
     """
     Calculate the response magnitudes of optogenetic stimulation.
 
-    Parameters:
-    opto_response (numpy.ndarray): Array containing the optogenetic response data.
+    Args:
+        opto_response (numpy.ndarray): Array containing the optogenetic response data.
 
     Returns:
-    numpy.ndarray: Array of response magnitudes calculated for each trial.
-    """ # docstring
-
+        numpy.ndarray: Array of response magnitudes calculated for each trial.
+    """
     baseline_window = slice(0, 9)  # baseline epoch
     response_window = slice(11, 18)  # laser epoch
 
     response_magnitudes = np.mean(opto_response[:, response_window], axis=1) \
                         - np.mean(opto_response[:, baseline_window], axis=1)
-    
+
     return response_magnitudes
 
 
 def get_average_unit_responses(units, spike_times, trial_start, duration=0.03, binSize=0.001):
     """
-    Calculate the unit responses for each unit in the given units DataFrame.
+    Calculate the average unit responses for each unit in the given units DataFrame.
 
-    Parameters:
-    units (DataFrame): DataFrame containing information about the units.
-    spike_times (list): List of spike times for each unit.
-    trial_start (float): Start time of the trial.
-    duration (float): Total duration of trial for PSTH in seconds. Default is 0.03.
-    binSize (float): Bin size for PSTH in seconds. Default is 0.001.
+    Args:
+        units (DataFrame): DataFrame containing information about the units.
+        spike_times (list): List of spike times for each unit.
+        trial_start (float): Start time of the trial.
+        duration (float): Total duration of trial for PSTH in seconds. Default is 0.03.
+        binSize (float): Bin size for PSTH in seconds. Default is 0.001.
 
     Returns:
-    numpy.ndarray: Array containing the unit responses, shape (units, duration/binSize)
+        numpy.ndarray: Array containing the average unit responses, shape (units, duration/binSize)
     """
     response = []
     unit_id = []
     for iu, unit in units.iterrows():
         unit_spike_times = spike_times[iu]
         unit_response, bins = makePSTH(unit_spike_times,
-                                       trial_start, duration,
-                                       binSize=binSize)
+                                        trial_start, duration,
+                                        binSize=binSize)
 
         response.append(unit_response)
         unit_id.append(iu)
@@ -535,57 +514,51 @@ def get_unit_responses(units, spike_times, trial_start, trial_end, stepSize=0.01
     """
     Calculate the unit responses for each trial and time bin.
 
-    Parameters:
-    units (DataFrame): A DataFrame containing unit data.
-    spike_times (dict): A dictionary mapping unit IDs to their corresponding spike times.
-    trial_start (array-like): An array-like object containing the start times of each trial.
-    trial_end (array-like): An array-like object containing the end times of each trial.
-    stepSize (float, optional): The size of the time step. Defaults to 0.010.
-    binSize (float, optional): The size of the time bin. Defaults to 0.050.
-    progressbar (bool, optional): Whether to display a progress bar. Defaults to True.
+    Args:
+        units (DataFrame): A DataFrame containing unit data.
+        spike_times (dict): A dictionary mapping unit IDs to their corresponding spike times.
+        trial_start (array-like): An array-like object containing the start times of each trial.
+        trial_end (array-like): An array-like object containing the end times of each trial.
+        stepSize (float, optional): The size of the time step. Defaults to 0.010.
+        binSize (float, optional): The size of the time bin. Defaults to 0.050.
+        progressbar (bool, optional): Whether to display a progress bar. Defaults to True.
 
     Returns:
-    tensor (ndarray): A 3-dimensional numpy array containing the unit responses for each trial and time bin.
+        tensor (ndarray): A 3-dimensional numpy array containing the unit responses for each trial and time bin.
     """
-    
-    # def convert_to_tensor(spike_times, binSize, duration):
     n_unit = len(units)
     n_trial = len(trial_start)
     trial_length = np.mean(trial_end - trial_start)
     n_step = int(trial_length / stepSize)
     n_bin = int(trial_length / binSize)
 
-    # Initialize tensor
     tensor = np.zeros((n_unit, n_trial, n_step))
-    
-    # Print progressbar
+
     if progressbar:
         printProgressBar(0, n_unit, prefix='Units:', length=50)
 
-    for i, unit_ID in enumerate([unit_ID for unit_ID, unit_data, in units.iterrows()]):  # Units
-
+    for i, unit_ID in enumerate([unit_ID for unit_ID, unit_data, in units.iterrows()]):
         # Get the spike times for the unit
         unit_spike_times = spike_times[unit_ID]
-        
+
         # Loop through trials and time
         for j, (start, end) in enumerate(zip(trial_start, trial_end)):  # Trials
             for k, time in enumerate(np.arange(start, end, stepSize)): # Time
                 
-                # Check if k is out of range
-                if k == n_bin: # This can happen because of different floating point rounding in int() and np.arange() functions i guess.
-                    break # print('Warning: k is out of range')
-                
+                # Check if k is out of range. (This can happen because of different floating point rounding in int() and np.arange() functions i guess.)
+                if k == n_bin:
+                    break
+
                 # Find the bin indices
                 bin_start_idx = np.searchsorted(unit_spike_times, time)
                 bin_end_idx = np.searchsorted(unit_spike_times, time+binSize)
-                
+
                 # Get the spikes in the time bin
                 spikes_in_timebin = unit_spike_times[bin_start_idx:bin_end_idx]
-                
+
                 # Count the number of spikes in the time bin
-                tensor[i, j, k] = len(spikes_in_timebin) # spike_count
-        
-        # Update Progress Bar
+                tensor[i, j, k] = len(spikes_in_timebin)
+
         if progressbar:
             printProgressBar(i + 1, n_unit, prefix='Units:', length=50)
 
@@ -594,22 +567,43 @@ def get_unit_responses(units, spike_times, trial_start, trial_end, stepSize=0.01
     print('Spike count in the data:', count)
 
     return tensor
-    
+
 
 def rasterplot(session, times):
+    """
+    Generate a raster plot for a given session and times.
+
+    Args:
+        session (Session): The session object.
+        times (DataFrame): The times DataFrame.
+
+    Returns:
+        None
+    """
     first_drifting_grating_presentation_id = times['stimulus_presentation_id'].values[0]
     plot_times = times[times['stimulus_presentation_id'] == first_drifting_grating_presentation_id]
 
     fig = raster_plot(plot_times, title=f'spike raster for stimulus presentation {first_drifting_grating_presentation_id}')
     plt.show()
 
-    # also print out this presentation
+    # Print out this presentation also
     session.stimulus_presentations.loc[first_drifting_grating_presentation_id]
-    
+
+
 def stimulus_duration(session, stimulus_block):
-    stimulus_presentations = session.stimulus_presentations[session.stimulus_presentations['active']==True &
+    """
+    Plot the histogram of stimulus durations for a given session and stimulus block.
+
+    Args:
+        session (Session): The session object.
+        stimulus_block (int): The stimulus block.
+
+    Returns:
+        None
+    """
+    stimulus_presentations = session.stimulus_presentations[session.stimulus_presentations['active'] == True &
                                                             session.stimulus_presentations['stimulus_block'] == stimulus_block &
-                                                            session.stimulus_presentations['omitted']==False]
+                                                            session.stimulus_presentations['omitted'] == False]
     stimulus_presentations['duration'].hist(bins=100)
     plt.xlabel('Flash Duration (s)')
     plt.ylabel('Count')

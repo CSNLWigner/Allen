@@ -1,8 +1,7 @@
 # utils/plots.py
 
 """
-Module: plots.py
-This module contains functions for plotting the results.
+This submodule contains tools for plotting the results.
 
 Functions:
 - simple_mean_SEM_time_plot(ax, mean, ylabel, title=None, SEM=None, SEM_multiplier=2, time_series=None, color=None, xlabel=None, alpha=0.2, linewidth=None, xticks=None, xticklabels=None, yticks=None, yticklabels=None, label=None, xlim=None, ylim=None) -> plt.Figure: Plots the mean and standard error of the mean of the results as a function of time.
@@ -46,12 +45,25 @@ def simple_mean_SEM_time_plot(ax, mean, ylabel, title=None, SEM=None, SEM_multip
     Plots the mean and standard error of the mean of the results as a function of time.
 
     Parameters:
-    mean (array-like): A one-dimensional array-like object representing the mean of the results.
-    SEM (array-like): A one-dimensional array-like object representing the standard error of the mean of the results.
-    title (str, optional): The title of the plot. Default is 'Mean and SEM of the results'.
-    time_series (array-like, optional): A one-dimensional array-like object representing the time series. If not provided, it will be generated using the params.yaml file.
-    ax (matplotlib.axes.Axes, optional): The axes on which to plot. If not provided, a new figure and axes will be created.
-
+    - ax (matplotlib.axes.Axes, optional): The axes on which to plot. If not provided, a new figure and axes will be created.
+    - mean (array-like): A one-dimensional array-like object representing the mean of the results.
+    - ylabel (str): The label for the y-axis.
+    - title (str, optional): The title of the plot. Default is 'Mean and SEM of the results'.
+    - SEM (array-like, optional): A one-dimensional array-like object representing the standard error of the mean of the results.
+    - SEM_multiplier (int, optional): The multiplier for the standard error of the mean. Default is 2.
+    - time_series (array-like, optional): A one-dimensional array-like object representing the time series. If not provided, it will be generated using the params.yaml file.
+    - color (str, optional): The color of the plot. Default is None.
+    - xlabel (str, optional): The label for the x-axis. Default is 'Time (s)'.
+    - alpha (float, optional): The transparency of the shaded area representing the standard error of the mean. Default is 0.2.
+    - linewidth (float, optional): The width of the line representing the mean. Default is None.
+    - xticks (array-like, optional): The locations of the x-axis ticks.
+    - xticklabels (array-like, optional): The labels for the x-axis ticks.
+    - yticks (array-like, optional): The locations of the y-axis ticks.
+    - yticklabels (array-like, optional): The labels for the y-axis ticks.
+    - label (str, optional): The label for the plot. Default is None.
+    - xlim (tuple, optional): The limits for the x-axis.
+    - ylim (tuple, optional): The limits for the y-axis.
+    
     Returns:
     matplotlib.figure.Figure: The figure object containing the plot.
     """

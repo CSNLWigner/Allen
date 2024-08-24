@@ -1,17 +1,15 @@
 # utils/ccf_volumes.py
 
 """
-Module: ccf_volumes.py
-
-This module contains functions for assigning cortical layers to channels and units based on the Allen Brain Atlas Common Coordinate Framework (CCF) volumes.
+This submodule contains tools for assigning cortical layers to channels and units based on the Allen Brain Atlas Common Coordinate Framework (CCF) volumes.
 
 Created on Tue Apr  7 08:41:07 2020
 
-@author: joshs
+Author: joshs
 
-https://community.brain-map.org/t/cortical-layers-using-ccfv3-in-neuropixels-data/1247/4
-
-https://www.dropbox.com/scl/fo/6x7ovegu2jp4jxrhyv0fi/APGHNCbZrJFU6xfccmyu1Vw?dl=0&e=2&rlkey=qqn8efbm4pto0olh0g9o5ctjs
+References:
+- [Cortical Layers using CCFv3 in Neuropixels Data](https://community.brain-map.org/t/cortical-layers-using-ccfv3-in-neuropixels-data/1247/4)
+- [CCFv3 Annotation Volume](https://www.dropbox.com/scl/fo/6x7ovegu2jp4jxrhyv0fi/APGHNCbZrJFU6xfccmyu1Vw?dl=0&e=2&rlkey=qqn8efbm4pto0olh0g9o5ctjs)
 
 Functions:
 - get_layer_name(acronym) -> int: Get the layer number from the given acronym.
@@ -25,10 +23,8 @@ Functions:
 
 import os
 
-import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import xarray as xr
 from allensdk.brain_observatory.ecephys.behavior_ecephys_session import \
     BehaviorEcephysSession
 from allensdk.brain_observatory.ecephys.ecephys_project_cache import \
@@ -74,7 +70,15 @@ import re
 
 
 def get_layer_name(acronym):
-    
+    """
+    Get the layer number from the given acronym.
+
+    Parameters:
+    - acronym (str): The acronym representing a cortical layer.
+
+    Returns:
+    - int: The layer number corresponding to the given acronym.
+    """
     try:
         layer = int(re.findall(r'\d+', acronym)[0])
         if layer == 3:
@@ -84,7 +88,16 @@ def get_layer_name(acronym):
         return 0
     
 def get_structure_ids(df, annotations):
-    
+    """
+    Get the structure IDs for the given DataFrame.
+
+    Parameters:
+    - df (pd.DataFrame): The DataFrame containing coordinate values.
+    - annotations (np.ndarray): The annotation volume.
+
+    Returns:
+    - np.ndarray: The structure IDs corresponding to the given DataFrame.
+    """
     x = (df.anterior_posterior_ccf_coordinate.values / 10).astype('int')
     y = (df.dorsal_ventral_ccf_coordinate.values / 10).astype('int')
     z = (df.left_right_ccf_coordinate.values / 10).astype('int')
@@ -100,7 +113,15 @@ def get_structure_ids(df, annotations):
 # %% First half of the layer assignment (called by the second half)
 
 def cortical_depth_calculation(channels) -> pd.DataFrame:
-    
+    """
+    Calculate the cortical depth for the given channels.
+
+    Parameters:
+    - channels (pd.DataFrame): The DataFrame containing channel information.
+
+    Returns:
+    - pd.DataFrame: The DataFrame with a new column 'cortical_depth' that represents the cortical depth of each channel.
+    """
     channels = channels[channels.anterior_posterior_ccf_coordinate > 0]
 
     x = (channels.anterior_posterior_ccf_coordinate.values / 10).astype('int')
@@ -120,27 +141,16 @@ def cortical_depth_calculation(channels) -> pd.DataFrame:
 
 def layer_assignment_to_channels(channels) -> pd.DataFrame:
     """
-    It will also allow you calculate unit depth along cortical “streamlines” (paths normal to the cortical surface), which is more accurate than using distance along the probe.
+    Assign cortical layers to the given channels.
 
     ATTENTION! Please keep in mind that these layer assignments are only estimates, and not definitive labels. 
-    
-    NOTE: We chose not to include layer labels in the NWB files because this method is based on the boundaries of the average CCF template volume and may not be accurate for individual mice
-    
-    NOTE: To determine the area boundaries for individual mice, we recommend looking at the current source density plots that are available for each probe (see this notebook 20 for info on how to retrieve these).
 
+    Parameters:
+    - channels (pd.DataFrame): The DataFrame containing channel information.
 
-    Parameters
-    ----------
-    session : BehaviorEcephysSession
-        The session object from the AllenSDK.
-    
-    Returns
-    -------
-    df : pandas.DataFrame
-        A DataFrame containing the channel data with a new column 'cortical_layer' that assigns each channel to a cortical layer.
-    
+    Returns:
+    - pd.DataFrame: The DataFrame with a new column 'cortical_layer' that assigns each channel to a cortical layer.
     """
-        
     channels = cortical_depth_calculation(channels)
 
     structure_ids = get_structure_ids(channels, annotations)
@@ -160,20 +170,18 @@ def cortical_layer_assignment(channels, units) -> pd.DataFrame:
     **ATTENTION! Please keep in mind that these layer assignments are only estimates, and not definitive labels**. 
 
     Args:
-        session (BehaviorEcephysSession): The behavior ecephys session object.
-        units (pd.DataFrame): The units dataframe containing ecephys_channel_id.
+        channels (pd.DataFrame): The DataFrame containing channel information.
+        units (pd.DataFrame): The DataFrame containing unit information.
 
     Returns:
-        pd.DataFrame: The units dataframe with an additional 'layer' column containing the cortical layer assignments.
+        pd.DataFrame: The DataFrame with an additional 'layer' column containing the cortical layer assignments for each unit.
     """
     
     # Get the channels with the layer assignment
-    channels = layer_assignment_to_channels(channels)  # session.get_channels()
+    channels = layer_assignment_to_channels(channels)
             
-    # Get the channel ids for the units whom session is the same as the input session
+    # Get the channel ids for the units
     unit_channel_ids = units.peak_channel_id
-    # print('units.probe_channel_number: ', units.probe_channel_number)
-    # print('units.peak_channel_id: ', units.peak_channel_id)
     
     # Filter channel_ids to only those that are in the channels index
     filtered_channel_ids = unit_channel_ids[unit_channel_ids.isin(channels.index)]

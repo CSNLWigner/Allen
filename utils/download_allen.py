@@ -1,7 +1,6 @@
 # utils/download_allen.py
 
 """
-Module: download_allen.py
 This module contains functions for downloading and initializing data from the Allen Brain Observatory.
 
 Functions:
@@ -31,22 +30,17 @@ def cacheData(location=""):
         cache (EcephysProjectCache): The cache object containing the cached data.
     """
     
-    # Location
+    # Set the cache location
     if location == "":
         location = params['location']
     print("Cache location:", params['location'])
     output_dir = Path(location)
     
-    # Confirming your allensdk version
+    # Confirm the allensdk version
     print(f"Your allensdk version is: {allensdk.__version__}")
 
-    # cache = EcephysProjectCache.from_warehouse(manifest=os.path.join(output_dir, "manifest.json"))
+    # Create the cache object
     cache = EcephysProjectCache(manifest=os.path.join(output_dir, "manifest.json"))
-    
-    # Print the manifest ids
-    # print('all of the manifest files available for this dataset online:')
-    # sessions = cache.get_session_table()
-    # print(*sessions.index, sep='\n')
     
     return cache
     

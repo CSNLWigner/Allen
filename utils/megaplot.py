@@ -1,8 +1,38 @@
 # utils/megaplot.py
 
 """
-Module: megaplot.py
-This module contains a class for creating and managing subplots in matplotlib.
+This submodule contains a tool named ``megaplot`` for creating and managing subplots in matplotlib.
+
+Classes:
+- SubPlot: A class for creating and managing subplots in matplotlib.
+- megaplot: A class used to make matplotlib subplot and its changes more convenient.
+
+Functions in megaplot:
+- SubPlot.__init__(self, ncols, nrows, name, constrained_layout=True): Initializes a SubPlot object with the specified number of columns and rows.
+- SubPlot.ax(self, x, y) -> Axes: Returns the Axes object at the specified position.
+- SubPlot.addrow(self): Adds a new row to the subplot grid.
+- megaplot.__init__(self, *argv, fig=None, gs=None, nrows=None, ncols=None, title=None, xlabel=None, ylabel=None, constrained_layout=False, log=True, **kwargs): Initializes a megaplot object with the specified parameters.
+- megaplot.__getitem__(self, items) -> Axes: Returns the Axes object at the specified position.
+- megaplot.__setitem__(self, items, artist): Sets the Axes object at the specified position.
+- megaplot.__len__(self): Returns the number of Axes objects in the megaplot.
+- megaplot.__iter__(self): Returns an iterator for iterating over the Axes objects in the megaplot.
+- megaplot.show(self): Displays the figure.
+- megaplot.save(self, filename, type='png', path='outputs', makedir=False, log=None, **kwargs): Saves the figure to a file.
+- megaplot.append2pdf(self, pdf:PdfPages): Appends the figure to an existing PDF file.
+- SubPlot.ncols: Number of columns in the subplot grid.
+- SubPlot.nrows: Number of rows in the subplot grid.
+- SubPlot.fig: The matplotlib figure object.
+- SubPlot.gs: The matplotlib GridSpec object.
+- SubPlot.size: The size of the subplot grid.
+- SubPlot.row_names: Names of the rows in the subplot grid.
+- SubPlot.col_names: Names of the columns in the subplot grid.
+- megaplot.nrows: Number of rows in the subplot grid.
+- megaplot.ncols: Number of columns in the subplot grid.
+- megaplot.log: Whether to print logs.
+- megaplot.row_names: Names of the rows in the subplot grid.
+- megaplot.col_names: Names of the columns in the subplot grid.
+- megaplot.fig: The matplotlib figure object.
+- megaplot.table: The table containing the indices of the Axes objects in the figure.
 """
 
 
