@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/theme.css" />
     <link rel="stylesheet" href="css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="assets/_mkdocstrings.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -42,11 +43,53 @@
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="#">Home</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#table-of-contents">Table Of Contents</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#project-overview">Project Overview</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#allen">allen</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#allen--allen-project">Allen Project</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#allen--packages">Packages</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#allen--utility-tools">Utility tools</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#allen--preprocessing-tools">Preprocessing tools</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#allen--experiments">Experiments</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting Started</a>
+    </li>
     </ul>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="about/">About</a>
+                <li class="toctree-l1"><a class="reference internal" href="tutorials/">Tutorials</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="how-to-guides/">How-To Guides</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="reference/">Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="explanation/">Project Explanation</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="notion/Allen%20project%20d3cfe5aab8384495b58fba8a47eeadcc/">Experiment History</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="DVC/">DVC Framework</a>
                 </li>
               </ul>
       </div>
@@ -74,25 +117,138 @@
               
                 <h1 id="welcome-to-allen-project">Welcome to Allen Project</h1>
 <p>This is the documentation for Allen Project.</p>
-<p>This project aims to analyze neural data using machine learning techniques. It includes various modules for data preprocessing, feature extraction, model training, and result visualization. The codebase is written in Python and utilizes popular libraries such as NumPy, Pandas, and TensorFlow.</p>
+<h2 id="introduction">Introduction</h2>
+<p>Functional connectivity analysis in the visual hierarchy is the basement towards studying continuous video stimuli processing. In this project, we aim to analyze the functional connection between the first two stage of the mouse visual cortex, specifically the V1 and LM. The neural activity data is obtained from the <a href="https://allensdk.readthedocs.io/en/latest/visual_coding_neuropixels.html">Visual Coding - Neuropixels dataset</a>. I employed Reduced Rank Regression (RRR) to uncover the underlying relationships between these brain regions. This analysis will provide valuable insights into the neural mechanisms underlying visual processing.</p>
+<p>The experiments are generated using the <a href="DVC/">DVC framework</a> and all the previous experiments are documented in the <a href="notion/Allen%20project%20d3cfe5aab8384495b58fba8a47eeadcc/">experiment history</a>.</p>
+<h2 id="table-of-contents">Table Of Contents</h2>
+<p>The documentation follows the best practice for
+project documentation as described by Daniele Procida
+in the <a href="https://diataxis.fr/">Diátaxis documentation framework</a>
+and consists of four separate parts:</p>
+<ol>
+<li><a href="tutorials/">Tutorials</a></li>
+<li><a href="how-to-guides/">How-To Guides</a></li>
+<li><a href="reference/">Reference</a></li>
+<li><a href="explanation/">Explanation</a></li>
+</ol>
+<p>Quickly find what you're looking for depending on
+your use case by looking at the different pages.</p>
+<h2 id="project-overview">Project Overview</h2>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="allen"></a>
+    <div class="doc doc-contents first">
+
+      <h2 id="allen--allen-project">Allen Project</h2>
+<p>Allen Project is a Python package for data analysis and visualization.</p>
+<h3 id="allen--packages">Packages</h3>
+<p>Allen Project includes subpackages:</p>
+<ul>
+<li><code>utils</code>: Utilities for data analysis and visualization.</li>
+<li><code>analyses</code>: Analyses for data analysis.</li>
+</ul>
+<h3 id="allen--utility-tools">Utility tools</h3>
+<p>The following main utility tools are available (in the <code>utils</code> subpackage):</p>
+<ul>
+<li><code>debug</code>: Debugging tool.</li>
+<li><code>megaplot</code>: This tool contains a class for creating and managing subplots in matplotlib.</li>
+<li><code>plots</code>: Plotting tool for all kinds of plots.</li>
+<li><code>AllenTable</code>: This tool contains a class for creating tables. See in the <code>utils/neuropixel.py</code> file.</li>
+</ul>
+<h3 id="allen--preprocessing-tools">Preprocessing tools</h3>
+<ul>
+<li><code>preprocessing</code>: Preprocessing tool for further data preprocessing after data initialization.</li>
+<li><code>behav-preprocessing</code>: Preprocessing tool for behavioral data.</li>
+<li><code>layer-assignment-analysis</code>: Analysis tool for layer assignment.</li>
+</ul>
+<h3 id="allen--experiments">Experiments</h3>
+<p>The following two-step experiments are available (make extra attention to the file names, as they are not always the same as the experiment names):</p>
+<ul>
+<li><strong>layer-rank</strong>: This experiment is about the rank of the layers in the RRR model. Corresponding codes are <code>layer-rank-analysis</code> and <code>layer-rank-plot</code>.</li>
+<li><strong>layer-interaction</strong>: This experiment is about the interaction between layers in a neural network. Corresponding codes are <code>layer-interaction-analysis</code> and <code>layer-interaction-plot</code>.</li>
+<li><strong>rank-along-time</strong>: This experiment is about the rank along time in the RRR model. Corresponding codes are <code>rank-along-time-analysis</code> and <code>rank-along-time-plot</code>.</li>
+<li><strong>crosstime</strong>: This experiment is about the cross-time RRR model. Corresponding codes are <code>crosstime-analysis</code> and <code>crosstime-plot</code>.</li>
+<li><strong>rrr-time-slice</strong>: This experiment is about the time slice of the RRR model. Corresponding codes are <code>rrr-time-slice-analysis</code> and <code>rrr-time-slice-plot</code>.</li>
+<li><strong>lag-along-time</strong>: This experiment is about the lag along time in the RRR model. Corresponding codes are <code>lag-along-time-analysis</code> and <code>lags-along-time-plot</code>.</li>
+<li><strong>time-lag-search</strong>: This experiment is about the time lag search in the RRR model. Corresponding codes are <code>time-lag-search-analysis</code> and <code>time-lag-search-plot</code>.</li>
+<li><strong>cv-time-lag</strong>: This experiment is about the cross-validation of the time lag in the RRR model. Corresponding codes are <code>cv-time-lag-analysis</code> and <code>cv-time-lag-plot</code>.</li>
+<li><strong>time-lag</strong>: This experiment is about the time lag in the RRR model. Corresponding codes are <code>time_lag_analysis</code> and <code>time_lag_plot</code>.</li>
+<li><strong>cv-rank-time</strong>: This experiment is about the cross-validation of the rank along time in the RRR model. Corresponding codes are <code>cv-rank-time-analysis</code> and <code>cv-rank-time-plot</code>.</li>
+<li><strong>rrr-rank</strong>: This experiment is about the rank of the RRR model. Corresponding codes are <code>rrr-rank-analysis</code> and <code>rrr-rank-plot</code>.</li>
+<li><strong>rrr</strong>: This experiment is about the RRR model. Corresponding codes are <code>rrr_analysis</code> and <code>rrr_plot</code>.</li>
+<li><strong>pca</strong>: This experiment is about the PCA model. Corresponding codes are <code>pca-analysis</code> and <code>pca-plot</code>.</li>
+<li><strong>cca</strong>: This experiment is about the CCA model. Corresponding codes are <code>cca_analysis</code> and <code>cca_plot</code>.</li>
+</ul>
+<p>The other experiment utilities are:</p>
+<ul>
+<li><code>histograms</code>: This utility contains functions for creating histograms.</li>
+<li><code>control-models</code>: This utility contains functions for creating control models.</li>
+<li><code>cv-rank-cross-time</code>: This utility contains functions for cross-validation of the rank along time.</li>
+<li><code>rrr-score-time-plot</code>: This utility contains functions for plotting the score along time in the RRR model.</li>
+<li><code>max-lags-along-time-plot</code>: This utility contains functions for plotting the maximum lags along time in the RRR model.</li>
+<li><code>crosstime-timeslice-plot</code>: This utility contains functions for plotting the cross-time time slice in the RRR model.</li>
+<li><code>save-slices</code>: This utility contains functions for saving slices in the crosstime RRR model.</li>
+<li><code>multiple-timeslices</code>: This utility contains functions for creating multiple time slices in the RRR model.</li>
+<li><code>multiple-timeslices-layers</code>: This utility contains functions for creating multiple time slices in the RRR model for each layer.</li>
+<li><code>layer-interaction-maxValues</code>: This utility contains functions for plotting the maximum values of the layer interaction in the RRR model.</li>
+<li><code>layer-interaction-stats</code>: This utility contains functions for plotting the statistics of the layer interaction in the RRR model.</li>
+<li><code>print-results</code>: This utility contains functions for printing the results of the RRR analyses.</li>
+</ul>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div><h2 id="getting-started">Getting Started</h2>
 <p>To get started, make sure you have Python 3.7 or higher installed on your machine. Then, clone the project repository from GitHub:</p>
-<pre><code>git clone https://github.com/username/repo.git
+<pre><code class="language-sh">git clone https://github.com/CSNLWigner/Allen
 </code></pre>
 <p>Next, navigate to the project directory:</p>
-<pre><code>cd repo
+<pre><code class="language-sh">cd Allen_project
 </code></pre>
 <p>Install the required dependencies using pip:</p>
-<pre><code>pip install -r requirements.txt
+<pre><code class="language-sh">pip3 install -r requirements.txt
 </code></pre>
-<p>Once the dependencies are installed, you can run the project by executing the main script:</p>
-<pre><code>python main.py
+<p>Once the dependencies are installed, you can run the last experiment by the <a href="DVC/">DVC framework</a> using the following command:</p>
+<pre><code class="language-sh">dvc repro
 </code></pre>
-<p>Feel free to explore the different modules and customize the code to suit your needs. For more detailed instructions, refer to the project's documentation.</p>
+<p>This command will reproduce the entire pipeline and generate the results.</p>
+<h1 id="reproduce-previous-experiments">Reproduce previous experiments</h1>
+<p>All the experiments are stored in the <code>pipelines</code> directory or in the <a href="notion/Allen%20project%20d3cfe5aab8384495b58fba8a47eeadcc/">experiment history</a> documentation. To reproduce the experiments we use the by the <a href="DVC/">DVC framework</a>. To reproduce a specific experiment, follow these steps:</p>
+<p>, follow these steps:</p>
+<ol>
+<li>Copy the dvc file from the <code>pipelines</code> directory or from a specific experiment in the <a href="notion/Allen%20project%20d3cfe5aab8384495b58fba8a47eeadcc/">experiment history</a> to the <code>dvc.yaml</code> file in the root directory.</li>
+<li>Copy the params file from the <code>pipelines</code> directory or from a specific experiment in the <a href="notion/Allen%20project%20d3cfe5aab8384495b58fba8a47eeadcc/">experiment history</a> to the <code>params.yaml</code> file in the root directory.</li>
+<li>Run the following command:</li>
+</ol>
+<pre><code class="language-sh">   dvc repro
+</code></pre>
+<ol>
+<li>If there are plotting stage in the pipeline, the visual results can be found in the <code>figures</code> directory (see the <code>outs</code> in the last stage).</li>
+</ol>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="about/" class="btn btn-neutral float-right" title="About">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="tutorials/" class="btn btn-neutral float-right" title="Tutorials">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -116,7 +272,7 @@
     
     
     
-      <span><a href="about/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="tutorials/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
@@ -124,6 +280,7 @@
     <script>var base_url = ".";</script>
     <script src="js/theme_extra.js"></script>
     <script src="js/theme.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       <script src="search/main.js"></script>
     <script>
         jQuery(function () {
@@ -136,5 +293,5 @@
 
 <!--
 MkDocs version : 1.6.0
-Build Date UTC : 2024-08-21 13:05:43.625410+00:00
+Build Date UTC : 2024-08-26 13:22:12.385813+00:00
 -->
