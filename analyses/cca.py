@@ -1,7 +1,6 @@
 # analyses/cca.py
 
 """
-Module: cca.py
 This module contains functions for performing Canonical Correlation Analysis (CCA) on neural data.
 These functions are called by the cca_analysis.py, which is the main program of this analysis.
 

@@ -1,7 +1,6 @@
 # analyses/pca.py
 
 """
-Module: pca.py
 This module contains functions for performing PCA on neural data.
 
 Functions:

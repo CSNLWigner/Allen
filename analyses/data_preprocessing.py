@@ -1,8 +1,7 @@
 # analyses/data_preprocessing.py
 
 """
-Module: data_preprocessing.py
-This module contains functions for preprocessing neural data.
+This module contains tools for preprocessing neural data.
 
 Functions:
 - get_behav_responses(behav_data, value_name, trial_start, duration=0.250, stepSize=0.010, binSize=0.050) -> np.ndarray: Calculate the unit responses for each trial in the given timestamps.

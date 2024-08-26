@@ -1,8 +1,7 @@
 # analyses/layer_interaction_maxValues.py
 
 """
-Module: layer_interaction_maxValues.py
-This module contains functions for finding the global maxima in a given data dictionary.
+This module contains tools for finding the global maxima in a given data.
 
 Functions:
 - getUnitsNumber(areaName: str) -> dict: Get the number of units for each layer in the origin and target areas.

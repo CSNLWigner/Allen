@@ -1,8 +1,7 @@
 # analyses/layer_rank.py
 
 """
-Module: layer_rank.py
-This module contains functions for performing rank-based analysis on neural data.
+This module contains tools for performing rank-based analysis on neural data.
 
 Functions:
 - cv_search(predictor, target) -> tuple: Perform a RRRR search for the best cv.

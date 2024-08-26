@@ -1,7 +1,6 @@
 # analyses/corr.py
 
 """
-Module: corr.py
 This module contains functions for calculating the cross-correlation between two areas.
 
 Functions:

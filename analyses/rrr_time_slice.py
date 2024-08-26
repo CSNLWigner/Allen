@@ -1,8 +1,7 @@
 # analyses/rrr_time_slice.py
 
 """
-Module: rrr_time_slice.py
-This module contains functions for performing RRRR analysis on time slices.
+This module contains tools for performing RRRR analysis on time slices.
 
 Functions:
 - RRRR_time_slice(predictor, target, predictor_time, cv, rank, log=True) -> dict: Calculate the RRRR for each time slice.

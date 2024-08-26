@@ -1,6 +1,8 @@
 # analyses/machine_learning_models.py
 
 """
+This module contains machine learning models for regression and feature selection.
+
 Reduced rank regression class.
 Requires scipy to be installed.
 

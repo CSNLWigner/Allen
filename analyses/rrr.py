@@ -1,8 +1,7 @@
 # analyses/rrr.py
 
 """
-Module: rrr.py
-This module contains functions for performing Reduced Rank Regression (RRR) analysis on neural data.
+This module contains tools for performing Reduced Rank Regression (RRR) analysis on neural data.
 
 Functions:
 - getCoeffs(model, log=False) -> numpy.ndarray: Calculate the mean coefficients of a model over cross-validation folds.

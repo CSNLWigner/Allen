@@ -1,8 +1,7 @@
 # analyses/imbalanced_data.py
 
 """
-Module: imbalanced_data.py
-This module contains functions for performing undersampled cross-validation on imbalanced datasets.
+This module contains tools for performing undersampled cross-validation on imbalanced datasets.
 
 Functions:
 - evaluate_fold(model, X_train, X_test, y_train, y_test, sample_size, replace) -> tuple: Train and evaluate the model on a single fold.
