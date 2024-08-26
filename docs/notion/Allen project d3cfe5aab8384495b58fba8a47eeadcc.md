@@ -30,20 +30,20 @@ Entry structure:
 - [Layer interaction plot](#layer-interaction-plot)
     - [Transient](#transient)
     - [**Causal direction of time**](#causal-direction-of-time)
-    - [Négyszigetes](#négyszigetes)
-    - [Egyirányú, L-alakú](#egyirányú-l-alakú)
-- [Layer in megaplot - first Blick](#layer-in-megaplot---first-blick)
+    - [Negyszigetes](#negyszigetes)
+    - [Egyiranyu: L alaku](#egyiranyu-l-alaku)
+- [Layer in megaplot: first Blick](#layer-in-megaplot-first-blick)
 - [LayerAssignment](#layerassignment)
 - [Units](#units)
 - [Layers](#layers)
-- [IPR 2024.05.27. \& discussion with Gergő](#ipr-20240527--discussion-with-gergő)
+- [After Progress Report](#after-progress-report)
     - [Marci](#marci)
     - [debug](#debug)
 - [Stimulus residual](#stimulus-residual)
 - [Stimuli](#stimuli)
 - [Mega plot 2](#mega-plot-2)
 - [Mega plot 1](#mega-plot-1)
-- [V1→ V1](#v1-v1)
+- [V1 to V1](#v1-to-v1)
 - [RRR time slice](#rrr-time-slice)
 - [Z-scoring](#z-scoring)
 - [Units table](#units-table)
@@ -64,7 +64,7 @@ Entry structure:
 - [V2-V1 interaction rank](#v2-v1-interaction-rank)
 - [Multiple session param search!!!](#multiple-session-param-search)
 - [Sessions](#sessions)
-- [V2 → V1](#v2--v1)
+- [V2 to V1](#v2-to-v1)
 - [RRR score by time](#rrr-score-by-time)
 - [Bootstrap above cv folds](#bootstrap-above-cv-folds)
 - [CV, timelag, timepoint exploration](#cv-timelag-timepoint-exploration)
@@ -88,7 +88,7 @@ Entry structure:
 - [PCA](#pca)
 - [RRR analysis along time](#rrr-analysis-along-time)
   - [Me:](#me)
-  - [**Gergő**:](#gergő)
+  - [**Gergo**:](#gergo)
     - [**Corr**:](#corr)
   - [**Marci**:](#marci-1)
   - [**References**:](#references)
@@ -202,12 +202,6 @@ stages:
     outs:
       - figures/layer-rank.png
 ```
-
-**Plan**:
-
-1. SCP copy through Nargothrond
-2. Azon adathalmazon mit tud a kreálmány
-3. ha nincs izgi eredmény (ami lázba hoz további munkára), akkor github repo-ba a methodologia (kövi diáknak)
 
 # New data layer distribution
 
@@ -474,7 +468,7 @@ Results:
 - rather predictive in the **causal direction of time**.
 - top-down LM l5 → V1 l2 l5 vízszintes
 
-### Négyszigetes
+### Negyszigetes
 
 ![layer-interaction_V1-to-LM_1111013640.png](Allen%20project%20d3cfe5aab8384495b58fba8a47eeadcc/layer-interaction_V1-to-LM_1111013640%201.png)
 
@@ -493,7 +487,7 @@ Results:
 - 1111013640, 1081079981, 1048189115, 1049514117
 - négyszigetes, inkább top-down a time causal kései response alapján, 50 ms alapján inkább bottom-up.
 
-### Egyirányú, L-alakú
+### Egyiranyu: L alaku
 
 ![layer-interaction_V1-to-LM_1086200042.png](Allen%20project%20d3cfe5aab8384495b58fba8a47eeadcc/layer-interaction_V1-to-LM_1086200042.png)
 
@@ -533,7 +527,7 @@ Results:
 - LM l5 → V1 l4
 - V1 l2 l5 → LM l5
 
-# Layer in megaplot - first Blick
+# Layer in megaplot: first Blick
 
 Name: LAYERPLOT.
 
@@ -626,12 +620,12 @@ Date: 2024.06.03
 |  | units from table | units from session |
 | --- | --- | --- |
 | Load time | 0.06 s | 28.36 s |
-| columns | ['ecephys_channel_id', 'ecephys_probe_id', 'ecephys_session_id', 'amplitude_cutoff', 'anterior_posterior_ccf_coordinate', 'dorsal_ventral_ccf_coordinate', 'left_right_ccf_coordinate', 'cumulative_drift', 'd_prime', 'structure_acronym', 'structure_id', 'firing_rate', 'isi_violations', 'isolation_distance', 'l_ratio', 'local_index', 'max_drift', 'nn_hit_rate', 'nn_miss_rate', 'presence_ratio', 'probe_horizontal_position', 'probe_vertical_position', 'silhouette_score', 'snr', 'quality', 'valid_data', 'amplitude', 'waveform_duration', 'waveform_halfwidth', 'PT_ratio', 'recovery_slope', 'repolarization_slope', 'spread', 'velocity_above', 'velocity_below'] | ['PT_ratio', 'amplitude', 'amplitude_cutoff', 'cluster_id', 'cumulative_drift', 'd_prime', 'firing_rate', 'isi_violations', 'isolation_distance', 'l_ratio', 'local_index', 'max_drift', 'nn_hit_rate', 'nn_miss_rate', 'peak_channel_id', 'presence_ratio', 'quality', 'recovery_slope', 'repolarization_slope', 'silhouette_score', 'snr', 'spread', 'velocity_above', 'velocity_below', 'waveform_duration'] |
-| code | units_table = cache.get_unit_table()
-units_cache = units_table[units_table['ecephys_session_id'] == session_id] | session = cache.get_ecephys_session(ecephys_session_id=session_id)
-units_session = session.get_units() |
+| columns | `['ecephys_channel_id', 'ecephys_probe_id', 'ecephys_session_id', 'amplitude_cutoff', 'anterior_posterior_ccf_coordinate', 'dorsal_ventral_ccf_coordinate', 'left_right_ccf_coordinate', 'cumulative_drift', 'd_prime', 'structure_acronym', 'structure_id', 'firing_rate', 'isi_violations', 'isolation_distance', 'l_ratio', 'local_index', 'max_drift', 'nn_hit_rate', 'nn_miss_rate', 'presence_ratio', 'probe_horizontal_position', 'probe_vertical_position', 'silhouette_score', 'snr', 'quality', 'valid_data', 'amplitude', 'waveform_duration', 'waveform_halfwidth', 'PT_ratio', 'recovery_slope', 'repolarization_slope', 'spread', 'velocity_above', 'velocity_below'] | ['PT_ratio', 'amplitude', 'amplitude_cutoff', 'cluster_id', 'cumulative_drift', 'd_prime', 'firing_rate', 'isi_violations', 'isolation_distance', 'l_ratio', 'local_index', 'max_drift', 'nn_hit_rate', 'nn_miss_rate', 'peak_channel_id', 'presence_ratio', 'quality', 'recovery_slope', 'repolarization_slope', 'silhouette_score', 'snr', 'spread', 'velocity_above', 'velocity_below', 'waveform_duration']` |
+| code | `units_table = cache.get_unit_table()`
+`units_cache = units_table[units_table['ecephys_session_id'] == session_id]` | `session = cache.get_ecephys_session(ecephys_session_id=session_id)`
+`units_session = session.get_units()` |
 - code
-    
+
 ```python
 # %% Load the Allen Neuropixel dataset
 
@@ -729,7 +723,9 @@ unit_id                                                                         
 [1925 rows x 36 columns]
 ```
 
-# IPR 2024.05.27. & discussion with Gergő
+# After Progress Report
+
+IPR 2024.05.27. & discussion with Gergő
 
 ### Marci
 
@@ -857,7 +853,7 @@ bottom-up: bifázisos kód (50 ms, 150 ms)
 
 top-down: gyengülő jel/tranziens kód
 
-# V1→ V1
+# V1 to V1
 
 **Date**: 2024.05.06.
 
@@ -1734,17 +1730,17 @@ All ecephys sessions had this issue except those listed here: ~~1059678195~~, 11
 | 1112302803 | 8% | cv=3, rank=14 | cv=2, rank=14 | 2 |
 | 1109889304 | 18-21% (NO 100ms) | cv=5, rank=18 | cv=2, lag=3, rank=8 | 6 |
 
-# V2 → V1
+# V2 to V1
 
 **Date**: 2024.02.28.
 
 **Session**: 1064644573
 
+```yaml
 cv: [2,3,4,5]
-
 rank: [2,4,6,8,10,12,14,16,18,20]
-
 lag: [0,3,6]
+```
 
 **All model failed** (both timewindow 50 and 100
 
@@ -2409,7 +2405,7 @@ stages:
 Cross-validation scores: [-1.62523803e+28 -2.47969342e+28 -1.52222458e+28]
 ```
 
-With CV [2,3,4,5,6] and ranks [3,4,5,6,7,8,9,10,11,12,13,14] the Max score is NaN:
+With `CV=[2,3,4,5,6]` and `ranks=[3,4,5,6,7,8,9,10,11,12,13,14]` the Max score is NaN:
 
 ```yaml
 stages:
@@ -2880,7 +2876,7 @@ change in spike frequency
 
 - [x] TODO: VISp→VISl,  VISl→VISp~~
 
-## **Gergő**:
+## **Gergo**:
 
 - [x] TODO: residual számilás before the analysis.~~
 
@@ -2904,9 +2900,20 @@ mozgás vajon milyen korrelációt ad? annak is van dimenzionalitása…
 
 ## **Marci**:
 
-$Y_{V2} = W_{V1} X_{V1} + W_{move} X_{move} + W_{pupil} X_{pupil} + W_{V2} X_{V2}$  különböző tagokat kihagyva (hold out) $R^2$ -ek összehasonlítása
+$$
+Y_{V2} = W_{V1} X_{V1} + W_{move} X_{move} + W_{pupil} X_{pupil} + W_{V2} X_{V2}
+$$
+különböző tagokat kihagyva (hold out) 
+$$
+R^2
+$$
+-ek összehasonlítása
 
-Ezeket úgy is össze lehet hasonlítani, hogy pl $Corr = X_{V1} \cdot X_{move}$ for each term/model.
+Ezeket úgy is össze lehet hasonlítani, hogy pl 
+$$
+Corr = X_{V1} \cdot X_{move}
+$$
+for each term/model.
 
 time_binek elcsúsztatva, esetleg optimalizálni V1→V2 time-lagra (R^2 kirajzolása vagy rank kirajzolása)
 
