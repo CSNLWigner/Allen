@@ -6,6 +6,12 @@ This script plots the rank of the bottom-up and top-down connections between lay
 - `-rank`: Rank switch.
 - `-r2`: R2 switch.
 
+**Parameters**:
+- `preprocess`: Preprocess parameters.
+
+**Input**:
+- `layer-rank`: Layer rank results.
+
 **Output**:
 
 - `layer-rank`: Layer rank results.

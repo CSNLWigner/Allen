@@ -1,3 +1,25 @@
+# rank-along-time-analysis.py
+
+"""
+This module contains tools for analyzing the rank along time in the RRR model.
+
+**Parameters**:
+
+- `load`: Load parameters.
+- `preprocess`: Preprocess parameters.
+- `rrr`: RRR parameters.
+- `rrr-param-search`: RRR parameter search.
+
+**Input**:
+
+- `<stimulus-block>_block_<predictor>-activity`: Predictor activity.
+- `<stimulus-block>_block_<target>-activity`: Target activity.
+
+**Output**:
+
+- `max-ranks`: Optimal rank along time.
+"""
+
 import numpy as np
 import yaml
 

@@ -9,6 +9,11 @@ This module contains tools for plotting the results of the layer interaction ana
 - `preprocess`: Preprocess parameters.
 - `crosstime`: Crosstime parameters.
 
+**Input**:
+
+- `layer-assignments-<originArea>`: Layer assignments for the origin area.
+- `layer-assignments-<targetArea>`: Layer assignments for the target area.
+
 **Output**:
 
 - `layer-interaction_<originArea>-to-<targetArea>`: Layer interaction results for each layer combination between the two areas.

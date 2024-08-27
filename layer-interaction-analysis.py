@@ -9,6 +9,12 @@ This module contains tools for performing layer interaction analysis on neural d
 - `crosstime`: Crosstime parameters.
 - `rrr`: RRR parameters.
 
+**Input**:
+
+- `session-params-old`: Table of session parameters.
+- `<stimulus-block>_block_VISp-activity`: V1 activity.
+- `<stimulus-block>_block_VISl-activity`: LM activity.
+
 **Output**:
 
 - `layer-interaction_<originArea>-to-<targetArea>`: Layer interaction results for each layer combination between the two areas.

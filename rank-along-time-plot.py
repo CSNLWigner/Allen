@@ -1,4 +1,20 @@
+# rank-along-time-plot.py
 
+"""
+This module contains tools for plotting the rank along time in the RRR model.
+
+**Parameters**:
+
+- `preprocess`: Preprocess parameters.
+
+**Input**:
+
+- `max-ranks`: Optimal rank along time.
+
+**Output**:
+
+- `figures/max-ranks.png`: Plot of the optimal rank along time.
+"""
 from matplotlib import pyplot as plt
 import numpy as np
 from utils.data_io import load_pickle, save_fig

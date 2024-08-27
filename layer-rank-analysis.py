@@ -17,6 +17,11 @@ $ python layer-rank-analysis.py [-l]
 - `preprocess`: Preprocess parameters.
 - `layer-rank`: Layer rank parameters.
 
+**Input**:
+
+- `<stimulus-block>_block_VISp-activity`: V1 activity.
+- `<stimulus-block>_block_VISl-activity`: LM activity.
+
 **Output**:
 
 - `layer-rank`: Layer rank results.
