@@ -1,7 +1,7 @@
 # rank-along-time-analysis.py
 
 """
-This module contains tools for analyzing the rank along time in the RRR model.
+This module performs rank-along-time analysis on the Allen Neuropixel dataset.
 
 **Parameters**:
 
@@ -12,12 +12,12 @@ This module contains tools for analyzing the rank along time in the RRR model.
 
 **Input**:
 
-- `<stimulus-block>_block_<predictor>-activity`: Predictor activity.
-- `<stimulus-block>_block_<target>-activity`: Target activity.
+- `data/raw-area-responses/<stimulus-block>_block_<predictor>-activity.pickle`: Predictor activity.
+- `data/raw-area-responses/<stimulus-block>_block_<target>-activity.pickle`: Target activity.
 
 **Output**:
 
-- `max-ranks`: Optimal rank along time.
+- `results/max-ranks.pickle`: Optimal rank along time.
 """
 
 import numpy as np

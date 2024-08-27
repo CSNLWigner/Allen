@@ -1,5 +1,32 @@
+# multiple-timeslices-layers.py
 
-import sys
+"""
+This module analyzes the interaction between layers in the Allen Neuropixel dataset.
+
+**Parameters**:
+
+- `load`:
+    - `session`: The session to analyze.
+- `preprocess`: The preprocess parameters.
+- `timeslice`: The time-slice parameters.
+- `crosstime`: The cross-time parameters.
+- `interaction-layers`: The layers to analyze.
+
+**Input**:
+
+- `data/units/layer-assignments-VISp.pickle`: Pickle file containing the layer assignments for the VISp area.
+- `data/units/layer-assignments-VISl.pickle`: Pickle file containing the layer assignments for the VISl area.
+- `data/raw-area-responses/<stimulus-block>_block_VISp-activity.pickle`: Pickle file containing the raw activity for the VISp area.
+- `data/raw-area-responses/<stimulus-block>_block_VISl-activity.pickle`: Pickle file containing the raw activity for the VISl area.
+- `data/area-responses/<stimulus-block>_block_VISp-activity.pickle`: Pickle file containing the preprocessed activity for the VISp area.
+- `data/area-responses/<stimulus-block>_block_VISl-activity.pickle`: Pickle file containing the preprocessed activity for the VISl area.
+- `data/stimulus-presentations/<stimulus-block>_block_image-names.pickle`: Pickle file containing the stimulus names.
+
+**Output**:
+
+- `figures/rrr-cross-time-slice-mega-plot.png`: The mega plot of the RRR analysis.
+
+"""
 
 import numpy as np
 import yaml

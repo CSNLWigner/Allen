@@ -1,11 +1,50 @@
+# cv-time-lag-analysis.py
+
+"""
+This module searches for the optimal cv-fold and time lag in the RRR model using cross-validation.
+
+The script loops through the cross-validation folds, time lags, and ranks specified in the parameters and calculates the RRR model for each combination. The results are saved as a pickle file in the `data/rrr-results` directory.
+
+**Parameters**:
+
+- `load`:
+    - `stimulus-block`: The name of the stimulus block to analyze.
+- `preprocess`:
+    - `step-size`: The step size of the time series data.
+    - `stimulus-duration`: The duration of the stimulus block.
+- `rrr`:
+    - `predictor`: The name of the brain area to use as the predictor in the RRR model.
+    - `target`: The name of the brain area to use as the target in the RRR model.
+    - `rank`: The rank of the RRR model.
+- `rrr-param-search`:
+    - `cv`: A list of cross-validation folds to use.
+    - `lag`: A list of time lags to use.
+    - `rank`: A list of ranks to use.
+    - `timepoints`: A list of timepoints to use for the analysis.
+
+**Input**:
+
+- `data/raw-area-responses/<stimulus-block>_block_<predictor>-activity.pickle`: Pickle file containing the raw activity data for the predictor brain area.
+- `data/raw-area-responses/<stimulus-block>_block_<target>-activity.pickle`: Pickle file containing the raw activity data for the target brain area.
+
+**Output**:
+
+- `data/rrr-results/CV-lag-time.pickle`: Pickle file containing the results of the cross-validation of the time lag in the RRR model. Shape: (n_cv, n_lag, n_rank, n_timepoints)
+
+**Submodules**:
+
+- `analysis.data_preprocessing`: Module for data preprocessing.
+- `analyses.rrr`: Module containing the RRRR function for calculating the RRR model.
+- `utils.data_io`: Module for loading and saving data.
+
+"""
+
 import sys
 
 import yaml
 
-from analyses.data_preprocessing import (get_area_responses,
-                                         preprocess_area_responses)
+from analyses.data_preprocessing import preprocess_area_responses
 from utils.data_io import load_pickle, save_pickle
-from utils.debug import debug, hasharr, ic
 
 # Get the arguments
 opts = [opt for opt in sys.argv[1:] if opt.startswith("-")]

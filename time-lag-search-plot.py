@@ -1,4 +1,25 @@
+# time-lag-search-plot.py
 
+"""
+This module plots the time-lag search.
+
+**Parameters**:
+
+- `rrr-param-search`: The RRR parameter search parameters.
+
+**Input**:
+
+- `results/time-lag-search.pickle`: Pickle file containing the time-lag search results.
+
+**Output**:
+
+- `figures/time-lag-search.png`: The time-lag search plot.
+
+**Submodules**:
+
+- `utils.data_io`: Module for loading and saving data.
+
+"""
 from matplotlib import pyplot as plt
 import numpy as np
 from utils.data_io import load_pickle, save_fig

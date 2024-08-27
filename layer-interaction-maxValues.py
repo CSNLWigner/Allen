@@ -1,3 +1,29 @@
+# layer-interaction-maxValues.py
+
+"""
+This module acquires the maximum values for each layer interaction from the Allen Neuropixel dataset and appends them to the results/maxValues.csv file.
+
+**Parameters**:
+
+- `load`:
+    - `session`: The session to analyze.
+- `crosstime`:
+    - `scaling-factor`: The scaling factor for the time values.
+    
+**Input**:
+
+- `results/layer-interaction_<originArea>-to-<targetArea>.pickle`: Pickle file containing the maximum values for each layer interaction from the origin area to the target area.
+
+**Output**:
+
+- `results/maxValues.csv`: CSV file containing the maximum values for each layer interaction.
+
+**Submodules**:
+
+- `analyses.layer_interaction_maxValues`: Module for analyzing the maximum values for each layer interaction.
+- `utils.data_io`: Module for loading and saving data.
+
+"""
 
 import warnings
 

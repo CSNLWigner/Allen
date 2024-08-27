@@ -1,7 +1,7 @@
 # layer-interaction-analysis.py
 
 """
-This module contains tools for performing layer interaction analysis on neural data.
+This module analyzes the interaction between layers in the Allen Neuropixel dataset.
 
 **Parameters**:
 
@@ -11,13 +11,15 @@ This module contains tools for performing layer interaction analysis on neural d
 
 **Input**:
 
-- `session-params-old`: Table of session parameters.
-- `<stimulus-block>_block_VISp-activity`: V1 activity.
-- `<stimulus-block>_block_VISl-activity`: LM activity.
+- `session-params-old.csv`: Table of session parameters.
+- `data/raw-area-responses/<stimulus-block>_block_VISp-activity.pickle`: V1 activity.
+- `data/raw-area-responses/<stimulus-block>_block_VISl-activity.pickle`: LM activity.
+- `data/units/layer-assignments-VISp.pickle`: Layer assignments for V1.
+- `data/units/layer-assignments-VISl.pickle`: Layer assignments for LM.
 
 **Output**:
 
-- `layer-interaction_<originArea>-to-<targetArea>`: Layer interaction results for each layer combination between the two areas.
+- `results/layer-interaction_<originArea>-to-<targetArea>.pickle`: Layer interaction results for each layer combination between the two areas.
 """
 
 # Import params

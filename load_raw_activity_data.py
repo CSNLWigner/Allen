@@ -1,3 +1,32 @@
+# load_raw_activity_data.py
+
+"""
+This script loads the raw activity data from the Allen Neuropixel dataset for a given session and stimulus block. The data is saved as a pickle file.
+
+The script first loads the session data using the `cacheData` class from the `download_allen` module. It then extracts the units from the session data and filters them based on the brain areas specified in the parameters. The script then calls the `get_area_responses` function to extract the responses of the units in each brain area to the stimulus block. The resulting data is saved as a pickle file in the `data/raw-area-responses` directory.
+
+**Parameters**:
+
+- `load`: 
+    - `session`: The index of the session to load.
+    - `stimulus-block`: The name of the stimulus block to analyze.
+    - `areas`: A list of brain areas to analyze.
+
+**Input**:
+
+None
+
+**Output**:
+
+- `data/raw-area-responses/<stimulus-block>_block_<area>-activity.pickle`: Pickle files containing the raw activity data for each brain area. Shape: (n_units, n_trials, n_timepoints)
+
+**Submodules**:
+
+- `analyses.data_preprocessing`: Module for data preprocessing.
+- `utils.data_io`: Module for loading and saving data.
+- `utils.download_allen`: Module for downloading data from the Allen Institute API.
+"""
+
 import yaml
 
 from analyses.data_preprocessing import get_area_responses

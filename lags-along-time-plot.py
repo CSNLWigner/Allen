@@ -1,13 +1,35 @@
+# lags-along-time-plot.py
 
-from matplotlib import pyplot as plt
+"""
+This module plots the lags along time.
+
+**Parameters**:
+
+- `preprocess`: Preprocess parameters.
+- `rrr-param-search`: RRR parameter search.
+
+**Input**:
+
+- `results/lags-along-time.pickle`: Lags along time.
+
+**Output**:
+
+- `figures/lags-along-time.png`: Plot of the lags along time.
+
+**Submodules**:
+
+- `utils.data_io`: Module for loading and saving data.
+
+"""
 import numpy as np
-from utils.data_io import load_pickle, save_fig
 import yaml
+from matplotlib import pyplot as plt
+
+from utils.data_io import load_pickle
 
 # Load parameters
 preproc = yaml.safe_load(open('params.yaml'))['preprocess']
 search_params = yaml.safe_load(open('params.yaml'))['rrr-param-search']
-
 
 # Load lags
 lags = load_pickle('lags-along-time')

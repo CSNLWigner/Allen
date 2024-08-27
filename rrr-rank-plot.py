@@ -1,9 +1,34 @@
+# rrr-rank-plot.py
 
-from matplotlib import pyplot as plt
+"""
+This module plots the RRR rank analysis.
+
+**Parameters**:
+
+- `preprocess`: Preprocess parameters.
+- `rrr-plot`: RRR rank analysis parameters.
+
+**Input**:
+
+- `results/VISp_VISl_cross-time-test-scores.pickle`: RRR test scores.
+
+**Output**:
+
+- `figures/V1-V2_cross-time_RRR-rank-analysis-2DIM.png`: 2D plot of the RRR test scores.
+- `figures/V1-V2_cross-time_RRR-rank-analysis-timewise.png`: Plot of the RRR test scores along time.
+- `figures/V1-V2_cross-time_RRR-rank-analysis-averaged-over-time.png`: Plot of the RRR test scores averaged over time.
+
+**Submodules**:
+
+- `utils.data_io`: Module for loading and saving data.
+- `utils.plots`: Module for plotting data.
+
+"""
 import numpy as np
 import yaml
+from matplotlib import pyplot as plt
 
-from utils.data_io import load_pickle, save_fig, save_pickle
+from utils.data_io import load_pickle, save_fig
 from utils.plots import rrr_rank_plot, rrr_rank_plot_over_time
 
 # Load params

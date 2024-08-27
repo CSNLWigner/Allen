@@ -1,9 +1,31 @@
+# time_lag_plot.py
 
+"""
+This module plots the time lag between V1 and LM.
 
+**Parameters**:
+
+- `preprocess`: Preprocess parameters.
+
+**Input**:
+
+- `results/VISp_VISl_cross-time-coeffs.pickle`: Cross time correlation coefficients.
+
+**Output**:
+
+- `figures/Time_lag_between_V1_LM.png`: Plot of the time lag between V1 and LM.
+
+**Submodules**:
+
+- `utils.data_io`: Module for loading and saving data.
+- `utils.plots`: Module for plotting data.
+"""
+
+import yaml
 from matplotlib import pyplot as plt
+
 from utils.data_io import load_pickle, save_fig
 from utils.plots import cross_time_correlation_coefficients_plot
-import yaml
 
 # Load parameters
 params = yaml.safe_load(open('params.yaml'))['preprocess']

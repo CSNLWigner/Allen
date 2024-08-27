@@ -1,4 +1,34 @@
-# Import 
+# lag-along-time-analysis.py
+
+"""
+This module performs lag-along-time analysis on the Allen Neuropixel dataset.
+
+**Parameters**:
+
+- `load`: Load parameters.
+- `preprocess`: Preprocess parameters.
+- `rrr`: RRR parameters.
+- `best-rrr-params`: Best RRR parameters.
+- `rrr-param-search`: RRR parameter search.
+
+**Input**:
+
+- `data/raw-area-responses/<stimulus-block>_block_<predictor>-activity.pickle`: Predictor activity.
+- `data/raw-area-responses/<stimulus-block>_block_<target>-activity.pickle`: Target activity.
+
+**Output**:
+
+- `results/lags-along-time.pickle`: Lags along time.
+- `results/max-lags-along-time.pickle`: Max lags along time.
+
+**Submodules**:
+
+- `analysis.data_preprocessing`: Module for data preprocessing.
+- `analyses.rrr`: Module containing the RRRR function for calculating the RRR model.
+- `utils.data_io`: Module for loading and saving data.
+- `utils.utils`: Module containing utility functions.
+
+""" 
 import numpy as np
 import yaml
 

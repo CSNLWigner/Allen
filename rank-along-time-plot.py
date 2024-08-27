@@ -1,7 +1,7 @@
 # rank-along-time-plot.py
 
 """
-This module contains tools for plotting the rank along time in the RRR model.
+This module plots the optimal rank along time.
 
 **Parameters**:
 
@@ -9,7 +9,7 @@ This module contains tools for plotting the rank along time in the RRR model.
 
 **Input**:
 
-- `max-ranks`: Optimal rank along time.
+- `results/max-ranks.pickle`: Optimal rank along time.
 
 **Output**:
 

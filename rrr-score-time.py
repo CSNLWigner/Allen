@@ -1,9 +1,33 @@
+# rrr-score-time.py
 
-from matplotlib import pyplot as plt
-import numpy as np
+"""
+This module performs rank-along-time analysis on the Allen Neuropixel dataset.
+
+**Parameters**:
+
+- `preprocess`: Preprocess parameters.
+- `rrr`: RRR parameters.
+
+**Input**:
+
+- `data/area-responses/5_block_<predictor>-activity.pickle`: Predictor activity.
+- `data/area-responses/5_block_<target>-activity.pickle`: Target activity.
+
+**Output**:
+
+- `results/rrr-score-time.pickle`: RRR score along time.
+
+**Submodules**:
+
+- `analyses.rrr`: Module containing the RRRR function for calculating the RRR model.
+- `utils.data_io`: Module for loading and saving data.
+
+"""
+
 import yaml
-from analyses.rrr import RRRR
 from scipy.stats import sem as standard_error
+
+from analyses.rrr import RRRR
 from utils.data_io import load_pickle, save_pickle
 
 # Load the params

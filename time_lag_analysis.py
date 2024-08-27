@@ -1,10 +1,37 @@
+# time_lag_analysis.py is a script that calculates the time lag between V1 and V2 activity.
 
+
+"""
+This module calculates the time lag between the V1 and V2 activity.
+
+The script loads the V1 and V2 activity data, calculates the RRR between the two areas, and finds the time lag that maximizes the RRR coefficients.
+
+**Parameters**:
+
+- `load`: Load parameters.
+- `preprocess`: Preprocessing parameters.
+
+**Input**:
+
+- `data/area-responses/<stimulus-block>_block_VISp-activity.pickle`: V1 activity.
+- `data/area-responses/<stimulus-block>_block_VISl-activity.pickle`: V2 activity.
+
+**Output**:
+
+- `results/VISp_VISl_cross-time-coeffs.pickle`: Pickle file containing the RRR coefficients between V1 and V2.
+- `results/VISp_VISl_cross-time-lag.pickle`: Pickle file containing the time lag between V1 and V2.
+
+**Submodules**:
+
+- `analyses.rrr`: Module containing the RRRR function for calculating the RRR model.
+- `utils.data_io`: Module for loading and saving data.
+
+"""
 import numpy as np
 import yaml
 
+from analyses.rrr import RRRR
 from utils.data_io import load_pickle, save_pickle
-from analyses.data_preprocessing import z_score_normalize
-from analyses.rrr import RRRR, calculate_cross_time_correlation
 
 # Load parameters
 load = yaml.safe_load(open('params.yaml'))['load']

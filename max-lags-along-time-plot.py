@@ -1,3 +1,23 @@
+# max-lags-along-time-plot.py
+
+"""
+
+This module plots the max lag along time.
+
+**Parameters**:
+
+- `preprocess`: Preprocess parameters.
+- `rrr-param-search`: RRR parameter search.
+
+**Input**:
+
+- `results/max-lags-along-time.pickle`: Max lag along time.
+
+**Output**:
+
+- `figures/max-lags-along-time.png`: Plot of the max lag along time.
+
+"""
 
 from matplotlib import pyplot as plt
 import numpy as np
@@ -7,7 +27,6 @@ import yaml
 # Load parameters
 preproc = yaml.safe_load(open('params.yaml'))['preprocess']
 search_params = yaml.safe_load(open('params.yaml'))['rrr-param-search']
-
 
 # Load lags
 lags = load_pickle('max-lags-along-time')

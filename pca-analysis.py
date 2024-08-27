@@ -1,10 +1,34 @@
-from matplotlib import pyplot as plt
-import numpy as np
-from sklearn.decomposition import PCA
-from utils.data_io import load_pickle, save_pickle
+# pca-analysis.py
+
+"""
+This module performs PCA analysis on the Allen Neuropixel dataset.
+
+**Parameters**:
+
+- `preprocess`: Preprocess parameters.
+
+**Input**:
+
+- `data/area-responses/<stimulus-block>_block_VISp-activity.pickle`: V1 activity.
+- `data/area-responses/<stimulus-block>_block_VISl-activity.pickle`: LM activity.
+
+**Output**:
+
+- `results/pca-analysis.pickle`: PCA analysis results.
+
+**Submodules**:
+
+- `analyses.pca`: Module containing the PCA function for calculating the PCA model.
+- `utils.data_io`: Module for loading and saving data.
+
+"""
+
 import yaml
-from utils.utils import iterate_dimension
+from sklearn.decomposition import PCA
+
 from analyses.pca import pca
+from utils.data_io import load_pickle, save_pickle
+from utils.utils import iterate_dimension
 
 # Load params
 params = yaml.safe_load(open('params.yaml'))['preprocess']

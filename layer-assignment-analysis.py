@@ -1,14 +1,36 @@
-# Cortical Layer Assignment Analysis
+# layer-assignment-analysis.py
 
-import time
+"""
+This module assigns the cortical layers to the units in the Allen Neuropixel dataset.
 
-import pandas as pd
+**Parameters**:
+
+- `load`:
+    - `areas`: A list of brain areas to analyze.
+
+**Input**:
+
+None
+
+**Output**:
+
+- `data/units/layer-assignments-<area>.pickle`: Pickle files containing the layer assignments for each brain area.
+
+**Submodules**:
+
+- `utils.download_allen`: Module for downloading data from the Allen Institute API.
+- `utils.ccf_volumes`: Module for extracting the cortical layer assignment.
+- `utils.data_io`: Module for loading and saving data.
+- `utils.neuropixel`: Module for extracting the units from the Allen Neuropixel dataset.
+
+"""
+
+
 import yaml
 
-from utils.allen_cache import cacheData
+from utils.download_allen import cacheData
 from utils.ccf_volumes import cortical_layer_assignment
 from utils.data_io import save_pickle
-from utils.debug import ic
 from utils.neuropixel import AllenTables, get_area_units
 
 # Load parameters

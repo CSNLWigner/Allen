@@ -1,10 +1,42 @@
+# time-lag-search-analysis.py
+
+"""
+This module searches for the optimal time lag in the RRR model using cross-validation.
+
+The script loops through the time lags specified in the parameters and calculates the RRR model for each time lag. The results are saved as a pickle file in the `data/results` directory.
+
+**Parameters**:
+
+- `load`:
+    - `stimulus-block`: The name of the stimulus block to analyze.
+- `preprocess`: Preprocessing parameters.
+- `rrr`: RRR parameters.
+- `best-rrr-params`: Best RRR parameters.
+- `rrr-param-search`: RRR parameter search.
+
+**Input**:
+
+- `data/raw-area-responses/<stimulus-block>_block_<predictor>-activity.pickle`: Pickle file containing the raw activity data for the predictor brain area.
+- `data/raw-area-responses/<stimulus-block>_block_<target>-activity.pickle`: Pickle file containing the raw activity data for the target brain area.
+
+**Output**:
+
+- `data/results/time-lag-search.pickle`: Pickle file containing the results of the time lag search.
+
+**Submodules**:
+
+- `analyses.rrr`: Module containing the RRRR function for calculating the RRR model.
+- `analyses.data_preprocessing`: Module for data preprocessing.
+- `utils.data_io`: Module for loading and saving data.
+
+"""
+
 import numpy as np
-from analyses.rrr import RRRR
-from analyses.data_preprocessing import preprocess_area_responses
-from utils.data_io import load_pickle, save_pickle
 import yaml
 
-from utils.utils import shift_with_nans
+from analyses.data_preprocessing import preprocess_area_responses
+from analyses.rrr import RRRR
+from utils.data_io import load_pickle, save_pickle
 
 # Load parameters
 load = yaml.safe_load(open('params.yaml'))['load']

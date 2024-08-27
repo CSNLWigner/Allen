@@ -1,11 +1,40 @@
+# crosstime-timeslice-plot.py
 
+"""
+This module plots the cross-time RRR analysis and time-slice analysis based on the cached results.
 
-# Import the necessary libraries
-from matplotlib import pyplot as plt
+**Parameters**:
+
+- `load`:
+    - `session`: The session to analyze.
+- `preprocess`: The preprocess parameters.
+- `rrr-time-slice`: The time-slice parameters.
+
+**Input**:
+
+- `cache/top-down_cross-time-RRR_<session>.pickle`: Pickle file containing the top-down cross-time RRR analysis results.
+- `cache/bottom-up_cross-time-RRR_<session>.pickle`: Pickle file containing the bottom-up cross-time RRR analysis results.
+- `results/rrr-time-slice.pickle`: Pickle file containing the time-slice analysis results.
+
+**Output**:
+
+- `figures/crosstime-timeslice-plot.png`: The cross-time RRR and time-slice plot.
+
+(Also saves a copy of the plot in the `cache` directory with the session name appended to the filename.)
+
+**Submodules**:
+
+- `utils.data_io`: Module for loading and saving data.
+- `utils.plots`: Module for plotting functions.
+
+"""
+
 import numpy as np
-from utils.data_io import load_pickle, save_fig
-from utils import plots
 import yaml
+from matplotlib import pyplot as plt
+
+from utils import plots
+from utils.data_io import load_pickle, save_fig
 
 # Load the params
 load = yaml.safe_load(open('params.yaml'))['load']

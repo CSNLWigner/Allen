@@ -10,11 +10,11 @@ This script plots the rank of the bottom-up and top-down connections between lay
 - `preprocess`: Preprocess parameters.
 
 **Input**:
-- `layer-rank`: Layer rank results.
+- `results/layer-rank.pickle`: Layer rank results.
 
 **Output**:
 
-- `layer-rank`: Layer rank results.
+- `figures/layer-rank.png`: Layer rank results.
 """
 
 import sys

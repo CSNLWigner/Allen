@@ -1,9 +1,35 @@
-# Import
+# crosstime-analysis.py
+
+"""
+This module performs cross-time analysis on the Allen Neuropixel dataset.
+
+**Parameters**:
+
+- `load`: Load parameters.
+- `preprocess`: Preprocess parameters.
+- `rrr`: RRR parameters.
+- `crosstime`: Crosstime parameters.
+
+**Input**:
+
+- `data/raw-area-responses/<stimulus-block>_block_<predictor>-activity.pickle`: Predictor activity.
+- `data/raw-area-responses/<stimulus-block>_block_<target>-activity.pickle`: Target activity.
+
+**Output**:
+
+- `results/<predictor>-<target>_cross-time-RRR.pickle`: Cross-time RRR results.
+
+**Submodules**:
+
+- `analyses.rrr`: Module containing the RRRR function for calculating the RRR model.
+- `utils.data_io`: Module for loading and saving data.
+
+"""
 import sys
 
 import yaml
 
-from analyses.rrr import RRRR, crosstime_analysis
+from analyses.rrr import crosstime_analysis
 from utils.data_io import load_pickle, save_pickle
 
 """

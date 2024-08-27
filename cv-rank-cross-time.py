@@ -1,10 +1,41 @@
+# cv-rank-cross-time.py
 
+"""
+This module searches for the optimal cv-fold and time lag in the RRR model using cross-validation.
 
-from matplotlib import pyplot as plt
+The script loops through the cross-validation folds, time lags, and ranks specified in the parameters and calculates the RRR model for each combination. The results are saved as a pickle file in the `data/rrr-results` directory.
+
+**Parameters**:
+
+- `rrr-cv-rank-time`:
+    - `cv`: A list of cross-validation folds to use.
+    - `ranks`: A list of ranks to use.
+    - `duration`: The duration of the time window.
+    - `time-bin`: The time bin size.
+    - `time-step`: The time step size.
+    
+**Input**:
+
+- `data/area-responses/5_block_VISp-activity.pickle`: Pickle file containing the raw activity data for the VISp brain area.
+- `data/area-responses/5_block_VISl-activity.pickle`: Pickle file containing the raw activity data for the VISl brain area.
+
+**Output**:
+
+- `data/rrr-results/CV-rank.pickle`: Pickle file containing the results of the cross-validation of the rank in the RRR model. Shape: (n_cv, n_rank)
+- `figures/CV-rank_cross-time.png`: Plot of the cross-validation of the rank in the RRR model.
+
+**Submodules**:
+
+- `analyses.rrr`: Module containing the RRRR function for calculating the RRR model.
+- `utils.data_io`: Module for loading and saving data.
+- `utils.plots`: Module for plotting data.
+"""
+
 import numpy as np
-from utils.data_io import load_pickle, save_pickle
-from analyses.rrr import RRRR, cross_time_rrr_coeffs
+from matplotlib import pyplot as plt
 
+from analyses.rrr import RRRR, cross_time_rrr_coeffs
+from utils.data_io import load_pickle, save_pickle
 from utils.plots import cv_rank_time_plot
 
 # Load V1 and V2 activity

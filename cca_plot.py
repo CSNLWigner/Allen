@@ -1,10 +1,28 @@
-# Main for plot CCA results (saved in the results folder)
-# DVC file. 
+# cca_plot.py
 
-from matplotlib import pyplot as plt
-from utils import plots
+"""
+This module plots the CCA scores.
+
+**Parameters**:
+
+None
+
+**Input**:
+
+- `results/cca_scores.csv`: CCA scores.
+
+**Output**:
+
+None
+
+**Submodules**:
+
+None
+
+"""
+
 import numpy as np
-import csv
+from matplotlib import pyplot as plt
 
 # Load the results from the results folder
 results_path = "results/cca_scores.csv"

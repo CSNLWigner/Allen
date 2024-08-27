@@ -1,4 +1,27 @@
-import pickle
+# pca-plot.py
+
+"""
+This module plots the PCA analysis results.
+
+**Parameters**:
+
+None
+
+**Input**:
+
+- `results/pca-analysis.pickle`: PCA analysis results.
+
+**Output**:
+
+- `figures/pca-analysis_explained_variance_ratio.png`: Plot of the explained variance ratio.
+- `figures/pca-analysis_principal-components.png`: Plot of the principal components.
+
+**Submodules**:
+
+- `utils.data_io`: Module for loading and saving data.
+
+"""
+
 import matplotlib.pyplot as plt
 
 from utils.data_io import load_pickle, save_fig

@@ -116,20 +116,20 @@ def rank_search(predictor, target, cv, log=False) -> tuple:
 
 
 def calc_ranks(V1_data, LM_data, timepoints, log=False):
-    '''
-    Calculate the time lag between two time series.
+    """
+    Calculate the ranks and R^2 scores for the given time series data.
 
     Parameters:
-        V1_data (numpy array): Time series data for V1 area.
-        LM_data (numpy array): Time series data for LM area.
-        timepoints (list): Time points to calculate ranks for.
+        V1_data (numpy array): Time series data for the V1 area.
+        LM_data (numpy array): Time series data for the LM area.
+        timepoints (list): List of time points to calculate ranks for.
         log (bool, optional): Whether to log the results or not. Default is False.
 
     Returns:
         rank_results (numpy array): Array of calculated ranks. Shape: (nAreas(2), nLayers(6+1), nLayers(6+1), nTimepoints)
         r2_results (numpy array): Array of R^2 scores. Shape: (nAreas(2), nLayers(6+1), nLayers(6+1), nTimepoints)
-    '''
-
+    """
+    
     # Calculate the time length after the preprocessing by the time step and the stimulus duration
     time_length = int(preproc['stimulus-duration'] / preproc['step-size'])
 

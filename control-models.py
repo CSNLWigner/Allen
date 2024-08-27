@@ -1,8 +1,32 @@
-from utils.data_io import save_fig
-from analyses.rrr import control_models
-import matplotlib.pyplot as plt
-from utils.plots import score_plot_by_time
+# control-models.py
 
+"""
+This module compares the control models.
+
+**Parameters**:
+
+None
+
+**Input**:
+
+- `results/rrr-control.pickle`: RRR control models.
+
+**Output**:
+
+- `figures/control-models.png`: Plot of the control models.
+
+**Submodules**:
+
+- `analyses.rrr`: Module for RRR analysis.
+- `utils.data_io`: Module for loading and saving data.
+- `utils.plots`: Module for plotting data.
+"""
+
+import matplotlib.pyplot as plt
+
+from analyses.rrr import control_models
+from utils.data_io import save_fig
+from utils.plots import score_plot_by_time
 
 # Create Figure
 fig, ax = plt.subplots()  # 1, 1, figsize=(10, 10)

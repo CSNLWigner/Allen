@@ -1,8 +1,30 @@
+# histograms.py
 
-# Load params
-from matplotlib import pyplot as plt
+"""
+This module calculates and plots the histograms of the V1 activity.
+
+**Parameters**:
+
+- `preprocess`: Preprocess parameters.
+
+**Input**:
+
+- `data/area-responses/5_block_VISp-activity.pickle`: V1 activity.
+
+**Output**:
+
+- `results/5_block_VISp-histograms.pickle`: Histograms of the V1 activity.
+- `figures/V1-histograms_on_natural_images.png`: Plot of the histograms.
+
+**Submodules**:
+
+- `utils.data_io`: Module for loading and saving data.
+- `utils.utils`: Module for utility functions.
+"""
+
 import numpy as np
 import yaml
+from matplotlib import pyplot as plt
 
 from utils.data_io import load_pickle, save_fig, save_pickle
 from utils.utils import get_time

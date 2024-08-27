@@ -1,10 +1,34 @@
+# cv-time-lag-plot.py
 
+"""
+This module plots the cross-validation, lag, and time search.
 
-from matplotlib import pyplot as plt
+**Parameters**:
+
+- `preprocess`: Preprocess parameters.
+- `rrr`: RRR parameters.
+- `rrr-param-search`: RRR parameter search.
+
+**Input**:
+
+- `results/CV-lag-time.pickle`: Pickle file containing the results of the cross-validation, lag, and time search.
+
+**Output**:
+
+- `figures/rrr-param-search.png`: The cross-validation, lag, and time search plot.
+
+**Submodules**:
+
+- `utils.data_io`: Module for loading and saving data.
+- `utils.plots`: Module for plotting functions.
+"""
+
 import numpy as np
+import yaml
+from matplotlib import pyplot as plt
+
 from utils.data_io import load_pickle, save_fig
 from utils.plots import cv_rank_time_plot
-import yaml
 
 # Load the params
 preproc = yaml.safe_load(open('params.yaml'))['preprocess']
@@ -35,6 +59,7 @@ fig.suptitle(f'{rrr["predictor"]} -> {rrr["target"]}', fontsize=20)
 
 # Permuations of the dimensions (select 2 from 4) with built-in function
 from itertools import combinations
+
 perm = list(combinations(dim_names, 2))
 for p in perm:
     

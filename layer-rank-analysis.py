@@ -1,5 +1,5 @@
 """
-This module contains tools for performing rank-based analysis on neural data.
+This module calculates the RRR ranks between the layers of V1 and LM.
 
 **Usage**:
 
@@ -19,13 +19,15 @@ $ python layer-rank-analysis.py [-l]
 
 **Input**:
 
-- `<stimulus-block>_block_VISp-activity`: V1 activity.
-- `<stimulus-block>_block_VISl-activity`: LM activity.
+- `data/area-responses/<stimulus-block>_block_VISp-activity.pickle`: V1 activity.
+- `data/area-responses/<stimulus-block>_block_VISl-activity.pickle`: LM activity.
+- `data/units/layer-assignments-VISp.pickle`: Layer assignments for V1.
+- `data/units/layer-assignments-VISl.pickle`: Layer assignments for LM.
 
 **Output**:
 
-- `layer-rank`: Layer rank results.
-- `layer-r2`: Layer R2 results.
+- `results/layer-rank.pickle`: Layer rank results.
+- `results/layer-r2.pickle`: Layer R2 results.
 """
 
 import sys

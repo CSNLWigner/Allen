@@ -1,3 +1,31 @@
+# behav-preprocessing.py: Preprocess the behavior data from the Allen Neuropixel dataset
+
+"""
+This module preprocesses the behavior data from the Allen Neuropixel dataset.
+
+The script loads the behavior data for a given session and stimulus block. It then transforms the behavior data using the `transform_behav_data` function from the `data_preprocessing` module. The transformed data is z-scored and saved as a pickle file in the `data/behav-responses` directory.
+
+**Parameters**:
+
+- `preprocess`:
+    - `stimulus-block`: The name of the stimulus block to analyze.
+
+**Input**:
+
+None
+
+**Output**:
+
+- `data/behav-responses/<stimulus-block>_block_<behavior>.pickle`: Pickle files containing the transformed behavior data.  
+
+**Submodules**:
+
+- `analyses.data_preprocessing`: Module for data preprocessing.
+- `utils.data_io`: Module for loading and saving data.
+- `utils.download_allen`: Module for downloading data from the Allen Institute API.
+
+"""
+
 import yaml
 
 from analyses.data_preprocessing import transform_behav_data

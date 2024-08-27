@@ -1,14 +1,40 @@
-# This code will make a CCA analysis across two brain region (VISp and VISpm) from the allen cache databese using allensdk cache and the data/.vbn_s3_cache
-# The functions for the analysis are in the cca.py and in the utils folder (e.g. download_allen.py and neuropixel.py) 
+# rrr_analysis.py
 
-# Utile functions:
-# from allensdk.brain_observatory.ecephys.visualization import plot_mean_waveforms, plot_spike_counts, raster_plot
+"""
+This code will make a CCA analysis across two brain region (VISp and VISpm) from the allen cache databese using allensdk cache and the data/.vbn_s3_cache
 
+The functions for the analysis are in the cca.py and in the utils folder (e.g. download_allen.py and neuropixel.py) 
 
-# Compare VISp and VISpm areas with CCA
+Utile functions:
+
+- from allensdk.brain_observatory.ecephys.visualization import plot_mean_waveforms, plot_spike_counts, raster_plot
+
+**Parameters**:
+
+- `preprocess`:
+    - `stimulus-block`: The name of the stimulus block to analyze.
+
+**Input**:
+
+- `data/area-responses/<stimulus-block>_block_VISp-responses.pickle`: Pickle file containing the responses of the units in the VISp area.
+- `data/area-responses/<stimulus-block>_block_VISpm-responses.pickle`: Pickle file containing the responses of the units in the VISpm area.
+
+**Output**:
+
+- `results/rrr.pickle`: Pickle file containing the results of the RRR analysis.
+
+**Submodules**:
+
+- `analyses.rrr`: Module for the RRR analysis.
+- `utils.data_io`: Module for loading and saving data.
+- `utils.download_allen`: Module for downloading data from the Allen Institute API.
+
+"""
+
+import yaml
+
 from analyses.rrr import compare_two_areas
 from utils.data_io import load_pickle, save_dict_items
-import yaml
 
 preprocess = yaml.safe_load(open('params.yaml'))['preprocess']
 

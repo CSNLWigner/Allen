@@ -1,9 +1,34 @@
+# rrr-time-slice-plot.py
 
-from matplotlib import pyplot as plt
+"""
+This module plots the results of the RRR time-slice analysis.
+
+**Parameters**:
+
+- `preprocess`: Preprocess parameters.
+- `rrr-time-slice`: Time-slice parameters.
+    - `predictor-time`: Time of the predictor stimulus.
+
+**Input**:
+
+- `results/rrr-time-slice.pickle`: Results of the time-slice analysis.
+
+**Output**:
+
+- `figures/rrr-time-slice.png`: Plot of the RRR time-slice analysis.
+
+**Submodules**:
+
+- `utils.plots`: Module for plotting functions.
+- `utils.data_io`: Module for loading and saving data.
+
+"""
 import numpy as np
-from utils.data_io import load_pickle, save_fig
-from utils import plots
 import yaml
+from matplotlib import pyplot as plt
+
+from utils import plots
+from utils.data_io import load_pickle, save_fig
 
 # Load parameters
 preproc = yaml.safe_load(open('params.yaml'))['preprocess']

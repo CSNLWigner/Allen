@@ -1,7 +1,7 @@
 # layer-interaction-plot.py
 
 """
-This module contains tools for plotting the results of the layer interaction analysis on neural data.
+This module plots the layer interaction results between two areas.
 
 **Parameters**:
 
@@ -11,12 +11,15 @@ This module contains tools for plotting the results of the layer interaction ana
 
 **Input**:
 
-- `layer-assignments-<originArea>`: Layer assignments for the origin area.
-- `layer-assignments-<targetArea>`: Layer assignments for the target area.
+- `data/units/layer-assignments-<originArea>.pickle`: Layer assignments for the origin area.
+- `data/units/layer-assignments-<targetArea>.pickle`: Layer assignments for the target area.
+- `data/layer-interaction_<originArea>-to-<targetArea>.pickle`: Layer interaction results for the origin and target areas.
 
 **Output**:
 
-- `layer-interaction_<originArea>-to-<targetArea>`: Layer interaction results for each layer combination between the two areas.
+- `figures/layer-interaction_<originArea>-to-<targetArea>.png`: Layer interaction results for each layer combination between the two areas.
+
+(Also saved in the cache directory with the session and block number appended to the filename.)
 """
 
 import numpy as np

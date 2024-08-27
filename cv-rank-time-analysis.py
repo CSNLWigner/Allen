@@ -1,12 +1,41 @@
+# cv-ranking-time-analysis.py
 
+"""
+This module performs cross-validation, rank, and time analysis on the Allen Neuropixel dataset.
 
-from matplotlib import pyplot as plt
+**Parameters**:
+
+- `load`:
+    - `session`: The session to analyze.
+- `preprocess`: Preprocess parameters.
+- `rrr-cv-rank-time`: RRR cross-validation, rank, and time parameters.
+
+**Input**:
+
+- `data/raw-area-responses/<stimulus-block>_block_VISp-activity.pickle`: Pickle file containing the raw activity for the VISp area.
+- `data/raw-area-responses/<stimulus-block>_block_VISl-activity.pickle`: Pickle file containing the raw activity for the VISl area.
+
+**Output**:
+
+- `figures/CV-rank-time_<time_bin>-bin_<time_step>-step.png`: The cross-validation, rank, and time plot.
+
+**Submodules**:
+
+- `analyses.rrr`: Module containing the RRRR function for calculating the RRR model.
+- `utils.data_io`: Module for loading and saving data.
+- `utils.plots`: Module for plotting data.
+- `utils.utils`: Module for utility functions.
+
+"""
+
 import numpy as np
-from analyses.data_preprocessing import calculate_residual_activity, recalculate_neural_activity, z_score_normalize
-from utils.data_io import load_pickle, save_pickle
-from analyses.rrr import RRRR
 import yaml
+from matplotlib import pyplot as plt
 
+from analyses.data_preprocessing import (calculate_residual_activity,
+                                         z_score_normalize)
+from analyses.rrr import RRRR
+from utils.data_io import load_pickle
 from utils.plots import cv_rank_time_plot
 
 # Load the parameters

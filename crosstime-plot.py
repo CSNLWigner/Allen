@@ -1,11 +1,41 @@
+# crosstime-plot.py
 
+"""
+This module plots the cross-time RRR analysis.
 
-import numpy as np
-from utils.data_io import load_pickle, save_fig
-from utils import plots
-import matplotlib.pyplot as plt
-import yaml
+**Parameters**:
+
+- `load`:
+    - `session`: The session to analyze.
+- `rrr-param-search`: The RRR parameter search parameters.
+- `rrr`: The RRR parameters.
+- `crosstime`: The cross-time parameters.
+
+**Input**:
+
+- `results/cross-time-RRR.pickle`: Pickle file containing the cross-time RRR analysis results.
+
+**Output**:
+
+- `figures/cross-time-RRR.png`: The cross-time RRR plot.
+
+(Also saves a copy of the plot in the `cache` directory with the session name appended to the filename.)
+
+**Submodules**:
+
+- `utils.data_io`: Module for loading and saving data.
+- `utils.plots`: Module for plotting functions.
+
+"""
+
 import sys
+
+import matplotlib.pyplot as plt
+import numpy as np
+import yaml
+
+from utils import plots
+from utils.data_io import load_pickle, save_fig
 
 # Get the parameters from the command line
 prediction_direction = sys.argv[1]

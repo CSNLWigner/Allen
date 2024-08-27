@@ -23,7 +23,7 @@ nav:
   - Experiment History: notion/Allen project d3cfe5aab8384495b58fba8a47eeadcc.md
   - References:
     - Overview: references/references.md
-    - Modules:
+    - Experiment Modules:
       - references/experiments/layer-rank.md
       - references/experiments/layer-interaction.md
       - references/experiments/rank-along-time.md
