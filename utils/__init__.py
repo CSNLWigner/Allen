@@ -3,22 +3,22 @@
 """
 Tool-package for data analysis and visualization (plotting).
 
-Main submodules
-----------
-debug : Debugging tool.
-megaplot : This tool contains a class for creating and managing subplots in matplotlib.
-plots : Plotting tool for all kinds of plots.
+Main submodules:
 
-More submodules
-----------
-data_io : Data input/output tools.
-download_allen: Download and initialize data from the Allen Brain Observatory.
-layers: Tools for simple layer analysis.
-directDownload: Direct download tools for retrieving the download links for all sessions in a given manifest file from the Allen Brain Observatory.
-neuropixel: Tools for working with Neuropixel data from the Allen Institute.
-ccf_volumes: Tools for assigning cortical layers to channels and units based on the Allen Brain Atlas Common Coordinate Framework (CCF) volumes.
-utils: Utility tools for various tasks
-feature_functions: Feature functions for data analysis.
+- `debug`: Debugging tool.
+- `megaplot`: This tool contains a class for creating and managing subplots in matplotlib.
+- `plots`: Plotting tool for all kinds of plots.
+
+More submodules:
+
+- `data_io`: Data input/output tools.
+- `download_allen`: Download and initialize data from the Allen Brain Observatory.
+- `layers`: Tools for simple layer analysis.
+- `directDownload`: Direct download tools for retrieving the download links for all sessions in a given manifest file from the Allen Brain Observatory.
+- `neuropixel`: Tools for working with Neuropixel data from the Allen Institute.
+- `ccf_volumes`: Tools for assigning cortical layers to channels and units based on the Allen Brain Atlas Common Coordinate Framework (CCF) volumes.
+- `utils`: Utility tools for various tasks.
+- `feature_functions`: Feature functions for data analysis.
 """
 
 # Package metadata

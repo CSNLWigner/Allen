@@ -8,20 +8,20 @@ Functional connectivity analysis in the visual hierarchy is the basement towards
 
 The experiments are generated using the [DVC framework](DVC.md) and all the previous experiments are documented in the [experiment history](<notion/Allen project d3cfe5aab8384495b58fba8a47eeadcc.md>).
 
+There are two [Allen Brain Observatory](https://allensdk.readthedocs.io/en/latest/) datasets used in this project:
+
+1. [Visual Behavior - Neuropixels](https://portal.brain-map.org/circuits-behavior/visual-behavior-neuropixels): The most of the experiments are based on this dataset. Since the stimuli were very limited, we switched to the next dataset.
+2. [Visual Coding - Neuropixels](https://allensdk.readthedocs.io/en/latest/visual_coding_neuropixels.html): The last experiment ([`layer-rank` analysis](notion/Allen%20project%20d3cfe5aab8384495b58fba8a47eeadcc.md#layer-rank-analysis)) is based on this dataset. There are also movies in this dataset, which can be used for further analysis.
+
+Use the latter dataset for the analyses.
+
+Environment: I used the computer m3 and conda environment for pip.
+
 ## Table Of Contents
 
-The documentation follows the best practice for
-project documentation as described by Daniele Procida
-in the [Diátaxis documentation framework](https://diataxis.fr/)
-and consists of four separate parts:
-
-1. [Tutorials](tutorials.md)
-2. [How-To Guides](how-to-guides.md)
-3. [Reference](reference.md)
-4. [Explanation](explanation.md)
-
-Quickly find what you're looking for depending on
-your use case by looking at the different pages.
+- [DVC Framework](DVC.md)
+- [Experiment History](<notion/Allen project d3cfe5aab8384495b58fba8a47eeadcc.md>)
+- [References](references/references.md)
 
 ## Project Overview
 
