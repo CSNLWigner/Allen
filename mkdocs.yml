@@ -25,10 +25,4 @@ nav:
     - Overview: references/references.md
     - Experiments:
       - references/experiments/layer-rank.md
-#  - About: about.md
-#  - Getting Started:
-#      - Installation: getting-started/installation.md
-#      - Configuration: getting-started/configuration.md
-#  - User Guide:
-#      - Features: user-guide/features.md
-#      - FAQ: user-guide/faq.md
+      - references/experiments/layer-interaction.md

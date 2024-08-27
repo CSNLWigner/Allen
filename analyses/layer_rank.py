@@ -24,11 +24,12 @@ def cv_search(predictor, target) -> tuple:
     Perform a cross-validation search for the best cv value and maximum RRRR score.
     
     Args:
-        predictor (ndarray): The predictor data array.
-        target (ndarray): The target data array.
+        predictor (ndarray): The predictor data array. Shape: (n_samples, n_features, n_timepoints).
+        target (ndarray): The target data array. Shape: (n_samples, n_features, n_timepoints).
     
     Returns:
-        tuple: A tuple containing the best cv value and the maximum RRRR score.
+        best_cv (int): The best cross-validation (cv) value found during the search.
+        max_r2 (float): The maximum R^2 score corresponding to the best cv value.
     """
 
     # Define the cross-validation, and time
@@ -75,7 +76,8 @@ def rank_search(predictor, target, cv, log=False) -> tuple:
         log (bool): Whether to log the results or not.
     
     Returns:
-        int: The best rank found during the search.
+        best_rank (int): The best rank found during the search.
+        max_r2 (float): The maximum R^2 score corresponding to the best rank.
     """
     
     # Define the ranks
@@ -124,7 +126,8 @@ def calc_ranks(V1_data, LM_data, timepoints, log=False):
         log (bool, optional): Whether to log the results or not. Default is False.
 
     Returns:
-        results: numpy array, array of calculated ranks. Shape: (nAreas(2), nLayers(6+1), nLayers(6+1), nTimepoints)
+        rank_results (numpy array): Array of calculated ranks. Shape: (nAreas(2), nLayers(6+1), nLayers(6+1), nTimepoints)
+        r2_results (numpy array): Array of R^2 scores. Shape: (nAreas(2), nLayers(6+1), nLayers(6+1), nTimepoints)
     '''
 
     # Calculate the time length after the preprocessing by the time step and the stimulus duration

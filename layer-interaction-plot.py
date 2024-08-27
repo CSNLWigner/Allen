@@ -1,3 +1,18 @@
+# layer-interaction-plot.py
+
+"""
+This module contains tools for plotting the results of the layer interaction analysis on neural data.
+
+**Parameters**:
+
+- `load`: Session and stimulus-block from load parameters.
+- `preprocess`: Preprocess parameters.
+- `crosstime`: Crosstime parameters.
+
+**Output**:
+
+- `layer-interaction_<originArea>-to-<targetArea>`: Layer interaction results for each layer combination between the two areas.
+"""
 
 import numpy as np
 import yaml

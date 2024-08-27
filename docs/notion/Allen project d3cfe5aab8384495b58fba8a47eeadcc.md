@@ -111,7 +111,7 @@ Entry structure:
 
 # Layer-Rank Analysis
 
-[References](../references/experiments/layer-rank.md)
+See [references](../references/experiments/layer-rank.md) for more information.
 
 Commits:
 
@@ -372,6 +372,8 @@ Gabor
 ![layer-interaction_V1-to-LM_1048189115_gabor.png](Allen%20project%20d3cfe5aab8384495b58fba8a47eeadcc/layer-interaction_V1-to-LM_1048189115_gabor.png)
 
 # Layer interaction plot
+
+See [references](#layer-interaction-plot) for more information.
 
 Name: Layer interaction plot
 

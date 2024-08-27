@@ -1,11 +1,24 @@
+# layer-interaction-analysis.py
 
+"""
+This module contains tools for performing layer interaction analysis on neural data.
+
+**Parameters**:
+
+- `load`: Load parameters.
+- `crosstime`: Crosstime parameters.
+- `rrr`: RRR parameters.
+
+**Output**:
+
+- `layer-interaction_<originArea>-to-<targetArea>`: Layer interaction results for each layer combination between the two areas.
+"""
 
 # Import params
 import yaml
 
 from analyses.rrr import crosstime_analysis
 from utils.data_io import load_csv, load_pickle, save_pickle
-from utils.debug import ic
 from utils.utils import manager
 
 # Import params
