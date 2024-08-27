@@ -1,3 +1,16 @@
+"""
+This script plots the rank of the bottom-up and top-down connections between layers.
+
+**Arguments**:
+
+- `-rank`: Rank switch.
+- `-r2`: R2 switch.
+
+**Output**:
+
+- `layer-rank`: Layer rank results.
+"""
+
 import sys
 
 import numpy as np

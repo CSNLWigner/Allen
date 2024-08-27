@@ -3,10 +3,12 @@
 """
 This module contains tools for performing rank-based analysis on neural data.
 
-Functions:
-- cv_search(predictor, target) -> tuple: Perform a RRRR search for the best cv.
-- rank_search(predictor, target, cv, log=False) -> tuple: Perform a RRRR search for the best rank.
-- calc_ranks(V1_data, LM_data, timepoints, log=False) -> numpy array: Calculate the time lag between two time series.
+**Functions**:
+
+- `cv_search(predictor, target) -> tuple`: Perform a RRRR search for the best cv.
+- `rank_search(predictor, target, cv, log=False) -> tuple`: Perform a RRRR search for the best rank.
+- `calc_ranks(V1_data, LM_data, timepoints, log=False) -> tuple`: Calculate the time lag between two time series.
+    tuple: A tuple containing the best rank found during the search and the maximum RRRR score.
 """
 
 import numpy as np
@@ -19,7 +21,7 @@ params = yaml.safe_load(open('params.yaml'))['layer-rank']
 
 def cv_search(predictor, target) -> tuple:
     """
-    Perform a RRRR search for the best cv.
+    Perform a cross-validation search for the best cv value and maximum RRRR score.
     
     Args:
         predictor (ndarray): The predictor data array.
@@ -62,18 +64,20 @@ def cv_search(predictor, target) -> tuple:
 
 def rank_search(predictor, target, cv, log=False) -> tuple:
     """
-    Perform a RRRR search for the best rank.
-
+    Perform a rank search for the best rank.
+    
+    This function calculates the RRRR (Rank-Reduced Ridge Regression) for different ranks and returns the best rank found during the search.
+    
     Parameters:
-    predictor (ndarray): The predictor data. Shape: (n_samples, n_features).
-    target (ndarray): The target data. Shape: (n_samples, n_features).
-    cv (int): The number of cross-validation folds.
-    log (bool): Whether to log the results or not.
-
+        predictor (ndarray): The predictor data. Shape: (n_samples, n_features).
+        target (ndarray): The target data. Shape: (n_samples, n_features).
+        cv (int): The number of cross-validation folds.
+        log (bool): Whether to log the results or not.
+    
     Returns:
-    int: The best rank found during the search.
+        int: The best rank found during the search.
     """
-
+    
     # Define the ranks
     ranks = np.arange(params['minRank'], params['maxRank'], params['stepRank'])
 
@@ -114,13 +118,13 @@ def calc_ranks(V1_data, LM_data, timepoints, log=False):
     Calculate the time lag between two time series.
 
     Parameters:
-    - V1_data: numpy array, time series data for V1 area
-    - LM_data: numpy array, time series data for LM area
-    - timepoints: list, time points to calculate ranks for
-    - log: bool, whether to log the results or not (default: False)
+        V1_data (numpy array): Time series data for V1 area.
+        LM_data (numpy array): Time series data for LM area.
+        timepoints (list): Time points to calculate ranks for.
+        log (bool, optional): Whether to log the results or not. Default is False.
 
     Returns:
-    - results: numpy array, array of calculated ranks. Shape: (nAreas(2), nLayers(6+1), nLayers(6+1), nTimepoints)
+        results: numpy array, array of calculated ranks. Shape: (nAreas(2), nLayers(6+1), nLayers(6+1), nTimepoints)
     '''
 
     # Calculate the time length after the preprocessing by the time step and the stimulus duration

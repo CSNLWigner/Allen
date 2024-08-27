@@ -111,6 +111,8 @@ Entry structure:
 
 # Layer-Rank Analysis
 
+[References](../references/experiments/layer-rank.md)
+
 Commits:
 
 - Layer-Rank Analysis

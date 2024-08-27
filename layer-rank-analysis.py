@@ -1,3 +1,28 @@
+"""
+This module contains tools for performing rank-based analysis on neural data.
+
+**Usage**:
+
+```shell
+$ python layer-rank-analysis.py [-l]
+```
+
+**Arguemnts**:
+
+- `-l`: Log switch.
+
+**Parameters**:
+
+- `load`: Load parameters.
+- `preprocess`: Preprocess parameters.
+- `layer-rank`: Layer rank parameters.
+
+**Output**:
+
+- `layer-rank`: Layer rank results.
+- `layer-r2`: Layer R2 results.
+"""
+
 import sys
 
 import numpy as np
