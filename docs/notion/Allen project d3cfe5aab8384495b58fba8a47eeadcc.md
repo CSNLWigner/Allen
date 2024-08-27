@@ -15,88 +15,88 @@ Entry structure:
 - **Interpretation**: the interpretation of the results
 - **Next**: the potential next steps or future directions in the project at that time
 
-# Table of Contents
+## Table of Contents
 
 - [Allen project](#allen-project)
-- [Table of Contents](#table-of-contents)
-- [Future directions](#future-directions)
-- [Layer-Rank Analysis](#layer-rank-analysis)
-- [New data layer distribution](#new-data-layer-distribution)
-- [Memory bug](#memory-bug)
-- [Normalized maxValues](#normalized-maxvalues)
-- [Undersampling neurons](#undersampling-neurons)
-- [Unit number statistics](#unit-number-statistics)
-- [Gabor](#gabor)
-- [Layer interaction plot](#layer-interaction-plot)
+  - [Table of Contents](#table-of-contents)
+  - [Future directions](#future-directions)
+  - [Layer-Rank Analysis](#layer-rank-analysis)
+  - [New data layer distribution](#new-data-layer-distribution)
+  - [Memory bug](#memory-bug)
+  - [Normalized maxValues](#normalized-maxvalues)
+  - [Undersampling neurons](#undersampling-neurons)
+  - [Unit number statistics](#unit-number-statistics)
+  - [Gabor](#gabor)
+  - [Layer interaction plot](#layer-interaction-plot)
     - [Transient](#transient)
     - [**Causal direction of time**](#causal-direction-of-time)
     - [Negyszigetes](#negyszigetes)
     - [Egyiranyu: L alaku](#egyiranyu-l-alaku)
-- [Layer in megaplot: first Blick](#layer-in-megaplot-first-blick)
-- [LayerAssignment](#layerassignment)
-- [Units](#units)
-- [Layers](#layers)
-- [After Progress Report](#after-progress-report)
+  - [Layer in megaplot: first Blick](#layer-in-megaplot-first-blick)
+  - [LayerAssignment](#layerassignment)
+  - [Units](#units)
+  - [Layers](#layers)
+  - [After Progress Report](#after-progress-report)
     - [Marci](#marci)
     - [debug](#debug)
-- [Stimulus residual](#stimulus-residual)
-- [Stimuli](#stimuli)
-- [Mega plot 2](#mega-plot-2)
-- [Mega plot 1](#mega-plot-1)
-- [V1 to V1](#v1-to-v1)
-- [RRR time slice](#rrr-time-slice)
-- [Z-scoring](#z-scoring)
-- [Units table](#units-table)
-- [Crosstime timeseries of lags](#crosstime-timeseries-of-lags)
+  - [Stimulus residual](#stimulus-residual)
+  - [Stimuli](#stimuli)
+  - [Mega plot 2](#mega-plot-2)
+  - [Mega plot 1](#mega-plot-1)
+  - [V1 to V1](#v1-to-v1)
+  - [RRR time slice](#rrr-time-slice)
+  - [Z-scoring](#z-scoring)
+  - [Units table](#units-table)
+  - [Crosstime timeseries of lags](#crosstime-timeseries-of-lags)
     - [Top-down](#top-down)
     - [Bottom-up](#bottom-up)
     - [Within V1](#within-v1)
     - [Within LM](#within-lm)
     - [Interpretations](#interpretations)
-- [Time lag along trial time](#time-lag-along-trial-time)
+  - [Time lag along trial time](#time-lag-along-trial-time)
     - [Top-down:](#top-down-1)
     - [Bottom-up:](#bottom-up-1)
-- [Time lag search](#time-lag-search)
+  - [Time lag search](#time-lag-search)
     - [Top-down](#top-down-2)
     - [Bottom-up](#bottom-up-2)
-- [Bottom-up lag](#bottom-up-lag)
-- [Top-down lag exploration](#top-down-lag-exploration)
-- [V2-V1 interaction rank](#v2-v1-interaction-rank)
-- [Multiple session param search!!!](#multiple-session-param-search)
-- [Sessions](#sessions)
-- [V2 to V1](#v2-to-v1)
-- [RRR score by time](#rrr-score-by-time)
-- [Bootstrap above cv folds](#bootstrap-above-cv-folds)
-- [CV, timelag, timepoint exploration](#cv-timelag-timepoint-exploration)
+  - [Bottom-up lag](#bottom-up-lag)
+  - [Top-down lag exploration](#top-down-lag-exploration)
+  - [V2-V1 interaction rank](#v2-v1-interaction-rank)
+  - [Multiple session param search!!!](#multiple-session-param-search)
+  - [Sessions](#sessions)
+  - [V2 to V1](#v2-to-v1)
+  - [RRR score by time](#rrr-score-by-time)
+  - [Bootstrap above cv folds](#bootstrap-above-cv-folds)
+  - [CV, timelag, timepoint exploration](#cv-timelag-timepoint-exploration)
     - [More params](#more-params)
     - [Less params #1](#less-params-1)
     - [Less params #2](#less-params-2)
-- [CV-rank-time exploration](#cv-rank-time-exploration)
+  - [CV-rank-time exploration](#cv-rank-time-exploration)
     - [Detailed](#detailed)
-- [Time step](#time-step)
-- [Semedo](#semedo)
-- [Rank analysis from V2 to V1](#rank-analysis-from-v2-to-v1)
-- [Rank analysis for gabor](#rank-analysis-for-gabor)
-- [Control models](#control-models)
-- [Rank optimization](#rank-optimization)
-- [Behav data](#behav-data)
-- [GitHub codes](#github-codes)
-- [**Time lag between V1 and V2**](#time-lag-between-v1-and-v2)
-- [Siegle, 2021 on this data](#siegle-2021-on-this-data)
-- [Areas](#areas)
-- [Data distribution](#data-distribution)
-- [PCA](#pca)
-- [RRR analysis along time](#rrr-analysis-along-time)
-  - [Me:](#me)
-  - [**Gergo**:](#gergo)
-    - [**Corr**:](#corr)
-  - [**Marci**:](#marci-1)
-  - [**References**:](#references)
-  - [**Future plan**:](#future-plan)
+  - [Time step](#time-step)
+  - [Semedo](#semedo)
+  - [Rank analysis from V2 to V1](#rank-analysis-from-v2-to-v1)
+  - [Rank analysis for gabor](#rank-analysis-for-gabor)
+  - [Control models](#control-models)
+  - [Rank optimization](#rank-optimization)
+  - [Behav data](#behav-data)
+  - [GitHub codes](#github-codes)
+  - [**Time lag between V1 and V2**](#time-lag-between-v1-and-v2)
+  - [Siegle, 2021 on this data](#siegle-2021-on-this-data)
+  - [Areas](#areas)
+  - [Data distribution](#data-distribution)
+  - [PCA](#pca)
+  - [RRR analysis along time](#rrr-analysis-along-time)
+    - [Me:](#me)
+    - [**Gergo**:](#gergo)
+      - [**Corr**:](#corr)
+    - [**Marci**:](#marci-1)
+    - [**References**:](#references)
+    - [**Future plan**:](#future-plan)
 
 
 
-# Future directions
+## Future directions
 
 - make predictions via the first d predictive dimensions. same area, cross area, …
 - in the video, we can use seqPCA to extract the dims… only if its not a linear video…?
@@ -109,7 +109,7 @@ Entry structure:
 - neuronok száma
 - **undersample param-search**
 
-# Layer-Rank Analysis
+## Layer-Rank Analysis
 
 See [references](../references/experiments/layer-rank.md) for more information.
 
@@ -205,7 +205,7 @@ stages:
       - figures/layer-rank.png
 ```
 
-# New data layer distribution
+## New data layer distribution
 
 date: 2024.07.31.
 
@@ -222,7 +222,7 @@ Ratio of value 4: 32.43%
 Ratio of value 2: 10.81%
 ```
 
-# Memory bug
+## Memory bug
 
 date: 2024.07.29.
 
@@ -250,7 +250,7 @@ solution:
 
 Use `units = session.units` instead of `units = cache.get_units()`
 
-# Normalized maxValues
+## Normalized maxValues
 
 **Date**: 07.15.
 
@@ -275,7 +275,7 @@ later from 5,6 to 2
 - Top-down from layer 5,6 to layer 5,6
 later from 5,6 to 6
 
-# Undersampling neurons
+## Undersampling neurons
 
 https://machinelearningmastery.com/random-oversampling-and-undersampling-for-imbalanced-classification/
 
@@ -283,7 +283,7 @@ https://datascience.stackexchange.com/questions/45046/cross-validation-for-highl
 
 https://imbalanced-learn.org/stable/references/generated/imblearn.under_sampling.RandomUnderSampler.html
 
-# Unit number statistics
+## Unit number statistics
 
 Date: 2024.07.03.
 
@@ -337,7 +337,7 @@ todo:
 
 - csak 5. réteg undersample, mi az alsó limit to good performance.
 
-# Gabor
+## Gabor
 
 Date: 2024.06.25
 
@@ -371,7 +371,7 @@ Gabor
 
 ![layer-interaction_V1-to-LM_1048189115_gabor.png](Allen%20project%20d3cfe5aab8384495b58fba8a47eeadcc/layer-interaction_V1-to-LM_1048189115_gabor.png)
 
-# Layer interaction plot
+## Layer interaction plot
 
 See [references](#layer-interaction-plot) for more information.
 
@@ -531,7 +531,7 @@ Results:
 - LM l5 → V1 l4
 - V1 l2 l5 → LM l5
 
-# Layer in megaplot: first Blick
+## Layer in megaplot: first Blick
 
 Name: LAYERPLOT.
 
@@ -594,7 +594,7 @@ What we see:
 - activity at 50 ms in LM predicts activity in all time in V1
 - activity at 180 ms in LM predicts activity in all time in V1
 
-# LayerAssignment
+## LayerAssignment
 
 Date: 2024.06.11.
 
@@ -617,7 +617,7 @@ Ratio of value 6: 25.76%
 layerAssignments_V1.isin(neurmask['V1']['output'])
 ```
 
-# Units
+## Units
 
 Date: 2024.06.03
 
@@ -660,7 +660,7 @@ ic(units_session.columns)
 print(units_session)
 ```
     
-# Layers
+## Layers
 
 **Date**: 2024.05.30.
 
@@ -727,7 +727,7 @@ unit_id                                                                         
 [1925 rows x 36 columns]
 ```
 
-# After Progress Report
+## After Progress Report
 
 IPR 2024.05.27. & discussion with Gergő
 
@@ -743,7 +743,7 @@ result interpretation: local memory
 - [x] nem stim resid is rosszabodik-e?
 - [x] neurális adat változik vajon?
 
-# Stimulus residual
+## Stimulus residual
 
 Name: STIMRESIDUAL
 
@@ -764,13 +764,13 @@ maximum value(0.024) at 150 ms is at cv=2, lag=0, rank=8
 
 ![rrr-param-search.png](Allen%20project%20d3cfe5aab8384495b58fba8a47eeadcc/rrr-param-search%201.png)
 
-# Stimuli
+## Stimuli
 
 Date: 2024.05.09.
 
 ![stimulus_templates.png](Allen%20project%20d3cfe5aab8384495b58fba8a47eeadcc/stimulus_templates.png)
 
-# Mega plot 2
+## Mega plot 2
 
 Date: 2024.05.08.
 
@@ -831,7 +831,7 @@ Gergő:
 2. layerek
 3. dimenzionalitás (alacsonyabb rankkel jósolni
 
-# Mega plot 1
+## Mega plot 1
 
 Date: 2024.05.08.
 
@@ -857,7 +857,7 @@ bottom-up: bifázisos kód (50 ms, 150 ms)
 
 top-down: gyengülő jel/tranziens kód
 
-# V1 to V1
+## V1 to V1
 
 **Date**: 2024.05.06.
 
@@ -865,7 +865,7 @@ top-down: gyengülő jel/tranziens kód
 
 V1 -> V1 az a session (Fig 1: ...708) ahol a legstabilabb a kód (gyakran csak a diagonál barna, Fig2: ...624,  note that itt is van asszimetrikus rész)
 
-# RRR time slice
+## RRR time slice
 
 Name: SLICE.
 
@@ -934,13 +934,13 @@ sessions: …84, …74, …03
 
 ![rrr-time-slice.png](Allen%20project%20d3cfe5aab8384495b58fba8a47eeadcc/rrr-time-slice%203.png)
 
-# Z-scoring
+## Z-scoring
 
 Hogy hol z-scoreozol (in window of interest vagy egész trial) az R^2-ben mindegy, de coefficiensben nem mindegy.
 
 Esetleg z-score mean legyen ITI-ből.
 
-# Units table
+## Units table
 
 **General Metadata**
 
@@ -1014,7 +1014,7 @@ Esetleg z-score mean legyen ITI-ből.
 
 `quality`: Label assigned based on waveform shape as described [here](https://github.com/AllenInstitute/ecephys_spike_sorting/tree/7e567a6fc3fd2fc0eedef750b83b8b8a0d469544/ecephys_spike_sorting/modules/noise_templates). Either 'good' for physiological waveforms or 'noise' for artifactual waveforms.
 
-# Crosstime timeseries of lags
+## Crosstime timeseries of lags
 
 **Name**: CROSSTIME.
 
@@ -1191,7 +1191,7 @@ GEN2:
 - cortical layer selective RRR (wich is scientifically known to the inter brain areas connections) (RRR says little about the causality) → where is the layer information?
 - célzott kérdésekre DLAG → MATLABból kell fordítani
 
-# Time lag along trial time
+## Time lag along trial time
 
 **Name**: LAGXTIME.
 
@@ -1261,7 +1261,7 @@ stages:
 
 ![lags-along-time.png](Allen%20project%20d3cfe5aab8384495b58fba8a47eeadcc/lags-along-time%204.png)
 
-# Time lag search
+## Time lag search
 
 **Name**: LAGR2. LAGHANDL. 
 
@@ -1325,7 +1325,7 @@ stages:
 
 ![time-lag-search.png](Allen%20project%20d3cfe5aab8384495b58fba8a47eeadcc/time-lag-search%207.png)
 
-# Bottom-up lag
+## Bottom-up lag
 
 ![rrr-param-search.png](Allen%20project%20d3cfe5aab8384495b58fba8a47eeadcc/rrr-param-search%202.png)
 
@@ -1339,7 +1339,7 @@ Session: 1112302803
 
 Lag: 4
 
-# Top-down lag exploration
+## Top-down lag exploration
 
 ![rrr-param-search.png](Allen%20project%20d3cfe5aab8384495b58fba8a47eeadcc/rrr-param-search%204.png)
 
@@ -1365,7 +1365,7 @@ Lag: 4
 
 **Lag**: 2 ms, 7 ms
 
-# V2-V1 interaction rank
+## V2-V1 interaction rank
 
 **Name**: TDTIME, BUTIME, TDRANKTIME, BURANKTIME
 
@@ -1472,7 +1472,7 @@ bottom-up
 - causality is can only be said by positive time lag!
 - the low-dimensional correlation at the 0 and 6 ms lag is the same or not? → cross test between 0 and 6 ms lag
 
-# Multiple session param search!!!
+## Multiple session param search!!!
 
 **name**: TOPDOWN
 
@@ -1535,32 +1535,32 @@ rrr-param-search:
 
 - **results**
     
-    ## ~~1059678195~~
+    ### ~~1059678195~~
     
     ![rrr-param-search.png](Allen%20project%20d3cfe5aab8384495b58fba8a47eeadcc/rrr-param-search%208.png)
     
     maximum value(0.13) at 0 ms is at cv=4, lag=0, rank=14
     maximum value(0.13) at 100 ms is at cv=4, lag=0, rank=14
     
-    ### V1→V2
+    #### V1→V2
     
     All-NaN slice encountered
     
-    ## 1108334384 (11-15%)
+    ### 1108334384 (11-15%)
     
     ![rrr-param-search.png](Allen%20project%20d3cfe5aab8384495b58fba8a47eeadcc/rrr-param-search%209.png)
     
     maximum value(0.111) at 0 ms is at cv=2, lag=0, rank=14
     maximum value(0.111) at 100 ms is at cv=2, lag=0, rank=14
     
-    ### V1→V2
+    #### V1→V2
     
     ![rrr-param-search.png](Allen%20project%20d3cfe5aab8384495b58fba8a47eeadcc/rrr-param-search%2010.png)
     
     maximum value(0.158) at 0 ms is at cv=3, lag=0, rank=18
     maximum value(0.158) at 100 ms is at cv=3, lag=0, rank=18
     
-    ## ~~1108531612~~
+    ### ~~1108531612~~
     
     Spike count in the data: 0
     (0, 4803, 250)
@@ -1569,7 +1569,7 @@ rrr-param-search:
     
     All-NaN
     
-    ## 1109889304 (12-18%)
+    ### 1109889304 (12-18%)
     
     Spike count in the data: 984080
     (131, 4804, 250)
@@ -1581,21 +1581,21 @@ rrr-param-search:
     maximum value(**0.181**) at 0 ms is at cv=5, lag=0, rank=18
     maximum value(**0.181**) at 100 ms is at cv=5, lag=0, rank=18
     
-    ### window size 50 ms
+    #### window size 50 ms
     
     ![rrr-param-search.png](Allen%20project%20d3cfe5aab8384495b58fba8a47eeadcc/rrr-param-search%2012.png)
     
     maximum value(0.125) at 0 ms is at cv=3, lag=0, rank=12
     maximum value(0.125) at 100 ms is at cv=3, lag=0, rank=12
     
-    ### V1→V2
+    #### V1→V2
     
     ![rrr-param-search.png](Allen%20project%20d3cfe5aab8384495b58fba8a47eeadcc/rrr-param-search%2013.png)
     
     maximum value(0.218) at 0 ms is at cv=2, **lag=3**, rank=8
     maximum value(0.218) at 100 ms is at cv=2, **lag=3**, rank=8
     
-    ## 1111013640 (10-12%)
+    ### 1111013640 (10-12%)
     
     Spike count in the data: 1246081
     (147, 4800, 250)
@@ -1607,14 +1607,14 @@ rrr-param-search:
     maximum value(0.125) at 0 ms is at cv=2, lag=0, rank=16
     maximum value(0.125) at 100 ms is at cv=2, lag=0, rank=16
     
-    ### V1→V2
+    #### V1→V2
     
     ![rrr-param-search.png](Allen%20project%20d3cfe5aab8384495b58fba8a47eeadcc/rrr-param-search%2015.png)
     
     maximum value(0.097) at 0 ms is at cv=2, lag=0, rank=16
     maximum value(0.097) at 100 ms is at cv=2, lag=0, rank=16
     
-    ## ~~1111216934~~
+    ### ~~1111216934~~
     
     Spike count in the data: 930540
     (110, 4796, 250)
@@ -1626,11 +1626,11 @@ rrr-param-search:
     maximum value(0.114) at 0 ms is at cv=2, lag=0, rank=12
     maximum value(0.114) at 100 ms is at cv=2, lag=0, rank=12
     
-    ### V1→V2
+    #### V1→V2
     
     All-NaN slice encountered
     
-    ## 1112302803 (8%)
+    ### 1112302803 (8%)
     
     Spike count in the data: 954940
     (121, 4798, 250)
@@ -1647,7 +1647,7 @@ rrr-param-search:
     maximum value(0.089) at 0 ms is at cv=2, lag=0, rank=14
     maximum value(0.089) at 100 ms is at cv=2, lag=0, rank=14
     
-    ## 1112515874 (6-16%)
+    ### 1112515874 (6-16%)
     
     Spike count in the data: 336822
     (28, 4796, 250)
@@ -1664,65 +1664,65 @@ rrr-param-search:
     maximum value(0.063) at 0 ms is at cv=2, lag=0, rank=12
     maximum value(0.063) at 100 ms is at cv=2, lag=0, rank=12
     
-    ## 1113751921 (8-13%)
+    ### 1113751921 (8-13%)
     
-    ### V1→LM
+    #### V1→LM
     
     ![rrr-param-search.png](Allen%20project%20d3cfe5aab8384495b58fba8a47eeadcc/rrr-param-search%2021.png)
     
     maximum value(0.085) at 0 ms is at cv=2, lag=0, rank=10
     maximum value(0.085) at 100 ms is at cv=2, lag=0, rank=10
     
-    ### LM →V1
+    #### LM →V1
     
     ![rrr-param-search.png](Allen%20project%20d3cfe5aab8384495b58fba8a47eeadcc/rrr-param-search%2022.png)
     
     maximum value(0.138) at 0 ms is at cv=4, lag=0, rank=20
     maximum value(0.138) at 100 ms is at cv=4, lag=0, rank=20
     
-    ## 1113957627 (12%)
+    ### 1113957627 (12%)
     
-    ### LM → V1
+    #### LM → V1
     
     ![rrr-param-search.png](Allen%20project%20d3cfe5aab8384495b58fba8a47eeadcc/rrr-param-search%2023.png)
     
     maximum value(0.119) at 0 ms is at cv=3, lag=0, rank=10
     maximum value(0.119) at 100 ms is at cv=3, lag=0, rank=10
     
-    ### V1 → LM all failed
+    #### V1 → LM all failed
     
-    ## 1115077618: There is no spike in VISl
+    ### 1115077618: There is no spike in VISl
     
-    ## 1115356973
+    ### 1115356973
     
-    ### V1 → LM all failed
+    #### V1 → LM all failed
     
-    ## 1118324999: 18%
+    ### 1118324999: 18%
     
-    ### V1 → LM
+    #### V1 → LM
     
     ![rrr-param-search.png](Allen%20project%20d3cfe5aab8384495b58fba8a47eeadcc/rrr-param-search%2024.png)
     
     maximum value(0.18) at 0 ms is at cv=4, lag=0, rank=16
     maximum value(0.18) at 100 ms is at cv=4, lag=0, rank=16
     
-    ### LM → V1: all failed
+    #### LM → V1: all failed
     
-    ## 1118512505: 28%
+    ### 1118512505: 28%
     
-    ### LM → V1
+    #### LM → V1
     
     ![rrr-param-search.png](Allen%20project%20d3cfe5aab8384495b58fba8a47eeadcc/rrr-param-search%2025.png)
     
     maximum value(0.278) at 0 ms is at cv=4, lag=0, rank=16
     maximum value(0.278) at 100 ms is at cv=4, lag=0, rank=16
     
-    ### V1 → LM: all failed
+    #### V1 → LM: all failed
     
     ---
     
 
-# Sessions
+## Sessions
 
 All ecephys sessions had this issue except those listed here: ~~1059678195~~, 1108334384, ~~1108531612~~, ~~1109680280~~, 1109889304, 1111013640, ~~1111216934~~, 1112302803, 1112515874, 1113751921, 1113957627, 1115077618, 1115356973, 1118324999, 1118512505
 
@@ -1734,7 +1734,7 @@ All ecephys sessions had this issue except those listed here: ~~1059678195~~, 11
 | 1112302803 | 8% | cv=3, rank=14 | cv=2, rank=14 | 2 |
 | 1109889304 | 18-21% (NO 100ms) | cv=5, rank=18 | cv=2, lag=3, rank=8 | 6 |
 
-# V2 to V1
+## V2 to V1
 
 **Date**: 2024.02.28.
 
@@ -1748,7 +1748,7 @@ lag: [0,3,6]
 
 **All model failed** (both timewindow 50 and 100
 
-# RRR score by time
+## RRR score by time
 
 **Name**: RRRSCORETIME.
 
@@ -1808,7 +1808,7 @@ stages:
 
 ![rrr-score-time.png](Allen%20project%20d3cfe5aab8384495b58fba8a47eeadcc/rrr-score-time%208.png)
 
-# Bootstrap above cv folds
+## Bootstrap above cv folds
 
 **Date**: 2024.02.27.
 
@@ -1845,7 +1845,7 @@ print(scores['test_score'])
 
 **Interpretation**: **CV=2 is OK**.
 
-# CV, timelag, timepoint exploration
+## CV, timelag, timepoint exploration
 
 **Name**: CVLAGTIME-ANALYSIS. CVLAGRANKTIME.
 
@@ -2047,7 +2047,7 @@ maximum value(0.085) at 100 ms is at cv=3, lag=0, rank=16
 
 here the $r^2$ is **0.086**
 
-# CV-rank-time exploration
+## CV-rank-time exploration
 
 **Date**: 2024.02.21.
 
@@ -2071,19 +2071,19 @@ here the $r^2$ is **0.086**
 
 ![CV-rank_200-250.png](Allen%20project%20d3cfe5aab8384495b58fba8a47eeadcc/CV-rank_200-250.png)
 
-# Time step
+## Time step
 
 **Name**: TIMESTEP, TIMESTEP2
 
 **Date**: 2024.02.20.
 
-# Semedo
+## Semedo
 
 qualitatively similar results for a wide range of bin widths
 
 - sliding time window
 
-# Rank analysis from V2 to V1
+## Rank analysis from V2 to V1
 
 **Date**: 2024.02.20.
 
@@ -2093,7 +2093,7 @@ qualitatively similar results for a wide range of bin widths
 
 **Result**: doesnt work for CV 2, 4
 
-# Rank analysis for gabor
+## Rank analysis for gabor
 
 **Date**: 2024.02.20.
 
@@ -2105,7 +2105,7 @@ qualitatively similar results for a wide range of bin widths
 
 **Interpretation**: stimulus is too sparse
 
-# Control models
+## Control models
 
 **Name**: RRRCONTROL.
 
@@ -2173,7 +2173,7 @@ stages:
 
 does the normaliyation give us indistinguishable values for movement and spiking? print these values .
 
-# Rank optimization
+## Rank optimization
 
 **Name**: RANKOPT. RANKOPTTIME. RANKOPTCV.
 
@@ -2308,7 +2308,7 @@ cv of the optimal rank: 2
 - negative values mean that the model is wrong…
 - greater ranks perform worse bcs overfitting? so there are times when we cannot predict V2 from V1.
 
-# Behav data
+## Behav data
 
 ![Untitled](Allen%20project%20d3cfe5aab8384495b58fba8a47eeadcc/Untitled%206.png)
 
@@ -2316,7 +2316,7 @@ stimulus-duration: 250 ms (movement!)
 
 at Joao Semedo: 1250 ms (not contaminated by movement)
 
-# GitHub codes
+## GitHub codes
 
 [generate figures](https://github.com/AllenInstitute/neuropixels_platform_paper/tree/master)
 
@@ -2332,7 +2332,7 @@ at Joao Semedo: 1250 ms (not contaminated by movement)
 
 [data acquisition/neuropixelsPXI](https://github.com/open-ephys-plugins/neuropixels-PXI)
 
-# **Time lag between V1 and V2**
+## **Time lag between V1 and V2**
 
 **Name**: CROSSTIMELAG. CROSSTIMECOEFFS.
 
@@ -2474,7 +2474,7 @@ Gergő:
 6. change task (motor contam) OR movie
 7. (Bernstein)
 
-# Siegle, 2021 on this data
+## Siegle, 2021 on this data
 
 [Survey of spiking in the mouse visual system reveals functional hierarchy](https://www.nature.com/articles/s41586-020-03171-x)
 
@@ -2484,7 +2484,7 @@ Gergő:
 
 ![Untitled](Allen%20project%20d3cfe5aab8384495b58fba8a47eeadcc/Untitled%209.png)
 
-# Areas
+## Areas
 
 **Added VISpm (MT) and VISm (motion area) to analyses for video stimuli.**
 
@@ -2503,7 +2503,7 @@ VISpm:  V4-V5(MT), PMC (associative area)
 VISm:   V6 (medial motion area)
 ```
 
-# Data distribution
+## Data distribution
 
 **Date**: 2024.02.06.
 
@@ -2785,7 +2785,7 @@ Activity of 118. unit does not look Gaussian (reject H0)
 
 **Marci** (2024.02.14.): ITI mean + std, csak nem z-scorenak hívjuk, mert nem normal-distr data. → Normalize based on ITI activity?
 
-# PCA
+## PCA
 
 **Date**: 2024.02.06.
 
@@ -2800,7 +2800,7 @@ Activity of 118. unit does not look Gaussian (reject H0)
 
 ![pca-analysis_principal-components.png](Allen%20project%20d3cfe5aab8384495b58fba8a47eeadcc/pca-analysis_principal-components.png)
 
-# RRR analysis along time
+## RRR analysis along time
 
 **Name**: RRR ANALYSIS ALONG TIME.
 
@@ -2872,7 +2872,7 @@ Flashes:
     3. **Eigenvalue Plot**: In the context of RRR, one can plot the eigenvalues obtained from the eigenvector problem. If there is a clear ‘elbow’ or ‘knee’ in this plot (a point where the decrease in eigenvalues becomes less steep), this may be a good choice for **`r`**.
     4. **Domain Knowledge**: If you have specific knowledge about the underlying structure of your data or the specific problem at hand, this might inform a good choice of **`r`**.
 
-## Me:
+### Me:
 
 - [ ] TODO: control drifts.
 
@@ -2880,7 +2880,7 @@ change in spike frequency
 
 - [x] TODO: VISp→VISl,  VISl→VISp~~
 
-## **Gergo**:
+### **Gergo**:
 
 - [x] TODO: residual számilás before the analysis.~~
 
@@ -2892,7 +2892,7 @@ frame X repeat.
 
 change detection task: legyen kb 100féle kép 10 repeattel = 1000 trial
 
-### **Corr**:
+#### **Corr**:
 
 later TODO: on movies (it has autocorrelation).
 
@@ -2902,7 +2902,7 @@ vajon a video alatt több  correlatio van (pixelwide/wise) mint sima képnél?
 
 mozgás vajon milyen korrelációt ad? annak is van dimenzionalitása…
 
-## **Marci**:
+### **Marci**:
 
 $$
 Y_{V2} = W_{V1} X_{V1} + W_{move} X_{move} + W_{pupil} X_{pupil} + W_{V2} X_{V2}
@@ -2921,14 +2921,14 @@ for each term/model.
 
 time_binek elcsúsztatva, esetleg optimalizálni V1→V2 time-lagra (R^2 kirajzolása vagy rank kirajzolása)
 
-## **References**:
+### **References**:
 
 What is the effect of motor movement on V1 and V2 activity:
 
 - **Christensen, 2022**: [Reduced neural activity but improved coding in rodent higher-order visual cortex during locomotion](https://www.nature.com/articles/s41467-022-29200-z.pdf)
 - **Musall, 2019**: Single-trial neural dynamics are dominated by richly varied movements
 
-## **Future plan**:
+### **Future plan**:
 
 1. read joao
 2. ~~z-score~~
