@@ -24,19 +24,25 @@ nav:
   - References:
     - Overview: references/references.md
     - Experiments:
-      - references/experiments/layer-rank.md
-      - references/experiments/layer-interaction.md
-      - references/experiments/rank-along-time.md
-      - references/experiments/crosstime.md
-      - references/experiments/rrr-time-slice.md
-      - references/experiments/lag-along-time.md
-      - references/experiments/time-lag-search.md
-      - references/experiments/cv-time-lag.md
-      - references/experiments/time-lag.md
-      - references/experiments/cv-rank-time.md
-      - references/experiments/rrr-rank.md
-      - references/experiments/rrr.md
-      - references/experiments/pca.md
-      - references/experiments/cca.md
+      - references/experiments/layer-rank.md # 2024.08.06.
+      - references/experiments/layer-interaction.md # 2024.06.14.-19.
+      - references/experiments/multiple-timeslices-layers.md # 2024.06.12.
+      - references/experiments/multiple-timeslices.md # 2024.05.08.
+      - references/experiments/rrr-time-slice.md # 2024.04.30.
+      - references/experiments/crosstime-timeslice-plot.md # ?
+      - references/experiments/crosstime.md # 2024.04.09., 10.
+      - references/experiments/time-lag-search.md # 2024.03.21., 26., 27.
+      - references/experiments/cv-time-lag.md # 2024.03.18.-19., 04.12.
+      - references/experiments/rrr-score-time.md # 2024.02.27.
+      - references/experiments/cv-rank-time.md # 2024.02.21.
+      - references/experiments/lag-along-time.md # ?
+      - references/experiments/rank-along-time.md # ?
+      - references/experiments/control-models.md # 2024.02.15., 20.
+      - references/experiments/rrr-rank.md # 2024.02.13., 17-21.
+      - references/experiments/time-lag.md # 2024.02.08., 22.
+      - references/experiments/histograms.md # 2024.02.06.
+      - references/experiments/pca.md # 2024.02.06.
+      - references/experiments/rrr.md # 2024.01.30. Modified: 2024.01.31.
+      - references/experiments/cca.md # ?
     - Tools:
       - about.md

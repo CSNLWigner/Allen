@@ -118,7 +118,7 @@ Commits:
 - Layer-Rank Analysis
 - Layer-Rank Plot
 
-Date: 08.06.
+Date: 2024.08.06.
 
 - params
     
@@ -533,6 +533,8 @@ Results:
 
 ## Layer in megaplot: first Blick
 
+See [references](../references/experiments/multiple-timeslices-layers.md) for more information.
+
 Name: LAYERPLOT.
 
 Date: 2024.06.12.
@@ -771,6 +773,8 @@ Date: 2024.05.09.
 ![stimulus_templates.png](Allen%20project%20d3cfe5aab8384495b58fba8a47eeadcc/stimulus_templates.png)
 
 ## Mega plot 2
+
+See [references](../references/experiments/multiple-timeslices.md) for more information.
 
 Date: 2024.05.08.
 
@@ -1758,6 +1762,8 @@ lag: [0,3,6]
 
 ## RRR score by time
 
+See [references](../references/experiments/rrr-score-time.md) for more information.
+
 **Name**: RRRSCORETIME.
 
 **Date**: 2024.02.27.
@@ -2116,6 +2122,8 @@ qualitatively similar results for a wide range of bin widths
 **Interpretation**: stimulus is too sparse
 
 ## Control models
+
+See [references](../references/experiments/control-models.md) for more information.
 
 **Name**: RRRCONTROL.
 
@@ -2518,6 +2526,8 @@ VISm:   V6 (medial motion area)
 ```
 
 ## Data distribution
+
+See [references](../references/experiments/histograms.md) for more information.
 
 **Date**: 2024.02.06.
 
