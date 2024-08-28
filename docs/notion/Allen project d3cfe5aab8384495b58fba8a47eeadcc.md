@@ -81,7 +81,7 @@ Entry structure:
   - [Rank optimization](#rank-optimization)
   - [Behav data](#behav-data)
   - [GitHub codes](#github-codes)
-  - [**Time lag between V1 and V2**](#time-lag-between-v1-and-v2)
+  - [Time lag between V1 and V2](#time-lag-between-v1-and-v2)
   - [Siegle, 2021 on this data](#siegle-2021-on-this-data)
   - [Areas](#areas)
   - [Data distribution](#data-distribution)
@@ -373,7 +373,7 @@ Gabor
 
 ## Layer interaction plot
 
-See [references](#layer-interaction-plot) for more information.
+See [references](../references/experiments/layer-interaction.md) for more information.
 
 Name: Layer interaction plot
 
@@ -867,6 +867,8 @@ V1 -> V1 az a session (Fig 1: ...708) ahol a legstabilabb a kód (gyakran csak a
 
 ## RRR time slice
 
+See [references](../references/experiments/rrr-time-slice.md) for more information.
+
 Name: SLICE.
 
 Date: 2024.04.30.
@@ -1015,6 +1017,8 @@ Esetleg z-score mean legyen ITI-ből.
 `quality`: Label assigned based on waveform shape as described [here](https://github.com/AllenInstitute/ecephys_spike_sorting/tree/7e567a6fc3fd2fc0eedef750b83b8b8a0d469544/ecephys_spike_sorting/modules/noise_templates). Either 'good' for physiological waveforms or 'noise' for artifactual waveforms.
 
 ## Crosstime timeseries of lags
+
+See [references](../references/experiments/crosstime.md) for more information.
 
 **Name**: CROSSTIME.
 
@@ -1263,6 +1267,8 @@ stages:
 
 ## Time lag search
 
+See [references](../references/experiments/time-lag-search.md) for more information.
+
 **Name**: LAGR2. LAGHANDL. 
 
 **Date**: 2024.03.21., 26., 27.
@@ -1473,6 +1479,8 @@ bottom-up
 - the low-dimensional correlation at the 0 and 6 ms lag is the same or not? → cross test between 0 and 6 ms lag
 
 ## Multiple session param search!!!
+
+See [references](../references/experiments/cv-time-lag.md) for more intormation.
 
 **name**: TOPDOWN
 
@@ -2049,6 +2057,8 @@ here the $r^2$ is **0.086**
 
 ## CV-rank-time exploration
 
+See [references](../references/experiments/cv-rank-time.md) for more information.
+
 **Date**: 2024.02.21.
 
 **Results**:
@@ -2174,6 +2184,8 @@ stages:
 does the normaliyation give us indistinguishable values for movement and spiking? print these values .
 
 ## Rank optimization
+
+See [references](../references/experiments/rrr-rank.md) for more information.
 
 **Name**: RANKOPT. RANKOPTTIME. RANKOPTCV.
 
@@ -2332,7 +2344,9 @@ at Joao Semedo: 1250 ms (not contaminated by movement)
 
 [data acquisition/neuropixelsPXI](https://github.com/open-ephys-plugins/neuropixels-PXI)
 
-## **Time lag between V1 and V2**
+## Time lag between V1 and V2
+
+See [references](../references/experiments/time-lag.md) for more information.
 
 **Name**: CROSSTIMELAG. CROSSTIMECOEFFS.
 
@@ -2787,6 +2801,8 @@ Activity of 118. unit does not look Gaussian (reject H0)
 
 ## PCA
 
+See [references](../references/experiments/pca.md) for more information.
+
 **Date**: 2024.02.06.
 
 **Params**:
@@ -2801,6 +2817,8 @@ Activity of 118. unit does not look Gaussian (reject H0)
 ![pca-analysis_principal-components.png](Allen%20project%20d3cfe5aab8384495b58fba8a47eeadcc/pca-analysis_principal-components.png)
 
 ## RRR analysis along time
+
+See [references](../references/experiments/rrr.md) for more information.
 
 **Name**: RRR ANALYSIS ALONG TIME.
 

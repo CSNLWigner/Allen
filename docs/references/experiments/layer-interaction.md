@@ -1,7 +1,5 @@
 # Layer Interaction
 
-Date: Jun 14
-
 See [experiment history](../../notion/Allen%20project%20d3cfe5aab8384495b58fba8a47eeadcc.md#layer-interaction-plot) for more information.
 
 ## Analysis

@@ -4,6 +4,7 @@
 This module contains tools for performing Reduced Rank Regression (RRR) analysis on neural data.
 
 Functions:
+
 - getCoeffs(model, log=False) -> numpy.ndarray: Calculate the mean coefficients of a model over cross-validation folds.
 - RRRR(X_data, Y_data, dataBalancing='none', rank=None, cv=None, log=False, success_log=True, warn=True) -> dict: Make Reduced Rank Regression (RRR) analysis.
 - RFE_CV(X_data, Y_data, rank=None, cv=None) -> dict: Perform Recursive Feature Elimination (RFE) cross-validation.
@@ -190,11 +191,11 @@ def control_models(predictor_names=['V1', 'movement', 'pupil'], response_name='V
     can also be included as predictors.
     
     Params:
-    - predictor names (list): Define, which data to concatenate into the predictors. The options are: 'V1', 'movement', 'pupil'.
-    - outcome name (str): The name of the outcome variable. Default is 'V2'.
+        - predictor names (list): Define, which data to concatenate into the predictors. The options are: 'V1', 'movement', 'pupil'.
+        - outcome name (str): The name of the outcome variable. Default is 'V2'.
 
     Returns:
-    - results (numpy.ndarray): Array of shape (T, cv) containing the RRR test scores at each time point.
+        - results (numpy.ndarray): Array of shape (T, cv) containing the RRR test scores at each time point.
     '''
     
     # Load the data

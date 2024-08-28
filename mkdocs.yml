@@ -23,7 +23,20 @@ nav:
   - Experiment History: notion/Allen project d3cfe5aab8384495b58fba8a47eeadcc.md
   - References:
     - Overview: references/references.md
-    - Experiment Modules:
+    - Experiments:
       - references/experiments/layer-rank.md
       - references/experiments/layer-interaction.md
       - references/experiments/rank-along-time.md
+      - references/experiments/crosstime.md
+      - references/experiments/rrr-time-slice.md
+      - references/experiments/lag-along-time.md
+      - references/experiments/time-lag-search.md
+      - references/experiments/cv-time-lag.md
+      - references/experiments/time-lag.md
+      - references/experiments/cv-rank-time.md
+      - references/experiments/rrr-rank.md
+      - references/experiments/rrr.md
+      - references/experiments/pca.md
+      - references/experiments/cca.md
+    - Tools:
+      - about.md

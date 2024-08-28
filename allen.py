@@ -41,7 +41,7 @@ The following two-step experiments are available (make extra attention to the fi
 - **rank-along-time**: This experiment is about the rank along time in the RRR model. Corresponding codes are ``rank-along-time-analysis`` and ``rank-along-time-plot``.
 - **crosstime**: This experiment is about the cross-time RRR model. Corresponding codes are ``crosstime-analysis`` and ``crosstime-plot``.
 - **rrr-time-slice**: This experiment is about the time slice of the RRR model. Corresponding codes are ``rrr-time-slice-analysis`` and ``rrr-time-slice-plot``.
-- **lag-along-time**: This experiment is about the lag along time in the RRR model. Corresponding codes are ``lag-along-time-analysis`` and ``lags-along-time-plot``.
+- **lag-along-time**: This experiment is about the lag along time in the RRR model. Corresponding codes are ``lag-along-time-analysis``, ``lags-along-time-plot``, and ``max-lags-along-time-plot``.
 - **time-lag-search**: This experiment is about the time lag search in the RRR model. Corresponding codes are ``time-lag-search-analysis`` and ``time-lag-search-plot``.
 - **cv-time-lag**: This experiment is about the cross-validation of the time lag in the RRR model. Corresponding codes are ``cv-time-lag-analysis`` and ``cv-time-lag-plot``.
 - **time-lag**: This experiment is about the time lag in the RRR model. Corresponding codes are ``time_lag_analysis`` and ``time_lag_plot``.
@@ -57,7 +57,6 @@ The other experiment utilities are:
 - ``control-models``: This utility contains functions for creating control models.
 - ``cv-rank-cross-time``: This utility contains functions for cross-validation of the rank along time.
 - ``rrr-score-time-plot``: This utility contains functions for plotting the score along time in the RRR model.
-- ``max-lags-along-time-plot``: This utility contains functions for plotting the maximum lags along time in the RRR model.
 - ``crosstime-timeslice-plot``: This utility contains functions for plotting the cross-time time slice in the RRR model.
 - ``save-slices``: This utility contains functions for saving slices in the crosstime RRR model.
 - ``multiple-timeslices``: This utility contains functions for creating multiple time slices in the RRR model.
