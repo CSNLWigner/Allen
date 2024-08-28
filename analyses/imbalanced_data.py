@@ -41,18 +41,18 @@ def undersampled_cross_validation(estimator, X, y, sample_size, k_folds=5, repla
     Perform undersampled cross-validation on the given dataset using the specified model, in parallel.
 
     Parameters:
-    - X (array-like): The input features.
-    - y (array-like): The target variable.
-    - model: The machine learning model to be trained and evaluated.
-    - k_folds (int): The number of folds for cross-validation. Default is 5.
-    - sample_size (int): The number of samples to be randomly selected for undersampling.
-    - replace (bool): Whether to allow replacement when undersampling. Default is False.
-    - log (bool): Whether to log the overall performance metrics. Default is False.
-    - n_jobs (int): The number of CPUs to use to do the computation. -1 means using all processors.
-    - warn (bool): Whether to log a warning if sample_size is greater than the number of samples. Default is True.
+        X (array-like): The input features.
+        y (array-like): The target variable.
+        model: The machine learning model to be trained and evaluated.
+        k_folds (int): The number of folds for cross-validation. Default is 5.
+        sample_size (int): The number of samples to be randomly selected for undersampling.
+        replace (bool): Whether to allow replacement when undersampling. Default is False.
+        log (bool): Whether to log the overall performance metrics. Default is False.
+        n_jobs (int): The number of CPUs to use to do the computation. -1 means using all processors.
+        warn (bool): Whether to log a warning if sample_size is greater than the number of samples. Default is True.
 
     Returns:
-    dict: A dictionary containing the test scores, F1 scores, and the trained model.
+        dict: A dictionary containing the test scores, F1 scores, and the trained model.
     """
 
     kf = KFold(n_splits=k_folds, shuffle=True)

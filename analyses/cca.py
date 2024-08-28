@@ -15,6 +15,7 @@ from sklearn.model_selection import cross_val_score
 from utils.neuropixel import get_area_units, get_stimulus_presentations, get_unit_responses
 
 import yaml
+from allensdk.brain_observatory.ecephys.ecephys_session import EcephysSession
 params = yaml.safe_load(open('params.yaml'))['cca']
 
 
@@ -23,18 +24,18 @@ def cca(X_train, Y_train, X_test, Y_test):
     Perform Canonical Correlation Analysis (CCA) on two sets of variables.
 
     Parameters:
-    X_train (numpy.ndarray): First set of variables for training, shape (n_samples, n_features1).
-    Y_train (numpy.ndarray): Second set of variables for training, shape (n_samples, n_features2).
-    X_test (numpy.ndarray): First set of variables for testing, shape (n_samples, n_features1).
-    Y_test (numpy.ndarray): Second set of variables for testing, shape (n_samples, n_features2).
+        X_train (numpy.ndarray): First set of variables for training, shape (n_samples, n_features1).
+        Y_train (numpy.ndarray): Second set of variables for training, shape (n_samples, n_features2).
+        X_test (numpy.ndarray): First set of variables for testing, shape (n_samples, n_features1).
+        Y_test (numpy.ndarray): Second set of variables for testing, shape (n_samples, n_features2).
 
     Returns:
-    dict: A dictionary containing the following items:
-        - 'model' (sklearn.cross_decomposition.CCA): CCA object fitted on the training data.
-        - 'X_train_r' (numpy.ndarray): Transformed X_train data using CCA.
-        - 'Y_train_r' (numpy.ndarray): Transformed Y_train data using CCA.
-        - 'X_test_r' (numpy.ndarray): Transformed X_test data using CCA.
-        - 'Y_test_r' (numpy.ndarray): Transformed Y_test data using CCA.
+        cca (dict): A dictionary containing the following items:
+            'model' (sklearn.cross_decomposition.CCA): CCA object fitted on the training data.
+            'X_train_r' (numpy.ndarray): Transformed X_train data using CCA.
+            'Y_train_r' (numpy.ndarray): Transformed Y_train data using CCA.
+            'X_test_r' (numpy.ndarray): Transformed X_test data using CCA.
+            'Y_test_r' (numpy.ndarray): Transformed Y_test data using CCA.
     """
     cca = CCA()
     cca.fit(X_train, Y_train)
@@ -55,12 +56,14 @@ We can then consider two layers, L1 and L2 of a neural network as two sets of ob
 """
 
 
-def compare_two_areas(session, area_X, area_Y, log=True) -> dict:
+def compare_two_areas(session: EcephysSession, area_X, area_Y, log=True) -> dict:
     """
     Compare the responses of units in the VISp and VISpm brain areas using Canonical Correlation Analysis (CCA).
 
-    Args:
-        session: The session object containing the spike times and stimulus presentations.
+    Parameters:
+        session (EcephysSession): The session object containing the spike times and stimulus presentations.
+        area_X (str): Name of the first brain area.
+        area_Y (str): Name of the second brain area.
         log (bool, optional): Whether to log the progress. Defaults to True.
 
     Returns:

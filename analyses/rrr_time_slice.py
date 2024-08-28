@@ -10,12 +10,14 @@ Functions:
 
 import numpy as np
 import pandas as pd
-from analyses.data_preprocessing import preprocess_area_responses, z_score_normalize
-from analyses.rrr import RRRR
+import yaml
 from scipy.stats import sem as SEM
+
+from analyses.data_preprocessing import (preprocess_area_responses,
+                                         z_score_normalize)
+from analyses.rrr import RRRR
 from utils.utils import printProgressBar
 
-import yaml
 preprocess = yaml.safe_load(open("params.yaml"))["preprocess"]
 
 def RRRR_time_slice(predictor, target, predictor_time, cv, rank, log=True):
@@ -32,10 +34,10 @@ def RRRR_time_slice(predictor, target, predictor_time, cv, rank, log=True):
         rank (int): The rank of the RRRR model.
 
     Returns:
-        dict: A dictionary containing the mean and standard error of the RRRR scores for each time slice.
+        rrr (dict): A dictionary containing the mean and standard error of the RRRR scores for each time slice.
               The dictionary has the following keys:
-              - 'mean': ndarray of shape (T), containing the mean RRRR scores for each time slice.
-              - 'sem': ndarray of shape (T), containing the standard error of the RRRR scores for each time slice.
+              'mean': ndarray of shape (T), containing the mean RRRR scores for each time slice.
+              'sem': ndarray of shape (T), containing the standard error of the RRRR scores for each time slice.
     """
     
     T = predictor.shape[2]
@@ -77,6 +79,7 @@ def RRRR_time_slice(predictor, target, predictor_time, cv, rank, log=True):
 
 
 def bidirectional_time_slice(V1_activity, LM_activity, session_params:pd.DataFrame, predictor_time, log=False):
+    
     """
     Perform bidirectional time slice analysis using RRRR.
 
@@ -87,7 +90,7 @@ def bidirectional_time_slice(V1_activity, LM_activity, session_params:pd.DataFra
         predictor_time (numpy.ndarray): The time points for the predictor activity.
 
     Returns:
-        dict: A dictionary containing the results for each prediction direction.
+        prediction_direction (dict): A dictionary containing the results for each prediction direction. The keys of the dictionary are the prediction directions ('top-down', 'bottom-up', 'V1', 'LM'). The values are the results of the RRRR analysis for each prediction direction.
 
     """
     
@@ -112,7 +115,7 @@ def bidirectional_time_slice(V1_activity, LM_activity, session_params:pd.DataFra
     }
 
     # Init results
-    results = {}
+    prediction_direction = {}
 
     # Iterate through the prediction directions
     for prediction_direction in ['top-down', 'bottom-up', 'V1', 'LM']:
@@ -137,6 +140,6 @@ def bidirectional_time_slice(V1_activity, LM_activity, session_params:pd.DataFra
             predictor_activity, target_activity, predictor_time, cv, rank, log=log)
 
         # Save the results
-        results[prediction_direction] = result
+        prediction_direction[prediction_direction] = result
 
-    return results
+    return prediction_direction

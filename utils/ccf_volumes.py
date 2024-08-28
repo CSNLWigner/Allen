@@ -74,10 +74,10 @@ def get_layer_name(acronym):
     Get the layer number from the given acronym.
 
     Parameters:
-    - acronym (str): The acronym representing a cortical layer.
+        acronym (str): The acronym representing a cortical layer.
 
     Returns:
-    - int: The layer number corresponding to the given acronym.
+        int: The layer number corresponding to the given acronym.
     """
     try:
         layer = int(re.findall(r'\d+', acronym)[0])
@@ -92,11 +92,11 @@ def get_structure_ids(df, annotations):
     Get the structure IDs for the given DataFrame.
 
     Parameters:
-    - df (pd.DataFrame): The DataFrame containing coordinate values.
-    - annotations (np.ndarray): The annotation volume.
+        df (pd.DataFrame): The DataFrame containing coordinate values.
+        annotations (np.ndarray): The annotation volume.
 
     Returns:
-    - np.ndarray: The structure IDs corresponding to the given DataFrame.
+        np.ndarray: The structure IDs corresponding to the given DataFrame.
     """
     x = (df.anterior_posterior_ccf_coordinate.values / 10).astype('int')
     y = (df.dorsal_ventral_ccf_coordinate.values / 10).astype('int')
@@ -117,10 +117,10 @@ def cortical_depth_calculation(channels) -> pd.DataFrame:
     Calculate the cortical depth for the given channels.
 
     Parameters:
-    - channels (pd.DataFrame): The DataFrame containing channel information.
+        channels (pd.DataFrame): The DataFrame containing channel information.
 
     Returns:
-    - pd.DataFrame: The DataFrame with a new column 'cortical_depth' that represents the cortical depth of each channel.
+        pd.DataFrame: The DataFrame with a new column 'cortical_depth' that represents the cortical depth of each channel.
     """
     channels = channels[channels.anterior_posterior_ccf_coordinate > 0]
 
@@ -146,10 +146,10 @@ def layer_assignment_to_channels(channels) -> pd.DataFrame:
     ATTENTION! Please keep in mind that these layer assignments are only estimates, and not definitive labels. 
 
     Parameters:
-    - channels (pd.DataFrame): The DataFrame containing channel information.
+        channels (pd.DataFrame): The DataFrame containing channel information.
 
     Returns:
-    - pd.DataFrame: The DataFrame with a new column 'cortical_layer' that assigns each channel to a cortical layer.
+        pd.DataFrame: The DataFrame with a new column 'cortical_layer' that assigns each channel to a cortical layer.
     """
     channels = cortical_depth_calculation(channels)
 

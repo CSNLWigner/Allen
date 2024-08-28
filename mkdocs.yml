@@ -1,7 +1,7 @@
 site_name: Allen Project Documentation
 
 theme:
-  name: readthedocs # or material 
+  name: material # or readthedocs
 
 extra_javascript:
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js

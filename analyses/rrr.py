@@ -42,7 +42,7 @@ def getCoeffs(model, log=False):
         log (bool, optional): Whether to print the shape of the coefficients. Default is False.
 
     Returns:
-        numpy.ndarray: The mean coefficients of the model.
+        mean_coefficients (numpy.ndarray): The mean coefficients of the model.
 
     Note:
         If the model is None, None is returned.
@@ -78,9 +78,9 @@ def RRRR(X_data, Y_data, dataBalancing='none', rank=None, cv=None, log=False, su
 
     Returns:
         dict: A dictionary containing the results of the RRR analysis.
-            - mean_coefficients (np.ndarray): The mean coefficients of the RRR model. Shape (n_features_X, n_features_Y)
-            - test_score (np.ndarray): The test scores of the RRR model. Shape (n_splits,)
-            - estimator (np.ndarray): The estimators of the RRR model. Shape (n_splits,)
+            mean_coefficients (np.ndarray): The mean coefficients of the RRR model. Shape (n_features_X, n_features_Y)
+            test_score (np.ndarray): The test scores of the RRR model. Shape (n_splits,)
+            estimator (np.ndarray): The estimators of the RRR model. Shape (n_splits,)
     """
     
     # Set default values
@@ -128,6 +128,18 @@ def RRRR(X_data, Y_data, dataBalancing='none', rank=None, cv=None, log=False, su
     return results
 
 def RFE_CV(X_data, Y_data, rank=None, cv=None):
+    """
+    Performs Recursive Feature Elimination (RFE) with cross-validation.
+    
+    Parameters:
+        X_data (array-like): The input data.
+        Y_data (array-like): The target data.
+        rank (int, optional): The number of features to select. If not provided, the default value from params will be used.
+        cv (int, optional): The number of cross-validation folds. If not provided, the default value from params will be used.
+    
+    Returns:
+        optimal_features (array-like): The selected optimal features.
+    """
 
     # Set default values
     if rank is None:
@@ -144,20 +156,14 @@ def compare_two_areas(area_X_responses:np.ndarray, area_Y_responses:np.ndarray, 
     """
     Compare the responses of units in two brain areas using Reduced Rank Regression (RRR).
 
-    Args:
-        session (Session): The session object containing the spike times and stimulus presentations.
-        area_X (str): The name of the first brain area.
-        area_Y (str): The name of the second brain area.
-        session_block (int): The stimulus block number.
-            0: change detection task
-            2: receptive field mapping by gabor stimuli
-            4: full-flash
-            5: passive replay
+    Parameters:
+        area_X_responses (np.ndarray): The responses of units in the first brain area. Shape (n_units_X, n_trials, n_timepoints)
+        area_Y_responses (np.ndarray): The responses of units in the second brain area. Shape (n_units_Y, n_trials, n_timepoints)
         log (bool, optional): Whether to log the progress. Defaults to True.
 
     Returns:
-        dict: A dictionary containing the results of the CCA analysis.
-            - coefficients (np.ndarray): The coefficients of the CCA model. Shape (Y_features, X_features)
+        return (dict): A dictionary containing the results of the RRR analysis.
+            coefficients (np.ndarray): The coefficients of the RRR model. Shape (n_units_X, n_units_Y, n_timepoints)
     """
     
     # Parameters
@@ -190,12 +196,13 @@ def control_models(predictor_names=['V1', 'movement', 'pupil'], response_name='V
     as predictors and V2 neuronal activity as the target variable. The behavioral data (movement and pupil)
     can also be included as predictors.
     
-    Params:
-        - predictor names (list): Define, which data to concatenate into the predictors. The options are: 'V1', 'movement', 'pupil'.
-        - outcome name (str): The name of the outcome variable. Default is 'V2'.
+    Parameters:
+        predictor_names (list): Define, which data to concatenate into the predictors. The options are: 'V1', 'movement', 'pupil'.
+        response_name (str): The name of the outcome variable. Default is 'V2'.
+        log (bool): Whether to log the progress. Default is False.
 
     Returns:
-        - results (numpy.ndarray): Array of shape (T, cv) containing the RRR test scores at each time point.
+        results (numpy.ndarray): Array of shape (T, cv) containing the RRR test scores at each time point.
     '''
     
     # Load the data
@@ -365,7 +372,7 @@ def crosstime_analysis(predictor, target, cv, rank, scaling_factor=10, dataBalan
     """
     Perform cross-time analysis based on timpoints of rrr-param-search lag.
     
-    Args:
+    Parameters:
         predictor (ndarray): Array of shape (neurons, trials, timepoints) representing the activity of the predictor area.
         target (ndarray): Array of shape (neurons, trials, timepoints) representing the activity of the target area.
         cv (int): Number of cross-validation folds to use.
@@ -375,7 +382,7 @@ def crosstime_analysis(predictor, target, cv, rank, scaling_factor=10, dataBalan
         ProgressBar (bool, optional): Whether to display a progress bar. Defaults to True.
     
     Returns:
-        ndarray: Array of shape (len(xseries), len(yseries)) containing the results of the cross-time analysis.
+        crosstimeMatrix (np.ndarray): Array of shape (timepoints, timepoints) representing the cross-time RRR scores.
     """
     predictor_orig = predictor
     target_orig = target
@@ -388,14 +395,14 @@ def crosstime_analysis(predictor, target, cv, rank, scaling_factor=10, dataBalan
     yseries = np.arange(0, 200, scaling_factor)
     
     # Init results
-    results = np.full((len(xseries), len(yseries)), fill_value=np.nan)
+    crosstimeMatrix = np.full((len(xseries), len(yseries)), fill_value=np.nan)
     
     # If sample_size is greater than the number of samples, then log a warning and return empty results
     if dataBalancing == 'undersampled':
         y_length = target_orig.shape[0]
         if params['sample-size'] > y_length:
             print(f"Waring: sample_size ({params['sample-size']}) is greater than the number of samples ({y_length}). Returning empty results.")
-            return results
+            return crosstimeMatrix
     
     # In case of undersampling lower boundary of layer 5 -> do not calculate the other layers
     # if dataBalancing == 'none': # TODO: wipe this out
@@ -423,9 +430,9 @@ def crosstime_analysis(predictor, target, cv, rank, scaling_factor=10, dataBalan
             res = RFE_CV(predictor.T, target.T, rank=rank, cv=cv)
             
             # Save results
-            results[x, y] = res
+            crosstimeMatrix[x, y] = res
             
         # Print progressbar
         if ProgressBar: manager.progress_bar(progress_bar_id, x+1, len(xseries))
     
-    return results
+    return crosstimeMatrix

@@ -23,10 +23,10 @@ def retrieve_link(session_id):
     Retrieves the download link for the given session ID.
 
     Parameters:
-    - session_id (int): The ID of the session.
+        session_id (int): The ID of the session.
 
     Returns:
-    - download_link (str): The download link for the session.
+        download_link (str): The download link for the session.
     """
 
     well_known_files = build_and_execute(
@@ -47,10 +47,10 @@ def get_download_links(manifest_path):
     Retrieves the download links for all sessions in the given manifest file.
 
     Parameters:
-    - manifest_path (str): The path to the manifest file.
+        manifest_path (str): The path to the manifest file.
 
     Returns:
-    - download_links (list): A list of download links for each session.
+        download_links (list): A list of download links for each session.
     """
 
     cache = EcephysProjectCache.from_warehouse(manifest=manifest_path)

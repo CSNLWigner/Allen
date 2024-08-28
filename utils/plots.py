@@ -45,27 +45,27 @@ def simple_mean_SEM_time_plot(ax, mean, ylabel, title=None, SEM=None, SEM_multip
     Plots the mean and standard error of the mean of the results as a function of time.
 
     Parameters:
-    - ax (matplotlib.axes.Axes, optional): The axes on which to plot. If not provided, a new figure and axes will be created.
-    - mean (array-like): A one-dimensional array-like object representing the mean of the results.
-    - ylabel (str): The label for the y-axis.
-    - title (str, optional): The title of the plot. Default is 'Mean and SEM of the results'.
-    - SEM (array-like, optional): A one-dimensional array-like object representing the standard error of the mean of the results.
-    - SEM_multiplier (int, optional): The multiplier for the standard error of the mean. Default is 2.
-    - time_series (array-like, optional): A one-dimensional array-like object representing the time series. If not provided, it will be generated using the params.yaml file.
-    - color (str, optional): The color of the plot. Default is None.
-    - xlabel (str, optional): The label for the x-axis. Default is 'Time (s)'.
-    - alpha (float, optional): The transparency of the shaded area representing the standard error of the mean. Default is 0.2.
-    - linewidth (float, optional): The width of the line representing the mean. Default is None.
-    - xticks (array-like, optional): The locations of the x-axis ticks.
-    - xticklabels (array-like, optional): The labels for the x-axis ticks.
-    - yticks (array-like, optional): The locations of the y-axis ticks.
-    - yticklabels (array-like, optional): The labels for the y-axis ticks.
-    - label (str, optional): The label for the plot. Default is None.
-    - xlim (tuple, optional): The limits for the x-axis.
-    - ylim (tuple, optional): The limits for the y-axis.
+        ax (matplotlib.axes.Axes, optional): The axes on which to plot. If not provided, a new figure and axes will be created.
+        mean (array-like): A one-dimensional array-like object representing the mean of the results.
+        ylabel (str): The label for the y-axis.
+        title (str, optional): The title of the plot. Default is 'Mean and SEM of the results'.
+        SEM (array-like, optional): A one-dimensional array-like object representing the standard error of the mean of the results.
+        SEM_multiplier (int, optional): The multiplier for the standard error of the mean. Default is 2.
+        time_series (array-like, optional): A one-dimensional array-like object representing the time series. If not provided, it will be generated using the params.yaml file.
+        color (str, optional): The color of the plot. Default is None.
+        xlabel (str, optional): The label for the x-axis. Default is 'Time (s)'.
+        alpha (float, optional): The transparency of the shaded area representing the standard error of the mean. Default is 0.2.
+        linewidth (float, optional): The width of the line representing the mean. Default is None.
+        xticks (array-like, optional): The locations of the x-axis ticks.
+        xticklabels (array-like, optional): The labels for the x-axis ticks.
+        yticks (array-like, optional): The locations of the y-axis ticks.
+        yticklabels (array-like, optional): The labels for the y-axis ticks.
+        label (str, optional): The label for the plot. Default is None.
+        xlim (tuple, optional): The limits for the x-axis.
+        ylim (tuple, optional): The limits for the y-axis.
     
     Returns:
-    matplotlib.figure.Figure: The figure object containing the plot.
+        matplotlib.figure.Figure: The figure object containing the plot.
     """
     
     # Set default values
@@ -435,18 +435,18 @@ def cv_rank_time_plot(results, title=None, ax=None, max=None, xlabel=None, ylabe
     Plot the results of the cross-validation and rank.
 
     Parameters:
-    - results: numpy array, the results of the cross-validation and rank
-    - title: str, the title of the plot
-    - ax: matplotlib Axes object, the axes to plot on (optional)
-    - max: int, the maximum value for the colorbar (optional)
-    - xlabel: str, the label for the x-axis (optional)
-    - ylabel: str, the label for the y-axis (optional)
-    - xticks: list, the tick labels for the x-axis (optional)
-    - yticks: list, the tick labels for the y-axis (optional)
+        results: numpy array, the results of the cross-validation and rank
+        title: str, the title of the plot
+        ax: matplotlib Axes object, the axes to plot on (optional)
+        max: int, the maximum value for the colorbar (optional)
+        xlabel: str, the label for the x-axis (optional)
+        ylabel: str, the label for the y-axis (optional)
+        xticks: list, the tick labels for the x-axis (optional)
+        yticks: list, the tick labels for the y-axis (optional)
 
     Returns:
-    - fig: matplotlib Figure object, the figure containing the plot (optional)
-    - im: matplotlib Image object, the image representing the plot
+        fig: matplotlib Figure object, the figure containing the plot (optional)
+        im: matplotlib Image object, the image representing the plot
 
     If ax is None, a new figure is created. The plot is displayed using a colormap
     with the 'viridis' color map. The colorbar is added to the plot. If fig is not None,
@@ -509,16 +509,16 @@ def crosstime_RRR(ax, matrix, predictor, target, timeseries, vlim, tick_frequenc
     Plot a cross-timepoint correlation matrix.
 
     Parameters:
-    - ax (matplotlib.axes.Axes): The axes on which to plot the matrix.
-    - matrix (numpy.ndarray): The correlation matrix to be plotted.
-    - predictor (str): The label for the predictor variable.
-    - target (str): The label for the target variable.
-    - timeseries (numpy.ndarray): The array of timepoints.
-    - vlim (tuple): The range of values for the colormap.
-    - tick_frequency (int): The frequency of the ticks on the axes.
+        ax (matplotlib.axes.Axes): The axes on which to plot the matrix.
+        matrix (numpy.ndarray): The correlation matrix to be plotted.
+        predictor (str): The label for the predictor variable.
+        target (str): The label for the target variable.
+        timeseries (numpy.ndarray): The array of timepoints.
+        vlim (tuple): The range of values for the colormap.
+        tick_frequency (int): The frequency of the ticks on the axes.
 
     Returns:
-    - cax (matplotlib.image.AxesImage): The plotted image of the matrix.
+        cax (matplotlib.image.AxesImage): The plotted image of the matrix.
     """
 
     # The diagonal of the matrix should be nan

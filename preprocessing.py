@@ -8,11 +8,11 @@ The script loads the area responses for a given stimulus block. It then z-scores
 **Parameters**:
 
 - `load`:
-    - `stimulus-block`: The name of the stimulus block to analyze.
+        `stimulus-block`: The name of the stimulus block to analyze.
 - `preprocess`:
-    - `areas`: A list of brain areas to preprocess.
-    - `lag-area`: The brain area to move back in time.
-    - `lag-time`: The time lag to apply to the area responses.
+        `areas`: A list of brain areas to preprocess.
+        `lag-area`: The brain area to move back in time.
+        `lag-time`: The time lag to apply to the area responses.
 
 **Input**:
 

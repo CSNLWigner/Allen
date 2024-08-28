@@ -33,10 +33,11 @@ class ReducedRankRegressor(object):
     Analytical method
     
     Reduced Rank Regressor (linear 'bottlenecking' or 'multitask learning')
-    - X is an n-by-x matrix of features.
-    - Y is an n-by-y matrix of targets.
-    - rrank is a rank constraint.
-    - reg is a regularization parameter (optional).
+        X is an n-by-x matrix of features.
+        Y is an n-by-y matrix of targets.
+        rrank is a rank constraint.
+        reg is a regularization parameter (optional).
+    
     ```
     def ideal_data(num, dimX, dimY, rrank, noise=1):
         "Low rank data"
@@ -106,11 +107,11 @@ class ReducedRankRidgeRegression(sklearn.base.MultiOutputMixin, sklearn.base.Reg
     The `ReducedRankRidgeRegression` estimator supports gradient descent method and does not support missing values.
 
     Parameters:
-    - alpha (float, default=1.0): Regularization parameter.
-    - fit_intercept (bool, default=True): Whether to calculate the intercept for this model.
-    - rank (int, default=None): Rank of the coefficient matrix.
-    - ridge_solver (str, default='auto'): Solver to use for ridge regression.
-    - memory (joblib.Memory, default=None): Memory object to cache the computation of the rank parameter.
+        alpha (float, default=1.0): Regularization parameter.
+        fit_intercept (bool, default=True): Whether to calculate the intercept for this model.
+        rank (int, default=None): Rank of the coefficient matrix.
+        ridge_solver (str, default='auto'): Solver to use for ridge regression.
+        memory (joblib.Memory, default=None): Memory object to cache the computation of the rank parameter.
 
     References:
     [^1] Mukherjee, A. and Zhu, J. (2011). Reduced rank ridge regression and its kernel extensions.
@@ -155,11 +156,11 @@ class ReducedRankRidgeRegression(sklearn.base.MultiOutputMixin, sklearn.base.Reg
         Fit the Reduced Rank Ridge Regression model to the training data.
 
         Parameters:
-        - X (array-like of shape (n_samples, n_features)): Training data.
-        - y (array-like of shape (n_samples, n_targets)): Target values.
+            X (array-like of shape (n_samples, n_features)): Training data.
+            y (array-like of shape (n_samples, n_targets)): Target values.
 
         Returns:
-        - self (object): Returns self.
+            self (object): Returns self.
         """
         if self.fit_intercept:
             X_offset = np.average(X, axis=0)
@@ -180,10 +181,10 @@ class ReducedRankRidgeRegression(sklearn.base.MultiOutputMixin, sklearn.base.Reg
         Predict target values for the given test data.
 
         Parameters:
-        - X (array-like of shape (n_samples, n_features)): Test data.
+            X (array-like of shape (n_samples, n_features)): Test data.
 
         Returns:
-        - y_pred (array-like of shape (n_samples, n_targets)): Predicted target values.
+            y_pred (array-like of shape (n_samples, n_targets)): Predicted target values.
         """
         return np.dot(X, self.coef_.T)
 

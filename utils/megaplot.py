@@ -641,9 +641,9 @@ class megaplot():
         Add colorbar axes to the side of the figure or below the figure.
 
         Parameters:
-        - imshow (AxesImage or ContourSet): The image or contour set to which the colorbar corresponds.
-        - orientation (str): The orientation and position of the colorbar. Can be 'vertical' or 'horizontal'. Default is 'vertical'.
-        - label (str): The label of the colorbar. Default is None.
+            imshow (AxesImage or ContourSet): The image or contour set to which the colorbar corresponds.
+            orientation (str): The orientation and position of the colorbar. Can be 'vertical' or 'horizontal'. Default is 'vertical'.
+            label (str): The label of the colorbar. Default is None.
         """
         
         # Initialize subplot. It must be AxesImage or ContourSet.
