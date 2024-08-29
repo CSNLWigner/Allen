@@ -45,4 +45,11 @@ nav:
       - references/experiments/rrr.md # 2024.01.30. Modified: 2024.01.31.
       - references/experiments/cca.md # ?
     - Tools:
-      - about.md
+      - Data I/O: references/utilities/data_io.md
+      - references/utilities/direct-download.md
+      - Data Preprocessing: references/utilities/neuropixel.md
+      - CCF Volumes: references/utilities/ccf_volumes.md
+      - Important Functions: references/utilities/utils.md
+      - references/utilities/plots.md
+      - references/utilities/megaplot.md
+      - references/utilities/other-utils.md

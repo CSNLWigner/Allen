@@ -78,7 +78,7 @@ class megaplot():
         A class used to make matplotlib subplot and its changes more convenient.
 
         Args:
-            *argv: Tuple of (nrows, ncols) if provided as separate arguments.
+            *argv (tuple): Tuple of (nrows, ncols) if provided as separate arguments.
             fig (pyplot.figure): The figure to use. If not provided, a new figure will be created.
             gs (GridSpec): The GridSpec to use. If not provided, a new GridSpec will be created.
             nrows (int): Number of rows in the subplot grid. If not provided, it will be determined based on the fig or gs.
@@ -88,7 +88,7 @@ class megaplot():
             ylabel (str): The label for the y-axis.
             constrained_layout (bool): Whether to use constrained layout for the figure.
             log (bool): Whether to print logs.
-            **kwargs: Additional keyword arguments to be passed to the figure creation.
+            **kwargs (dict): Additional keyword arguments to be passed to the figure creation.
 
         Attributes:
             nrows (int): Number of rows in the subplot grid. Do not change directly!
@@ -110,7 +110,8 @@ class megaplot():
             append2pdf(pdf): Save the figure to an existing PDF.
 
         Example:
-            ```# Create 2x2 figure and two Axes at [0,:] and [1,0]
+            ```python
+            # Create 2x2 figure and two Axes at [0,:] and [1,0]
             myfig = subplot(2,2,constrained_layout=True,title='title',xlabel='axis')
             ax = myfig[0,:]
             ax.plot([2,1,3])
@@ -152,8 +153,8 @@ class megaplot():
             myfig.show()
 
             # Save our figure
-            myfig.savefig('test',type='pdf',path='test')```
-
+            myfig.savefig('test',type='pdf',path='test')
+            ```
         """
         if len(argv)==2:
             nrows=argv[0]

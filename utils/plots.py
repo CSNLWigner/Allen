@@ -435,18 +435,18 @@ def cv_rank_time_plot(results, title=None, ax=None, max=None, xlabel=None, ylabe
     Plot the results of the cross-validation and rank.
 
     Parameters:
-        results: numpy array, the results of the cross-validation and rank
-        title: str, the title of the plot
-        ax: matplotlib Axes object, the axes to plot on (optional)
-        max: int, the maximum value for the colorbar (optional)
-        xlabel: str, the label for the x-axis (optional)
-        ylabel: str, the label for the y-axis (optional)
-        xticks: list, the tick labels for the x-axis (optional)
-        yticks: list, the tick labels for the y-axis (optional)
+        results (numpy.ndarray): The results of the cross-validation and rank.
+        title (str): The title of the plot.
+        ax (matplotlib.axes.Axes): The axes to plot on (optional).
+        max (int): The maximum value for the colorbar (optional).
+        xlabel (str): The label for the x-axis (optional).
+        ylabel (str): The label for the y-axis (optional).
+        xticks (List[str]): The tick labels for the x-axis (optional).
+        yticks (List[str]): The tick labels for the y-axis (optional).
 
     Returns:
-        fig: matplotlib Figure object, the figure containing the plot (optional)
-        im: matplotlib Image object, the image representing the plot
+        fig (matplotlib.figure.Figure): The figure containing the plot (optional).
+        im (matplotlib.image.AxesImage): The image representing the plot.
 
     If ax is None, a new figure is created. The plot is displayed using a colormap
     with the 'viridis' color map. The colorbar is added to the plot. If fig is not None,

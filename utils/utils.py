@@ -3,7 +3,8 @@
 """
 This submodule contains utility tools for various tasks.
 
-Functions:
+**Functions**:
+
 - calculate_accuracy(Y_data, prediction) -> float: Calculate the accuracy based on the similarity between Y_data and the prediction.
 - MSE(target, prediction) -> float: Calculate the Mean Squared Error based on the mean squared error between Y_data and the prediction.
 - iterate_dimension(arr, dim) -> None: Iterate through a specific dimension of a numpy array.
@@ -41,7 +42,7 @@ def calculate_accuracy(Y_data, prediction):
         prediction (np.ndarray): The predicted data.
 
     Returns:
-        float: The accuracy score.
+        accuracy (float): The accuracy score.
     """
     similarity = np.mean(np.equal(Y_data, prediction))
     accuracy = similarity 
@@ -57,7 +58,7 @@ def MSE(target, prediction):
         prediction (np.ndarray): The predicted data.
 
     Returns:
-        float: The similarity score.
+        similarity (float): The similarity score.
     """
     mse = np.mean((target - prediction) ** 2)
     similarity = 1 / (1 + mse)
@@ -84,8 +85,6 @@ def iterate_dimension(arr, dim):
         for counter, sliced in iterate_dimension(arr, 1):
             print(counter, sliced)
 
-    Returns:
-        None
     """
     for i in range(arr.shape[dim]):
         yield i, arr.take(i, axis=dim)
@@ -98,8 +97,6 @@ def normality_test(full_activity, dim=2):
         full_activity (np.ndarray): The input data.
         dim (int, optional): The dimension along which to perform the test. Default is 2.
 
-    Returns:
-        None
     """
     for counter, activity_slice in iterate_dimension(full_activity, dim=dim):
         # Normality test
@@ -122,7 +119,7 @@ def get_time(time_bin, bin_size=preprocess['step-size'], digits=3):
         digits (int, optional): The number of decimal places to round the result to. Default is 3.
 
     Returns:
-        float: The time in seconds.
+        rounded_value (float): The time in seconds.
     """
     return round(time_bin*bin_size, digits)
 
@@ -137,7 +134,7 @@ def shift_with_nans(arr, shift, axis=2, constant=np.nan):
         constant (int, optional): The value to use for padding. Default is np.nan.
 
     Returns:
-        np.ndarray: The shifted array.
+        return (np.ndarray): The shifted array.
 
     Example:
         # Create a 2D array
@@ -214,9 +211,10 @@ class ProgressBarManager:
         Initializes a ProgressBarManager object.
 
         Usage:
-        manager = ProgressBarManager()
+            manager = ProgressBarManager()
 
         Example:
+        ```python
         manager = ProgressBarManager()
 
         # Simulate progress
@@ -226,6 +224,7 @@ class ProgressBarManager:
             for j in range(50):
                 manager.progress_bar('Upload', j, 50)
                 time.sleep(0.01)
+        ```
         '''
         self.progress_bars = {}
         self.n_progress_bars = 0
@@ -249,15 +248,17 @@ class ProgressBarManager:
             total (int): The total value of the progress bar.
 
         Example:
-            manager = ProgressBarManager()
+        ```python
+        manager = ProgressBarManager()
 
-            # Simulate progress
-            for i in range(10):
-                manager.progress_bar('Download', i, 10)
-                # time.sleep(5)
-                for j in range(50):
-                    manager.progress_bar('Upload', j, 50)
-                    time.sleep(0.01)
+        # Simulate progress
+        for i in range(10):
+            manager.progress_bar('Download', i, 10)
+            # time.sleep(5)
+            for j in range(50):
+                manager.progress_bar('Upload', j, 50)
+                time.sleep(0.01)
+        ```
         '''
         # If not already initialized, initialize a new progress bar
         if id not in self.progress_bars:
@@ -327,16 +328,13 @@ def options_and_arguments():
 
 def dfs(node, graph, visited, component):
     """
-    Function to find the connected components in a graph using DFS
+    Function to find the connected components in a graph using Depth-First Search (DFS).
 
-    Args:
-        node: The starting node for the DFS traversal
-        graph: The graph represented as an adjacency list
-        visited: A boolean array to keep track of visited nodes
-        component: A list to store the nodes in the connected component
+        node (int): The starting node for the DFS traversal.
+        graph (dict): The graph represented as an adjacency list.
+        visited (list): A boolean array to keep track of visited nodes.
+        component (list): A list to store the nodes in the connected component.
 
-    Returns:
-        None
     """
     stack = [node]
     while stack:
@@ -409,7 +407,7 @@ def iterate_common_elements(lists):
         lists (list): A list of lists to be merged.
 
     Yields:
-        list: A merged list containing unique elements from the input lists.
+        merged_set (list): A merged list containing unique elements from the input lists.
 
     """
     # Step 1: Create a graph
@@ -487,8 +485,20 @@ def get_args(argv):
         argv (list): The list of command line arguments.
 
     Returns:
-        tuple: A tuple containing the options and arguments.
+        options (list): The list of options.
+        args (list): The list of arguments.
 
     Example:
         opts, args = get_args(sys.argv)
     """
+
+    import getopt
+    import sys
+
+    try:
+        opts, args = getopt.getopt(argv, "ho:v", ["help", "output="])
+    except getopt.GetoptError:
+        print('Usage: script.py -o <output_file> -v')
+        sys.exit(2)
+
+    return opts, args

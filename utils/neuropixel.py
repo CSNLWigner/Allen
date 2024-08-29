@@ -62,7 +62,7 @@ def get_table(cache, session_id, table_name):
         table_name (str): The name of the table to retrieve.
 
     Returns:
-        DataFrame: The table data.
+        session_table (DataFrame): The table data.
     """
     return cache.get_session_data(session_id)[table_name]
 
@@ -109,7 +109,7 @@ class AllenTables():
         Creates a dictionary of tables.
 
         Returns:
-            dict: A dictionary of tables.
+            tables (dict): A dictionary of tables.
         """
         self.tables = {
             'session': self.session,
@@ -125,7 +125,7 @@ class AllenTables():
         Creates a dictionary of columns.
 
         Returns:
-            dict: A dictionary of columns.
+            tables (dict): A dictionary of columns where the keys are the column names and the values are the assigned name.
         """
         self.columns = {}
 
@@ -152,11 +152,6 @@ class AllenTables():
         to the units in the tables. The assigned layer information is then appended to the 'layer' column
         in the columns list.
 
-        Parameters:
-            None
-
-        Returns:
-            None
         """
         # self.units = cortical_layer_assignment(self.tables.channels, self.tables.units)
         # self.columns.append('layer')
@@ -260,6 +255,7 @@ def get_unit_channels(session, log_all_areas=False) -> pd.DataFrame:
 
 def makePSTH(spikes, startTimes, windowDur, binSize=0.001):
     """
+    
     Compute the Peri-Stimulus Time Histogram (PSTH).
 
     Args:
@@ -269,8 +265,7 @@ def makePSTH(spikes, startTimes, windowDur, binSize=0.001):
         binSize (float, optional): Size of the time bins for the histogram. Defaults to 0.001.
 
     Returns:
-        tuple: A tuple containing the PSTH counts and the bin edges.
-        tuple[NDArray[float64], NDArray[floating[Any]]]
+        return (tuple[NDArray[float64], NDArray[floating[Any]]]): A tuple containing the PSTH counts and the bin edges.
 
     Notes:
         The PSTH is a histogram that represents the firing rate of neurons in response to a stimulus over time.
@@ -471,7 +466,7 @@ def get_response_magnitudes(opto_response):
         opto_response (numpy.ndarray): Array containing the optogenetic response data.
 
     Returns:
-        numpy.ndarray: Array of response magnitudes calculated for each trial.
+        response_magnitudes (numpy.ndarray): Array of response magnitudes calculated for each trial.
     """
     baseline_window = slice(0, 9)  # baseline epoch
     response_window = slice(11, 18)  # laser epoch
@@ -494,7 +489,7 @@ def get_average_unit_responses(units, spike_times, trial_start, duration=0.03, b
         binSize (float): Bin size for PSTH in seconds. Default is 0.001.
 
     Returns:
-        numpy.ndarray: Array containing the average unit responses, shape (units, duration/binSize)
+        response (numpy.ndarray): Array containing the average unit responses, shape (units, duration/binSize)
     """
     response = []
     unit_id = []
@@ -577,8 +572,6 @@ def rasterplot(session, times):
         session (Session): The session object.
         times (DataFrame): The times DataFrame.
 
-    Returns:
-        None
     """
     first_drifting_grating_presentation_id = times['stimulus_presentation_id'].values[0]
     plot_times = times[times['stimulus_presentation_id'] == first_drifting_grating_presentation_id]
@@ -598,8 +591,6 @@ def stimulus_duration(session, stimulus_block):
         session (Session): The session object.
         stimulus_block (int): The stimulus block.
 
-    Returns:
-        None
     """
     stimulus_presentations = session.stimulus_presentations[session.stimulus_presentations['active'] == True &
                                                             session.stimulus_presentations['stimulus_block'] == stimulus_block &

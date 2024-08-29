@@ -77,7 +77,7 @@ def get_layer_name(acronym):
         acronym (str): The acronym representing a cortical layer.
 
     Returns:
-        int: The layer number corresponding to the given acronym.
+        layer_number (int): The layer number corresponding to the given acronym.
     """
     try:
         layer = int(re.findall(r'\d+', acronym)[0])
@@ -96,7 +96,7 @@ def get_structure_ids(df, annotations):
         annotations (np.ndarray): The annotation volume.
 
     Returns:
-        np.ndarray: The structure IDs corresponding to the given DataFrame.
+        structure_ids (np.ndarray): The structure IDs corresponding to the given DataFrame.
     """
     x = (df.anterior_posterior_ccf_coordinate.values / 10).astype('int')
     y = (df.dorsal_ventral_ccf_coordinate.values / 10).astype('int')
