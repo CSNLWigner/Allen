@@ -1,99 +1,3161 @@
-<!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Experiment History - Allen Project Documentation</title>
-    <link rel="stylesheet" href="../../css/theme.css" />
-    <link rel="stylesheet" href="../../css/theme_extra.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
-        <link href="../../assets/_mkdocstrings.css" rel="stylesheet" />
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
     
-      <script>
-        // Current page data
-        var mkdocs_page_name = "Experiment History";
-        var mkdocs_page_input_path = "notion/Allen project d3cfe5aab8384495b58fba8a47eeadcc.md";
-        var mkdocs_page_url = null;
-      </script>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../DVC/">
+      
+      
+        <link rel="next" href="../../references/references/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.32">
     
-    <!--[if lt IE 9]>
-      <script src="../../js/html5shiv.min.js"></script>
-    <![endif]-->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-      <script>hljs.highlightAll();</script> 
-</head>
+    
+      
+        <title>Experiment History - Allen Project Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3cba04c6.min.css">
+      
+      
 
-<body class="wy-body-for-nav" role="document">
 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
-    <div class="wy-side-scroll">
-      <div class="wy-side-nav-search">
-          <a href="../.." class="icon icon-home"> Allen Project Documentation
-        </a><div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
-  </form>
-</div>
-      </div>
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../tutorials/">Tutorials</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../how-to-guides/">How-To Guides</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../reference/">Reference</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../explanation/">Project Explanation</a>
-                </li>
-              </ul>
-              <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="#">Experiment History</a>
-    <ul class="current">
-    </ul>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../DVC/">DVC Framework</a>
-                </li>
-              </ul>
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#allen-project" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Allen Project Documentation" class="md-header__button md-logo" aria-label="Allen Project Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Allen Project Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Experiment History
+            
+          </span>
+        </div>
       </div>
     </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../..">Allen Project Documentation</a>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
         
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
       </nav>
-      <div class="wy-nav-content">
-        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
-  <ul class="wy-breadcrumbs">
-    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Experiment History</li>
-    <li class="wy-breadcrumbs-aside">
-    </li>
-  </ul>
-  <hr/>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-            <div class="section" itemprop="articleBody">
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
               
-                <h1 id="allen-project">Allen project</h1>
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Allen Project Documentation" class="md-nav__button md-logo" aria-label="Allen Project Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Allen Project Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DVC/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DVC Framework
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Experiment History
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Experiment History
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#future-directions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Future directions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#layer-rank-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Layer-Rank Analysis
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#new-data-layer-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      New data layer distribution
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#memory-bug" class="md-nav__link">
+    <span class="md-ellipsis">
+      Memory bug
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#normalized-maxvalues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Normalized maxValues
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#undersampling-neurons" class="md-nav__link">
+    <span class="md-ellipsis">
+      Undersampling neurons
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unit-number-statistics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unit number statistics
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gabor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gabor
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#layer-interaction-plot" class="md-nav__link">
+    <span class="md-ellipsis">
+      Layer interaction plot
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Layer interaction plot">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#transient" class="md-nav__link">
+    <span class="md-ellipsis">
+      Transient
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#causal-direction-of-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      Causal direction of time
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#negyszigetes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Negyszigetes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#egyiranyu-l-alaku" class="md-nav__link">
+    <span class="md-ellipsis">
+      Egyiranyu: L alaku
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#layer-in-megaplot-first-blick" class="md-nav__link">
+    <span class="md-ellipsis">
+      Layer in megaplot: first Blick
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#layerassignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      LayerAssignment
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#units" class="md-nav__link">
+    <span class="md-ellipsis">
+      Units
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#layers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Layers
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#after-progress-report" class="md-nav__link">
+    <span class="md-ellipsis">
+      After Progress Report
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="After Progress Report">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#marci" class="md-nav__link">
+    <span class="md-ellipsis">
+      Marci
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debug" class="md-nav__link">
+    <span class="md-ellipsis">
+      debug
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stimulus-residual" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stimulus residual
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stimuli" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stimuli
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mega-plot-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mega plot 2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mega-plot-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mega plot 1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v1-to-v1" class="md-nav__link">
+    <span class="md-ellipsis">
+      V1 to V1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rrr-time-slice" class="md-nav__link">
+    <span class="md-ellipsis">
+      RRR time slice
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#z-scoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      Z-scoring
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#units-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      Units table
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#crosstime-timeseries-of-lags" class="md-nav__link">
+    <span class="md-ellipsis">
+      Crosstime timeseries of lags
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Crosstime timeseries of lags">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#top-down" class="md-nav__link">
+    <span class="md-ellipsis">
+      Top-down
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bottom-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bottom-up
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#within-v1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Within V1
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#within-lm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Within LM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interpretations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interpretations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#time-lag-along-trial-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      Time lag along trial time
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Time lag along trial time">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#top-down_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Top-down:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bottom-up_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bottom-up:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#time-lag-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      Time lag search
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Time lag search">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#top-down_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Top-down
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bottom-up_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bottom-up
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bottom-up-lag" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bottom-up lag
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#top-down-lag-exploration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Top-down lag exploration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v2-v1-interaction-rank" class="md-nav__link">
+    <span class="md-ellipsis">
+      V2-V1 interaction rank
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multiple-session-param-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multiple session param search!!!
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Multiple session param search!!!">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1059678195" class="md-nav__link">
+    <span class="md-ellipsis">
+      ~~1059678195~~
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="~~1059678195~~">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#v1v2" class="md-nav__link">
+    <span class="md-ellipsis">
+      V1→V2
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1108334384-11-15" class="md-nav__link">
+    <span class="md-ellipsis">
+      1108334384 (11-15%)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1108334384 (11-15%)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#v1v2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      V1→V2
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1108531612" class="md-nav__link">
+    <span class="md-ellipsis">
+      ~~1108531612~~
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1109889304-12-18" class="md-nav__link">
+    <span class="md-ellipsis">
+      1109889304 (12-18%)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1109889304 (12-18%)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#window-size-50-ms" class="md-nav__link">
+    <span class="md-ellipsis">
+      window size 50 ms
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v1v2_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      V1→V2
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1111013640-10-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      1111013640 (10-12%)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1111013640 (10-12%)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#v1v2_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      V1→V2
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1111216934" class="md-nav__link">
+    <span class="md-ellipsis">
+      ~~1111216934~~
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="~~1111216934~~">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#v1v2_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      V1→V2
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1112302803-8" class="md-nav__link">
+    <span class="md-ellipsis">
+      1112302803 (8%)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1112515874-6-16" class="md-nav__link">
+    <span class="md-ellipsis">
+      1112515874 (6-16%)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1113751921-8-13" class="md-nav__link">
+    <span class="md-ellipsis">
+      1113751921 (8-13%)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1113751921 (8-13%)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#v1lm" class="md-nav__link">
+    <span class="md-ellipsis">
+      V1→LM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lm-v1" class="md-nav__link">
+    <span class="md-ellipsis">
+      LM →V1
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1113957627-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      1113957627 (12%)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1113957627 (12%)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lm-v1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      LM → V1
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v1-lm-all-failed" class="md-nav__link">
+    <span class="md-ellipsis">
+      V1 → LM all failed
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1115077618-there-is-no-spike-in-visl" class="md-nav__link">
+    <span class="md-ellipsis">
+      1115077618: There is no spike in VISl
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1115356973" class="md-nav__link">
+    <span class="md-ellipsis">
+      1115356973
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1115356973">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#v1-lm-all-failed_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      V1 → LM all failed
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1118324999-18" class="md-nav__link">
+    <span class="md-ellipsis">
+      1118324999: 18%
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1118324999: 18%">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#v1-lm" class="md-nav__link">
+    <span class="md-ellipsis">
+      V1 → LM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lm-v1-all-failed" class="md-nav__link">
+    <span class="md-ellipsis">
+      LM → V1: all failed
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1118512505-28" class="md-nav__link">
+    <span class="md-ellipsis">
+      1118512505: 28%
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1118512505: 28%">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lm-v1_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      LM → V1
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v1-lm-all-failed_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      V1 → LM: all failed
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sessions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sessions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v2-to-v1" class="md-nav__link">
+    <span class="md-ellipsis">
+      V2 to V1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rrr-score-by-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      RRR score by time
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bootstrap-above-cv-folds" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bootstrap above cv folds
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cv-timelag-timepoint-exploration" class="md-nav__link">
+    <span class="md-ellipsis">
+      CV, timelag, timepoint exploration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CV, timelag, timepoint exploration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#more-params" class="md-nav__link">
+    <span class="md-ellipsis">
+      More params
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#less-params-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Less params #1
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#less-params-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Less params #2
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cv-rank-time-exploration" class="md-nav__link">
+    <span class="md-ellipsis">
+      CV-rank-time exploration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CV-rank-time exploration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#detailed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Detailed
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#time-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      Time step
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#semedo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Semedo
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rank-analysis-from-v2-to-v1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rank analysis from V2 to V1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rank-analysis-for-gabor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rank analysis for gabor
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#control-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      Control models
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rank-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rank optimization
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#behav-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Behav data
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#github-codes" class="md-nav__link">
+    <span class="md-ellipsis">
+      GitHub codes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#time-lag-between-v1-and-v2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Time lag between V1 and V2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#siegle-2021-on-this-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Siegle, 2021 on this data
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#areas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Areas
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data distribution
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pca" class="md-nav__link">
+    <span class="md-ellipsis">
+      PCA
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rrr-analysis-along-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      RRR analysis along time
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RRR analysis along time">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#me" class="md-nav__link">
+    <span class="md-ellipsis">
+      Me:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gergo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gergo:
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gergo:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#corr" class="md-nav__link">
+    <span class="md-ellipsis">
+      Corr:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#marci_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Marci:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      References:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#future-plan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Future plan:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    References
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            References
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Experiments
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Experiments
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/experiments/layer-rank/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Layer Ranks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/experiments/layer-interaction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Layer Interaction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/experiments/multiple-timeslices-layers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multiple Time Slices: Layers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/experiments/multiple-timeslices/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multiple Time Slices
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/experiments/rrr-time-slice/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Reduced Rank Regression Time Slice
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/experiments/crosstime/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Crosstime
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/experiments/time-lag-search/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Time lag search
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/experiments/cv-time-lag/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cross-Validation-fold, Time-lag, and Rank search
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/experiments/rrr-score-time/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Reduced Rank Regression (RRR) Score-Time Plot
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/experiments/cv-rank-time/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cross-Validation-fold Exploration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/experiments/lag-along-time/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lag along Time
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/experiments/rank-along-time/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rank Along Time
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/experiments/control-models/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Control Models
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/experiments/rrr-rank/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Reduced Rank Regression Rank Optimization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/experiments/time-lag/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Time-lag search
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/experiments/histograms/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Histograms
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/experiments/pca/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Principal Component Analysis
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/experiments/rrr/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Reduced Rank Regression along Time
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/experiments/cca/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Canonical Correlation Analysis
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Tools
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            Tools
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/utilities/data-io/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data I/O
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/utilities/direct-download/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Direct Download
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/utilities/neuropixel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data Preprocessing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/utilities/ccf-volumes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CCF Volumes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/utilities/utils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Important Utility Tools
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/utilities/plots/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Plots
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/utilities/megaplot/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Megaplot
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/utilities/other-utils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Other Utility Tools
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#future-directions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Future directions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#layer-rank-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Layer-Rank Analysis
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#new-data-layer-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      New data layer distribution
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#memory-bug" class="md-nav__link">
+    <span class="md-ellipsis">
+      Memory bug
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#normalized-maxvalues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Normalized maxValues
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#undersampling-neurons" class="md-nav__link">
+    <span class="md-ellipsis">
+      Undersampling neurons
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unit-number-statistics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unit number statistics
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gabor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gabor
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#layer-interaction-plot" class="md-nav__link">
+    <span class="md-ellipsis">
+      Layer interaction plot
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Layer interaction plot">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#transient" class="md-nav__link">
+    <span class="md-ellipsis">
+      Transient
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#causal-direction-of-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      Causal direction of time
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#negyszigetes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Negyszigetes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#egyiranyu-l-alaku" class="md-nav__link">
+    <span class="md-ellipsis">
+      Egyiranyu: L alaku
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#layer-in-megaplot-first-blick" class="md-nav__link">
+    <span class="md-ellipsis">
+      Layer in megaplot: first Blick
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#layerassignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      LayerAssignment
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#units" class="md-nav__link">
+    <span class="md-ellipsis">
+      Units
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#layers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Layers
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#after-progress-report" class="md-nav__link">
+    <span class="md-ellipsis">
+      After Progress Report
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="After Progress Report">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#marci" class="md-nav__link">
+    <span class="md-ellipsis">
+      Marci
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debug" class="md-nav__link">
+    <span class="md-ellipsis">
+      debug
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stimulus-residual" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stimulus residual
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stimuli" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stimuli
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mega-plot-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mega plot 2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mega-plot-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mega plot 1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v1-to-v1" class="md-nav__link">
+    <span class="md-ellipsis">
+      V1 to V1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rrr-time-slice" class="md-nav__link">
+    <span class="md-ellipsis">
+      RRR time slice
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#z-scoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      Z-scoring
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#units-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      Units table
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#crosstime-timeseries-of-lags" class="md-nav__link">
+    <span class="md-ellipsis">
+      Crosstime timeseries of lags
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Crosstime timeseries of lags">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#top-down" class="md-nav__link">
+    <span class="md-ellipsis">
+      Top-down
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bottom-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bottom-up
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#within-v1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Within V1
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#within-lm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Within LM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interpretations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interpretations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#time-lag-along-trial-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      Time lag along trial time
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Time lag along trial time">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#top-down_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Top-down:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bottom-up_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bottom-up:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#time-lag-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      Time lag search
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Time lag search">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#top-down_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Top-down
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bottom-up_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bottom-up
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bottom-up-lag" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bottom-up lag
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#top-down-lag-exploration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Top-down lag exploration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v2-v1-interaction-rank" class="md-nav__link">
+    <span class="md-ellipsis">
+      V2-V1 interaction rank
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multiple-session-param-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multiple session param search!!!
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Multiple session param search!!!">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1059678195" class="md-nav__link">
+    <span class="md-ellipsis">
+      ~~1059678195~~
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="~~1059678195~~">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#v1v2" class="md-nav__link">
+    <span class="md-ellipsis">
+      V1→V2
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1108334384-11-15" class="md-nav__link">
+    <span class="md-ellipsis">
+      1108334384 (11-15%)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1108334384 (11-15%)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#v1v2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      V1→V2
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1108531612" class="md-nav__link">
+    <span class="md-ellipsis">
+      ~~1108531612~~
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1109889304-12-18" class="md-nav__link">
+    <span class="md-ellipsis">
+      1109889304 (12-18%)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1109889304 (12-18%)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#window-size-50-ms" class="md-nav__link">
+    <span class="md-ellipsis">
+      window size 50 ms
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v1v2_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      V1→V2
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1111013640-10-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      1111013640 (10-12%)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1111013640 (10-12%)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#v1v2_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      V1→V2
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1111216934" class="md-nav__link">
+    <span class="md-ellipsis">
+      ~~1111216934~~
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="~~1111216934~~">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#v1v2_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      V1→V2
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1112302803-8" class="md-nav__link">
+    <span class="md-ellipsis">
+      1112302803 (8%)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1112515874-6-16" class="md-nav__link">
+    <span class="md-ellipsis">
+      1112515874 (6-16%)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1113751921-8-13" class="md-nav__link">
+    <span class="md-ellipsis">
+      1113751921 (8-13%)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1113751921 (8-13%)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#v1lm" class="md-nav__link">
+    <span class="md-ellipsis">
+      V1→LM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lm-v1" class="md-nav__link">
+    <span class="md-ellipsis">
+      LM →V1
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1113957627-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      1113957627 (12%)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1113957627 (12%)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lm-v1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      LM → V1
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v1-lm-all-failed" class="md-nav__link">
+    <span class="md-ellipsis">
+      V1 → LM all failed
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1115077618-there-is-no-spike-in-visl" class="md-nav__link">
+    <span class="md-ellipsis">
+      1115077618: There is no spike in VISl
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1115356973" class="md-nav__link">
+    <span class="md-ellipsis">
+      1115356973
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1115356973">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#v1-lm-all-failed_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      V1 → LM all failed
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1118324999-18" class="md-nav__link">
+    <span class="md-ellipsis">
+      1118324999: 18%
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1118324999: 18%">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#v1-lm" class="md-nav__link">
+    <span class="md-ellipsis">
+      V1 → LM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lm-v1-all-failed" class="md-nav__link">
+    <span class="md-ellipsis">
+      LM → V1: all failed
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1118512505-28" class="md-nav__link">
+    <span class="md-ellipsis">
+      1118512505: 28%
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1118512505: 28%">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lm-v1_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      LM → V1
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v1-lm-all-failed_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      V1 → LM: all failed
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sessions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sessions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v2-to-v1" class="md-nav__link">
+    <span class="md-ellipsis">
+      V2 to V1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rrr-score-by-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      RRR score by time
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bootstrap-above-cv-folds" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bootstrap above cv folds
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cv-timelag-timepoint-exploration" class="md-nav__link">
+    <span class="md-ellipsis">
+      CV, timelag, timepoint exploration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CV, timelag, timepoint exploration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#more-params" class="md-nav__link">
+    <span class="md-ellipsis">
+      More params
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#less-params-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Less params #1
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#less-params-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Less params #2
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cv-rank-time-exploration" class="md-nav__link">
+    <span class="md-ellipsis">
+      CV-rank-time exploration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CV-rank-time exploration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#detailed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Detailed
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#time-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      Time step
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#semedo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Semedo
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rank-analysis-from-v2-to-v1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rank analysis from V2 to V1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rank-analysis-for-gabor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rank analysis for gabor
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#control-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      Control models
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rank-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rank optimization
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#behav-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Behav data
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#github-codes" class="md-nav__link">
+    <span class="md-ellipsis">
+      GitHub codes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#time-lag-between-v1-and-v2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Time lag between V1 and V2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#siegle-2021-on-this-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Siegle, 2021 on this data
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#areas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Areas
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data distribution
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pca" class="md-nav__link">
+    <span class="md-ellipsis">
+      PCA
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rrr-analysis-along-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      RRR analysis along time
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RRR analysis along time">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#me" class="md-nav__link">
+    <span class="md-ellipsis">
+      Me:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gergo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gergo:
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gergo:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#corr" class="md-nav__link">
+    <span class="md-ellipsis">
+      Corr:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#marci_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Marci:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      References:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#future-plan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Future plan:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="allen-project">Allen project</h1>
 <hr />
 <p>This is the documentation of the previous experiments and the future directions of the Allen project (see <a href="#future-directions">Future directions</a>). The entries are in reverse chronological order.</p>
 <p>Entry structure:</p>
@@ -107,7 +3169,7 @@
 <li><strong>Interpretation</strong>: the interpretation of the results</li>
 <li><strong>Next</strong>: the potential next steps or future directions in the project at that time</li>
 </ul>
-<h1 id="table-of-contents">Table of Contents</h1>
+<h2 id="table-of-contents">Table of Contents</h2>
 <ul>
 <li><a href="#allen-project">Allen project</a></li>
 <li><a href="#table-of-contents">Table of Contents</a></li>
@@ -122,15 +3184,15 @@
 <li><a href="#layer-interaction-plot">Layer interaction plot</a><ul>
 <li><a href="#transient">Transient</a></li>
 <li><a href="#causal-direction-of-time"><strong>Causal direction of time</strong></a></li>
-<li><a href="#négyszigetes">Négyszigetes</a></li>
-<li><a href="#egyirányú-l-alakú">Egyirányú, L-alakú</a></li>
+<li><a href="#negyszigetes">Negyszigetes</a></li>
+<li><a href="#egyiranyu-l-alaku">Egyiranyu: L alaku</a></li>
 </ul>
 </li>
-<li><a href="#layer-in-megaplot---first-blick">Layer in megaplot - first Blick</a></li>
+<li><a href="#layer-in-megaplot-first-blick">Layer in megaplot: first Blick</a></li>
 <li><a href="#layerassignment">LayerAssignment</a></li>
 <li><a href="#units">Units</a></li>
 <li><a href="#layers">Layers</a></li>
-<li><a href="#ipr-20240527--discussion-with-gergő">IPR 2024.05.27. \&amp; discussion with Gergő</a><ul>
+<li><a href="#after-progress-report">After Progress Report</a><ul>
 <li><a href="#marci">Marci</a></li>
 <li><a href="#debug">debug</a></li>
 </ul>
@@ -139,7 +3201,7 @@
 <li><a href="#stimuli">Stimuli</a></li>
 <li><a href="#mega-plot-2">Mega plot 2</a></li>
 <li><a href="#mega-plot-1">Mega plot 1</a></li>
-<li><a href="#v1-v1">V1→ V1</a></li>
+<li><a href="#v1-to-v1">V1 to V1</a></li>
 <li><a href="#rrr-time-slice">RRR time slice</a></li>
 <li><a href="#z-scoring">Z-scoring</a></li>
 <li><a href="#units-table">Units table</a></li>
@@ -166,7 +3228,7 @@
 <li><a href="#v2-v1-interaction-rank">V2-V1 interaction rank</a></li>
 <li><a href="#multiple-session-param-search">Multiple session param search!!!</a></li>
 <li><a href="#sessions">Sessions</a></li>
-<li><a href="#v2--v1">V2 → V1</a></li>
+<li><a href="#v2-to-v1">V2 to V1</a></li>
 <li><a href="#rrr-score-by-time">RRR score by time</a></li>
 <li><a href="#bootstrap-above-cv-folds">Bootstrap above cv folds</a></li>
 <li><a href="#cv-timelag-timepoint-exploration">CV, timelag, timepoint exploration</a><ul>
@@ -187,22 +3249,22 @@
 <li><a href="#rank-optimization">Rank optimization</a></li>
 <li><a href="#behav-data">Behav data</a></li>
 <li><a href="#github-codes">GitHub codes</a></li>
-<li><a href="#time-lag-between-v1-and-v2"><strong>Time lag between V1 and V2</strong></a></li>
+<li><a href="#time-lag-between-v1-and-v2">Time lag between V1 and V2</a></li>
 <li><a href="#siegle-2021-on-this-data">Siegle, 2021 on this data</a></li>
 <li><a href="#areas">Areas</a></li>
 <li><a href="#data-distribution">Data distribution</a></li>
 <li><a href="#pca">PCA</a></li>
-<li><a href="#rrr-analysis-along-time">RRR analysis along time</a></li>
+<li><a href="#rrr-analysis-along-time">RRR analysis along time</a><ul>
 <li><a href="#me">Me:</a></li>
-<li><a href="#gergő"><strong>Gergő</strong>:</a><ul>
+<li><a href="#gergo"><strong>Gergo</strong>:</a></li>
 <li><a href="#corr"><strong>Corr</strong>:</a></li>
-</ul>
-</li>
 <li><a href="#marci-1"><strong>Marci</strong>:</a></li>
 <li><a href="#references"><strong>References</strong>:</a></li>
 <li><a href="#future-plan"><strong>Future plan</strong>:</a></li>
 </ul>
-<h1 id="future-directions">Future directions</h1>
+</li>
+</ul>
+<h2 id="future-directions">Future directions</h2>
 <ul>
 <li>make predictions via the first d predictive dimensions. same area, cross area, …</li>
 <li>in the video, we can use seqPCA to extract the dims… only if its not a linear video…?</li>
@@ -215,13 +3277,14 @@
 <li>neuronok száma</li>
 <li><strong>undersample param-search</strong></li>
 </ul>
-<h1 id="layer-rank-analysis">Layer-Rank Analysis</h1>
+<h2 id="layer-rank-analysis">Layer-Rank Analysis</h2>
+<p>See <a href="../../references/experiments/layer-rank/">references</a> for more information.</p>
 <p>Commits:</p>
 <ul>
 <li>Layer-Rank Analysis</li>
 <li>Layer-Rank Plot</li>
 </ul>
-<p>Date: 08.06.</p>
+<p>Date: 2024.08.06.</p>
 <ul>
 <li>params</li>
 </ul>
@@ -298,13 +3361,7 @@
     outs:
       - figures/layer-rank.png
 </code></pre>
-<p><strong>Plan</strong>:</p>
-<ol>
-<li>SCP copy through Nargothrond</li>
-<li>Azon adathalmazon mit tud a kreálmány</li>
-<li>ha nincs izgi eredmény (ami lázba hoz további munkára), akkor github repo-ba a methodologia (kövi diáknak)</li>
-</ol>
-<h1 id="new-data-layer-distribution">New data layer distribution</h1>
+<h2 id="new-data-layer-distribution">New data layer distribution</h2>
 <p>date: 2024.07.31.</p>
 <pre><code class="language-shell">Unique values in VISp: [6 5 4 2]
 Ratio of value 6: 26.67%
@@ -317,7 +3374,7 @@ Ratio of value 5: 40.54%
 Ratio of value 4: 32.43%
 Ratio of value 2: 10.81%
 </code></pre>
-<h1 id="memory-bug">Memory bug</h1>
+<h2 id="memory-bug">Memory bug</h2>
 <p>date: 2024.07.29.</p>
 <p>params:</p>
 <pre><code class="language-yaml">- stimulus block: natural scene
@@ -332,7 +3389,7 @@ Tensor shape: (165, 4805, 250)
 </code></pre>
 <p>solution:</p>
 <p>Use <code>units = session.units</code> instead of <code>units = cache.get_units()</code></p>
-<h1 id="normalized-maxvalues">Normalized maxValues</h1>
+<h2 id="normalized-maxvalues">Normalized maxValues</h2>
 <p><strong>Date</strong>: 07.15.</p>
 <p><strong>Source</strong>: https://www.wikiwand.com/en/Coefficient_of_determination#Adjusted_R2</p>
 <p><strong>Formula</strong>:</p>
@@ -350,11 +3407,11 @@ later from 5,6 to 2</li>
 <li>Top-down from layer 5,6 to layer 5,6
 later from 5,6 to 6</li>
 </ul>
-<h1 id="undersampling-neurons">Undersampling neurons</h1>
+<h2 id="undersampling-neurons">Undersampling neurons</h2>
 <p>https://machinelearningmastery.com/random-oversampling-and-undersampling-for-imbalanced-classification/</p>
 <p>https://datascience.stackexchange.com/questions/45046/cross-validation-for-highly-imbalanced-data-with-undersampling</p>
 <p>https://imbalanced-learn.org/stable/references/generated/imblearn.under_sampling.RandomUnderSampler.html</p>
-<h1 id="unit-number-statistics">Unit number statistics</h1>
+<h2 id="unit-number-statistics">Unit number statistics</h2>
 <p>Date: 2024.07.03.</p>
 <p><strong>across sessions</strong></p>
 <p>Code:</p>
@@ -444,7 +3501,7 @@ It penalizes adding irrelevant features that don’t improve prediction.</p>
 <ul>
 <li>csak 5. réteg undersample, mi az alsó limit to good performance.</li>
 </ul>
-<h1 id="gabor">Gabor</h1>
+<h2 id="gabor">Gabor</h2>
 <p>Date: 2024.06.25</p>
 <p>Name: Gabor</p>
 <p>natural</p>
@@ -461,7 +3518,8 @@ It penalizes adding irrelevant features that don’t improve prediction.</p>
 <p><img alt="layer-interaction_V1-to-LM_1111013640_gabor.png" src="layer-interaction_V1-to-LM_1111013640_gabor.png" /></p>
 <p><img alt="layer-interaction_V1-to-LM_1112302803_gabor.png" src="layer-interaction_V1-to-LM_1112302803_gabor.png" /></p>
 <p><img alt="layer-interaction_V1-to-LM_1048189115_gabor.png" src="layer-interaction_V1-to-LM_1048189115_gabor.png" /></p>
-<h1 id="layer-interaction-plot">Layer interaction plot</h1>
+<h2 id="layer-interaction-plot">Layer interaction plot</h2>
+<p>See <a href="../../references/experiments/layer-interaction/">references</a> for more information.</p>
 <p>Name: Layer interaction plot</p>
 <p>Date: 2024.06.14.-19.</p>
 <ul>
@@ -553,7 +3611,7 @@ It penalizes adding irrelevant features that don’t improve prediction.</p>
 <li>rather predictive in the <strong>causal direction of time</strong>.</li>
 <li>top-down LM l5 → V1 l2 l5 vízszintes</li>
 </ul>
-<h3 id="negyszigetes">Négyszigetes</h3>
+<h3 id="negyszigetes">Negyszigetes</h3>
 <p><img alt="layer-interaction_V1-to-LM_1111013640.png" src="layer-interaction_V1-to-LM_1111013640%201.png" /></p>
 <p><img alt="layer-interaction_LM-to-V1_1111013640.png" src="layer-interaction_LM-to-V1_1111013640%201.png" /></p>
 <p><img alt="layer-interaction_V1-to-LM_1081079981.png" src="layer-interaction_V1-to-LM_1081079981.png" /></p>
@@ -565,7 +3623,7 @@ It penalizes adding irrelevant features that don’t improve prediction.</p>
 <li>1111013640, 1081079981, 1048189115, 1049514117</li>
 <li>négyszigetes, inkább top-down a time causal kései response alapján, 50 ms alapján inkább bottom-up.</li>
 </ul>
-<h3 id="egyiranyu-l-alaku">Egyirányú, L-alakú</h3>
+<h3 id="egyiranyu-l-alaku">Egyiranyu: L alaku</h3>
 <p><img alt="layer-interaction_V1-to-LM_1086200042.png" src="layer-interaction_V1-to-LM_1086200042.png" /></p>
 <p><img alt="layer-interaction_LM-to-V1_1086200042.png" src="layer-interaction_LM-to-V1_1086200042.png" /></p>
 <ul>
@@ -602,7 +3660,8 @@ It penalizes adding irrelevant features that don’t improve prediction.</p>
 <li>LM l5 → V1 l4</li>
 <li>V1 l2 l5 → LM l5</li>
 </ul>
-<h1 id="layer-in-megaplot-first-blick">Layer in megaplot - first Blick</h1>
+<h2 id="layer-in-megaplot-first-blick">Layer in megaplot: first Blick</h2>
+<p>See <a href="../../references/experiments/multiple-timeslices-layers/">references</a> for more information.</p>
 <p>Name: LAYERPLOT.</p>
 <p>Date: 2024.06.12.</p>
 <ul>
@@ -658,7 +3717,7 @@ It penalizes adding irrelevant features that don’t improve prediction.</p>
 <li>activity at 50 ms in LM predicts activity in all time in V1</li>
 <li>activity at 180 ms in LM predicts activity in all time in V1</li>
 </ul>
-<h1 id="layerassignment">LayerAssignment</h1>
+<h2 id="layerassignment">LayerAssignment</h2>
 <p>Date: 2024.06.11.</p>
 <p>session: 1048189115</p>
 <pre><code class="language-shell">Unique values in VISp: [5 2 4 6]
@@ -674,7 +3733,7 @@ Ratio of value 6: 25.76%
 </code></pre>
 <pre><code class="language-python">layerAssignments_V1.isin(neurmask['V1']['output'])
 </code></pre>
-<h1 id="units">Units</h1>
+<h2 id="units">Units</h2>
 <p>Date: 2024.06.03</p>
 <table>
 <thead>
@@ -692,21 +3751,21 @@ Ratio of value 6: 25.76%
 </tr>
 <tr>
 <td>columns</td>
-<td>['ecephys_channel_id', 'ecephys_probe_id', 'ecephys_session_id', 'amplitude_cutoff', 'anterior_posterior_ccf_coordinate', 'dorsal_ventral_ccf_coordinate', 'left_right_ccf_coordinate', 'cumulative_drift', 'd_prime', 'structure_acronym', 'structure_id', 'firing_rate', 'isi_violations', 'isolation_distance', 'l_ratio', 'local_index', 'max_drift', 'nn_hit_rate', 'nn_miss_rate', 'presence_ratio', 'probe_horizontal_position', 'probe_vertical_position', 'silhouette_score', 'snr', 'quality', 'valid_data', 'amplitude', 'waveform_duration', 'waveform_halfwidth', 'PT_ratio', 'recovery_slope', 'repolarization_slope', 'spread', 'velocity_above', 'velocity_below']</td>
-<td>['PT_ratio', 'amplitude', 'amplitude_cutoff', 'cluster_id', 'cumulative_drift', 'd_prime', 'firing_rate', 'isi_violations', 'isolation_distance', 'l_ratio', 'local_index', 'max_drift', 'nn_hit_rate', 'nn_miss_rate', 'peak_channel_id', 'presence_ratio', 'quality', 'recovery_slope', 'repolarization_slope', 'silhouette_score', 'snr', 'spread', 'velocity_above', 'velocity_below', 'waveform_duration']</td>
+<td><code>['ecephys_channel_id', 'ecephys_probe_id', 'ecephys_session_id', 'amplitude_cutoff', 'anterior_posterior_ccf_coordinate', 'dorsal_ventral_ccf_coordinate', 'left_right_ccf_coordinate', 'cumulative_drift', 'd_prime', 'structure_acronym', 'structure_id', 'firing_rate', 'isi_violations', 'isolation_distance', 'l_ratio', 'local_index', 'max_drift', 'nn_hit_rate', 'nn_miss_rate', 'presence_ratio', 'probe_horizontal_position', 'probe_vertical_position', 'silhouette_score', 'snr', 'quality', 'valid_data', 'amplitude', 'waveform_duration', 'waveform_halfwidth', 'PT_ratio', 'recovery_slope', 'repolarization_slope', 'spread', 'velocity_above', 'velocity_below'] | ['PT_ratio', 'amplitude', 'amplitude_cutoff', 'cluster_id', 'cumulative_drift', 'd_prime', 'firing_rate', 'isi_violations', 'isolation_distance', 'l_ratio', 'local_index', 'max_drift', 'nn_hit_rate', 'nn_miss_rate', 'peak_channel_id', 'presence_ratio', 'quality', 'recovery_slope', 'repolarization_slope', 'silhouette_score', 'snr', 'spread', 'velocity_above', 'velocity_below', 'waveform_duration']</code></td>
+<td></td>
 </tr>
 <tr>
 <td>code</td>
-<td>units_table = cache.get_unit_table()</td>
+<td><code>units_table = cache.get_unit_table()</code></td>
 <td></td>
 </tr>
 <tr>
-<td>units_cache = units_table[units_table['ecephys_session_id'] == session_id]</td>
-<td>session = cache.get_ecephys_session(ecephys_session_id=session_id)</td>
+<td><code>units_cache = units_table[units_table['ecephys_session_id'] == session_id]</code></td>
+<td><code>session = cache.get_ecephys_session(ecephys_session_id=session_id)</code></td>
 <td></td>
 </tr>
 <tr>
-<td>units_session = session.get_units()</td>
+<td><code>units_session = session.get_units()</code></td>
 <td></td>
 <td></td>
 </tr>
@@ -745,7 +3804,7 @@ print(units_cache)
 ic(units_session.columns)
 print(units_session)
 </code></pre>
-<h1 id="layers">Layers</h1>
+<h2 id="layers">Layers</h2>
 <p><strong>Date</strong>: 2024.05.30.</p>
 <pre><code class="language-python">params = yaml.safe_load(open('params.yaml'))['load']
 
@@ -801,7 +3860,8 @@ print(layer_assigned_units)
 
 [1925 rows x 36 columns]
 </code></pre>
-<h1 id="ipr-20240527-discussion-with-gergo">IPR 2024.05.27. &amp; discussion with Gergő</h1>
+<h2 id="after-progress-report">After Progress Report</h2>
+<p>IPR 2024.05.27. &amp; discussion with Gergő</p>
 <h3 id="marci">Marci</h3>
 <p>proposal: stim nélküli időben nézni korrelációt V1-LM</p>
 <p>result interpretation: local memory</p>
@@ -811,7 +3871,7 @@ print(layer_assigned_units)
 <li>[x] nem stim resid is rosszabodik-e?</li>
 <li>[x] neurális adat változik vajon?</li>
 </ul>
-<h1 id="stimulus-residual">Stimulus residual</h1>
+<h2 id="stimulus-residual">Stimulus residual</h2>
 <p>Name: STIMRESIDUAL</p>
 <p>Date: 2024.05.15.</p>
 <p>Result:</p>
@@ -823,10 +3883,11 @@ maximum value(0.024) at 150 ms is at cv=2, lag=0, rank=8
 </code></pre>
 <p><img alt="rrr-param-search.png" src="rrr-param-search.png" /></p>
 <p><img alt="rrr-param-search.png" src="rrr-param-search%201.png" /></p>
-<h1 id="stimuli">Stimuli</h1>
+<h2 id="stimuli">Stimuli</h2>
 <p>Date: 2024.05.09.</p>
 <p><img alt="stimulus_templates.png" src="stimulus_templates.png" /></p>
-<h1 id="mega-plot-2">Mega plot 2</h1>
+<h2 id="mega-plot-2">Mega plot 2</h2>
+<p>See <a href="../../references/experiments/multiple-timeslices/">references</a> for more information.</p>
 <p>Date: 2024.05.08.</p>
 <p>Name:</p>
 <ul>
@@ -877,7 +3938,7 @@ maximum value(0.024) at 150 ms is at cv=2, lag=0, rank=8
 <li>layerek</li>
 <li>dimenzionalitás (alacsonyabb rankkel jósolni</li>
 </ol>
-<h1 id="mega-plot-1">Mega plot 1</h1>
+<h2 id="mega-plot-1">Mega plot 1</h2>
 <p>Date: 2024.05.08.</p>
 <p>Name:</p>
 <p>Results:</p>
@@ -890,11 +3951,12 @@ maximum value(0.024) at 150 ms is at cv=2, lag=0, rank=8
 <p><img alt="Untitled" src="Untitled%204.png" /></p>
 <p>bottom-up: bifázisos kód (50 ms, 150 ms)</p>
 <p>top-down: gyengülő jel/tranziens kód</p>
-<h1 id="v1-v1">V1→ V1</h1>
+<h2 id="v1-to-v1">V1 to V1</h2>
 <p><strong>Date</strong>: 2024.05.06.</p>
 <p><img alt="Untitled" src="Untitled%205.png" /></p>
 <p>V1 -&gt; V1 az a session (Fig 1: ...708) ahol a legstabilabb a kód (gyakran csak a diagonál barna, Fig2: ...624,  note that itt is van asszimetrikus rész)</p>
-<h1 id="rrr-time-slice">RRR time slice</h1>
+<h2 id="rrr-time-slice">RRR time slice</h2>
+<p>See <a href="../../references/experiments/rrr-time-slice/">references</a> for more information.</p>
 <p>Name: SLICE.</p>
 <p>Date: 2024.04.30.</p>
 <ul>
@@ -952,10 +4014,10 @@ maximum value(0.024) at 150 ms is at cv=2, lag=0, rank=8
 <p><img alt="rrr-time-slice.png" src="rrr-time-slice%201.png" /></p>
 <p><img alt="rrr-time-slice.png" src="rrr-time-slice%202.png" /></p>
 <p><img alt="rrr-time-slice.png" src="rrr-time-slice%203.png" /></p>
-<h1 id="z-scoring">Z-scoring</h1>
+<h2 id="z-scoring">Z-scoring</h2>
 <p>Hogy hol z-scoreozol (in window of interest vagy egész trial) az R^2-ben mindegy, de coefficiensben nem mindegy.</p>
 <p>Esetleg z-score mean legyen ITI-ből.</p>
-<h1 id="units-table">Units table</h1>
+<h2 id="units-table">Units table</h2>
 <p><strong>General Metadata</strong></p>
 <p><code>ecephys_channel_id</code>: unique ID of channel on which unit's peak waveform occurred</p>
 <p><code>ecephys_probe_id</code>: unique ID for probe on which unit was recorded</p>
@@ -992,7 +4054,8 @@ maximum value(0.024) at 150 ms is at cv=2, lag=0, rank=8
 <p><code>presence_ratio</code>: Fraction of time during session for which a unit was spiking</p>
 <p><code>silhouette_score</code>: Standard metric for cluster overlap, computed in PCA space</p>
 <p><code>quality</code>: Label assigned based on waveform shape as described <a href="https://github.com/AllenInstitute/ecephys_spike_sorting/tree/7e567a6fc3fd2fc0eedef750b83b8b8a0d469544/ecephys_spike_sorting/modules/noise_templates">here</a>. Either 'good' for physiological waveforms or 'noise' for artifactual waveforms.</p>
-<h1 id="crosstime-timeseries-of-lags">Crosstime timeseries of lags</h1>
+<h2 id="crosstime-timeseries-of-lags">Crosstime timeseries of lags</h2>
+<p>See <a href="../../references/experiments/crosstime/">references</a> for more information.</p>
 <p><strong>Name</strong>: CROSSTIME.</p>
 <p><strong>Date</strong>: 2024.04.09., 10.</p>
 <ul>
@@ -1117,7 +4180,7 @@ rrr-param-search:
 <li>cortical layer selective RRR (wich is scientifically known to the inter brain areas connections) (RRR says little about the causality) → where is the layer information?</li>
 <li>célzott kérdésekre DLAG → MATLABból kell fordítani</li>
 </ul>
-<h1 id="time-lag-along-trial-time">Time lag along trial time</h1>
+<h2 id="time-lag-along-trial-time">Time lag along trial time</h2>
 <p><strong>Name</strong>: LAGXTIME.</p>
 <p><strong>Date</strong>: 2024.04.02.</p>
 <ul>
@@ -1175,7 +4238,8 @@ rrr-param-search:
 <h3 id="bottom-up_1">Bottom-up:</h3>
 <p><img alt="lags-along-time.png" src="lags-along-time%203.png" /></p>
 <p><img alt="lags-along-time.png" src="lags-along-time%204.png" /></p>
-<h1 id="time-lag-search">Time lag search</h1>
+<h2 id="time-lag-search">Time lag search</h2>
+<p>See <a href="../../references/experiments/time-lag-search/">references</a> for more information.</p>
 <p><strong>Name</strong>: LAGR2. LAGHANDL. </p>
 <p><strong>Date</strong>: 2024.03.21., 26., 27.</p>
 <ul>
@@ -1224,14 +4288,14 @@ rrr-param-search:
 <p><img alt="time-lag-search.png" src="time-lag-search%205.png" /></p>
 <p><img alt="time-lag-search.png" src="time-lag-search%206.png" /></p>
 <p><img alt="time-lag-search.png" src="time-lag-search%207.png" /></p>
-<h1 id="bottom-up-lag">Bottom-up lag</h1>
+<h2 id="bottom-up-lag">Bottom-up lag</h2>
 <p><img alt="rrr-param-search.png" src="rrr-param-search%202.png" /></p>
 <p>Session: 1108334384</p>
 <p>Lag: 4</p>
 <p><img alt="rrr-param-search.png" src="rrr-param-search%203.png" /></p>
 <p>Session: 1112302803</p>
 <p>Lag: 4</p>
-<h1 id="top-down-lag-exploration">Top-down lag exploration</h1>
+<h2 id="top-down-lag-exploration">Top-down lag exploration</h2>
 <p><img alt="rrr-param-search.png" src="rrr-param-search%204.png" /></p>
 <p><strong>Session</strong>: 1111013640</p>
 <p><strong>Lag</strong>: 4 ms</p>
@@ -1244,7 +4308,7 @@ rrr-param-search:
 <p><img alt="rrr-param-search.png" src="rrr-param-search%207.png" /></p>
 <p><strong>Session</strong>: 1112302803</p>
 <p><strong>Lag</strong>: 2 ms, 7 ms</p>
-<h1 id="v2-v1-interaction-rank">V2-V1 interaction rank</h1>
+<h2 id="v2-v1-interaction-rank">V2-V1 interaction rank</h2>
 <p><strong>Name</strong>: TDTIME, BUTIME, TDRANKTIME, BURANKTIME</p>
 <p><strong>Date</strong>: 2024.03.19.-20.</p>
 <ul>
@@ -1321,7 +4385,8 @@ rrr-param-search:
 <li>causality is can only be said by positive time lag!</li>
 <li>the low-dimensional correlation at the 0 and 6 ms lag is the same or not? → cross test between 0 and 6 ms lag</li>
 </ul>
-<h1 id="multiple-session-param-search">Multiple session param search!!!</h1>
+<h2 id="multiple-session-param-search">Multiple session param search!!!</h2>
+<p>See <a href="../../references/experiments/cv-time-lag/">references</a> for more intormation.</p>
 <p><strong>name</strong>: TOPDOWN</p>
 <p><strong>date</strong>: 2024.03.18.-19., 04.12.</p>
 <ul>
@@ -1377,27 +4442,27 @@ rrr-param-search:
 <ul>
 <li>
 <p><strong>results</strong></p>
-<h2 id="1059678195">~~1059678195~~</h2>
+<h3 id="1059678195">~~1059678195~~</h3>
 <p><img alt="rrr-param-search.png" src="rrr-param-search%208.png" /></p>
 <p>maximum value(0.13) at 0 ms is at cv=4, lag=0, rank=14
 maximum value(0.13) at 100 ms is at cv=4, lag=0, rank=14</p>
-<h3 id="v1v2">V1→V2</h3>
+<h4 id="v1v2">V1→V2</h4>
 <p>All-NaN slice encountered</p>
-<h2 id="1108334384-11-15">1108334384 (11-15%)</h2>
+<h3 id="1108334384-11-15">1108334384 (11-15%)</h3>
 <p><img alt="rrr-param-search.png" src="rrr-param-search%209.png" /></p>
 <p>maximum value(0.111) at 0 ms is at cv=2, lag=0, rank=14
 maximum value(0.111) at 100 ms is at cv=2, lag=0, rank=14</p>
-<h3 id="v1v2_1">V1→V2</h3>
+<h4 id="v1v2_1">V1→V2</h4>
 <p><img alt="rrr-param-search.png" src="rrr-param-search%2010.png" /></p>
 <p>maximum value(0.158) at 0 ms is at cv=3, lag=0, rank=18
 maximum value(0.158) at 100 ms is at cv=3, lag=0, rank=18</p>
-<h2 id="1108531612">~~1108531612~~</h2>
+<h3 id="1108531612">~~1108531612~~</h3>
 <p>Spike count in the data: 0
 (0, 4803, 250)
 Spike count in the data: 1209114
 (150, 4803, 250)</p>
 <p>All-NaN</p>
-<h2 id="1109889304-12-18">1109889304 (12-18%)</h2>
+<h3 id="1109889304-12-18">1109889304 (12-18%)</h3>
 <p>Spike count in the data: 984080
 (131, 4804, 250)
 Spike count in the data: 965488
@@ -1405,15 +4470,15 @@ Spike count in the data: 965488
 <p><img alt="rrr-param-search.png" src="rrr-param-search%2011.png" /></p>
 <p>maximum value(<strong>0.181</strong>) at 0 ms is at cv=5, lag=0, rank=18
 maximum value(<strong>0.181</strong>) at 100 ms is at cv=5, lag=0, rank=18</p>
-<h3 id="window-size-50-ms">window size 50 ms</h3>
+<h4 id="window-size-50-ms">window size 50 ms</h4>
 <p><img alt="rrr-param-search.png" src="rrr-param-search%2012.png" /></p>
 <p>maximum value(0.125) at 0 ms is at cv=3, lag=0, rank=12
 maximum value(0.125) at 100 ms is at cv=3, lag=0, rank=12</p>
-<h3 id="v1v2_2">V1→V2</h3>
+<h4 id="v1v2_2">V1→V2</h4>
 <p><img alt="rrr-param-search.png" src="rrr-param-search%2013.png" /></p>
 <p>maximum value(0.218) at 0 ms is at cv=2, <strong>lag=3</strong>, rank=8
 maximum value(0.218) at 100 ms is at cv=2, <strong>lag=3</strong>, rank=8</p>
-<h2 id="1111013640-10-12">1111013640 (10-12%)</h2>
+<h3 id="1111013640-10-12">1111013640 (10-12%)</h3>
 <p>Spike count in the data: 1246081
 (147, 4800, 250)
 Spike count in the data: 952839
@@ -1421,11 +4486,11 @@ Spike count in the data: 952839
 <p><img alt="rrr-param-search.png" src="rrr-param-search%2014.png" /></p>
 <p>maximum value(0.125) at 0 ms is at cv=2, lag=0, rank=16
 maximum value(0.125) at 100 ms is at cv=2, lag=0, rank=16</p>
-<h3 id="v1v2_3">V1→V2</h3>
+<h4 id="v1v2_3">V1→V2</h4>
 <p><img alt="rrr-param-search.png" src="rrr-param-search%2015.png" /></p>
 <p>maximum value(0.097) at 0 ms is at cv=2, lag=0, rank=16
 maximum value(0.097) at 100 ms is at cv=2, lag=0, rank=16</p>
-<h2 id="1111216934">~~1111216934~~</h2>
+<h3 id="1111216934">~~1111216934~~</h3>
 <p>Spike count in the data: 930540
 (110, 4796, 250)
 Spike count in the data: 475659
@@ -1433,9 +4498,9 @@ Spike count in the data: 475659
 <p><img alt="rrr-param-search.png" src="rrr-param-search%2016.png" /></p>
 <p>maximum value(0.114) at 0 ms is at cv=2, lag=0, rank=12
 maximum value(0.114) at 100 ms is at cv=2, lag=0, rank=12</p>
-<h3 id="v1v2_4">V1→V2</h3>
+<h4 id="v1v2_4">V1→V2</h4>
 <p>All-NaN slice encountered</p>
-<h2 id="1112302803-8">1112302803 (8%)</h2>
+<h3 id="1112302803-8">1112302803 (8%)</h3>
 <p>Spike count in the data: 954940
 (121, 4798, 250)
 Spike count in the data: 1207317
@@ -1446,7 +4511,7 @@ maximum value(0.075) at 100 ms is at cv=3, lag=0, rank=14</p>
 <p><img alt="rrr-param-search.png" src="rrr-param-search%2018.png" /></p>
 <p>maximum value(0.089) at 0 ms is at cv=2, lag=0, rank=14
 maximum value(0.089) at 100 ms is at cv=2, lag=0, rank=14</p>
-<h2 id="1112515874-6-16">1112515874 (6-16%)</h2>
+<h3 id="1112515874-6-16">1112515874 (6-16%)</h3>
 <p>Spike count in the data: 336822
 (28, 4796, 250)
 Spike count in the data: 554072
@@ -1457,40 +4522,40 @@ maximum value(<strong>0.164</strong>) at 100 ms is at cv=3, <strong>lag=6</stron
 <p><img alt="rrr-param-search.png" src="rrr-param-search%2020.png" /></p>
 <p>maximum value(0.063) at 0 ms is at cv=2, lag=0, rank=12
 maximum value(0.063) at 100 ms is at cv=2, lag=0, rank=12</p>
-<h2 id="1113751921-8-13">1113751921 (8-13%)</h2>
-<h3 id="v1lm">V1→LM</h3>
+<h3 id="1113751921-8-13">1113751921 (8-13%)</h3>
+<h4 id="v1lm">V1→LM</h4>
 <p><img alt="rrr-param-search.png" src="rrr-param-search%2021.png" /></p>
 <p>maximum value(0.085) at 0 ms is at cv=2, lag=0, rank=10
 maximum value(0.085) at 100 ms is at cv=2, lag=0, rank=10</p>
-<h3 id="lm-v1">LM →V1</h3>
+<h4 id="lm-v1">LM →V1</h4>
 <p><img alt="rrr-param-search.png" src="rrr-param-search%2022.png" /></p>
 <p>maximum value(0.138) at 0 ms is at cv=4, lag=0, rank=20
 maximum value(0.138) at 100 ms is at cv=4, lag=0, rank=20</p>
-<h2 id="1113957627-12">1113957627 (12%)</h2>
-<h3 id="lm-v1_1">LM → V1</h3>
+<h3 id="1113957627-12">1113957627 (12%)</h3>
+<h4 id="lm-v1_1">LM → V1</h4>
 <p><img alt="rrr-param-search.png" src="rrr-param-search%2023.png" /></p>
 <p>maximum value(0.119) at 0 ms is at cv=3, lag=0, rank=10
 maximum value(0.119) at 100 ms is at cv=3, lag=0, rank=10</p>
-<h3 id="v1-lm-all-failed">V1 → LM all failed</h3>
-<h2 id="1115077618-there-is-no-spike-in-visl">1115077618: There is no spike in VISl</h2>
-<h2 id="1115356973">1115356973</h2>
-<h3 id="v1-lm-all-failed_1">V1 → LM all failed</h3>
-<h2 id="1118324999-18">1118324999: 18%</h2>
-<h3 id="v1-lm">V1 → LM</h3>
+<h4 id="v1-lm-all-failed">V1 → LM all failed</h4>
+<h3 id="1115077618-there-is-no-spike-in-visl">1115077618: There is no spike in VISl</h3>
+<h3 id="1115356973">1115356973</h3>
+<h4 id="v1-lm-all-failed_1">V1 → LM all failed</h4>
+<h3 id="1118324999-18">1118324999: 18%</h3>
+<h4 id="v1-lm">V1 → LM</h4>
 <p><img alt="rrr-param-search.png" src="rrr-param-search%2024.png" /></p>
 <p>maximum value(0.18) at 0 ms is at cv=4, lag=0, rank=16
 maximum value(0.18) at 100 ms is at cv=4, lag=0, rank=16</p>
-<h3 id="lm-v1-all-failed">LM → V1: all failed</h3>
-<h2 id="1118512505-28">1118512505: 28%</h2>
-<h3 id="lm-v1_2">LM → V1</h3>
+<h4 id="lm-v1-all-failed">LM → V1: all failed</h4>
+<h3 id="1118512505-28">1118512505: 28%</h3>
+<h4 id="lm-v1_2">LM → V1</h4>
 <p><img alt="rrr-param-search.png" src="rrr-param-search%2025.png" /></p>
 <p>maximum value(0.278) at 0 ms is at cv=4, lag=0, rank=16
 maximum value(0.278) at 100 ms is at cv=4, lag=0, rank=16</p>
-<h3 id="v1-lm-all-failed_2">V1 → LM: all failed</h3>
+<h4 id="v1-lm-all-failed_2">V1 → LM: all failed</h4>
 <hr />
 </li>
 </ul>
-<h1 id="sessions">Sessions</h1>
+<h2 id="sessions">Sessions</h2>
 <p>All ecephys sessions had this issue except those listed here: ~~1059678195~~, 1108334384, ~~1108531612~~, ~~1109680280~~, 1109889304, 1111013640, ~~1111216934~~, 1112302803, 1112515874, 1113751921, 1113957627, 1115077618, 1115356973, 1118324999, 1118512505</p>
 <table>
 <thead>
@@ -1540,14 +4605,16 @@ maximum value(0.278) at 100 ms is at cv=4, lag=0, rank=16</p>
 </tr>
 </tbody>
 </table>
-<h1 id="v2-v1">V2 → V1</h1>
+<h2 id="v2-to-v1">V2 to V1</h2>
 <p><strong>Date</strong>: 2024.02.28.</p>
 <p><strong>Session</strong>: 1064644573</p>
-<p>cv: [2,3,4,5]</p>
-<p>rank: [2,4,6,8,10,12,14,16,18,20]</p>
-<p>lag: [0,3,6]</p>
+<pre><code class="language-yaml">cv: [2,3,4,5]
+rank: [2,4,6,8,10,12,14,16,18,20]
+lag: [0,3,6]
+</code></pre>
 <p><strong>All model failed</strong> (both timewindow 50 and 100</p>
-<h1 id="rrr-score-by-time">RRR score by time</h1>
+<h2 id="rrr-score-by-time">RRR score by time</h2>
+<p>See <a href="../../references/experiments/rrr-score-time/">references</a> for more information.</p>
 <p><strong>Name</strong>: RRRSCORETIME.</p>
 <p><strong>Date</strong>: 2024.02.27.</p>
 <ul>
@@ -1598,7 +4665,7 @@ maximum value(0.278) at 100 ms is at cv=4, lag=0, rank=16</p>
 </code></pre>
 <p><strong>Results</strong>:</p>
 <p><img alt="rrr-score-time.png" src="rrr-score-time%208.png" /></p>
-<h1 id="bootstrap-above-cv-folds">Bootstrap above cv folds</h1>
+<h2 id="bootstrap-above-cv-folds">Bootstrap above cv folds</h2>
 <p><strong>Date</strong>: 2024.02.27.</p>
 <ul>
 <li><strong>Code</strong></li>
@@ -1628,7 +4695,7 @@ print(scores['test_score'])
 0.14210302 0.14476292 0.14729195 0.14400448]
 </code></pre>
 <p><strong>Interpretation</strong>: <strong>CV=2 is OK</strong>.</p>
-<h1 id="cv-timelag-timepoint-exploration">CV, timelag, timepoint exploration</h1>
+<h2 id="cv-timelag-timepoint-exploration">CV, timelag, timepoint exploration</h2>
 <p><strong>Name</strong>: CVLAGTIME-ANALYSIS. CVLAGRANKTIME.</p>
 <p><strong>Date</strong>: 2024.02.26-27.</p>
 <ul>
@@ -1816,7 +4883,8 @@ maximum value(0.085) at 100 ms is at cv=3, lag=0, rank=16
 <li>optimal rank: 11</li>
 </ul>
 <p>here the $r^2$ is <strong>0.086</strong></p>
-<h1 id="cv-rank-time-exploration">CV-rank-time exploration</h1>
+<h2 id="cv-rank-time-exploration">CV-rank-time exploration</h2>
+<p>See <a href="../../references/experiments/cv-rank-time/">references</a> for more information.</p>
 <p><strong>Date</strong>: 2024.02.21.</p>
 <p><strong>Results</strong>:</p>
 <p><img alt="CV-rank-time_0.05-bin_0.025-step.png" src="CV-rank-time_0.05-bin_0.025-step.png" /></p>
@@ -1828,22 +4896,22 @@ maximum value(0.085) at 100 ms is at cv=3, lag=0, rank=16
 <p><img alt="CV-rank_100-150.png" src="CV-rank_100-150.png" /></p>
 <p><img alt="CV-rank_150-200.png" src="CV-rank_150-200.png" /></p>
 <p><img alt="CV-rank_200-250.png" src="CV-rank_200-250.png" /></p>
-<h1 id="time-step">Time step</h1>
+<h2 id="time-step">Time step</h2>
 <p><strong>Name</strong>: TIMESTEP, TIMESTEP2</p>
 <p><strong>Date</strong>: 2024.02.20.</p>
-<h1 id="semedo">Semedo</h1>
+<h2 id="semedo">Semedo</h2>
 <p>qualitatively similar results for a wide range of bin widths</p>
 <ul>
 <li>sliding time window</li>
 </ul>
-<h1 id="rank-analysis-from-v2-to-v1">Rank analysis from V2 to V1</h1>
+<h2 id="rank-analysis-from-v2-to-v1">Rank analysis from V2 to V1</h2>
 <p><strong>Date</strong>: 2024.02.20.</p>
 <p><strong>Params</strong>:</p>
 <ul>
 <li>stimulus-block: 5</li>
 </ul>
 <p><strong>Result</strong>: doesnt work for CV 2, 4</p>
-<h1 id="rank-analysis-for-gabor">Rank analysis for gabor</h1>
+<h2 id="rank-analysis-for-gabor">Rank analysis for gabor</h2>
 <p><strong>Date</strong>: 2024.02.20.</p>
 <p><strong>Params</strong>:</p>
 <ul>
@@ -1851,7 +4919,8 @@ maximum value(0.085) at 100 ms is at cv=3, lag=0, rank=16
 </ul>
 <p><strong>Result</strong>: doesnt work for CV 2, 5, 10</p>
 <p><strong>Interpretation</strong>: stimulus is too sparse</p>
-<h1 id="control-models">Control models</h1>
+<h2 id="control-models">Control models</h2>
+<p>See <a href="../../references/experiments/control-models/">references</a> for more information.</p>
 <p><strong>Name</strong>: RRRCONTROL.</p>
 <p><strong>Date</strong>: 2024.02.15., 20.</p>
 <ul>
@@ -1905,7 +4974,8 @@ maximum value(0.085) at 100 ms is at cv=3, lag=0, rank=16
 </ul>
 <p><strong>Interpretation</strong>:</p>
 <p>does the normaliyation give us indistinguishable values for movement and spiking? print these values .</p>
-<h1 id="rank-optimization">Rank optimization</h1>
+<h2 id="rank-optimization">Rank optimization</h2>
+<p>See <a href="../../references/experiments/rrr-rank/">references</a> for more information.</p>
 <p><strong>Name</strong>: RANKOPT. RANKOPTTIME. RANKOPTCV.</p>
 <p><strong>Date</strong>: 2024.02.13., 17-21.</p>
 <ul>
@@ -2007,11 +5077,11 @@ cv of the optimal rank: 2</p>
 <li>negative values mean that the model is wrong…</li>
 <li>greater ranks perform worse bcs overfitting? so there are times when we cannot predict V2 from V1.</li>
 </ul>
-<h1 id="behav-data">Behav data</h1>
+<h2 id="behav-data">Behav data</h2>
 <p><img alt="Untitled" src="Untitled%206.png" /></p>
 <p>stimulus-duration: 250 ms (movement!)</p>
 <p>at Joao Semedo: 1250 ms (not contaminated by movement)</p>
-<h1 id="github-codes">GitHub codes</h1>
+<h2 id="github-codes">GitHub codes</h2>
 <p><a href="https://github.com/AllenInstitute/neuropixels_platform_paper/tree/master">generate figures</a></p>
 <p><a href="https://github.com/AllenInstitute/ecephys_spike_sorting">preprocessing and unit metrics</a></p>
 <p><a href="https://github.com/MouseLand/Kilosort">spike sorting</a></p>
@@ -2019,7 +5089,8 @@ cv of the optimal rank: 2</p>
 <p><a href="https://github.com/open-ephys/plugin-GUI">data acquisition/plugin GUI</a></p>
 <p><a href="https://github.com/open-ephys-plugins/neuropixels-3a">data acquisition/neuropixels3a</a></p>
 <p><a href="https://github.com/open-ephys-plugins/neuropixels-PXI">data acquisition/neuropixelsPXI</a></p>
-<h1 id="time-lag-between-v1-and-v2"><strong>Time lag between V1 and V2</strong></h1>
+<h2 id="time-lag-between-v1-and-v2">Time lag between V1 and V2</h2>
+<p>See <a href="../../references/experiments/time-lag/">references</a> for more information.</p>
 <p><strong>Name</strong>: CROSSTIMELAG. CROSSTIMECOEFFS.</p>
 <p><strong>Date</strong>: 2024.02.08., 22.</p>
 <ul>
@@ -2089,7 +5160,7 @@ cv of the optimal rank: 2</p>
 <p><img alt="Time_lag_between_V1_LM.png" src="Time_lag_between_V1_LM.png" /></p>
 <pre><code class="language-shell">Cross-validation scores: [-1.62523803e+28 -2.47969342e+28 -1.52222458e+28]
 </code></pre>
-<p>With CV [2,3,4,5,6] and ranks [3,4,5,6,7,8,9,10,11,12,13,14] the Max score is NaN:</p>
+<p>With <code>CV=[2,3,4,5,6]</code> and <code>ranks=[3,4,5,6,7,8,9,10,11,12,13,14]</code> the Max score is NaN:</p>
 <pre><code class="language-yaml">stages:
   load:
     cmd: python3 -u load_raw_activity_data.py
@@ -2152,12 +5223,12 @@ cv of the optimal rank: 2</p>
 <li>change task (motor contam) OR movie</li>
 <li>(Bernstein)</li>
 </ol>
-<h1 id="siegle-2021-on-this-data">Siegle, 2021 on this data</h1>
+<h2 id="siegle-2021-on-this-data">Siegle, 2021 on this data</h2>
 <p><a href="https://www.nature.com/articles/s41586-020-03171-x">Survey of spiking in the mouse visual system reveals functional hierarchy</a></p>
 <p><img alt="Untitled" src="Untitled%207.png" /></p>
 <p><img alt="Untitled" src="Untitled%208.png" /></p>
 <p><img alt="Untitled" src="Untitled%209.png" /></p>
-<h1 id="areas">Areas</h1>
+<h2 id="areas">Areas</h2>
 <p><strong>Added VISpm (MT) and VISm (motion area) to analyses for video stimuli.</strong></p>
 <p><strong>Date</strong>: 2024.02.06.</p>
 <pre><code class="language-python">VISp:   V1
@@ -2171,7 +5242,8 @@ VISam:  anteromedial cuneus
 VISpm:  V4-V5(MT), PMC (associative area)
 VISm:   V6 (medial motion area)
 </code></pre>
-<h1 id="data-distribution">Data distribution</h1>
+<h2 id="data-distribution">Data distribution</h2>
+<p>See <a href="../../references/experiments/histograms/">references</a> for more information.</p>
 <p><strong>Date</strong>: 2024.02.06.</p>
 <p><strong>Method</strong>: Shapiro-Wilk test.</p>
 <p><strong>Params</strong>:</p>
@@ -2440,7 +5512,8 @@ Activity of 118. unit does not look Gaussian (reject H0)
 <p><strong>Conclusion</strong>: Use normalization instead of standardization</p>
 <p><strong>Discussion</strong>:</p>
 <p><strong>Marci</strong> (2024.02.14.): ITI mean + std, csak nem z-scorenak hívjuk, mert nem normal-distr data. → Normalize based on ITI activity?</p>
-<h1 id="pca">PCA</h1>
+<h2 id="pca">PCA</h2>
+<p>See <a href="../../references/experiments/pca/">references</a> for more information.</p>
 <p><strong>Date</strong>: 2024.02.06.</p>
 <p><strong>Params</strong>:</p>
 <ul>
@@ -2450,7 +5523,8 @@ Activity of 118. unit does not look Gaussian (reject H0)
 <p><strong>Results</strong>:</p>
 <p><img alt="pca-analysis_explained_variance_ratio.png" src="pca-analysis_explained_variance_ratio.png" /></p>
 <p><img alt="pca-analysis_principal-components.png" src="pca-analysis_principal-components.png" /></p>
-<h1 id="rrr-analysis-along-time">RRR analysis along time</h1>
+<h2 id="rrr-analysis-along-time">RRR analysis along time</h2>
+<p>See <a href="../../references/experiments/rrr/">references</a> for more information.</p>
 <p><strong>Name</strong>: RRR ANALYSIS ALONG TIME.</p>
 <p><strong>Date</strong>: 2024.01.30. Modified: 2024.01.31.</p>
 <ul>
@@ -2513,7 +5587,7 @@ Activity of 118. unit does not look Gaussian (reject H0)
 </ol>
 </li>
 </ul>
-<h2 id="me">Me:</h2>
+<h3 id="me">Me:</h3>
 <ul>
 <li>[ ] TODO: control drifts.</li>
 </ul>
@@ -2521,7 +5595,7 @@ Activity of 118. unit does not look Gaussian (reject H0)
 <ul>
 <li>[x] TODO: VISp→VISl,  VISl→VISp~~</li>
 </ul>
-<h2 id="gergo"><strong>Gergő</strong>:</h2>
+<h3 id="gergo"><strong>Gergo</strong>:</h3>
 <ul>
 <li>
 <p>[x] TODO: residual számilás before the analysis.~~</p>
@@ -2535,22 +5609,33 @@ Activity of 118. unit does not look Gaussian (reject H0)
 </ul>
 <p>frame X repeat.</p>
 <p>change detection task: legyen kb 100féle kép 10 repeattel = 1000 trial</p>
-<h3 id="corr"><strong>Corr</strong>:</h3>
+<h4 id="corr"><strong>Corr</strong>:</h4>
 <p>later TODO: on movies (it has autocorrelation).</p>
 <p>Videok autocerrelatioja .hány ms time bin.</p>
 <p>vajon a video alatt több  correlatio van (pixelwide/wise) mint sima képnél?</p>
 <p>mozgás vajon milyen korrelációt ad? annak is van dimenzionalitása…</p>
-<h2 id="marci_1"><strong>Marci</strong>:</h2>
-<p>$Y_{V2} = W_{V1} X_{V1} + W_{move} X_{move} + W_{pupil} X_{pupil} + W_{V2} X_{V2}$  különböző tagokat kihagyva (hold out) $R^2$ -ek összehasonlítása</p>
-<p>Ezeket úgy is össze lehet hasonlítani, hogy pl $Corr = X_{V1} \cdot X_{move}$ for each term/model.</p>
+<h3 id="marci_1"><strong>Marci</strong>:</h3>
+<p>$$
+Y_{V2} = W_{V1} X_{V1} + W_{move} X_{move} + W_{pupil} X_{pupil} + W_{V2} X_{V2}
+$$
+különböző tagokat kihagyva (hold out) 
+$$
+R^2
+$$
+-ek összehasonlítása</p>
+<p>Ezeket úgy is össze lehet hasonlítani, hogy pl 
+$$
+Corr = X_{V1} \cdot X_{move}
+$$
+for each term/model.</p>
 <p>time_binek elcsúsztatva, esetleg optimalizálni V1→V2 time-lagra (R^2 kirajzolása vagy rank kirajzolása)</p>
-<h2 id="references"><strong>References</strong>:</h2>
+<h3 id="references"><strong>References</strong>:</h3>
 <p>What is the effect of motor movement on V1 and V2 activity:</p>
 <ul>
 <li><strong>Christensen, 2022</strong>: <a href="https://www.nature.com/articles/s41467-022-29200-z.pdf">Reduced neural activity but improved coding in rodent higher-order visual cortex during locomotion</a></li>
 <li><strong>Musall, 2019</strong>: Single-trial neural dynamics are dominated by richly varied movements</li>
 </ul>
-<h2 id="future-plan"><strong>Future plan</strong>:</h2>
+<h3 id="future-plan"><strong>Future plan</strong>:</h3>
 <ol>
 <li>read joao</li>
 <li>~~z-score~~</li>
@@ -2566,52 +5651,59 @@ Activity of 118. unit does not look Gaussian (reject H0)
 </ol>
 <hr />
 <p>The Allen project appears to involve data analysis and visualization related to neuroscience. It involves the use of Python scripts for data loading, analysis, and plotting, working with large sets of data, and identifying maximum values at different parameters. However, the specific goal or research question of the project is not clearly stated in the search results.</p>
-              
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
             </div>
-          </div><footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../../explanation/" class="btn btn-neutral float-left" title="Project Explanation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../../DVC/" class="btn btn-neutral float-right" title="DVC Framework">Next <span class="icon icon-circle-arrow-right"></span></a>
-    </div>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <!-- Copyright etc -->
-  </div>
-
-  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
-</footer>
           
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
-      </div>
-
-    </section>
-
-  </div>
-
-  <div class="rst-versions" role="note" aria-label="Versions">
-  <span class="rst-current-version" data-toggle="rst-current-version">
-    
-    
-      <span><a href="../../explanation/" style="color: #fcfcfc">&laquo; Previous</a></span>
-    
-    
-      <span><a href="../../DVC/" style="color: #fcfcfc">Next &raquo;</a></span>
-    
-  </span>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
 </div>
-    <script src="../../js/jquery-3.6.0.min.js"></script>
-    <script>var base_url = "../..";</script>
-    <script src="../../js/theme_extra.js"></script>
-    <script src="../../js/theme.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-      <script src="../../search/main.js"></script>
-    <script>
-        jQuery(function () {
-            SphinxRtdTheme.Navigation.enable(true);
-        });
-    </script>
-
-</body>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.471ce7a9.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
 </html>
