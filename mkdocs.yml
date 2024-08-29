@@ -29,7 +29,6 @@ nav:
       - references/experiments/multiple-timeslices-layers.md # 2024.06.12.
       - references/experiments/multiple-timeslices.md # 2024.05.08.
       - references/experiments/rrr-time-slice.md # 2024.04.30.
-      - references/experiments/crosstime-timeslice-plot.md # ?
       - references/experiments/crosstime.md # 2024.04.09., 10.
       - references/experiments/time-lag-search.md # 2024.03.21., 26., 27.
       - references/experiments/cv-time-lag.md # 2024.03.18.-19., 04.12.
@@ -45,11 +44,11 @@ nav:
       - references/experiments/rrr.md # 2024.01.30. Modified: 2024.01.31.
       - references/experiments/cca.md # ?
     - Tools:
-      - Data I/O: references/utilities/data_io.md
+      - Data I/O: references/utilities/data-io.md
       - references/utilities/direct-download.md
       - Data Preprocessing: references/utilities/neuropixel.md
-      - CCF Volumes: references/utilities/ccf_volumes.md
-      - Important Functions: references/utilities/utils.md
+      - CCF Volumes: references/utilities/ccf-volumes.md
+      - Important Utility Tools: references/utilities/utils.md
       - references/utilities/plots.md
       - references/utilities/megaplot.md
       - references/utilities/other-utils.md

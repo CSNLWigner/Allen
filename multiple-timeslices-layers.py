@@ -26,6 +26,14 @@ This module analyzes the interaction between layers in the Allen Neuropixel data
 
 - `figures/rrr-cross-time-slice-mega-plot.png`: The mega plot of the RRR analysis.
 
+**Submodules**:
+
+- `analyses.rrr`: Reduced Rank Regression.
+- `utils.data_io`: Data I/O.
+- `utils.plots`: Plotting utilities.
+- `utils.megaplot`: Megaplot.
+- `utils.utils`: Utilities.
+
 """
 
 import numpy as np
@@ -33,9 +41,8 @@ import yaml
 from matplotlib import pyplot as plt
 
 from analyses.rrr import crosstime_analysis
-from analyses.rrr_time_slice import bidirectional_time_slice
 from utils import plots
-from utils.data_io import load_csv, load_pickle, save_fig, save_pickle
+from utils.data_io import load_csv, load_pickle
 from utils.megaplot import megaplot
 from utils.utils import printProgressBar
 

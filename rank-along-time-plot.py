@@ -14,11 +14,16 @@ This module plots the optimal rank along time.
 **Output**:
 
 - `figures/max-ranks.png`: Plot of the optimal rank along time.
+
+**Submodules**:
+
+- `utils.data_io`: Data I/O.
 """
-from matplotlib import pyplot as plt
 import numpy as np
-from utils.data_io import load_pickle, save_fig
 import yaml
+from matplotlib import pyplot as plt
+
+from utils.data_io import load_pickle
 
 # Load parameters
 preproc = yaml.safe_load(open('params.yaml'))['preprocess']

@@ -3,7 +3,8 @@
 """
 This submodule contains tools for plotting the results.
 
-Functions:
+**Functions**:
+
 - simple_mean_SEM_time_plot(ax, mean, ylabel, title=None, SEM=None, SEM_multiplier=2, time_series=None, color=None, xlabel=None, alpha=0.2, linewidth=None, xticks=None, xticklabels=None, yticks=None, yticklabels=None, label=None, xlim=None, ylim=None) -> plt.Figure: Plots the mean and standard error of the mean of the results as a function of time.
 - simple_rrr_plot(result, axs=None) -> plt.Figure: Plots the results of the reduced rank regression analysis.
 - simple_rrr_plot_mean(result, ax=None) -> plt.Figure: Plots the mean of the results of the reduced rank regression analysis.
@@ -196,13 +197,13 @@ def cross_correlation_plot(cross_correlation, time_series=None, title='Cross-cor
     Plots the cross-correlation between two signals.
 
     Parameters:
-    cross_correlation (array-like): A one-dimensional array-like object representing the cross-correlation values.
-    time_series (array-like, optional): A one-dimensional array-like object representing the time series. If not provided, it will be generated using the length of cross_correlation.
-    title (str, optional): The title of the plot. Default is 'Cross-correlation'.
-    ax (matplotlib.axes.Axes, optional): The axes on which to plot. If not provided, a new figure and axes will be created.
+        cross_correlation (array-like): A one-dimensional array-like object representing the cross-correlation values.
+        time_series (array-like, optional): A one-dimensional array-like object representing the time series. If not provided, it will be generated using the length of cross_correlation.
+        title (str, optional): The title of the plot. Default is 'Cross-correlation'.
+        ax (matplotlib.axes.Axes, optional): The axes on which to plot. If not provided, a new figure and axes will be created.
 
     Returns:
-    matplotlib.figure.Figure: The figure object containing the plot.
+        figure (matplotlib.figure.Figure): The figure object containing the plot.
     """
     
     # If time_series is not provided, generate it
@@ -232,13 +233,13 @@ def cross_time_correlation_coefficients_plot(coeffs, time_series=None, first_dim
     Plots the cross-correlation between two signals. Colors range from blue (negative) to red (positive), with white representing zero.
 
     Parameters:
-    coeffs (array-like): A three-dimensional array-like object representing the cross-correlation coefficients.
-    time_series (array-like, optional): A one-dimensional array-like object representing the time series. If not provided, it will be generated using the length of coeffs.
-    title (str, optional): The title of the plot. Default is 'Cross-time-correlation'.
-    ax (matplotlib.axes.Axes, optional): The axes on which to plot. If not provided, a new figure and axes will be created.
+        coeffs (array-like): A three-dimensional array-like object representing the cross-correlation coefficients.
+        time_series (array-like, optional): A one-dimensional array-like object representing the time series. If not provided, it will be generated using the length of coeffs.
+        title (str, optional): The title of the plot. Default is 'Cross-time-correlation'.
+        ax (matplotlib.axes.Axes, optional): The axes on which to plot. If not provided, a new figure and axes will be created.
 
     Returns:
-    matplotlib.pyplot.Figure: The figure containing the plot.
+        figure (matplotlib.pyplot.Figure): The figure containing the plot.
     """
     
     # Reverse the second dimension of the coefficients
@@ -281,14 +282,14 @@ def rrr_rank_plot(scores, title='RRR test scores (r2)', time_series=None, ax=Non
     Plots the RRR test scores as a function of rank and time.
 
     Parameters:
-    scores (array-like): A two-dimensional array-like object representing the scores.
-    rank (array-like): A one-dimensional array-like object representing the rank.
-    title (str, optional): The title of the plot. Default is 'Activity Estimation Error'.
-    time_series (array-like, optional): A one-dimensional array-like object representing the time series. If not provided, it will be generated using the params.yaml file.
-    ax (matplotlib.axes.Axes, optional): The axes on which to plot. If not provided, a new figure and axes will be created.
+        scores (array-like): A two-dimensional array-like object representing the scores.
+        rank (array-like): A one-dimensional array-like object representing the rank.
+        title (str, optional): The title of the plot. Default is 'Activity Estimation Error'.
+        time_series (array-like, optional): A one-dimensional array-like object representing the time series. If not provided, it will be generated using the params.yaml file.
+        ax (matplotlib.axes.Axes, optional): The axes on which to plot. If not provided, a new figure and axes will be created.
 
     Returns:
-    matplotlib.figure.Figure: The figure object containing the plot.
+        figure (matplotlib.figure.Figure): The figure object containing the plot.
     """
     
     # Set default values
@@ -321,14 +322,14 @@ def rrr_rank_plot_over_time(scores, title='RRR test scores', time_series=None, f
     Plots the RRR test scores as a function of rank and time.
 
     Parameters:
-    scores (array-like): A two-dimensional array-like object representing the scores.
-    rank (array-like): A one-dimensional array-like object representing the rank.
-    title (str, optional): The title of the plot. Default is 'Activity Estimation Error'.
-    time_series (array-like, optional): A one-dimensional array-like object representing the time series. If not provided, it will be generated using the params.yaml file.
-    ax (matplotlib.axes.Axes, optional): The axes on which to plot. If not provided, a new figure and axes will be created.
+        scores (array-like): A two-dimensional array-like object representing the scores.
+        rank (array-like): A one-dimensional array-like object representing the rank.
+        title (str, optional): The title of the plot. Default is 'Activity Estimation Error'.
+        time_series (array-like, optional): A one-dimensional array-like object representing the time series. If not provided, it will be generated using the params.yaml file.
+        ax (matplotlib.axes.Axes, optional): The axes on which to plot. If not provided, a new figure and axes will be created.
 
     Returns:
-    matplotlib.figure.Figure: The figure object containing the plot.
+        figure (matplotlib.figure.Figure): The figure object containing the plot.
     """
     
     # Set default values
@@ -378,14 +379,14 @@ def score_plot_by_time(scores, title=None, time_series=None, ax=None, label='', 
     Plots the RRR test scores as a function of rank and time.
 
     Parameters:
-    scores (array-like): A two-dimensional array-like object representing the scores. Shape (cv, time)
-    rank (array-like): A one-dimensional array-like object representing the rank.
-    title (str, optional): The title of the plot. Default is 'Activity Estimation Error'.
-    time_series (array-like, optional): A one-dimensional array-like object representing the time series. If not provided, it will be generated using the params.yaml file.
-    ax (matplotlib.axes.Axes, optional): The axes on which to plot. If not provided, a new figure and axes will be created.
+        scores (np.ndarray): A two-dimensional array-like object representing the scores. Shape (cv, time)
+        rank (np.ndarray): A one-dimensional array-like object representing the rank.
+        title (str, optional): The title of the plot. Default is 'Activity Estimation Error'. Default is None.
+        time_series (array-like, optional): A one-dimensional array-like object representing the time series. If not provided, it will be generated using the params.yaml file. Default is None.
+        ax (matplotlib.axes.Axes, optional): The axes on which to plot. If not provided, a new figure and axes will be created. Default is None.
 
     Returns:
-    matplotlib.figure.Figure: The figure object containing the plot.
+        figure (matplotlib.figure.Figure): The figure object containing the plot.
     """
     
     # If color is not provided, generate it from the default color cycle. If color is None, the color will be determined by the axes.
@@ -437,12 +438,12 @@ def cv_rank_time_plot(results, title=None, ax=None, max=None, xlabel=None, ylabe
     Parameters:
         results (numpy.ndarray): The results of the cross-validation and rank.
         title (str): The title of the plot.
-        ax (matplotlib.axes.Axes): The axes to plot on (optional).
-        max (int): The maximum value for the colorbar (optional).
-        xlabel (str): The label for the x-axis (optional).
-        ylabel (str): The label for the y-axis (optional).
-        xticks (List[str]): The tick labels for the x-axis (optional).
-        yticks (List[str]): The tick labels for the y-axis (optional).
+        ax (matplotlib.axes.Axes): The axes to plot on (optional). Default is None.
+        max (int): The maximum value for the colorbar (optional). Default is None.
+        xlabel (str): The label for the x-axis (optional). Default is None.
+        ylabel (str): The label for the y-axis (optional). Default is None.
+        xticks (List[str]): The tick labels for the x-axis (optional). Default is None.
+        yticks (List[str]): The tick labels for the y-axis (optional). Default is None.
 
     Returns:
         fig (matplotlib.figure.Figure): The figure containing the plot (optional).
@@ -591,15 +592,15 @@ def plot_3d_scatter_with_color(ax: matplotlib.axes.Axes, data: np.array, title=N
     Plots 4D data using a 3D scatter plot with color coding.
 
     Parameters:
-    ax (matplotlib.axes.Axes): The axes on which to plot.
-    data (np.array): A 3D array representing the data to plot.
-    title (str, optional): Title of the plot.
-    xlabel (str, optional): Label for the x-axis.
-    ylabel (str, optional): Label for the y-axis.
-    zlabel (str, optional): Label for the z-axis.
-    xticks (list, optional): Ticks for the x-axis.
-    yticks (list, optional): Ticks for the y-axis.
-    zticks (list, optional): Ticks for the z-axis.
+        ax (matplotlib.axes.Axes): The axes on which to plot.
+        data (np.array): A 3D array representing the data to plot.
+        title (str, optional): Title of the plot. Default is None.
+        xlabel (str, optional): Label for the x-axis. Default is None.
+        ylabel (str, optional): Label for the y-axis. Default is None.
+        zlabel (str, optional): Label for the z-axis. Default is None.
+        xticks (list, optional): Ticks for the x-axis. Default is None.
+        yticks (list, optional): Ticks for the y-axis. Default is None.
+        zticks (list, optional): Ticks for the z-axis. Default is None.
     """
     # Assuming data is 3D: (nLayers, nLayers, nTimepoints)
     nLayers_source, nLayers_target, nTime_indeces = data.shape

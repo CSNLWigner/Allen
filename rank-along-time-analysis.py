@@ -18,19 +18,20 @@ This module performs rank-along-time analysis on the Allen Neuropixel dataset.
 **Output**:
 
 - `results/max-ranks.pickle`: Optimal rank along time.
+
+**Submodules**:
+
+- `analyses.data_preprocessing`: Data preprocessing.
+- `analyses.rrr`: Reduced Rank Regression.
+- `utils.data_io`: Data I/O.
 """
 
 import numpy as np
 import yaml
 
-from analyses.data_preprocessing import (calculate_residual_activity,
-                                         get_area_responses,
-                                         preprocess_area_responses,
-                                         recalculate_neural_activity,
-                                         z_score_normalize)
+from analyses.data_preprocessing import preprocess_area_responses
 from analyses.rrr import RRRR
 from utils.data_io import load_pickle, save_pickle
-from utils.download_allen import cacheData
 
 # Load parameters
 load = yaml.safe_load(open('params.yaml'))['load']

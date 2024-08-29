@@ -49,7 +49,7 @@ def completeDownloadData(sessions, cache, output_dir, download_lfp=False):
     '''
     Downloads the complete dataset for analysis.
 
-    Args:
+    Parameters:
         sessions (DataFrame): A DataFrame containing session information.
         cache (Cache): An object representing the cache.
         output_dir (str): The directory where the downloaded data will be stored.

@@ -20,6 +20,13 @@ This module plots the layer interaction results between two areas.
 - `figures/layer-interaction_<originArea>-to-<targetArea>.png`: Layer interaction results for each layer combination between the two areas.
 
 (Also saved in the cache directory with the session and block number appended to the filename.)
+
+**Submodules**:
+
+- `utils.data_io`: Data I/O.
+- `utils.plots`: Plotting utilities.
+- `utils.megaplot`: Megaplot.
+
 """
 
 import numpy as np

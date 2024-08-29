@@ -20,6 +20,13 @@ This module analyzes the interaction between layers in the Allen Neuropixel data
 **Output**:
 
 - `results/layer-interaction_<originArea>-to-<targetArea>.pickle`: Layer interaction results for each layer combination between the two areas.
+
+**Submodules**:
+
+- `analyses.rrr`: Reduced Rank Regression.
+- `utils.data_io`: Data I/O.
+- `utils.utils`: Utilities.
+
 """
 
 # Import params

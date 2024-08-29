@@ -78,13 +78,14 @@ def iterate_dimension(arr, dim):
         Tuple[int, np.ndarray]: The counter and the sliced array along the specified dimension.
 
     Example:
-        # Make a simple matrix with 3 dimensions
-        arr = np.array([[[1, 2, 3], [4, 5, 6]], [[7, 8, 9], [10, 11, 12]]])
+    ```
+    # Make a simple matrix with 3 dimensions
+    arr = np.array([[[1, 2, 3], [4, 5, 6]], [[7, 8, 9], [10, 11, 12]]])
 
-        # Iterate through the second dimension
-        for counter, sliced in iterate_dimension(arr, 1):
-            print(counter, sliced)
-
+    # Iterate through the second dimension
+    for counter, sliced in iterate_dimension(arr, 1):
+        print(counter, sliced)
+    ```
     """
     for i in range(arr.shape[dim]):
         yield i, arr.take(i, axis=dim)
@@ -137,22 +138,24 @@ def shift_with_nans(arr, shift, axis=2, constant=np.nan):
         return (np.ndarray): The shifted array.
 
     Example:
-        # Create a 2D array
-        arr = np.array([[1, 2, 3], [4, 5, 6]])
+    ```
+    # Create a 2D array
+    arr = np.array([[1, 2, 3], [4, 5, 6]])
 
-        # Shift the elements by 1 position to the right along axis 1
-        shifted_arr = shift_with_nans(arr, 1, axis=1)
-        print(shifted_arr)
-        # Output: [[nan 1 2]
-        #          [nan 4 5]]
+    # Shift the elements by 1 position to the right along axis 1
+    shifted_arr = shift_with_nans(arr, 1, axis=1)
+    print(shifted_arr)
+    # Output: [[nan 1 2]
+    #          [nan 4 5]]
 
-        # Shift the elements by 2 positions to the left along axis 0
-        shifted_arr = shift_with_nans(arr, -2, axis=0)
-        print(shifted_arr)
-        # Output: [[nan nan nan]
-        #          [nan nan nan]
-        #          [1 2 3]
-        #          [4 5 6]]
+    # Shift the elements by 2 positions to the left along axis 0
+    shifted_arr = shift_with_nans(arr, -2, axis=0)
+    print(shifted_arr)
+    # Output: [[nan nan nan]
+    #          [nan nan nan]
+    #          [1 2 3]
+    #          [4 5 6]]
+    ```
     """
     padding = [(0, 0) for _ in range(arr.ndim)]
     if shift > 0:
@@ -181,10 +184,12 @@ def printProgressBar(iteration, total, prefix='', suffix='', decimals=1, length=
             Options: 'delete' (clear the progress bar), 'newline' (print a newline character). Defaults to 'delete'.
 
     Example:
-        printProgressBar(0, 10)
-        for i in range(10):
-            printProgressBar(i + 1, 10)
-            time.sleep(0.1)
+    ```
+    printProgressBar(0, 10)
+    for i in range(10):
+        printProgressBar(i + 1, 10)
+        time.sleep(0.1)
+    ```
     """
     percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
     filledLength = int(length * iteration // total)
@@ -303,7 +308,7 @@ def options_and_arguments():
         input_file: The input file to process.
 
     Example:
-        python script.py -v -o output.txt input_file.txt
+        ```python script.py -v -o output.txt input_file.txt```
     """
     import argparse
 
@@ -442,14 +447,16 @@ def mergeDataframes(dataframes: pd.DataFrame) -> list:
         list: A list of merged pandas DataFrames.
 
     Example:
-        df1 = pd.DataFrame({'A': [1, 2, 3], 'B': [4, 5, 6]})
-        df2 = pd.DataFrame({'B': [6, 7, 8], 'C': [9, 10, 11]})
-        df3 = pd.DataFrame({'D': [12, 13, 14], 'E': [15, 16, 17]})
-        df4 = pd.DataFrame({'C': [10, 11, 12], 'F': [18, 19, 20]})
-        dataframes = [df1, df2, df3, df4]
+    ```
+    df1 = pd.DataFrame({'A': [1, 2, 3], 'B': [4, 5, 6]})
+    df2 = pd.DataFrame({'B': [6, 7, 8], 'C': [9, 10, 11]})
+    df3 = pd.DataFrame({'D': [12, 13, 14], 'E': [15, 16, 17]})
+    df4 = pd.DataFrame({'C': [10, 11, 12], 'F': [18, 19, 20]})
+    dataframes = [df1, df2, df3, df4]
 
-        for df in mergeDataframes(dataframes):
-            print(df)
+    for df in mergeDataframes(dataframes):
+        print(df)
+    ```
     """
     # Create a graph
     graph = createGraph(dataframes)

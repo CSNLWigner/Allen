@@ -17,12 +17,17 @@ This module plots the max lag along time.
 
 - `figures/max-lags-along-time.png`: Plot of the max lag along time.
 
+**Submodules**:
+
+- `utils.data_io`: Data I/O.
+
 """
 
-from matplotlib import pyplot as plt
 import numpy as np
-from utils.data_io import load_pickle, save_fig
 import yaml
+from matplotlib import pyplot as plt
+
+from utils.data_io import load_pickle
 
 # Load parameters
 preproc = yaml.safe_load(open('params.yaml'))['preprocess']

@@ -28,6 +28,12 @@ $ python layer-rank-analysis.py [-l]
 
 - `results/layer-rank.pickle`: Layer rank results.
 - `results/layer-r2.pickle`: Layer R2 results.
+
+**Submodules**:
+
+- `analyses.layer_rank`: Layer rank analysis.
+- `utils.data_io`: Data I/O.
+- `utils.utils`: Utilities.
 """
 
 import sys

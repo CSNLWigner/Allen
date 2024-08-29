@@ -3,15 +3,17 @@
 """
 This submodule contains tools for assigning cortical layers to channels and units based on the Allen Brain Atlas Common Coordinate Framework (CCF) volumes.
 
-Created on Tue Apr  7 08:41:07 2020
+*Created on Tue Apr  7 08:41:07 2020*
 
-Author: joshs
+**Author**: joshs
 
-References:
+**References**:
+
 - [Cortical Layers using CCFv3 in Neuropixels Data](https://community.brain-map.org/t/cortical-layers-using-ccfv3-in-neuropixels-data/1247/4)
 - [CCFv3 Annotation Volume](https://www.dropbox.com/scl/fo/6x7ovegu2jp4jxrhyv0fi/APGHNCbZrJFU6xfccmyu1Vw?dl=0&e=2&rlkey=qqn8efbm4pto0olh0g9o5ctjs)
 
-Functions:
+**Functions**:
+
 - get_layer_name(acronym) -> int: Get the layer number from the given acronym.
 - get_structure_ids(df, annotations) -> np.ndarray: Get the structure IDs for the given DataFrame.
 - cortical_depth_calculation(channels) -> pd.DataFrame: Calculate the cortical depth for the given channels.

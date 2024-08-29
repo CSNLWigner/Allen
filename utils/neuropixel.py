@@ -3,7 +3,8 @@
 """
 This submodule contains tools for working with Neuropixel data from the Allen Institute.
 
-Functions:
+**Functions**:
+
 - get_table(cache, session_id, table_name) -> DataFrame: Get a table from the cache.
 - dict_from_dataframe(df, name) -> dict: Create a dictionary from a DataFrame.
 - AllenTables(cache, session_id, layer_assignment=False) -> AllenTables: Create an AllenTables object.
@@ -18,13 +19,16 @@ Functions:
 - get_average_unit_responses(units, spike_times, trial_start, duration=0.03, binSize=0.001) -> np.ndarray: Calculate the unit responses for each unit in the given units DataFrame.
 - get_unit_responses(units, spike_times, trial_start, trial_end, stepSize=0.010, binSize=0.050, progressbar=True) -> np.ndarray: Calculate the unit responses for each trial and time bin.
 
-Classes:
+**Classes**:
+
 - AllenTables: A class that represents tables related to Allen Institute's Neuropixel data.
 
-Info:
+**Info**:
+
 This module provides functions and a class for working with Neuropixel data from the Allen Institute. It includes functions for retrieving specific tables from the cache, creating dictionaries from DataFrames, and performing various analyses on the data. The AllenTables class represents tables related to Neuropixel data and provides methods for creating tables and columns, assigning cortical layer information to units, and retrieving dataframes based on keys. The module also includes functions for computing the Peri-Stimulus Time Histogram (PSTH), getting unit channels, stimulus presentations, units in a specific area of interest, change responses for units in an area of interest, receptive fields for units in an area of interest, performing optotagging analysis, calculating response magnitudes of optogenetic stimulation, and calculating unit responses for each unit in a given DataFrame.
 
-Acronyms:
+**Acronyms**:
+
 - VISp: Primary Visual Area (V1)
 - VISpl: Posterolateral visual area
 - VISli: Laterointermediate area (visually guided behav)
@@ -48,8 +52,6 @@ from allensdk.brain_observatory.ecephys.visualization import raster_plot
 from matplotlib import pyplot as plt
 
 from utils.utils import mergeDataframes, printProgressBar
-
-
 
 
 def get_table(cache, session_id, table_name):

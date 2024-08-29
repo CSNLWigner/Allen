@@ -6,7 +6,7 @@ Functional connection analysis of the V1 and LM in mouse.
 
 Functional connectivity analysis in the visual hierarchy is the basement towards studying continuous video stimuli processing. In this project, we aim to analyze the functional connection between the first two stage of the mouse visual cortex, specifically the V1 and LM. The neural activity data is obtained from the [Visual Coding - Neuropixels dataset](https://allensdk.readthedocs.io/en/latest/visual_coding_neuropixels.html). I employed Reduced Rank Regression (RRR) to uncover the underlying relationships between these brain regions. This analysis will provide valuable insights into the neural mechanisms underlying visual processing.
 
-To learn more about the project and its documentation, visit [here](https://CSNLWigner.github.io/Allen/).
+To learn more about the project, read the [documentation](https://CSNLWigner.github.io/Allen/).
 
 ## Table of Contents
 

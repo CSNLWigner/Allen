@@ -3,11 +3,13 @@
 """
 This submodule contains a tool named ``megaplot`` for creating and managing subplots in matplotlib.
 
-Classes:
+**Classes**:
+
 - SubPlot: A class for creating and managing subplots in matplotlib.
 - megaplot: A class used to make matplotlib subplot and its changes more convenient.
 
-Functions in megaplot:
+**Functions in megaplot**:
+
 - SubPlot.__init__(self, ncols, nrows, name, constrained_layout=True): Initializes a SubPlot object with the specified number of columns and rows.
 - SubPlot.ax(self, x, y) -> Axes: Returns the Axes object at the specified position.
 - SubPlot.addrow(self): Adds a new row to the subplot grid.

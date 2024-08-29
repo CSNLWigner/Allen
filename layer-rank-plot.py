@@ -15,6 +15,13 @@ This script plots the rank of the bottom-up and top-down connections between lay
 **Output**:
 
 - `figures/layer-rank.png`: Layer rank results.
+
+**Submodules**:
+
+- `utils.data_io`: Data I/O.
+- `utils.megaplot`: Megaplot.
+- `utils.plots`: Plots.
+- `utils.utils`: Utilities.
 """
 
 import sys
